@@ -1,0 +1,859 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VodProMaster2.master" AutoEventWireup="true" %>
+
+<script Langauge="C#" runat="server">
+  string spiImageRoot;
+  string spiImageRootPath;
+  int SPIParent ;
+  protected void Page_Load(Object sender, EventArgs e)
+  {
+    SPIParent = Int32.Parse(ConfigurationManager.AppSettings["VPSPIParent"].ToString());
+    spiImageRoot = ConfigurationManager.AppSettings["VPSPIImageRoot"].ToString();
+    spiImageRootPath = Server.MapPath(spiImageRoot);
+    spiErrorMessage.InnerHtml = String.Empty;
+    spiErrorMessage.Visible = false;
+      
+    if(!IsPostBack)
+    {
+      prop_uid.Value = Request.QueryString["u"].ToString();
+      prop_secret.Value = Request.QueryString["s"].ToString();
+      loadSPI(prop_uid.Value);
+    }
+  
+  }
+    
+  protected void Save_Click(Object sender, EventArgs e)
+  {
+      saveSPI(prop_uid.Value, false);
+      loadSPI(prop_uid.Value);
+  }
+  protected void Complete_Click(Object sender, EventArgs e)
+  {
+      saveSPI(prop_uid.Value, true);
+      loadSPI(prop_uid.Value);
+  }
+  
+    
+    
+    protected void saveSPI(string uid, bool isCompleted)
+    {
+      int id = Int32.Parse(uid);
+      
+      // Get Document Obj
+      umbraco.cms.businesslogic.web.Document d = new umbraco.cms.businesslogic.web.Document(id);  
+      umbraco.BusinessLogic.User u = new umbraco.BusinessLogic.User("websitecontentuser");
+
+      // Initialise properties
+      d.getProperty("companyName").Value = prop_companyName.Text;
+      d.getProperty("vodServiceName").Value = prop_vodServiceName.Text;
+  
+      
+      if(prop_companyName.Text.Trim().Length == 0) 
+      {
+        spiErrorMessage.InnerHtml += @"<li>Please complete your Company Name</li>";
+      }
+      if(prop_vodServiceName.Text.Trim().Length == 0)
+      {
+        spiErrorMessage.InnerHtml += @"<li>Please complete your VOD Service Name</li>";
+      }
+  
+      List<string> tempVals;
+
+  // Web
+      tempVals = new List<string>();
+      if (prop_webUI_0.Checked)         tempVals.Add(prop_webUI_0.Text);
+      if (prop_webUI_1.Checked)         tempVals.Add(prop_webUI_1.Text);
+      if (prop_webUI_2.Checked)         tempVals.Add(prop_webUI_2.Text);
+      d.getProperty("webUI").Value = String.Join(",",tempVals);
+      tempVals = new List<string>();
+      if (prop_webUI6months_0.Checked)         tempVals.Add(prop_webUI6months_0.Text);
+      if (prop_webUI6months_1.Checked)         tempVals.Add(prop_webUI6months_1.Text);
+      if (prop_webUI6months_2.Checked)         tempVals.Add(prop_webUI6months_2.Text);
+      d.getProperty("webUI6months").Value = String.Join(",",tempVals);
+      tempVals = new List<string>();
+      if (prop_webUILongTerm_0.Checked)         tempVals.Add(prop_webUILongTerm_0.Text);
+      if (prop_webUILongTerm_1.Checked)         tempVals.Add(prop_webUILongTerm_1.Text);
+      if (prop_webUILongTerm_2.Checked)         tempVals.Add(prop_webUILongTerm_2.Text);
+      d.getProperty("webUILongTerm").Value = String.Join(",",tempVals);
+      
+  
+  // Mobile
+      tempVals = new List<string>();
+      if (prop_mobileUIPlatforms_0.Checked)         tempVals.Add(prop_mobileUIPlatforms_0.Text);
+      if (prop_mobileUIPlatforms_1.Checked)         tempVals.Add(prop_mobileUIPlatforms_1.Text);
+      if (prop_mobileUIPlatforms_2.Checked)         tempVals.Add(prop_mobileUIPlatforms_2.Text);
+      if (prop_mobileUIPlatforms_3.Checked)         tempVals.Add(prop_mobileUIPlatforms_3.Text);
+      d.getProperty("mobileUIPlatforms").Value = String.Join(",",tempVals);
+      tempVals = new List<string>();
+      if (prop_mobileUI6months_0.Checked)         tempVals.Add(prop_mobileUI6months_0.Text);
+      if (prop_mobileUI6months_1.Checked)         tempVals.Add(prop_mobileUI6months_1.Text);
+      if (prop_mobileUI6months_2.Checked)         tempVals.Add(prop_mobileUI6months_2.Text);
+      if (prop_mobileUI6months_3.Checked)         tempVals.Add(prop_mobileUI6months_3.Text);
+      d.getProperty("mobileUI6months").Value = String.Join(",",tempVals);
+      tempVals = new List<string>();
+      if (prop_mobileUILongTerm_0.Checked)         tempVals.Add(prop_mobileUILongTerm_0.Text);
+      if (prop_mobileUILongTerm_1.Checked)         tempVals.Add(prop_mobileUILongTerm_1.Text);
+      if (prop_mobileUILongTerm_2.Checked)         tempVals.Add(prop_mobileUILongTerm_2.Text);
+      if (prop_mobileUILongTerm_3.Checked)         tempVals.Add(prop_mobileUILongTerm_3.Text);
+      d.getProperty("mobileUILongTerm").Value = String.Join(",",tempVals);
+
+  //Tablet  
+
+  
+      tempVals = new List<string>();
+      if (prop_tabletUIPlatforms_0.Checked)         tempVals.Add(prop_tabletUIPlatforms_0.Text);
+      if (prop_tabletUIPlatforms_1.Checked)         tempVals.Add(prop_tabletUIPlatforms_1.Text);
+      if (prop_tabletUIPlatforms_2.Checked)         tempVals.Add(prop_tabletUIPlatforms_2.Text);
+      d.getProperty("tabletUIPlatforms").Value = String.Join(",",tempVals);
+      tempVals = new List<string>();
+      if (prop_tabletUI6months_0.Checked)         tempVals.Add(prop_tabletUI6months_0.Text);
+      if (prop_tabletUI6months_1.Checked)         tempVals.Add(prop_tabletUI6months_1.Text);
+      if (prop_tabletUI6months_2.Checked)         tempVals.Add(prop_tabletUI6months_2.Text);
+      d.getProperty("tabletUI6months").Value = String.Join(",",tempVals);
+      tempVals = new List<string>();
+      if (prop_tabletUILongTerm_0.Checked)         tempVals.Add(prop_tabletUILongTerm_0.Text);
+      if (prop_tabletUILongTerm_1.Checked)         tempVals.Add(prop_tabletUILongTerm_1.Text);
+      if (prop_tabletUILongTerm_2.Checked)         tempVals.Add(prop_tabletUILongTerm_2.Text);
+      d.getProperty("tabletUILongTerm").Value = String.Join(",",tempVals);
+
+  // Connected TV
+  
+      tempVals = new List<string>();
+      if (prop_connectedTVPlatforms_0.Checked)         tempVals.Add(prop_connectedTVPlatforms_0.Text);
+      if (prop_connectedTVPlatforms_1.Checked)         tempVals.Add(prop_connectedTVPlatforms_1.Text);
+      if (prop_connectedTVPlatforms_2.Checked)         tempVals.Add(prop_connectedTVPlatforms_2.Text);
+      if (prop_connectedTVPlatforms_3.Checked)         tempVals.Add(prop_connectedTVPlatforms_3.Text);
+      if (prop_connectedTVPlatforms_4.Checked)         tempVals.Add(prop_connectedTVPlatforms_4.Text);
+      if (prop_connectedTVPlatforms_5.Checked)         tempVals.Add(prop_connectedTVPlatforms_5.Text);
+      d.getProperty("connectedTVPlatforms").Value = String.Join(",",tempVals);
+      tempVals = new List<string>();
+      if (prop_connectedTVPlatforms6months_0.Checked)         tempVals.Add(prop_connectedTVPlatforms6months_0.Text);
+      if (prop_connectedTVPlatforms6months_1.Checked)         tempVals.Add(prop_connectedTVPlatforms6months_1.Text);
+      if (prop_connectedTVPlatforms6months_2.Checked)         tempVals.Add(prop_connectedTVPlatforms6months_2.Text);
+      if (prop_connectedTVPlatforms6months_3.Checked)         tempVals.Add(prop_connectedTVPlatforms6months_3.Text);
+      if (prop_connectedTVPlatforms6months_4.Checked)         tempVals.Add(prop_connectedTVPlatforms6months_4.Text);
+      if (prop_connectedTVPlatforms6months_5.Checked)         tempVals.Add(prop_connectedTVPlatforms6months_5.Text);
+      d.getProperty("connectedTVPlatforms6months").Value = String.Join(",",tempVals);
+      tempVals = new List<string>();
+      if (prop_connectedTVPlatformsLongTerm_0.Checked)         tempVals.Add(prop_connectedTVPlatformsLongTerm_0.Text);
+      if (prop_connectedTVPlatformsLongTerm_1.Checked)         tempVals.Add(prop_connectedTVPlatformsLongTerm_1.Text);
+      if (prop_connectedTVPlatformsLongTerm_2.Checked)         tempVals.Add(prop_connectedTVPlatformsLongTerm_2.Text);
+      if (prop_connectedTVPlatformsLongTerm_3.Checked)         tempVals.Add(prop_connectedTVPlatformsLongTerm_3.Text);
+      if (prop_connectedTVPlatformsLongTerm_4.Checked)         tempVals.Add(prop_connectedTVPlatformsLongTerm_4.Text);
+      if (prop_connectedTVPlatformsLongTerm_5.Checked)         tempVals.Add(prop_connectedTVPlatformsLongTerm_5.Text);
+      d.getProperty("connectedTVPlatformsLongTerm").Value = String.Join(",",tempVals);
+  
+  // Console
+      tempVals = new List<string>();
+      if (prop_consoleUIPlatforms_0.Checked)         tempVals.Add(prop_consoleUIPlatforms_0.Text);
+      if (prop_consoleUIPlatforms_1.Checked)         tempVals.Add(prop_consoleUIPlatforms_1.Text);
+      if (prop_consoleUIPlatforms_2.Checked)         tempVals.Add(prop_consoleUIPlatforms_2.Text);
+      d.getProperty("consoleUIPlatforms").Value = String.Join(",",tempVals);
+      tempVals = new List<string>();
+      if (prop_consoleUI6months_0.Checked)         tempVals.Add(prop_consoleUI6months_0.Text);
+      if (prop_consoleUI6months_1.Checked)         tempVals.Add(prop_consoleUI6months_1.Text);
+      if (prop_consoleUI6months_2.Checked)         tempVals.Add(prop_consoleUI6months_2.Text);
+      d.getProperty("consoleUI6months").Value = String.Join(",",tempVals);
+      tempVals = new List<string>();
+      if (prop_consoleUILongTerm_0.Checked)         tempVals.Add(prop_consoleUILongTerm_0.Text);
+      if (prop_consoleUILongTerm_1.Checked)         tempVals.Add(prop_consoleUILongTerm_1.Text);
+      if (prop_consoleUILongTerm_2.Checked)         tempVals.Add(prop_consoleUILongTerm_2.Text);
+      d.getProperty("consoleUILongTerm").Value = String.Join(",",tempVals);  
+  
+  // STB
+      tempVals = new List<string>();
+      if (prop_stbUIPlatforms_0.Checked)         tempVals.Add(prop_stbUIPlatforms_0.Text);
+      if (prop_stbUIPlatforms_1.Checked)         tempVals.Add(prop_stbUIPlatforms_1.Text);
+      if (prop_stbUIPlatforms_2.Checked)         tempVals.Add(prop_stbUIPlatforms_2.Text);
+      if (prop_stbUIPlatforms_3.Checked)         tempVals.Add(prop_stbUIPlatforms_3.Text);
+      d.getProperty("stbUIPlatforms").Value = String.Join(",",tempVals);
+      tempVals = new List<string>();
+      if (prop_stbUI6months_0.Checked)         tempVals.Add(prop_stbUI6months_0.Text);
+      if (prop_stbUI6months_1.Checked)         tempVals.Add(prop_stbUI6months_1.Text);
+      if (prop_stbUI6months_2.Checked)         tempVals.Add(prop_stbUI6months_2.Text);
+      if (prop_stbUI6months_3.Checked)         tempVals.Add(prop_stbUI6months_3.Text);
+      d.getProperty("stbUI6months").Value = String.Join(",",tempVals);
+      tempVals = new List<string>();
+      if (prop_stbUILongTerm_0.Checked)         tempVals.Add(prop_stbUILongTerm_0.Text);
+      if (prop_stbUILongTerm_1.Checked)         tempVals.Add(prop_stbUILongTerm_1.Text);
+      if (prop_stbUILongTerm_2.Checked)         tempVals.Add(prop_stbUILongTerm_2.Text);
+      if (prop_stbUILongTerm_3.Checked)         tempVals.Add(prop_stbUILongTerm_3.Text);
+      d.getProperty("stbUILongTerm").Value = String.Join(",",tempVals);
+  
+      d.getProperty("webUIURL").Value = prop_webUIURL.Text;
+      d.getProperty("youtubeURL").Value = prop_youtubeURL.Text;
+      d.getProperty("mobileAppStoreUrls").Value = prop_mobileAppStoreUrls.Text;
+      d.getProperty("tabletAppStoreURLs").Value = prop_tabletAppStoreURLs.Text;
+      d.getProperty("primaryFacebookURLs").Value = prop_primaryFacebookURLs.Text;
+      d.getProperty("primaryTwitterHandles").Value = prop_primaryTwitterHandles.Text;
+  
+      d.getProperty("webAverageMonthly").Value = prop_webAverageMonthly.Text;
+      d.getProperty("webAverageMonthlyViews").Value = prop_webAverageMonthlyViews.Text;
+      d.getProperty("mobileAverageMonthly").Value = prop_mobileAverageMonthly.Text;
+      d.getProperty("mobileAverageMonthlyViews").Value = prop_mobileAverageMonthlyViews.Text;
+      d.getProperty("tabletAverageMonthly").Value = prop_tabletAverageMonthly.Text;
+      d.getProperty("tabletAverageMonthlyViews").Value = prop_tabletAverageMonthlyViews.Text;
+      d.getProperty("connectedTVAverageMonthly").Value = prop_connectedTVAverageMonthly.Text;
+      d.getProperty("connectedTVAverageMonthlyViews").Value = prop_connectedTVAverageMonthlyViews.Text;
+      d.getProperty("consoleAverageMonthly").Value = prop_consoleAverageMonthly.Text;
+      d.getProperty("consoleAverageMonthlyViews").Value = prop_consoleAverageMonthlyViews.Text;
+      d.getProperty("stbAverageMonthly").Value = prop_stbAverageMonthly.Text;
+      d.getProperty("stbAverageMonthlyViews").Value = prop_stbAverageMonthlyViews.Text;
+  
+      
+      if(prop_webUIImage.HasFile)
+      {
+        string ext = System.IO.Path.GetExtension(prop_webUIImage.FileName).ToLower();
+        if (ext.Equals(".png") || ext.Equals(".jpg") || ext.Equals(".gif") || ext.Equals(".zip"))
+        {
+          if(prop_webUIImage.PostedFile.ContentLength < Math.Pow(2,20))
+          {
+            //Response.Write(spiImageRootPath + id.ToString() + "_" + prop_stbUIImage.FileName);
+            prop_webUIImage.SaveAs(spiImageRootPath + id.ToString() + "_web" + ext);
+            d.getProperty("webUIImage").Value = spiImageRoot + id.ToString()+ "_web" + ext;
+          }
+          else
+          {
+            spiErrorMessage.InnerHtml += @"<li>Web UI Image is larger than the 1MB size limit</li>";
+          }
+        }
+        else
+        {
+            spiErrorMessage.InnerHtml += @"<li>Web UI Image must be a JPG, GIF or PNG image, or ZIP archive</li>";
+        }
+      }  
+  
+      if(prop_mobileUIImage.HasFile)
+      {
+        string ext = System.IO.Path.GetExtension(prop_mobileUIImage.FileName).ToLower();
+        if (ext.Equals(".png") || ext.Equals(".jpg") || ext.Equals(".gif")|| ext.Equals(".zip"))
+        {
+          if(prop_mobileUIImage.PostedFile.ContentLength < Math.Pow(2,20))
+          {
+            //Response.Write(spiImageRootPath + id.ToString() + "_" + prop_stbUIImage.FileName);
+            prop_mobileUIImage.SaveAs(spiImageRootPath + id.ToString() + "_mobile" + ext);
+            d.getProperty("mobileUIImage").Value = spiImageRoot + id.ToString()+ "_mobile" + ext;
+          }
+          else
+          {
+            spiErrorMessage.InnerHtml += @"<li>Mobile UI Image is larger than the 1MB size limit</li>";
+          }
+        }
+        else
+        {
+            spiErrorMessage.InnerHtml += @"<li>Mobile UI Image must be a JPG, GIF or PNG image, or ZIP archive</li>";
+        }
+      }
+  
+
+      if(prop_tabletUIImage.HasFile)
+      {
+        string ext = System.IO.Path.GetExtension(prop_tabletUIImage.FileName).ToLower();
+        if (ext.Equals(".png") || ext.Equals(".jpg") || ext.Equals(".gif")|| ext.Equals(".zip"))
+        {
+          if(prop_tabletUIImage.PostedFile.ContentLength < Math.Pow(2,20))
+          {
+            //Response.Write(spiImageRootPath + id.ToString() + "_" + prop_stbUIImage.FileName);
+            prop_tabletUIImage.SaveAs(spiImageRootPath + id.ToString() + "_tablet" + ext);
+            d.getProperty("tabletUIImage").Value = spiImageRoot + id.ToString()+ "_tablet" + ext;
+          }
+          else
+          {
+            spiErrorMessage.InnerHtml += @"<li>Tablet UI Image is larger than the 1MB size limit</li>";
+          }
+        }
+        else
+        {
+            spiErrorMessage.InnerHtml += @"<li>Tablet UI Image must be a JPG, GIF or PNG image, or ZIP archive</li>";
+        }
+      }
+  if(prop_connectedTVUIImage.HasFile)
+      {
+        string ext = System.IO.Path.GetExtension(prop_connectedTVUIImage.FileName).ToLower();
+        if (ext.Equals(".png") || ext.Equals(".jpg") || ext.Equals(".gif")|| ext.Equals(".zip"))
+        {
+          if(prop_connectedTVUIImage.PostedFile.ContentLength < Math.Pow(2,20))
+          {
+            //Response.Write(spiImageRootPath + id.ToString() + "_" + prop_stbUIImage.FileName);
+            prop_connectedTVUIImage.SaveAs(spiImageRootPath + id.ToString() + "_connectedTV" + ext);
+            d.getProperty("connectedTVUIImage").Value = spiImageRoot + id.ToString()+ "_connectedTV" + ext;
+          }
+          else
+          {
+            spiErrorMessage.InnerHtml += @"<li>Connected TV UI Image is larger than the 1MB size limit</li>";
+          }
+        }
+        else
+        {
+            spiErrorMessage.InnerHtml += @"<li>Connected TV UI Image must be a JPG, GIF or PNG image, or ZIP archive</li>";
+        }
+      }
+  if(prop_consoleUIImage.HasFile)
+      {
+        string ext = System.IO.Path.GetExtension(prop_consoleUIImage.FileName).ToLower();
+        if (ext.Equals(".png") || ext.Equals(".jpg") || ext.Equals(".gif")|| ext.Equals(".zip"))
+        {
+          if(prop_consoleUIImage.PostedFile.ContentLength < Math.Pow(2,20))
+          {
+            //Response.Write(spiImageRootPath + id.ToString() + "_" + prop_stbUIImage.FileName);
+            prop_consoleUIImage.SaveAs(spiImageRootPath + id.ToString() + "_console" + ext );
+            d.getProperty("consoleUIImage").Value = spiImageRoot + id.ToString()+ "_console" + ext ;
+          }
+          else
+          {
+            spiErrorMessage.InnerHtml += @"<li>Console UI Image is larger than the 1MB size limit</li>";
+          }
+        }
+        else
+        {
+            spiErrorMessage.InnerHtml += @"<li>Console UI Image must be a JPG, GIF or PNG image, or ZIP archive</li>";
+        }
+      }
+  if(prop_stbUIImage.HasFile)
+      {
+        string ext = System.IO.Path.GetExtension(prop_stbUIImage.FileName).ToLower();
+        if (ext.Equals(".png") || ext.Equals(".jpg") || ext.Equals(".gif")|| ext.Equals(".zip"))
+        {
+          if(prop_stbUIImage.PostedFile.ContentLength < Math.Pow(2,20))
+          {
+            //Response.Write(spiImageRootPath + id.ToString() + "_" + prop_stbUIImage.FileName);
+            prop_stbUIImage.SaveAs(spiImageRootPath + id.ToString() + "_stb" + ext );
+            d.getProperty("stbUIImage").Value = spiImageRoot + id.ToString()+ "_stb" + ext ;
+          }
+          else
+          {
+            spiErrorMessage.InnerHtml += @"<li>Set-top box UI Image is larger than the 1MB size limit</li>";
+          }
+        }
+        else
+        {
+            spiErrorMessage.InnerHtml += @"<li>Set-top box UI Image must be a JPG, GIF or PNG image, or ZIP archive</li>";
+        }
+      }
+  
+      if(spiErrorMessage.InnerHtml.Equals(String.Empty))
+      {
+        spiErrorMessage.Visible = false;
+        d.getProperty("isCompleted").Value = isCompleted;
+      }
+      else
+      {
+        spiErrorMessage.Visible = true;
+      }
+      d.getProperty("userUpdated").Value = true;
+  
+      d.Save();
+        
+      string url="http://" + HttpContext.Current.Request.Url.Host + umbraco.library.NiceUrl(SPIParent) + prop_uid.Value + "/" + prop_secret.Value;
+
+      if(isCompleted)
+      {
+        SendMail("kauserkanji@vodprofessional.com", "VODPro SPI - Profile Completed - " + prop_companyName.Text, "Click-through: " + url, "support@vodprofessional.com", "VOD Professional Support");
+      }
+      else
+      {
+        SendMail("kauserkanji@vodprofessional.com", "VODPro SPI - Profile Saved - " + prop_companyName.Text, "Click-through: " + url, "support@vodprofessional.com", "VOD Professional Support");
+      }
+    }
+    
+    protected void loadSPI(string uid)
+    {
+      int id = Int32.Parse(uid);
+      // Get document obj
+    // Get Document Obj
+      umbraco.cms.businesslogic.web.Document d = new umbraco.cms.businesslogic.web.Document(id);  
+      umbraco.BusinessLogic.User u = new umbraco.BusinessLogic.User("websitecontentuser");
+
+      // Initialise properties
+      prop_companyName.Text = d.getProperty("companyName").Value.ToString() ;
+      prop_vodServiceName.Text = d.getProperty("vodServiceName").Value.ToString();
+      // Init fields on form
+  
+      prop_webUIURL.Text = d.getProperty("webUIURL").Value.ToString();
+      prop_youtubeURL.Text = d.getProperty("youtubeURL").Value.ToString();
+      prop_mobileAppStoreUrls.Text = d.getProperty("mobileAppStoreUrls").Value.ToString();
+      prop_tabletAppStoreURLs.Text = d.getProperty("tabletAppStoreURLs").Value.ToString();
+      prop_primaryFacebookURLs.Text = d.getProperty("primaryFacebookURLs").Value.ToString();
+      prop_primaryTwitterHandles.Text = d.getProperty("primaryTwitterHandles").Value.ToString();
+      prop_webAverageMonthly.Text = d.getProperty("webAverageMonthly").Value.ToString();
+      prop_webAverageMonthlyViews.Text = d.getProperty("webAverageMonthlyViews").Value.ToString();
+      prop_mobileAverageMonthly.Text = d.getProperty("mobileAverageMonthly").Value.ToString();
+      prop_mobileAverageMonthlyViews.Text = d.getProperty("mobileAverageMonthlyViews").Value.ToString();
+      prop_tabletAverageMonthly.Text = d.getProperty("tabletAverageMonthly").Value.ToString();
+      prop_tabletAverageMonthlyViews.Text = d.getProperty("tabletAverageMonthlyViews").Value.ToString();
+      prop_connectedTVAverageMonthly.Text = d.getProperty("connectedTVAverageMonthly").Value.ToString();
+      prop_connectedTVAverageMonthlyViews.Text = d.getProperty("connectedTVAverageMonthlyViews").Value.ToString();
+      prop_consoleAverageMonthly.Text = d.getProperty("consoleAverageMonthly").Value.ToString();
+      prop_consoleAverageMonthlyViews.Text = d.getProperty("consoleAverageMonthlyViews").Value.ToString();
+      prop_stbAverageMonthly.Text = d.getProperty("stbAverageMonthly").Value.ToString();
+      prop_stbAverageMonthlyViews.Text = d.getProperty("stbAverageMonthlyViews").Value.ToString();
+  
+  
+      if(!String.IsNullOrEmpty(d.getProperty("webUIImage").Value.ToString()))
+      {
+        lit_webUIImage.Text = @"<a class=""";
+        if(d.getProperty("webUIImage").Value.ToString().ToLower().EndsWith(".zip"))
+          lit_webUIImage.Text += @"non-";
+        lit_webUIImage.Text += @"lightbox"" target=""vp_img"" href=""" + d.getProperty("webUIImage").Value.ToString() + @""">view image</a>";
+      }
+      if(!String.IsNullOrEmpty(d.getProperty("mobileUIImage").Value.ToString()))
+      {
+        lit_mobileUIImage.Text = @"<a class=""";
+        if(d.getProperty("mobileUIImage").Value.ToString().ToLower().EndsWith(".zip"))
+          lit_mobileUIImage.Text += @"non-";
+        lit_mobileUIImage.Text += @"lightbox""  target=""vp_img"" href=""" + d.getProperty("mobileUIImage").Value.ToString() + @""">view image</a>";
+      }
+      if(!String.IsNullOrEmpty(d.getProperty("tabletUIImage").Value.ToString()))
+      {
+        lit_tabletUIImage.Text = @"<a class=""";
+        if(d.getProperty("tabletUIImage").Value.ToString().ToLower().EndsWith(".zip"))
+          lit_tabletUIImage.Text += @"non-";
+        lit_tabletUIImage.Text += @"lightbox""  target=""vp_img"" href=""" + d.getProperty("tabletUIImage").Value.ToString() + @""">view image</a>";
+      }
+      if(!String.IsNullOrEmpty(d.getProperty("connectedTVUIImage").Value.ToString()))
+      {
+        lit_connectedTVUIImage.Text = @"<a class=""";
+        if(d.getProperty("connectedTVUIImage").Value.ToString().ToLower().EndsWith(".zip"))
+          lit_connectedTVUIImage.Text += @"non-";
+        lit_connectedTVUIImage.Text += @"lightbox""  target=""vp_img"" href=""" + d.getProperty("connectedTVUIImage").Value.ToString() + @""">view image</a>";
+      }
+      if(!String.IsNullOrEmpty(d.getProperty("consoleUIImage").Value.ToString()))
+      {
+        lit_consoleUIImage.Text = @"<a class=""";
+        if(d.getProperty("consoleUIImage").Value.ToString().ToLower().EndsWith(".zip"))
+          lit_consoleUIImage.Text += @"non-";
+        lit_consoleUIImage.Text += @"lightbox""  target=""vp_img"" href=""" + d.getProperty("consoleUIImage").Value.ToString() + @""">view image</a>";
+      }
+      if(!String.IsNullOrEmpty(d.getProperty("stbUIImage").Value.ToString()))
+      {
+        lit_stbUIImage.Text = @"<a class=""";
+        if(d.getProperty("stbUIImage").Value.ToString().ToLower().EndsWith(".zip"))
+          lit_stbUIImage.Text += @"non-";
+        lit_stbUIImage.Text += @"lightbox""  target=""vp_img"" href=""" + d.getProperty("stbUIImage").Value.ToString() + @""">view image</a>";
+      }
+  
+  
+      string tempVal;
+      string[] tempVals;
+  
+      setCheckbox("webUI",3,d.getProperty("webUI").Value.ToString());
+      setCheckbox("webUI6months",3,d.getProperty("webUI6months").Value.ToString());
+      setCheckbox("webUILongTerm",3,d.getProperty("webUILongTerm").Value.ToString());
+  
+      setCheckbox("mobileUIPlatforms",4,d.getProperty("mobileUIPlatforms").Value.ToString());
+      setCheckbox("mobileUI6months",4,d.getProperty("mobileUI6months").Value.ToString());
+      setCheckbox("mobileUILongTerm",4,d.getProperty("mobileUILongTerm").Value.ToString());
+  
+      setCheckbox("tabletUIPlatforms",3,d.getProperty("tabletUIPlatforms").Value.ToString());
+      setCheckbox("tabletUI6months",3,d.getProperty("tabletUI6months").Value.ToString());
+      setCheckbox("tabletUILongTerm",3,d.getProperty("tabletUILongTerm").Value.ToString());
+
+      setCheckbox("connectedTVPlatforms",6,d.getProperty("connectedTVPlatforms").Value.ToString());
+      setCheckbox("connectedTVPlatforms6months",6,d.getProperty("connectedTVPlatforms6months").Value.ToString());
+      setCheckbox("connectedTVPlatformsLongTerm",6,d.getProperty("connectedTVPlatformsLongTerm").Value.ToString());
+  
+      setCheckbox("consoleUIPlatforms",3,d.getProperty("consoleUIPlatforms").Value.ToString());
+      setCheckbox("consoleUI6months",3,d.getProperty("consoleUI6months").Value.ToString());
+      setCheckbox("consoleUILongTerm",3,d.getProperty("consoleUILongTerm").Value.ToString());
+
+      setCheckbox("stbUIPlatforms",4,d.getProperty("stbUIPlatforms").Value.ToString());
+      setCheckbox("stbUI6months",4,d.getProperty("stbUI6months").Value.ToString());
+      setCheckbox("stbUILongTerm",4,d.getProperty("stbUILongTerm").Value.ToString());
+  
+      string isCompleted = d.getProperty("isCompleted").Value.ToString();
+  
+      if(isCompleted.Equals("1"))
+      {
+        spiCompletedMessage.Visible = true;
+        spiButtons.Visible = false;
+      }
+      else
+      {
+        spiCompletedMessage.Visible = false;
+        spiButtons.Visible = true;
+      }
+  
+    }
+    
+    protected void setCheckbox(string propname, int num, string tempvals)
+    {
+       if (!String.IsNullOrEmpty(tempvals))
+       {
+          string[] vals = tempvals.Split(',');
+          for(int i=0; i<num; i++)
+          {
+            try{
+              CheckBox c = plcSPI.FindControl("prop_" + propname+ "_" + i) as CheckBox;
+              c.Checked = vals.Contains(c.Text);
+            }
+            catch (Exception e)
+              {
+               Response.Write( "prop_" + propname+ "_" + i);
+              }
+          }
+       }
+    }
+      
+         
+private void SendMail(string to, string subject, string message, string emailFrom, string emailFromName)
+{
+    var m = new System.Net.Mail.MailMessage();
+    m.From = new System.Net.Mail.MailAddress(emailFrom, emailFromName);
+    m.Subject = subject;
+    m.IsBodyHtml = false;
+    m.To.Add(to);
+    m.CC.Add("support@vodprofessional.com");
+    
+    m.Body = message;
+    var s = new System.Net.Mail.SmtpClient("localhost");
+    s.Send(m);
+}     
+
+</script>
+  
+<asp:Content ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<div id="maincontent">
+
+  <h1>VOD Service Provider Survey</h1>
+  
+  <p class="spi">
+Thanks for participating in our VOD Global Service Provider survey. Using the data that you supply we’ll be able to build up a 
+    picture of the different video-on-demand services available in each country, levels of consumer uptake and how quickly 
+    the world of new television is changing.  We’ll also be able to establish best practices, analyse software development 
+    cycles and share this knowledge with industry colleagues. 
+  </p>
+  <p class="spi">
+    Our survey is made up of 6 small sections and <strong>you need only give us as much information as you feel comfortable with – or that’s already in the public domain.</strong> As a minimum 
+    however we ask that you tell us which platforms your VOD service is already available on <br>(the "Supported Now" questions) and 
+    provide accompanying user interface (UI) screenshots. <strong><br>Any future plans you share with us will NOT be made public.</strong> We'll simply 
+    aggregate that data to say things like "x% of VOD services that we surveyed are planning to create Samsung Smart TV apps 
+    within the next 12 months".  
+  </p>
+  <p class="spi">
+This page is unique to your company – a personalised URL has been created especially for you. You can save the form and come back 
+    to it later if necessary. Screenshots can be uploaded inside the page itself or zipped up and emailed to 
+    <a href="mailto:vsps@vodprofessional.com">vsps@vodprofessional.com</a>. 
+    Indeed, if you have any questions or comments please contact us at that address. 
+  </p>
+  <p class="spi">
+Thanks again and we look forward to hearing from you.  
+  </p>
+  <p class="spi">
+  Kauser Kanji
+    <br/>
+Editor, VOD Professional
+  </p>
+  <p id="spiCompletedMessage" class="spiCompletedMessage" runat="server">
+    This profile is now complete!
+  </p>
+  <ul id="spiErrorMessage" class="spiErrorMessage" runat="server"></ul>
+  
+  <asp:Panel ID="plcSPI" runat="server" CssClass="SPI">
+    <asp:HiddenField ID="prop_secret" runat="server" />
+  <asp:HiddenField id="prop_uid" runat="server" />
+    
+
+    <h2 class="no-border">Company</h2>
+    <div class="field">
+    <asp:Label runat="server" id="lbl1" AssociatedControlId="prop_companyName" CssClass="field">Company Name</asp:Label><asp:TextBox runat="server" id="prop_companyName" />
+    </div>
+    <div class="field">
+    <asp:Label runat="server" id="lbl2" AssociatedControlId="prop_vodServiceName" CssClass="field">VOD Service Name</asp:Label><asp:TextBox runat="server" id="prop_vodServiceName" />
+    </div>
+      <div class="field">
+    <asp:Label runat="server" id="lbl3" AssociatedControlId="prop_youtubeURL" CssClass="field">Primary Youtube URLs</asp:Label><asp:TextBox runat="server" id="prop_youtubeURL" TextMode="Multiline" />
+    </div>
+    <div class="field">
+    <asp:Label runat="server" id="lbl4" AssociatedControlId="prop_primaryFacebookURLs" CssClass="field">Primary Facebook URLs</asp:Label><asp:TextBox runat="server" id="prop_primaryFacebookURLs" TextMode="Multiline" />
+    </div>
+    <div class="field">
+    <asp:Label runat="server" id="lbl5" AssociatedControlId="prop_primaryTwitterHandles" CssClass="field">Primary Twitter handles</asp:Label><asp:TextBox runat="server" id="prop_primaryTwitterHandles" TextMode="Multiline" />
+    </div>
+
+    
+    <h2>#1. Your VOD Service on the Web</h2>
+      <div class="field">
+    <asp:Label runat="server" id="lblw3" AssociatedControlId="prop_webUIImage" CssClass="field">High-res screenshots of your Web UIs<br/>
+      <span class="instruction">(GIF, JPG, PNG or ZIP archive only)</span></asp:Label><asp:FileUpload id="prop_webUIImage" type="file" runat="server" />  <asp:Literal runat="server" id="lit_webUIImage" />
+    </div>
+  <table id="prop_webUI">
+  <tr>
+  <th>Platform</th>
+  <th>Supported Now</th><th>Planned (within 12 months)</th><th>Planned (no timescale)</th></tr>
+     <tr>
+      <td>Linux variants</td>
+      <td><asp:Checkbox runat="server" ID="prop_webUI_2" Text="37" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_webUI6months_2" Text="37" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_webUILongTerm_2" Text="37" /></td>
+    </tr>    
+    <tr>
+      <td>Mac</td>
+      <td><asp:Checkbox runat="server" ID="prop_webUI_1" Text="36" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_webUI6months_1" Text="36" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_webUILongTerm_1" Text="36" /></td>
+    </tr>
+    <tr>
+      <td>PC</td>
+      <td><asp:Checkbox runat="server" ID="prop_webUI_0" Text="35" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_webUI6months_0" Text="35" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_webUILongTerm_0" Text="35" /></td>
+    </tr>
+  </table>
+    <div class="field">
+    <asp:Label runat="server" id="lblw4" AssociatedControlId="prop_webAverageMonthly" CssClass="field number">Average monthly Web users
+      <span class="instruction">(past 6 months)</span></asp:Label><asp:TextBox runat="server" id="prop_webAverageMonthly" CssClass="number"/>
+    </div>
+    <div class="field">
+    <asp:Label runat="server" id="lblw5" AssociatedControlId="prop_webAverageMonthlyViews" CssClass="field number">Average monthly Web views
+      <span class="instruction">(past 6 months)</span></asp:Label><asp:TextBox runat="server" id="prop_webAverageMonthlyViews" CssClass="number" />
+    </div>
+  
+    <div class="field">
+    <asp:Label runat="server" id="lblw1" AssociatedControlId="prop_webUIURL" CssClass="field">Web UI URL</asp:Label><asp:TextBox runat="server" id="prop_webUIURL" />
+    </div>
+
+    
+      <h2>#2. Your VOD Service on Smartphones</h2>
+  <div class="field">
+    <asp:Label runat="server" id="lblm2" AssociatedControlId="prop_mobileUIImage" CssClass="field">
+      High-res screenshots of your Mobile UIs<br/>
+      <span class="instruction">(GIF, JPG, PNG or ZIP archive only)</span></asp:Label><asp:FileUpload id="prop_mobileUIImage" type="file" runat="server" />  <asp:Literal runat="server" id="lit_mobileUIImage" />
+    </div>
+
+    <table id="prop_mobileUIPlatforms">
+  <tr>
+  <th>Platform</th>
+  <th>Supported Now</th><th>Planned (within 12 months)</th><th>Planned (no timescale)</th></tr>
+    <tr>
+      <td>Android phone</td>
+      <td><asp:Checkbox runat="server" ID="prop_mobileUIPlatforms_1" Text="40" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_mobileUI6months_1" Text="40" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_mobileUILongTerm_1" Text="40" /></td>
+    </tr>
+    <tr>
+      <td>iPhone</td>
+      <td><asp:Checkbox runat="server" ID="prop_mobileUIPlatforms_0" Text="38" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_mobileUI6months_0" Text="38" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_mobileUILongTerm_0" Text="38" /></td>
+    </tr>
+    <tr>
+      <td>Symbian phone</td>
+      <td><asp:Checkbox runat="server" ID="prop_mobileUIPlatforms_3" Text="42" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_mobileUI6months_3" Text="42" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_mobileUILongTerm_3" Text="42" /></td>
+    </tr>
+    <tr>
+      <td>Windows phone</td>
+      <td><asp:Checkbox runat="server" ID="prop_mobileUIPlatforms_2" Text="41" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_mobileUI6months_2" Text="41" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_mobileUILongTerm_2" Text="41" /></td>
+    </tr>
+  </table>  
+    <div class="field">
+    <asp:Label runat="server" id="lblm4" AssociatedControlId="prop_webAverageMonthly" CssClass="field number">Average monthly Mobile users
+      <span class="instruction">(past 6 months)</span></asp:Label><asp:TextBox runat="server" id="prop_mobileAverageMonthly" CssClass="number"/>
+    </div>
+    <div class="field">
+    <asp:Label runat="server" id="lblm5" AssociatedControlId="prop_webAverageMonthlyViews" CssClass="field number">Average monthly Mobile views
+      <span class="instruction">(past 6 months)</span></asp:Label><asp:TextBox runat="server" id="prop_mobileAverageMonthlyViews" CssClass="number" />
+    </div>
+        <div class="field">
+    <asp:Label runat="server" id="lblm1" AssociatedControlId="prop_mobileAppStoreUrls" CssClass="field">Mobile App Store Urls</asp:Label><asp:TextBox runat="server" id="prop_mobileAppStoreUrls" TextMode="Multiline" />
+    </div>
+    
+     <h2>#3. Your VOD Service on Tablets</h2>
+        <div class="field">
+  <asp:Label runat="server" id="lblt2" AssociatedControlId="prop_tabletUIImage" CssClass="field">High-res screenshots of your Tablet UIs<br/>
+      <span class="instruction">(GIF, JPG, PNG or ZIP archive only)</span></asp:Label><asp:FileUpload id="prop_tabletUIImage" type="file" runat="server" />  <asp:Literal runat="server" id="lit_tabletUIImage" />
+     
+    </div>  
+<table id="prop_tabletUIPlatforms">
+  <tr>
+  <th>Platform</th>
+  <th>Supported Now</th><th>Planned (within 12 months)</th><th>Planned (no timescale)</th></tr>
+    <tr>
+      <TD>Android tablets</TD>
+      <td><asp:Checkbox runat="server" ID="prop_tabletUIPlatforms_1" Text="52" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_tabletUI6months_1" Text="52" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_tabletUILongTerm_1" Text="52" /></td>
+    </tr>
+    <tr>
+      <TD>iPad</TD>
+      <td><asp:Checkbox runat="server" ID="prop_tabletUIPlatforms_0" Text="51" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_tabletUI6months_0" Text="51" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_tabletUILongTerm_0" Text="51" /></td>
+    </tr>
+    <tr>
+      <TD>Windows tablets</TD>
+      <td><asp:Checkbox runat="server" ID="prop_tabletUIPlatforms_2" Text="53" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_tabletUI6months_2" Text="53" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_tabletUILongTerm_2" Text="53" /></td>
+    </tr>
+  </table>   
+    <div class="field"> 
+           <asp:Label runat="server" id="lblt4" AssociatedControlId="prop_webAverageMonthly" CssClass="field number">Average monthly Tablet users
+      <span class="instruction">(past 6 months)</span></asp:Label><asp:TextBox runat="server" id="prop_tabletAverageMonthly" CssClass="number"/>
+    </div>
+    <div class="field">
+    <asp:Label runat="server" id="lblt5" AssociatedControlId="prop_webAverageMonthlyViews" CssClass="field number">Average monthly Tablet views
+      <span class="instruction">(past 6 months)</span></asp:Label><asp:TextBox runat="server" id="prop_tabletAverageMonthlyViews" CssClass="number" />
+    </div>
+       
+  <div class="field">
+    <asp:Label runat="server" id="lblt1" AssociatedControlId="prop_tabletAppStoreURLs" CssClass="field">Tablet App Store URLs</asp:Label><asp:TextBox runat="server" id="prop_tabletAppStoreURLs" TextMode="Multiline" />
+    </div>
+ 
+    
+     <h2>#4. Your VOD Service on Connected TV</h2>    
+    <div class="field">
+  <asp:Label runat="server" id="lbltv1" AssociatedControlId="prop_connectedTVUIImage" CssClass="field">High-res screenshots of your Connected TV UIs<br/>
+      <span class="instruction">(GIF, JPG, PNG or ZIP archive only)</span></asp:Label><asp:FileUpload id="prop_connectedTVUIImage" type="file" runat="server" />  <asp:Literal runat="server" id="lit_connectedTVUIImage" />
+    
+    </div>  
+<table id="prop_connectedTVPlatforms">
+  <tr>
+  <th>Platform</th>
+  <th>Supported Now</th><th>Planned (within 12 months)</th><th>Planned (no timescale)</th></tr>
+  <tr>
+      <td>LG</td>
+      <td><asp:Checkbox runat="server" ID="prop_connectedTVPlatforms_2" Text="45" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_connectedTVPlatforms6months_2" Text="45" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_connectedTVPlatformsLongTerm_2" Text="45" /></td>
+    </tr>
+  <tr>
+      <td>Panasonic</td>
+      <td><asp:Checkbox runat="server" ID="prop_connectedTVPlatforms_3" Text="46" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_connectedTVPlatforms6months_3" Text="46" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_connectedTVPlatformsLongTerm_3" Text="46" /></td>
+    </tr>  <tr>
+       <td>Philips</td>
+       <td><asp:Checkbox runat="server" ID="prop_connectedTVPlatforms_5" Text="50" /></td>
+       <td><asp:Checkbox runat="server" ID="prop_connectedTVPlatforms6months_5" Text="50" /></td>
+       <td><asp:Checkbox runat="server" ID="prop_connectedTVPlatformsLongTerm_5" Text="50" /></td>
+     </tr>
+  <tr>
+      <td>Samsung</td>
+      <td><asp:Checkbox runat="server" ID="prop_connectedTVPlatforms_1" Text="44" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_connectedTVPlatforms6months_1" Text="44" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_connectedTVPlatformsLongTerm_1" Text="44" /></td>
+    </tr>
+  <tr>
+      <td>Sony</td>
+      <td><asp:Checkbox runat="server" ID="prop_connectedTVPlatforms_0" Text="43" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_connectedTVPlatforms6months_0" Text="43" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_connectedTVPlatformsLongTerm_0" Text="43" /></td>
+    </tr>
+
+
+  <tr>
+      <td>Toshiba</td>
+      <td><asp:Checkbox runat="server" ID="prop_connectedTVPlatforms_4" Text="49" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_connectedTVPlatforms6months_4" Text="49" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_connectedTVPlatformsLongTerm_4" Text="49" /></td>
+    </tr>
+
+  </table>
+    <div class="field">
+           <asp:Label runat="server" id="lblcon4" AssociatedControlId="prop_webAverageMonthly" CssClass="field number">Average monthly Connected TV users
+      <span class="instruction">(past 6 months)</span></asp:Label><asp:TextBox runat="server" id="prop_connectedTVAverageMonthly" CssClass="number"/>
+    </div>
+    <div class="field">
+    <asp:Label runat="server" id="lblcon5" AssociatedControlId="prop_webAverageMonthlyViews" CssClass="field number">Average monthly Connected TV views
+      <span class="instruction">(past 6 months)</span></asp:Label><asp:TextBox runat="server" id="prop_connectedTVAverageMonthlyViews" CssClass="number" />
+    </div>
+    
+    
+    <h2>#5. Your VOD Service on Games Consoles</h2>
+        <div class="field">
+<asp:Label runat="server" id="lblcon1" AssociatedControlId="prop_consoleUIImage" CssClass="field">High-res screenshots of your Console UIs<br/>
+      <span class="instruction">(GIF, JPG, PNG or ZIP archive only)</span></asp:Label><asp:FileUpload id="prop_consoleUIImage" type="file" runat="server" />  <asp:Literal runat="server" id="lit_consoleUIImage" />
+    
+    </div>
+  <table id="prop_consoleUIPlatforms">
+  <tr>
+  <th>Platform</th>
+  <th>Supported Now</th><th>Planned (within 12 months)</th><th>Planned (no timescale)</th></tr>
+
+    <tr>
+      <td>Playstation</td>
+      <td><asp:Checkbox runat="server" ID="prop_consoleUIPlatforms_1" Text="56" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_consoleUI6months_1" Text="56" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_consoleUILongTerm_1" Text="56" /></td>
+    </tr>
+    <tr>
+      <td>Wii</td>
+      <td><asp:Checkbox runat="server" ID="prop_consoleUIPlatforms_2" Text="68" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_consoleUI6months_2" Text="68" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_consoleUILongTerm_2" Text="68" /></td>
+    </tr>
+    <tr>
+      <td>Xbox</td>
+      <td><asp:Checkbox runat="server" ID="prop_consoleUIPlatforms_0" Text="55" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_consoleUI6months_0" Text="55" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_consoleUILongTerm_0" Text="55" /></td>
+    </tr>  
+  </table>
+    <div class="field">
+           <asp:Label runat="server" id="lblco4" AssociatedControlId="prop_webAverageMonthly" CssClass="field number">Average monthly Console users
+      <span class="instruction">(past 6 months)</span></asp:Label><asp:TextBox runat="server" id="prop_consoleAverageMonthly" CssClass="number"/>
+    </div>
+    <div class="field">
+    <asp:Label runat="server" id="lblco5" AssociatedControlId="prop_webAverageMonthlyViews" CssClass="field number">Average monthly Console views
+      <span class="instruction">(past 6 months)</span></asp:Label><asp:TextBox runat="server" id="prop_consoleAverageMonthlyViews" CssClass="number" />
+    </div>
+  
+    
+     <h2>#6. Your VOD Service on Set-top Boxes</h2>
+        <div class="field">
+      <asp:Label runat="server" id="lblstb1" AssociatedControlId="prop_stbUIImage" CssClass="field">High-res screenshots of your STB UIs<br/>
+      <span class="instruction">(GIF, JPG, PNG or ZIP archive only)</span></asp:Label><asp:FileUpload id="prop_stbUIImage" type="file" runat="server" />  <asp:Literal runat="server" id="lit_stbUIImage" />
+    </div>
+
+<table id="prop_stbUIPlatforms">
+  <tr>
+  <th>Platform</th>
+  <th>Supported Now</th><th>Planned (within 12 months)</th><th>Planned (no timescale)</th></tr>
+    <tr>
+      <td>Apple TV</td>
+      <td><asp:Checkbox runat="server" ID="prop_stbUIPlatforms_0" Text="59" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_stbUI6months_0" Text="59" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_stbUILongTerm_0" Text="59" /></td>
+    </tr>
+    <tr>
+      <td>Boxee</td>
+      <td><asp:Checkbox runat="server" ID="prop_stbUIPlatforms_3" Text="62" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_stbUI6months_3" Text="62" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_stbUILongTerm_3" Text="62" /></td>
+    </tr>
+    <tr>
+      <td>Google TV</td>
+      <td><asp:Checkbox runat="server" ID="prop_stbUIPlatforms_1" Text="60" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_stbUI6months_1" Text="60" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_stbUILongTerm_1" Text="60" /></td>
+    </tr><tr>
+      <td>Roku</td>
+      <td><asp:Checkbox runat="server" ID="prop_stbUIPlatforms_2" Text="61" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_stbUI6months_2" Text="61" /></td>
+      <td><asp:Checkbox runat="server" ID="prop_stbUILongTerm_2" Text="61" /></td>
+    </tr>
+  </table>  
+       
+    <div class="field">
+           <asp:Label runat="server" id="lblstb4" AssociatedControlId="prop_webAverageMonthly" CssClass="field number">Average monthly Set-top Box users
+      <span class="instruction">(past 6 months)</span></asp:Label><asp:TextBox runat="server" id="prop_stbAverageMonthly" CssClass="number"/>
+    </div>
+    <div class="field">
+    <asp:Label runat="server" id="lblstb5" AssociatedControlId="prop_webAverageMonthlyViews" CssClass="field number">Average monthly Set-top Box views
+      <span class="instruction">(past 6 months)</span></asp:Label><asp:TextBox runat="server" id="prop_stbAverageMonthlyViews" CssClass="number" />
+    </div>
+           
+       
+       
+    <div id="spiButtons" runat="server" class="buttons">
+    <asp:Button runat="server" CausesValidation="False" id="btnSave" Text="Save for later" OnClick="Save_Click" />
+    <asp:Button runat="server" CausesValidation="False" id="btnComplete" Text="Save and complete" OnClick="Complete_Click" />
+    
+    </div>
+  </asp:Panel>
+  </div>
+  
+</asp:Content>

@@ -1,0 +1,656 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VodProMaster2.master" AutoEventWireup="true" %>
+<script Langauge="C#" runat="server">
+protected void Page_Load(Object sender, EventArgs e)
+{
+  if(!IsPostBack && Request.QueryString["email"] != null)
+  {
+    if(Request.QueryString["page"] != null) {
+      ReturnPage.Value = Request.QueryString["page"].ToString();
+    }
+      else {
+        ReturnPage.Value = "1058";
+      }
+    EmailAddress.Text = Server.UrlDecode(Request.QueryString["email"].ToString());
+  }
+}
+protected void CreatedUser(Object sender, EventArgs e)
+{
+  /* User is created and setting extra parameters to profile */
+  TextBox UserName = CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("UserName") as TextBox;
+  TextBox CompanyName = CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("txtCompanyName") as TextBox;
+  TextBox CompanyAddress1 = CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("txtCompanyAddress1") as TextBox;
+  TextBox CompanyAddress2 = CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("txtCompanyAddress2") as TextBox;
+  TextBox CompanyAddress3 = CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("txtCompanyAddress3") as TextBox;
+  TextBox CompanyTown = CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("txtCompanyTown") as TextBox;
+  TextBox County = CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("txtCounty") as TextBox;
+  TextBox PostCode = CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("txtPostCode") as TextBox;
+  DropDownList Country = CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("Country") as DropDownList;
+  TextBox BusinessPhone = CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("txtPhone") as TextBox;
+  TextBox Mobile = CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("txtMobile") as TextBox;;
+  DropDownList OrgType = CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("txtOrgType") as DropDownList ;
+  TextBox OrgTypeOther = CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("txtOrgTypeOther") as TextBox ;
+  DropDownList Employees = CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("txtEmployees") as DropDownList;
+  
+  string username = UserName.Text;
+  MembershipUser User = Membership.GetUser(username);
+  umbraco.cms.businesslogic.member.Member member = new umbraco.cms.businesslogic.member.Member((int)User.ProviderUserKey);
+  
+  /*  umbraco.cms.businesslogic.property.Property[] props = member.getProperties;
+  for(int i=0; i<props.Length; i++)
+  {
+    Response.Write("<br/>"+props[i].Id.ToString() + ":" + props[i].Value);
+  }*/
+  
+  member.Text = txtFirstName.Text.Trim() + " " + txtLastName.Text.Trim();
+  
+  umbraco.cms.businesslogic.property.Property propTitle = member.getProperty("title"); // Property alias
+  umbraco.cms.businesslogic.property.Property propFirstName = member.getProperty("firstName"); // Property alias
+  umbraco.cms.businesslogic.property.Property propLastName = member.getProperty("lastName"); // Property alias
+  umbraco.cms.businesslogic.property.Property propFullName = member.getProperty("fullName"); // Property alias
+  umbraco.cms.businesslogic.property.Property propReceiveEmails = member.getProperty("receivePromoEmails"); // Property alias
+  umbraco.cms.businesslogic.property.Property propJobTitle = member.getProperty("jobTitle"); // Property alias
+  umbraco.cms.businesslogic.property.Property propCompanyName = member.getProperty("companyName"); // Property alias
+  umbraco.cms.businesslogic.property.Property propCompanyAddress1 = member.getProperty("companyAddress1"); // Property alias
+  umbraco.cms.businesslogic.property.Property propCompanyAddress2 = member.getProperty("companyAddress2"); // Property alias
+  umbraco.cms.businesslogic.property.Property propCompanyAddress3 = member.getProperty("companyAddress3"); // Property alias
+  umbraco.cms.businesslogic.property.Property propCompanyTown = member.getProperty("companyTown"); // Property alias
+  umbraco.cms.businesslogic.property.Property propCompanyState = member.getProperty("companyState"); // Property alias
+  umbraco.cms.businesslogic.property.Property propCompanyPostcode = member.getProperty("companyPostcodeZip"); // Property alias
+  umbraco.cms.businesslogic.property.Property propCompanyCountry = member.getProperty("companyCountry"); // Property alias
+  umbraco.cms.businesslogic.property.Property propBusinessPhone = member.getProperty("businessPhone"); // Property alias
+  umbraco.cms.businesslogic.property.Property propMobile = member.getProperty("mobile"); // Property alias
+  umbraco.cms.businesslogic.property.Property propOrgType = member.getProperty("organisationType"); // Property alias
+  umbraco.cms.businesslogic.property.Property propOrgTypeOther = member.getProperty("organisationTypeOther"); // Property alias
+  umbraco.cms.businesslogic.property.Property propEmployees = member.getProperty("numberOfEmployees"); // Property alias
+  umbraco.cms.businesslogic.property.Property propReturnPage = member.getProperty("returnPage"); // Property alias
+
+  propTitle.Value = txtTitle.Text.Trim();
+  propFirstName.Value = txtFirstName.Text.Trim();
+  propLastName.Value = txtLastName.Text.Trim();
+  propFullName.Value = txtTitle.Text.Trim() + " " + txtFirstName.Text.Trim() + " " + txtLastName.Text.Trim();
+  propReceiveEmails.Value = chkAccept.Checked;
+  propJobTitle.Value = txtJobTitle.Text.Trim();
+  propCompanyName.Value = txtCompanyName.Text.Trim();
+  propCompanyAddress1.Value = CompanyAddress1.Text.Trim();
+  propCompanyAddress2.Value = CompanyAddress2.Text.Trim();
+  propCompanyAddress3.Value = CompanyAddress3.Text.Trim();
+  propCompanyTown.Value = CompanyTown.Text.Trim();
+  propCompanyState.Value = County.Text.Trim();
+  propCompanyPostcode.Value = PostCode.Text.Trim();
+  propCompanyCountry.Value = Country.Text.Trim();
+  propBusinessPhone.Value = BusinessPhone.Text.Trim();
+  propMobile.Value = Mobile.Text.Trim();
+  propOrgType.Value = OrgType.Text.Trim();
+  propOrgTypeOther.Value = OrgTypeOther.Text.Trim();
+  propEmployees.Value = Employees.Text.Trim();
+  propReturnPage.Value = ReturnPage.Value;
+    
+   /* Add member to registrant group */
+  member.AddGroup(2869);  // Group ID 2869 = registrant
+  member.Save();
+  
+}
+  
+protected void NextButtonClick(Object sender, WizardNavigationEventArgs e)
+{
+  string errMessage = "";
+  if(e.CurrentStepIndex == 0)
+  {
+    e.Cancel = false;
+    MsgPassword.Visible = false;
+    MsgPasswordConfirm.Visible = false;
+    MsgTitle.Visible = false;
+    MsgFirstName.Visible = false;
+    MsgLastName.Visible = false;
+    MsgJobTitle.Visible = false;
+    MsgCompanyName.Visible = false;
+    MsgEmail.Visible = false;
+    
+    if(!Page.IsValid) {e.Cancel = true;}
+    
+    //    TextBox EmailAddress = CreateUserWizard1.WizardStep0.ContentTemplateContainer.FindControl("EmailAddress") as TextBox;
+    //TextBox PasswordText = CreateUserWizard1.WizardStep0.ContentTemplateContainer.FindControl("PasswordText") as TextBox;
+    //TextBox PasswordConfirm = CreateUserWizard1.WizardStep0.ContentTemplateContainer.FindControl("PasswordConfirm") as TextBox;
+    
+    if (PasswordText.Text.Trim().Equals(""))
+    {
+      MsgPassword.Text = "Please enter a password";
+      MsgPassword.Visible = true;
+      e.Cancel = true;
+    }
+    else if (!PasswordConfirm.Text.Equals(PasswordText.Text))
+    {
+      MsgPasswordConfirm.Text = "The passwords you've entered don't match!";
+      MsgPasswordConfirm.Visible = true;
+      e.Cancel = true;
+    }
+
+    if (txtTitle.Text.Trim().Equals(""))
+    {
+        MsgTitle.Text = "Title is a mandatory field";
+        MsgTitle.Visible = true;
+        e.Cancel = true;      
+    }
+    if (txtFirstName.Text.Trim().Equals(""))
+    {
+        MsgFirstName.Text = "First name is a mandatory field";
+        MsgFirstName.Visible = true;
+        e.Cancel = true;      
+    }
+    if (txtLastName.Text.Trim().Equals(""))
+    {
+        MsgLastName.Text = "Last name is a mandatory field";
+        MsgLastName.Visible = true;
+        e.Cancel = true;      
+    }
+    if (txtJobTitle.Text.Trim().Equals(""))
+    {
+        MsgJobTitle.Text = "Job title is a mandatory field";
+        MsgJobTitle.Visible = true;
+        e.Cancel = true;      
+    }
+    if (txtCompanyName.Text.Trim().Equals(""))
+    {
+        MsgCompanyName.Text = "Company name is a mandatory field";
+        MsgCompanyName.Visible = true;
+        e.Cancel = true;      
+    }
+    
+    if (EmailAddress.Text.Trim().Equals(""))
+    {
+        MsgEmail.Text = "Email address is a mandatory field";
+        MsgEmail.Visible = true;
+        e.Cancel = true;      
+    }
+    else if (!IsEmail(EmailAddress.Text.Trim()))
+    {
+        MsgEmail.Text = "Enter a valid email address";
+        MsgEmail.Visible = true;
+        e.Cancel = true;     
+    }
+    else if (UserExists(EmailAddress.Text.Trim()))
+    {
+        MsgEmail.Text = "That email address is already being used. Maybe you have already set up an account?";
+        MsgEmail.Visible = true;
+        e.Cancel = true;
+      
+    }
+    if (e.Cancel == false)
+    {
+          // Set the system textboxes
+      TextBox Email = CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("Email") as TextBox;
+      TextBox UserName = CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("UserName") as TextBox;
+      TextBox Password = CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("Password") as TextBox;
+      Email.Text = EmailAddress.Text.Trim();
+      UserName.Text = EmailAddress.Text.Trim();
+      Password.Text = PasswordText.Text;
+    }
+  }
+}
+  
+
+
+
+  /// <summary>
+  /// Checks whether the given Email-Parameter is a valid E-Mail address.
+  /// </summary>
+  /// <param name="email">Parameter-string that contains an E-Mail address.</param>
+  /// <returns>True, when Parameter-string is not null and 
+  /// contains a valid E-Mail address;
+  /// otherwise false.</returns>
+private static bool IsEmail(string email)
+{
+  string MatchEmailPattern =
+      @"^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@"
+     + @"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?
+        [0-9]{1,2}|25[0-5]|2[0-4][0-9])\."
+     + @"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?
+        [0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+     + @"([a-zA-Z]+[\w-]+\.)+[a-zA-Z]{2,4})$";
+  
+    if (email != null) return Regex.IsMatch(email, MatchEmailPattern);
+    else return false;
+}  
+private bool UserExists(string username)
+{
+    if (Membership.GetUser(username) != null) { return true; }
+
+    return false;
+}
+</script>
+<asp:Content ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<div id="maincontent">
+<umbraco:Macro runat="server" language="cshtml">
+@using umbraco.MacroEngines
+@{
+
+  <h1>@Model.title</h1>
+  
+  
+}
+  
+</umbraco:Macro>
+<!-- StartNextButtonStyle StepNextButtonStyle StepPreviousButtonStyle -->
+
+  <span id="regform" class="newform">
+<asp:CreateUserWizard ID="CreateUserWizard1" Runat="server" 
+  OnNextButtonClick="NextButtonClick" OnCreatedUser="CreatedUser" StepNextButtonText="Next" 
+  CreateUserButtonText="Register me"> 
+    
+  <MailDefinition BodyFileName="~/App_Data/reg-email-confirm.txt" Subject="Registration Confirmation" From="VOD Professional <postmaster@vodprofessional.com>" />
+  
+  <WizardSteps>
+    <asp:WizardStep runat="server" ID="WizardStep0">
+      
+    <div class="formintrotext">
+       <p>
+         <b>  Welcome to VOD Professional. Registration is free and gives you access to website resources, special reports and email alerts.</b>
+      </p>
+      <p>
+
+         </p><p></p>
+         </div>  
+      
+     <div class="vodform">
+       
+       
+       <asp:HiddenField runat="server" ID="ReturnPage" />      
+
+  <div class="entry">
+      <asp:Label runat="server" AssociatedControlID="txtTitle">Title</asp:Label>
+    <asp:DropDownList runat="server" ID="txtTitle">
+      <asp:ListItem Value="Mr">Mr</asp:ListItem>
+      <asp:ListItem Value="Mrs">Mrs</asp:ListItem>
+      <asp:ListItem Value="Miss">Miss</asp:ListItem>
+      <asp:ListItem Value="Ms">Ms</asp:ListItem>
+      <asp:ListItem Value="Dr">Dr</asp:ListItem>
+    </asp:DropDownList><asp:Label runat="server" ID="MsgTitle" Visible="False" CssClass="error"/>
+  </div>
+  <div class="entry">
+    <asp:Label runat="server" AssociatedControlID="txtFirstName">First Name</asp:Label>
+    <asp:TextBox runat="server" iD="txtFirstName" /><asp:Label runat="server" ID="MsgFirstName" Visible="False" CssClass="error"/>
+  </div>
+  <div class="entry">
+    <asp:Label runat="server" AssociatedControlID="txtLastName">Last Name</asp:Label>
+    <asp:TextBox runat="server" ID="txtLastName" /><asp:Label runat="server" ID="MsgLastName" Visible="False" CssClass="error"/>
+  </div>
+  <div class="entry">
+    <asp:Label runat="server" AssociatedControlID="txtJobTitle">Job Title</asp:Label>
+    <asp:TextBox runat="server" ID="txtJobTitle" /><asp:Label runat="server" ID="MsgJobTitle" Visible="False" CssClass="error"/>
+  </div>
+  <div class="entry">
+    <asp:Label runat="server" AssociatedControlID="txtCompanyName">Company Name</asp:Label>
+    <asp:TextBox runat="server" ID="txtCompanyName" /><asp:Label runat="server" ID="MsgCompanyName" Visible="False" CssClass="error"/>
+  </div>
+  <div class="entry">
+    <asp:Label runat="server" AssociatedControlID="EmailAddress">Email (also used as your login)</asp:Label>
+    <asp:TextBox runat="server" ID="EmailAddress" /><asp:Label runat="server" ID="MsgEmail" Visible="False" CssClass="error"/>
+  </div>
+  <div class="entry">
+    <asp:Label runat="server" AssociatedControlID="PasswordText" Columns="9">Password</asp:Label>
+    <asp:TextBox runat="server" ID="PasswordText" TextMode="Password" autocomplete="off" /><asp:Label runat="server" ID="MsgPassword" Visible="False" CssClass="error" />
+  </div>
+  <div class="entry">
+    <asp:Label runat="server" AssociatedControlID="PasswordConfirm" Columns="9">Confirm Password</asp:Label>
+    <asp:TextBox runat="server" ID="PasswordConfirm" TextMode="Password" autocomplete="off" /><asp:Label runat="server" ID="MsgPasswordConfirm" Visible="False" CssClass="error" />
+  </div>
+
+    <div class="entry">
+      <div class="formendtext">
+<p>VOD Professional will never pass on your data to other companies unless you give us permission to do so. 
+  See our <a href="http://www.vodprofessional.com/about-us/terms-conditions/">terms and conditions</a> and <a href="http://www.vodprofessional.com/about-us/privacy-policy/">privacy policy</a> for more details.
+      </p>
+      
+   <p>   
+      <asp:CheckBox runat="server" ID="chkAccept" Checked="false"/>
+      <asp:Label CssClass="checkbox" runat="server" AssociatedControlID="chkAccept">
+Tick here if you do want to receive selected email promotions from
+        external companies.</asp:Label>
+      </p>
+      </div>
+      
+    </div>
+      
+    <div class="entry recaptcha">  
+      <recaptcha:RecaptchaControl
+        ID="recaptcha"
+        runat="server"
+        PublicKey="6LdTAMQSAAAAAAOV3Hli3WXNMxC-BCXLiumAe9aa"
+        PrivateKey="6LdTAMQSAAAAAEGHjwquIw0oqd6Tp0cMi1jA3LhF"
+    />
+    </div>
+     
+      
+<div class="entry">
+  <div class="formendtext">
+    By clicking "Next" you confirm that you agree to our <a href="http://www.vodprofessional.com/about-us/terms-conditions/">terms and conditions</a>.      
+  </div>
+</div>
+
+      
+</div> 
+    
+    </asp:WizardStep>
+    
+    <asp:CreateUserWizardStep runat="server" Title="Add your details" ID="CreateUserStep">
+      <ContentTemplate>
+    <asp:TextBox runat="server" ID="UserName" Visible="False" />
+    <asp:TextBox runat="server" ID="Email" Visible="False" />
+    <asp:TextBox runat="server" ID="Password" Visible="False"/>
+        
+<h2>Page 2 of 2</h2>
+
+<div class="formintrotext">
+  <p>
+  Please tell us a little more about yourself. This information will help us improve the site
+and is necessary if you want to submit jobs or directory listings.
+</p>
+  </div>
+
+<div class="vodform">
+  
+<asp:Literal runat="server" EnableViewState="false" ID="ErrorMessage"></asp:Literal>
+  
+  
+<div class="entry">
+<asp:Label runat="server" AssociatedControlID="txtCompanyAddress1">Company Address 1 *</asp:Label>
+<asp:TextBox runat="server" ID="txtCompanyAddress1" />
+  <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtCompanyAddress1"
+    ErrorMessage="Company address is a mandatory field." ValidationGroup="CreateUserWizard1" CssClass="error" />
+</div>
+<div class="entry">
+<asp:Label runat="server" AssociatedControlID="txtCompanyAddress2">Company Address 2</asp:Label>
+<asp:TextBox runat="server" ID="txtCompanyAddress2" />
+</div>
+<div class="entry">
+<asp:Label runat="server" AssociatedControlID="txtCompanyAddress1">Company Address 3</asp:Label>
+<asp:TextBox runat="server" ID="txtCompanyAddress3" />
+</div>
+<div class="entry">
+<asp:Label runat="server" AssociatedControlID="txtCompanyTown">Town *</asp:Label>
+<asp:TextBox runat="server" ID="txtCompanyTown" />
+  <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="txtCompanyTown"
+    ErrorMessage="Town is a mandatory field." ValidationGroup="CreateUserWizard1" CssClass="error" />
+</div>
+<div class="entry">
+<asp:Label runat="server" AssociatedControlID="txtCounty">County / State</asp:Label>
+<asp:TextBox runat="server" ID="txtCounty" />
+</div>
+<div class="entry">
+<asp:Label runat="server" AssociatedControlID="txtPostcode">Postcode /ZIP *</asp:Label>
+<asp:TextBox runat="server" ID="txtPostcode" Columns="8" />
+  <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ControlToValidate="txtPostcode"
+  ErrorMessage="Postcode/Zip is a mandatory field." ValidationGroup="CreateUserWizard1" CssClass="error" />
+</div>
+<div class="entry">
+<asp:Label runat="server" AssociatedControlID="Country">Country *</asp:Label>
+<asp:DropDownList ID="Country" runat="server">
+  <asp:ListItem value="Albania">Albania</asp:ListItem>
+  <asp:ListItem value="Algeria">Algeria</asp:ListItem>
+  <asp:ListItem value="American Samoa">American Samoa</asp:ListItem>
+  <asp:ListItem value="Andorra">Andorra</asp:ListItem>
+  <asp:ListItem value="Angola">Angola</asp:ListItem>
+  <asp:ListItem value="Anguilla">Anguilla</asp:ListItem>
+  <asp:ListItem value="Antigua">Antigua</asp:ListItem>
+  <asp:ListItem value="Argentina">Argentina</asp:ListItem>
+  <asp:ListItem value="Armenia">Armenia</asp:ListItem>
+  <asp:ListItem value="Aruba">Aruba</asp:ListItem>
+  <asp:ListItem value="Australia">Australia</asp:ListItem>
+  <asp:ListItem value="Austria">Austria</asp:ListItem>
+  <asp:ListItem value="Azerbaijan">Azerbaijan</asp:ListItem>
+  <asp:ListItem value="Bahamas">Bahamas</asp:ListItem>
+  <asp:ListItem value="Bahrain">Bahrain</asp:ListItem>
+  <asp:ListItem value="Bangladesh">Bangladesh</asp:ListItem>
+  <asp:ListItem value="Barbados">Barbados</asp:ListItem>
+  <asp:ListItem value="Barbuda">Barbuda</asp:ListItem>
+  <asp:ListItem value="Belarus">Belarus</asp:ListItem>
+  <asp:ListItem value="Belgium">Belgium</asp:ListItem>
+  <asp:ListItem value="Belize">Belize</asp:ListItem>
+  <asp:ListItem value="Benin">Benin</asp:ListItem>
+  <asp:ListItem value="Bermuda">Bermuda</asp:ListItem>
+  <asp:ListItem value="Bhutan">Bhutan</asp:ListItem>
+  <asp:ListItem value="Bolivia">Bolivia</asp:ListItem>
+  <asp:ListItem value="Bonaire">Bonaire</asp:ListItem>
+  <asp:ListItem value="Botswana">Botswana</asp:ListItem>
+  <asp:ListItem value="Brazil">Brazil</asp:ListItem>
+  <asp:ListItem value="Virgin islands">British Virgin isl.</asp:ListItem>
+  <asp:ListItem value="Brunei">Brunei</asp:ListItem>
+  <asp:ListItem value="Bulgaria">Bulgaria</asp:ListItem>
+  <asp:ListItem value="Burundi">Burundi</asp:ListItem>
+  <asp:ListItem value="Cambodia">Cambodia</asp:ListItem>
+  <asp:ListItem value="Cameroon">Cameroon</asp:ListItem>
+  <asp:ListItem value="Canada">Canada</asp:ListItem>
+  <asp:ListItem value="Cape Verde">Cape Verde</asp:ListItem>
+  <asp:ListItem value="Cayman isl">Cayman Islands</asp:ListItem>
+  <asp:ListItem value="Central African Rep">Central African Rep.</asp:ListItem>
+  <asp:ListItem value="Chad">Chad</asp:ListItem>
+  <asp:ListItem value="Channel isl">Channel Islands</asp:ListItem>
+  <asp:ListItem value="Chile">Chile</asp:ListItem>
+  <asp:ListItem value="China">China</asp:ListItem>
+  <asp:ListItem value="Colombia">Colombia</asp:ListItem>
+  <asp:ListItem value="Congo">Congo</asp:ListItem>
+  <asp:ListItem value="cook isl">Cook Islands</asp:ListItem>
+  <asp:ListItem value="Costa Rica">Costa Rica</asp:ListItem>
+  <asp:ListItem value="Croatia">Croatia</asp:ListItem>
+  <asp:ListItem value="Curacao">Curacao</asp:ListItem>
+  <asp:ListItem value="Cyprus">Cyprus</asp:ListItem>
+  <asp:ListItem value="Czech Republic">Czech Republic</asp:ListItem>
+  <asp:ListItem value="Denmark">Denmark</asp:ListItem>
+  <asp:ListItem value="Djibouti">Djibouti</asp:ListItem>
+  <asp:ListItem value="Dominica">Dominica</asp:ListItem>
+  <asp:ListItem value="Dominican Republic">Dominican Republic</asp:ListItem>
+  <asp:ListItem value="Ecuador">Ecuador</asp:ListItem>
+  <asp:ListItem value="Egypt">Egypt</asp:ListItem>
+  <asp:ListItem value="El Salvador">El Salvador</asp:ListItem>
+  <asp:ListItem value="Equatorial Guinea">Equatorial Guinea</asp:ListItem>
+  <asp:ListItem value="Eritrea">Eritrea</asp:ListItem>
+  <asp:ListItem value="Estonia">Estonia</asp:ListItem>
+  <asp:ListItem value="Ethiopia">Ethiopia</asp:ListItem>
+  <asp:ListItem value="Faeroe isl">Faeroe Islands</asp:ListItem>
+  <asp:ListItem value="Fiji">Fiji</asp:ListItem>
+  <asp:ListItem value="Finland">Finland</asp:ListItem>
+  <asp:ListItem value="France">France</asp:ListItem>
+  <asp:ListItem value="French Guiana">French Guiana</asp:ListItem>
+  <asp:ListItem value="French Polynesia">French Polynesia</asp:ListItem>
+  <asp:ListItem value="Gabon">Gabon</asp:ListItem>
+  <asp:ListItem value="Gambia">Gambia</asp:ListItem>
+  <asp:ListItem value="Georgia">Georgia</asp:ListItem>
+  <asp:ListItem value="Gemany">Germany</asp:ListItem>
+  <asp:ListItem value="Ghana">Ghana</asp:ListItem>
+  <asp:ListItem value="Gibraltar">Gibraltar</asp:ListItem>
+  <asp:ListItem value="Greece">Greece</asp:ListItem>
+  <asp:ListItem value="Greenland">Greenland</asp:ListItem>
+  <asp:ListItem value="Grenada">Grenada</asp:ListItem>
+  <asp:ListItem value="Guadeloupe">Guadeloupe</asp:ListItem>
+  <asp:ListItem value="Guam">Guam</asp:ListItem>
+  <asp:ListItem value="Guatemala">Guatemala</asp:ListItem>
+  <asp:ListItem value="Guinea">Guinea</asp:ListItem>
+  <asp:ListItem value="Guinea Bissau">Guinea Bissau</asp:ListItem>
+  <asp:ListItem value="Guyana">Guyana</asp:ListItem>
+  <asp:ListItem value="Haiti">Haiti</asp:ListItem>
+  <asp:ListItem value="Honduras">Honduras</asp:ListItem>
+  <asp:ListItem value="Hong Kong">Hong Kong</asp:ListItem>
+  <asp:ListItem value="Hungary">Hungary</asp:ListItem>
+  <asp:ListItem value="Iceland">Iceland</asp:ListItem>
+  <asp:ListItem value="India">India</asp:ListItem>
+  <asp:ListItem value="Indonesia">Indonesia</asp:ListItem>
+  <asp:ListItem value="Irak">Irak</asp:ListItem>
+  <asp:ListItem value="Iran">Iran</asp:ListItem>
+  <asp:ListItem value="Ireland">Ireland</asp:ListItem>
+  <asp:ListItem value="Northern Ireland">Ireland, Northern</asp:ListItem>
+  <asp:ListItem value="Israel">Israel</asp:ListItem>
+  <asp:ListItem value="Italy">Italy</asp:ListItem>
+  <asp:ListItem value="Ivory Coast">Ivory Coast</asp:ListItem>
+  <asp:ListItem value="Jamaica">Jamaica</asp:ListItem>
+  <asp:ListItem value="Japan">Japan</asp:ListItem>
+  <asp:ListItem value="Jordan">Jordan</asp:ListItem>
+  <asp:ListItem value="Kazakhstan">Kazakhstan</asp:ListItem>
+  <asp:ListItem value="Kenya">Kenya</asp:ListItem>
+  <asp:ListItem value="Kuwait">Kuwait</asp:ListItem>
+  <asp:ListItem value="Kyrgyzstan">Kyrgyzstan</asp:ListItem>
+  <asp:ListItem value="Latvia">Latvia</asp:ListItem>
+  <asp:ListItem value="Lebanon">Lebanon</asp:ListItem>
+  <asp:ListItem value="Liberia">Liberia</asp:ListItem>
+  <asp:ListItem value="Liechtenstein">Liechtenstein</asp:ListItem>
+  <asp:ListItem value="Lithuania">Lithuania</asp:ListItem>
+  <asp:ListItem value="Luxembourg">Luxembourg</asp:ListItem>
+  <asp:ListItem value="Macau">Macau</asp:ListItem>
+  <asp:ListItem value="Macedonia">Macedonia</asp:ListItem>
+  <asp:ListItem value="Madagascar">Madagascar</asp:ListItem>
+  <asp:ListItem value="Malawi">Malawi</asp:ListItem>
+  <asp:ListItem value="Malaysia">Malaysia</asp:ListItem>
+  <asp:ListItem value="Maldives">Maldives</asp:ListItem>
+  <asp:ListItem value="Mali">Mali</asp:ListItem>
+  <asp:ListItem value="Malta">Malta</asp:ListItem>
+  <asp:ListItem value="Marshall isl">Marshall Islands</asp:ListItem>
+  <asp:ListItem value="Martinique">Martinique</asp:ListItem>
+  <asp:ListItem value="Mauritania">Mauritania</asp:ListItem>
+  <asp:ListItem value="Mauritius">Mauritius</asp:ListItem>
+  <asp:ListItem value="Mexico">Mexico</asp:ListItem>
+  <asp:ListItem value="Micronesia">Micronesia</asp:ListItem>
+  <asp:ListItem value="Moldova">Moldova</asp:ListItem>
+  <asp:ListItem value="Monaco">Monaco</asp:ListItem>
+  <asp:ListItem value="Mongolia">Mongolia</asp:ListItem>
+  <asp:ListItem value="Montserrat">Montserrat</asp:ListItem>
+  <asp:ListItem value="Morocco">Morocco</asp:ListItem>
+  <asp:ListItem value="Mozambique">Mozambique</asp:ListItem>
+  <asp:ListItem value="Myanmar">Myanmar/Burma</asp:ListItem>
+  <asp:ListItem value="Namibia">Namibia</asp:ListItem>
+  <asp:ListItem value="Nepal">Nepal</asp:ListItem>
+  <asp:ListItem value="Netherlands">Netherlands</asp:ListItem>
+  <asp:ListItem value="Netherlands Antilles">Netherlands Antilles</asp:ListItem>
+  <asp:ListItem value="New Caledonia">New Caledonia</asp:ListItem>
+  <asp:ListItem value="New Zealand">New Zealand</asp:ListItem>
+  <asp:ListItem value="Nicaragua">Nicaragua</asp:ListItem>
+  <asp:ListItem value="Niger">Niger</asp:ListItem>
+  <asp:ListItem value="Nigeria">Nigeria</asp:ListItem>
+  <asp:ListItem value="Norway">Norway</asp:ListItem>
+  <asp:ListItem value="Oman">Oman</asp:ListItem>
+  <asp:ListItem value="Palau">Palau</asp:ListItem>
+  <asp:ListItem value="Panama">Panama</asp:ListItem>
+  <asp:ListItem value="Papua New Guinea">Papua New Guinea</asp:ListItem>
+  <asp:ListItem value="Paraguay">Paraguay</asp:ListItem>
+  <asp:ListItem value="Peru">Peru</asp:ListItem>
+  <asp:ListItem value="Philippines">Philippines</asp:ListItem>
+  <asp:ListItem value="Poland">Poland</asp:ListItem>
+  <asp:ListItem value="Portugal">Portugal</asp:ListItem>
+  <asp:ListItem value="Puerto Rico">Puerto Rico</asp:ListItem>
+  <asp:ListItem value="Qatar">Qatar</asp:ListItem>
+  <asp:ListItem value="Reunion">Reunion</asp:ListItem>
+  <asp:ListItem value="Rwanda">Rwanda</asp:ListItem>
+  <asp:ListItem value="Saba">Saba</asp:ListItem>
+  <asp:ListItem value="Saipan">Saipan</asp:ListItem>
+  <asp:ListItem value="Saudi Arabia">Saudi Arabia</asp:ListItem>
+  <asp:ListItem value="Scotland">Scotland</asp:ListItem>
+  <asp:ListItem value="Senegal">Senegal</asp:ListItem>
+  <asp:ListItem value="Seychelles">Seychelles</asp:ListItem>
+  <asp:ListItem value="Sierra Leone">Sierra Leone</asp:ListItem>
+  <asp:ListItem value="Singapore">Singapore</asp:ListItem>
+  <asp:ListItem value="Slovac Republic">Slovak Republic</asp:ListItem>
+  <asp:ListItem value="Slovenia">Slovenia</asp:ListItem>
+  <asp:ListItem value="South Africa">South Africa</asp:ListItem>
+  <asp:ListItem value="South Korea">South Korea</asp:ListItem>
+  <asp:ListItem value="Spain">Spain</asp:ListItem>
+  <asp:ListItem value="Sri Lanka">Sri Lanka</asp:ListItem>
+  <asp:ListItem value="Sudan">Sudan</asp:ListItem>
+  <asp:ListItem value="Suriname">Suriname</asp:ListItem>
+  <asp:ListItem value="Swaziland">Swaziland</asp:ListItem>
+  <asp:ListItem value="Sweden">Sweden</asp:ListItem>
+  <asp:ListItem value="Switzerland">Switzerland</asp:ListItem>
+  <asp:ListItem value="Syria">Syria</asp:ListItem>
+  <asp:ListItem value="Taiwan">Taiwan</asp:ListItem>
+  <asp:ListItem value="Tanzania">Tanzania</asp:ListItem>
+  <asp:ListItem value="Thailand">Thailand</asp:ListItem>
+  <asp:ListItem value="Togo">Togo</asp:ListItem>
+  <asp:ListItem value="Trinidad-Tobago">Trinidad-Tobago</asp:ListItem>
+  <asp:ListItem value="Tunesia">Tunisia</asp:ListItem>
+  <asp:ListItem value="Turkey">Turkey</asp:ListItem>
+  <asp:ListItem value="Turkmenistan">Turkmenistan</asp:ListItem>
+  <asp:ListItem value="United Arab Emirates">United Arab Emirates</asp:ListItem>
+  <asp:ListItem value="U.S. Virgin isl">U.S. Virgin Islands</asp:ListItem>
+  <asp:ListItem value="USA">U.S.A.</asp:ListItem>
+  <asp:ListItem value="Uganda">Uganda</asp:ListItem>
+  <asp:ListItem value="United Kingdom" selected="true">United Kingdom</asp:ListItem>
+  <asp:ListItem value="Urugay">Uruguay</asp:ListItem>
+  <asp:ListItem value="Uzbekistan">Uzbekistan</asp:ListItem>
+  <asp:ListItem value="Vanuatu">Vanuatu</asp:ListItem>
+  <asp:ListItem value="Vatican City">Vatican City</asp:ListItem>
+  <asp:ListItem value="Venezuela">Venezuela</asp:ListItem>
+  <asp:ListItem value="Vietnam">Vietnam</asp:ListItem>
+  <asp:ListItem value="Wales">Wales</asp:ListItem>
+  <asp:ListItem value="Yemen">Yemen</asp:ListItem>
+  <asp:ListItem value="Zaire">Zaire</asp:ListItem>
+  <asp:ListItem value="Zambia">Zambia</asp:ListItem>
+  <asp:ListItem value="Zimbabwe">Zimbabwe</asp:ListItem>
+</asp:DropDownList>
+</div>
+<div class="entry">
+<asp:Label runat="server" AssociatedControlID="txtPhone">Business phone *</asp:Label>
+<asp:TextBox runat="server" ID="txtPhone" />
+  <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="txtPhone"
+    ErrorMessage="Phone is a mandatory field." ValidationGroup="CreateUserWizard1" CssClass="error" />
+</div>
+<div class="entry">
+<asp:Label runat="server" AssociatedControlID="txtMobile">Mobile</asp:Label>
+<asp:TextBox runat="server" ID="txtMobile" />
+</div>
+<div class="entry">
+<asp:Label runat="server" AssociatedControlID="txtOrgType">Organisation Type (If other, please specify)</asp:Label>
+  <asp:DropDownList runat="server" ID="txtOrgType">
+    <asp:ListItem value="Advertising">Advertising</asp:ListItem>
+    <asp:ListItem value="Analysis &amp; Analytics">Analysis &amp; Analytics</asp:ListItem>
+    <asp:ListItem value="Broadcaster">Broadcaster</asp:ListItem>
+    <asp:ListItem value="Consultancy">Consultancy</asp:ListItem>
+    <asp:ListItem value="Content Acquisition">Content Acquisition</asp:ListItem>
+    <asp:ListItem value="Content Management">Content Management</asp:ListItem>
+    <asp:ListItem value="Design Services">Design Services</asp:ListItem>
+    <asp:ListItem value="Hardware &amp; Infrastructure">Hardware &amp; Infrastructure</asp:ListItem>
+    <asp:ListItem value="IT Services">IT Services</asp:ListItem>
+    <asp:ListItem value="Manufacturing">Manufacturing</asp:ListItem>
+    <asp:ListItem value="Media">Media</asp:ListItem>
+    <asp:ListItem value="Media Buying / Selling">Media Buying / Selling</asp:ListItem>
+    <asp:ListItem value="MSO">MSO</asp:ListItem>
+    <asp:ListItem value="Online Marketing">Online Marketing</asp:ListItem>
+    <asp:ListItem value="Online Video">Online Video</asp:ListItem>
+    <asp:ListItem value="Production">Production</asp:ListItem>
+    <asp:ListItem value="Software Services">Software Services</asp:ListItem>
+    <asp:ListItem value="Trade Body">Trade Body</asp:ListItem>
+    <asp:ListItem value="Other">Other</asp:ListItem>
+  </asp:DropDownList>
+  <asp:TextBox runat="server" ID="txtOrgTypeOther" />
+</div>
+<div class="entry">
+<asp:Label runat="server" AssociatedControlID="txtEmployees">How many employees are there in your company? *</asp:Label>
+  <asp:DropDownList runat="server" ID="txtEmployees">
+    <asp:ListItem value="1-5">1-5 employees</asp:ListItem>
+    <asp:ListItem value="5-20">5-20</asp:ListItem>
+    <asp:ListItem value="20-100">20-100</asp:ListItem>
+    <asp:ListItem value="100-500">100-500</asp:ListItem>
+    <asp:ListItem value="500-1000">500-1000</asp:ListItem>
+    <asp:ListItem value="100+">1000+</asp:ListItem>
+  </asp:DropDownList>
+ <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator5" ControlToValidate="txtEmployees"
+    ErrorMessage="Number of employees is a mandatory field." ValidationGroup="CreateUserWizard1" />
+</div> 
+        </div>
+        
+      </ContentTemplate>
+    </asp:CreateUserWizardStep>
+
+    <asp:CompleteWizardStep runat="server" Title="Complete">
+      <ContentTemplate>
+        <h2>Thanks for Joining VOD Professional</h2>
+        <div class="formendtext">
+        <p>
+          We just sent a verification email to the address you provided (you may need 
+          to check your Junk mail folder). Please click on the link in the email to complete your registration. 
+        </p>
+        </div>
+      </ContentTemplate>
+    </asp:CompleteWizardStep>
+  </WizardSteps>
+</asp:CreateUserWizard>
+  <span>
+  </div>
+</asp:Content>
+  

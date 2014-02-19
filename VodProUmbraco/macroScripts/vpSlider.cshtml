@@ -1,0 +1,83 @@
+﻿@using Examine;
+@using UmbracoExamine;
+@using Examine.LuceneEngine.SearchCriteria;
+@{
+ 
+     dynamic node = null;
+  
+ if(@Model.relatedStorySearchTerm.GetType() == typeof(System.String))
+ {
+   var searchTerm = @Model.relatedStorySearchTerm;
+  
+   if(!string.IsNullOrEmpty(searchTerm))
+   {   
+     LuceneSearchCriteria criteria = (LuceneSearchCriteria)(ExamineManager.Instance
+                   .SearchProviderCollection["VPSiteSearchSearcher"]
+                   .CreateSearchCriteria());
+       
+     var filter = criteria
+       .GroupedOr(new string[]{"storytags"},searchTerm) //"title","story","storyteaser","storytags"
+       .Compile();  //.And().OrderByDescending("storydate")
+   
+     var sresults = ExamineManager.Instance
+                   .SearchProviderCollection["VPSiteSearchSearcher"]
+                   .Search(filter);
+    
+    
+     if(sresults.TotalItemCount > 0)
+     {
+       int count = 0;      
+       foreach (var result in sresults)
+       {    
+         if (result.Id == Model.Id) { continue; }
+         
+         node = @Model.NodeById(result.Id);
+         break;
+       }
+     }
+   }
+ }
+ if (node == null)
+ {
+     var teaserIDs = @Model.AncestorOrSelf().teasers.GetEnumerator();
+     int count = 0;
+     foreach(var teaserID in @teaserIDs)
+     {
+       if (teaserID.InnerText == Model.Id.ToString()) { continue; }
+       node = Model.NodeById(teaserID.InnerText);
+       break;
+     }
+ }
+
+ if (node != null)
+ {
+  
+   <div id="slider">
+    <div id="slideInner">
+      <div id="close"></div>
+      <div class="next">You might be interested in</div>
+      <h2><a href="@node.Url">@node.title</a></h2>
+      <div class="story">
+        <p>
+          @if(@node.miniTeaser.GetType() == typeof(System.String)) {
+            @node.miniTeaser
+          }
+          else {
+            @node.storyteaser      
+          }
+        </p>
+      </div>
+      @if(node.GetProperty("storyimage").Value.Length > 0)
+      {
+        dynamic media = @Model.MediaById(@node.GetProperty("storyimage").Value);
+        string mediaName = @media.umbracoFile;
+        string thumbName = @mediaName.Replace(".jpg","_thumb_195.jpg");
+        <img align="right" class="storyImage" src="@thumbName" />
+      }
+    </div>
+  </div>
+   
+ }
+     
+ 
+}

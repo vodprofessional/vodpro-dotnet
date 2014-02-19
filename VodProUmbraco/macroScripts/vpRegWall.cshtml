@@ -1,0 +1,124 @@
+﻿@using umbraco.cms.businesslogic.member;
+@using System.Web.Security;
+
+@helper ErrorMessage(string message)
+{
+   <div>@message</div>
+}
+@helper RegWall(string message)
+{
+<div id="regwall">
+ <!--<div id="banner"></div>-->
+ <div class="box">
+ 
+ <h2>For Members Only</h2>
+ <p>Please register or login to unlock further content and resources on this page.</p>
+  
+    <div id="login">
+    
+      <h3>Login</h3>
+      <div>
+          <input type="text" name="VPUserName" ID="VPUserName" value="Enter email address" />
+      </div>
+      <div>
+         <input type="text" name="fakepassword" id="fakepassword"
+           value="Enter password"  /><input style="display: none" type="password" name="VPPassword" id="VPPassword"
+           value="" />
+      </div>
+     
+      <div>
+         <div id="VPLoginError_user">That email isn't registered with us</div>
+         <div id="VPLoginError_password">Oops, wrong password!</div>
+         <input type="submit" ID="VPbtnSubmit" Value="Login" OnClick="return TryLogin(this)" />
+      </div>
+    
+    </div>
+  
+ 
+  <div id="divider"><img src="/css/images/regwall-box-divider-bg.png" /></div>
+ 
+  <div id="register">
+    
+    <h3>Become a Member</h3>
+    <p>It's free and only takes a minute!</p>
+      <div>
+          <input type="text" name="VPReg_Email" ID="VPReg_Email" value="Enter email address" onfocus="userFocus()" onblur="userBlur()" />
+      </div>
+      <div id="VPRegError_email">That isn't a valid email address</div>
+      <div>
+          <input type="button" ID="VPReg_btnSubmit" Value="Begin registration" OnClick="StartReg(this, @Model.Id)" />
+      </div>
+   
+  </div>
+ 
+ </div>
+ 
+</div>
+
+}
+
+@helper SpecialContent()
+{
+  <h2 id="premium" class="membercontent"></h2>
+  <p>@Html.Raw(umbraco.library.RenderMacroContent(@Model.memberStory.ToString(), @Model.Id))</p>
+   // @Logout()
+}
+
+@helper Logout()
+{
+  <a href="@Model.Url?action=logout">Logout</a>
+}
+
+
+
+@{
+  
+  if (@Model.requiresLogin.GetType() == typeof(Boolean))
+  {
+   
+   if(@Model.requiresLogin)
+   {
+   
+    var currentUser = Membership.GetUser();
+    
+    if(currentUser == null)
+    {
+      if(IsPost)
+      {
+        var email = Request["VPUserName"];
+        var pwd = Request["VPPassword"];
+        if (Membership.ValidateUser(email, pwd))
+        {
+          FormsAuthentication.SetAuthCookie(email, true);
+          Response.Redirect(@Model.Url + "#premium");       
+        }
+        else if(Membership.FindUsersByName(email).Count > 0)
+        {
+          @RegWall("Incorrect password")
+        }
+        else
+        {
+          @RegWall("User doesn't exist")
+        }
+        
+      }
+      
+      else
+      {
+        @RegWall(String.Empty)
+      }
+    }
+    else if (Request.QueryString["action"] == "logout")
+    {
+      FormsAuthentication.SignOut();
+      Response.Redirect(@Model.Url + "#premium");
+    }
+    else
+    {
+      @SpecialContent()
+      
+    }
+   }
+  }
+}
+

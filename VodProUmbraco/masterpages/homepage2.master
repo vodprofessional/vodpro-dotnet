@@ -1,0 +1,82 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VodProMaster2.master" AutoEventWireup="true" %>
+
+<asp:Content ContentPlaceHolderID="VodProHead" runat="server">
+
+</asp:Content>    
+  
+<asp:Content ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+  
+  <umbraco:Macro  runat="server" language="cshtml">
+  @using umbraco.MacroEngines
+  @using uComponents.Core
+  @using uComponents.Core.uQueryExtensions
+  @using System.Linq
+  <div class="hpCol1">
+    <div class="hplabel"><h1>Featured Content</h1></div>
+  @{
+    var featureIDs = @Model.AncestorOrSelf().features.GetEnumerator();
+    int count = 0;
+    foreach(var featureID in @featureIDs)
+    {
+       count++;
+       dynamic feature = @Model.NodeById(@featureID.InnerText);
+       <div class="homepagefeatures">
+          <div class="hpfheadline">
+              <h2>
+                <a href="@feature.Url">@feature.title</a>
+                @feature.miniTeaser
+              </h2>
+          </div>
+          @if(feature.GetProperty("storyimage").Value.Length > 0)
+          {
+            dynamic media = @Model.MediaById(@feature.GetProperty("storyimage").Value);
+            
+            string mediaName = media.umbracoFile;
+         <div class="hpfimage"><a href="@feature.Url"><img src="@mediaName" /></a></div>
+          }
+       </div>
+    }
+   
+    
+  }
+  </div>
+
+  <div class="hpCol2">
+     <div class="hplabel"><h1>News Feed</h1></div>  
+     <div class="homepagenewsfeed">
+    @{
+      dynamic node = new DynamicNode(1059);
+      int counter = 0;
+      dynamic subNodes = node.DescendantsOrSelf("vodProStory").OrderBy("storydate desc, storydate desc").Items;
+    
+      subNodes = subNodes.GetRange(0,15);
+    
+      foreach(dynamic story in @subNodes) {
+        counter++;
+        string cssclass="item";
+        if (counter == 5) {cssclass += " noborder"; }
+        <div class="@cssclass">
+          <h3><a href="@story.Url">@story.title</a></h3>
+          <div class="hpnftext">@story.miniTeaser</div>
+        </div>
+       /*       if (counter == 5) {
+         <div class="adtop"></div>
+         <div class="ad">  
+           <a href="http://play.brightcove.com/"><img src="/css/ads/play2012-150x260.jpg" /></a>
+         </div>
+       }
+       */
+    
+      }
+      <div  class="item">
+        <a class="morelink" href="@node.Url">More news --></a>
+      </div>
+    }
+    </div>
+  </div>
+          
+  </umbraco:Macro>
+  
+
+  
+</asp:Content>

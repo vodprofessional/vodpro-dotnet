@@ -1,0 +1,433 @@
+@using VUI.classes;
+@using VUI.VUI2.classes;
+@using umbraco.MacroEngines;
+@using System.Web.Security;
+@using umbraco.cms.businesslogic.member;
+
+
+@helper WriteCapability(List<Analysis> benchmarks, string capabilityName, string altText)
+{
+  <tr>
+    @if (!String.IsNullOrEmpty(altText))
+    {
+        <td>@altText</td>
+    }
+    else
+    {
+        <td>@capabilityName</td>
+    }
+    @foreach (Analysis benchmark in benchmarks)
+    {
+        string str = String.Empty;
+        if (benchmark.HasCapability(capabilityName))
+        {
+            str = "has-function";
+        }
+        else { str = "no-function"; }
+        <td class="@str"></td>
+    }
+  </tr>
+}
+@helper WriteHotFeature(List<Analysis> benchmarks, string capabilityName, string altText)
+{
+  <tr>
+    @if (!String.IsNullOrEmpty(altText))
+    {
+        <td>@altText</td>
+    }
+    else
+    {
+        <td>@capabilityName</td>
+    }
+    @foreach (Analysis benchmark in benchmarks)
+    {
+        string str = String.Empty;
+        if(benchmark.HideHotFeatures)
+        {
+            str = "";
+        }
+        else 
+        {
+            if (benchmark.HasHotFeature(capabilityName))
+            {
+                str = "has-function";
+            }
+            else { str = "no-function"; }
+        }
+        <td class="@str"></td>
+    }
+  </tr>
+}
+@functions{
+    string Mode = String.Empty;
+    string PageTitle = String.Empty;
+
+    bool IsFullMode = false;
+    Member m = VUIfunctions.CurrentUser();
+    string user_status;
+
+    int score;
+
+    Service thisService;
+    Platform parentPlatform;
+    Device parentDevice;
+    List<Analysis> Benchmarks;
+}
+@{  
+    user_status = VUIfunctions.MemberVUIStatus(m);
+    IsFullMode = VUIfunctions.MemberVUIFullMode(user_status);
+
+
+    VUIfunctions.InitScores();
+    score = VUIfunctions.TotalFunctionScore;
+
+    thisService = new Service(@Model.Id);
+    parentPlatform = thisService.Platform;
+    parentDevice = thisService.Device;
+    PageTitle = @"<a class=""ui-link-platform"" href=""/vui/benchmarking/"">Benchmarking</a>";
+
+    if (parentDevice != null)
+    {
+        if (IsFullMode)
+        {
+            PageTitle += " | " + @"<a class=""ui-link-platform"" href=""/vui/" + parentPlatform.PlatformName + "~" + parentDevice.DeviceName + @"/benchmarking/"">" + parentPlatform.Name + " - " + parentDevice.Name + "</a>";
+        }
+        else
+        {
+            PageTitle += " | " + @parentPlatform.Name + " - " + @parentDevice.Name;
+        }
+        <script type="text/javascript">document.title += ' Benchmarking @thisService.Name on @parentPlatform.Name / @parentDevice.Name ';</script>
+    }
+    else
+    {
+        if (IsFullMode)
+        {
+            PageTitle += " | " + @"<a class=""ui-link-platform"" href=""/vui/" + @parentPlatform.PlatformName + @"benchmarking/"">" + @parentPlatform.Name + @"</a>";
+        }
+        else
+        {
+            PageTitle += " | " + @parentPlatform.Name;
+        }
+        <script type="text/javascript">document.title += ' Benchmarking @thisService.Name on @parentPlatform.Name ';</script>
+    }
+    PageTitle += " | " + @thisService.Name;
+    <div class="ui-heading">
+      <h1>@Html.Raw(PageTitle)</h1>
+    </div>
+
+    int id;
+
+    try
+    {
+
+        if (IsFullMode || thisService.IsPreviewable)
+        {
+        <div class="ui-benchmarking">
+         
+            @if (thisService.HasBenchmark && !thisService.IsComingSoon)
+            {
+                Benchmarks = thisService.Benchmarks;
+                <p>
+                    <div class="ui-benchmarking-inset">
+                        <div class="ui-image-box"><img src="@thisService.DefaultScreenshot" width="180" /></div>
+                        <span class="score">@thisService.BenchmarkScore</span>
+                    </div>
+                    Writing a requirements document or a functional specification?
+                    <br/>
+                    This video service contains at least <strong> <span class="score">@thisService.BenchmarkScore</span> user interface functions that commonly appear on this platform</strong>
+                </p>  
+            }
+            <p>
+                To read more about each of the functions below check out our <a href="/vui/best-practice-guides/the-25-most-common-functions-found-in-a-video-user-interface/">guide to the 25 Most Common Functions found in Video User Interfaces</a>.
+            </p>
+            @if (thisService.BenchmarkScore > 0 && !thisService.IsComingSoon)
+            {
+                string bdate = thisService.Benchmarks.First().BenchmarkDate.ToString("dd MMM yyyy");
+                string bdevice = thisService.Benchmarks.First().DeviceDescription;
+                <p>
+                    This service was most recently benchmarked on <strong>@bdate</strong> using the <strong>@bdevice</strong>
+                </p>            
+            }
+        
+            @{
+            string str = "";
+                <h1 class="totals">Total Benchmark Scores</h1>
+                <table>
+                    <tr>
+                        <th></th>
+                        @foreach (Analysis benchmark in Benchmarks)
+                        {
+                            <th>@benchmark.BenchmarkDate.ToString("dd MMM yyyy")</th>   
+                        }
+                    </tr> 
+                    <tr>
+                        <th></th>
+                        @foreach (Analysis benchmark in Benchmarks)
+                        {
+                            <th><div class="score">@benchmark.BenchmarkScore</div></th>   
+                        }
+                    </tr>
+                </table>                
+                <h1>Content Discovery &amp; Recommendation</h1>
+                <table>
+                    <tr>
+                        <th>Feature</th>
+                        @foreach (Analysis benchmark in Benchmarks)
+                        {
+                            <th>@benchmark.BenchmarkDate.ToString("dd MMM yyyy")</th>   
+                        }
+                    </tr>        
+                    @WriteCapability(Benchmarks, "Featured content", String.Empty)
+                    @WriteCapability(Benchmarks, "Categorisation", String.Empty)
+                    @WriteCapability(Benchmarks, "Category homepage", String.Empty)
+                    @WriteCapability(Benchmarks, "Most popular", String.Empty)
+                    @WriteCapability(Benchmarks, "Recently added", String.Empty)
+                    @WriteCapability(Benchmarks, "More episodes", String.Empty)
+                    @WriteCapability(Benchmarks, "Content recommendation", String.Empty)
+                    @WriteCapability(Benchmarks, "EPG", String.Empty)
+                    @WriteCapability(Benchmarks, "Search", String.Empty)
+                    @WriteCapability(Benchmarks, "Predictive search", String.Empty)
+                    @WriteCapability(Benchmarks, "A-Z page", String.Empty)
+                    @WriteCapability(Benchmarks, "Social sharing (out)", "Social Sharing (Outbound)")
+                    @WriteCapability(Benchmarks, "Social sharing (in-service)", String.Empty)
+                </table>       
+
+                <h1>Video Player</h1>
+                <table>
+                    <tr>
+                        <th>Feature</th>
+                        @foreach (Analysis benchmark in Benchmarks)
+                        {
+                            <th>@benchmark.BenchmarkDate.ToString("dd MMM yyyy")</th>   
+                        }
+                    </tr>        
+                    @WriteCapability(Benchmarks, "Customised video player", String.Empty)
+                    @WriteCapability(Benchmarks, "Video description", String.Empty)
+                </table>     
+            
+
+                <h1>Personalisation</h1>
+                <table>
+                    <tr>
+                        <th>Feature</th>
+                        @foreach (Analysis benchmark in Benchmarks)
+                        {
+                            <th>@benchmark.BenchmarkDate.ToString("dd MMM yyyy")</th>   
+                        }
+                    </tr>        
+                    @WriteCapability(Benchmarks, "Favourites", String.Empty)
+                    @WriteCapability(Benchmarks, "Playlists", String.Empty)
+                    @WriteCapability(Benchmarks, "Sign in / Register", String.Empty)
+                    @WriteCapability(Benchmarks, "Social sign-on", String.Empty)
+                    @WriteCapability(Benchmarks, "Parental controls", String.Empty)
+                </table>     
+
+
+                <h1>Support</h1>
+                <table>
+                    <tr>
+                        <th>Feature</th>
+                        @foreach (Analysis benchmark in Benchmarks)
+                        {
+                            <th>@benchmark.BenchmarkDate.ToString("dd MMM yyyy")</th>   
+                        }
+                    </tr>        
+                    @WriteCapability(Benchmarks, "Help", String.Empty)
+                    @WriteCapability(Benchmarks, "About", String.Empty)
+                    @WriteCapability(Benchmarks, "Contact", String.Empty)
+                    @WriteCapability(Benchmarks, "Accessibility", String.Empty)
+                    @WriteCapability(Benchmarks, "Watch on other platforms", String.Empty)
+                </table>     
+                
+                        if (thisService.HasHotFeatures)
+                        {
+                <h1 class="hot-features">Hot Features <span>(not included in Benchmark scores)</span></h1>
+                <table>
+                    <tr>
+                        <th>Feature</th>
+                        @foreach (Analysis benchmark in Benchmarks)
+                        {
+                            <th>
+                            @if (!benchmark.HideHotFeatures)
+                            {
+                                @benchmark.BenchmarkDate.ToString("dd MMM yyyy")
+                            }
+                            </th>   
+                        }
+                    </tr>
+                    @WriteHotFeature(Benchmarks, "Adaptive bitrate streaming", String.Empty)
+                    @WriteHotFeature(Benchmarks, "Audio-described Shows", String.Empty)
+                    @WriteHotFeature(Benchmarks, "Device synchronisation", String.Empty)
+                    @WriteHotFeature(Benchmarks, "Download to device", String.Empty)
+                    @WriteHotFeature(Benchmarks, "Extended Archive", String.Empty)
+                    @WriteHotFeature(Benchmarks, "Last viewed", String.Empty)
+                    @WriteHotFeature(Benchmarks, "Live Restart", String.Empty)
+                    @WriteHotFeature(Benchmarks, "Live Viewing", String.Empty)
+                    @WriteHotFeature(Benchmarks, "Resume after stopping", String.Empty)
+                    @WriteHotFeature(Benchmarks, "Social content recommendation", "Social recommendation")
+                </table>   
+                        }    
+            }
+        </div>
+          
+              
+        <div class="ui-screenshots-desc-col">
+            <ul>
+
+            <li>
+            <div class="ui-service-info ui-visible">
+                <h2>Service Information</h2>
+                <div class="ui-service-info-desc">@thisService.Description</div>
+                <dl>
+                @if (!String.IsNullOrEmpty(thisService.Availability))
+                {
+                <dt title="Geographical regions">Availability:</dt><dd>@thisService.Availability</dd>
+                }
+                @if (!String.IsNullOrEmpty(thisService.SubscriptionType))
+                {
+                <dt title="Service types">Type:</dt><dd>@thisService.SubscriptionType.Replace(",", ", ")</dd>
+                }
+                @if (!String.IsNullOrEmpty(thisService.ServiceCategory))
+                {
+                <dt title="Service categories">Category:</dt><dd>@thisService.ServiceCategory.Replace(",", ", ")</dd>
+                }
+                @if (!String.IsNullOrEmpty(thisService.MarketplaceRating))
+                {
+                <dt title="App Store / Marketplace rating">Store rating:</dt><dd>@thisService.MarketplaceRating</dd>
+                }
+                </dl>
+                @if (thisService.ScreenshotCount > 0 && !thisService.IsComingSoon)
+                {
+                    string surl = "/vui/" + parentPlatform.PlatformName;
+                    if (parentDevice != null)
+                    {
+                        surl += "/" + parentDevice.DeviceName;
+                    }
+                    surl += @"/" + thisService.ServiceName + "/screenshots/";
+                <a class="link-to-screenshots" href="@surl">View Service Screenshots</a>
+                }
+            </div>
+            </li>
+            </ul>
+  
+            @{
+
+                if (IsFullMode)
+                {
+                    List<Service> serviceList;
+                    if (parentDevice != null)
+                    {
+                        serviceList = VUIDataFunctions.GetBestServicesForDevice(parentDevice.NodeId);
+                    }
+                    else
+                    {
+                        serviceList = VUIDataFunctions.GetBestServicesForPlatform(parentPlatform.NodeId);
+                    }
+
+                    if (serviceList != null)
+                    {
+                        int counter = 0;
+                        int maxtoshow = 5;
+            
+                        <ul class="related-services">
+                            <li class="heading"><h2>Best in Class</h2></li>
+                            
+                            @foreach (Service service in serviceList)
+                            {
+                                service.SetAnalyses(true);
+                                counter++;
+                                if (counter <= maxtoshow)
+                                {
+                                    string url = "";
+                                    url = "/vui/" + service.Platform.PlatformName;
+                                    if (service.Device != null)
+                                    {
+                                        url += "~" + service.Device.DeviceName;
+                                    }
+                                    url += "/" + service.ServiceName + "/benchmarking/";
+                                    
+                                <li>
+                                    <a href="@url">
+                                    <h3>@service.Name</h3>
+                                    <div class="ui-image-box"><img src="@service.DefaultScreenshot" width="205"/></div>
+                                        <div class="ui-service-score">
+                                        @{  
+                                    string s = @service.BenchmarkScore.ToString();
+                                            @:@s
+                                        }
+                                        </div>
+                                    </a>
+                                </li>
+                                }
+                            }
+                        </ul>
+                    }
+                }
+                else
+                {
+                <ul class="related-services">
+                    <li class="heading"><h2>Best in Class</h2></li>
+                    <li>
+                    <div class="ui-service-info-desc">When you subscribe, you’ll be able to see the breakdown for individual platforms (like Web, Tablet, Smartphone etc.) and find out which existing video services display the greatest range of functionality.</div>
+                    </li>
+                    <li>
+                        <a href="#">
+                        <h3>???</h3>
+                        <div class="ui-image-box"><img src="/css/images/benchmarking-dummy.png" width="205"/></div>
+                            <div class="ui-service-score">21</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                        <h3>???</h3>
+                        <div class="ui-image-box"><img src="/css/images/benchmarking-dummy.png" width="205"/></div>
+                            <div class="ui-service-score">20</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                        <h3>???</h3>
+                        <div class="ui-image-box"><img src="/css/images/benchmarking-dummy.png" width="205"/></div>
+                            <div class="ui-service-score">20</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                        <h3>???</h3>
+                        <div class="ui-image-box"><img src="/css/images/benchmarking-dummy.png" width="205"/></div>
+                            <div class="ui-service-score">19</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                        <h3>???</h3>
+                        <div class="ui-image-box"><img src="/css/images/benchmarking-dummy.png" width="205"/></div>
+                            <div class="ui-service-score">19</div>
+                        </a>
+                    </li>
+                </ul>
+                }
+            }
+        </div>
+        
+        }
+
+
+
+    }
+    catch (Exception ex1)
+    {
+        <p>@ex1.Message</p>
+        if (IsFullMode)
+        {
+            <div class="ui-error-message">That Service does not exist</div>
+        }
+        else
+        {
+      
+            <div class="ui-subscription-message">You need to be a subscriber to see this</div>
+      
+        }
+    }
+    
+}

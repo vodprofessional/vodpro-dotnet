@@ -1,0 +1,36 @@
+﻿@using umbraco.MacroEngines
+@using uComponents.Core
+@using uComponents.Core.uQueryExtensions
+@using System.Linq
+@{
+  DynamicNode node = new DynamicNode(Model.Id);
+  var otherStories = node.Parent.Descendants("vodProStory").Items.Where(n => n.Id != Model.Id).ToList();
+  
+  if(otherStories.Count > 0)
+  {
+  
+  <ul class="bp-otherstory">
+  
+    <li class="heading"><h2>More Resources</h2></li>
+  
+    @foreach(dynamic teaser in @otherStories )
+    {
+     <li>
+      <a href="@teaser.Url">
+        <h3>@teaser.title</h3>
+       
+       @if(teaser.GetProperty("storyimage").Value.Length > 0)
+       {
+        dynamic media = @Model.MediaById(@teaser.GetProperty("storyimage").Value);
+        string mediaName = @media.umbracoFile;
+        string thumbName = @mediaName.Replace(".jpg","_thumb_195.jpg");
+        <div class="mostpopimg"><img src="@mediaName"/></div>
+       }
+         <p>@teaser.storyteaser</p>
+       </a>
+      </li>
+    }
+  </ul>
+  }
+}
+      

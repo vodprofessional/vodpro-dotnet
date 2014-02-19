@@ -1,0 +1,746 @@
+@using VUI.classes;
+@using VUI.VUI3.classes;
+@using umbraco.cms.businesslogic.member;
+@using System.Web;
+@{
+    VUIUser u = VUI3Utility.GetUser();
+    Member c = u.Member;
+
+  
+  @* NOT LOGGED IN STATE *@
+    if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_NONE))
+    {
+      
+    <div id="main">
+      <div class="home-slides">
+        <div id="home-slide1" class="home-slide">
+          <div class="inner">
+            <section class="slide-content">
+              <h1>
+                @Model.title
+              </h1>
+              <h3 class="slogan">
+                @Model.subtitle
+              </h3>
+              @Model.introduction
+              <div class="b-home-logos">
+                @if (@Model.customers.GetType() == typeof(umbraco.MacroEngines.DynamicXml))
+                {
+                    var customerIDs = @Model.customers.GetEnumerator();
+                    <ul title="Here's just a sample of our illustrious customer list">
+                    @foreach (var customerID in @customerIDs)
+                    {
+                        dynamic customer = @Model.MediaById(@customerID.InnerText);
+                        <li>
+                            <img src="@customer.umbracoFile" />
+                        </li>
+                    }
+                    </ul>
+                }
+              </div>
+              <div class="b-home-btns">
+                <a class="btn" data-panel="true" data-panelregion="action-contact-form" href="#">Get a Demo</a><a class="btn" data-panel="true" data-panelregion="action-contact-form" href="#">Subscribe Today<span class="icon-chevron-right"></span></a>
+              </div>
+            </section>
+            <section class="slide-img">
+              <div class="b-iphone">
+                <div class="iphone-gallery">
+                @if (@Model.introImages.GetType() == typeof(umbraco.MacroEngines.DynamicXml))
+                {
+                    var iiIDs = @Model.introImages.GetEnumerator();
+                    <ul>
+                    @foreach (var imageID in @iiIDs)
+                    {
+                        dynamic iImage = @Model.MediaById(@imageID.InnerText);
+                        <li>
+                            <img src="@iImage.umbracoFile" />
+                        </li>
+                    }
+                    </ul>
+                }
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+        <!-- Screenshots -->    
+
+        <div id="home-slide2" class="home-slide">
+          <div class="inner">
+            <img class="logo" src="/_inc/images/logo.png" alt="logo icon">
+            <h2>
+              @Model.screenshotsTitle
+            </h2>
+            <section class="slide-content">
+              @Model.screenshotsBody
+            </section>
+            <a href="/vui3/services/4oD#slide-screenshots">
+              
+            <section class="slide-img">
+             <div class="slide-gallery">
+                <div class="carousel">
+                    @if (@Model.screenshotImages.GetType() == typeof(umbraco.MacroEngines.DynamicXml))
+                    {
+                        var iiIDs = @Model.screenshotImages.GetEnumerator();
+                        <ul>
+                        @foreach (var imageID in @iiIDs)
+                        {
+                            dynamic iImage = @Model.MediaById(@imageID.InnerText);
+                            <li>
+                                <img src="@iImage.umbracoFile" />
+                            </li>
+                        }
+                        </ul>
+                    }
+                </div>
+              </div>
+              <img src="/_inc/images/tv-example.png" alt="TV example">
+            </section>
+             </a>
+          </div>
+        </div>
+        
+
+ 
+
+        <div id="home-slide3" class="home-slide">
+          <div class="inner">
+            <img class="logo" src="/_inc/images/logo.png" alt="logo icon">
+            <h2>
+              @Model.benchmarkingTitle
+            </h2>
+            <section class="slide-content">
+              <div class="col">
+                @Model.benchmarkingLeftColBody
+              </div>
+              <div class="col">
+                @Model.benchmarkingRightColBody
+              </div>
+            </section>
+            <section class="slide-img">
+              <div class="slide-gallery droid">
+                <div class="carousel-off">
+                  @*if (@Model.benchmarkingImages.GetType() == typeof(umbraco.MacroEngines.DynamicXml))
+                  {
+                      var iiIDs = @Model.benchmarkingImages.GetEnumerator();
+                        <ul>
+                        @foreach (var imageID in @iiIDs)
+                        {
+                            dynamic iImage = @Model.MediaById(@imageID.InnerText);
+                            <li>
+                                <img src="@iImage.umbracoFile" />
+                            </li>
+                        }
+                        </ul>
+                  }
+                  else
+                  {
+                  <ul>
+                    <li>
+                      <img src="/_inc/images/tmp/examples/droid1.jpg" alt="" />
+                    </li>
+                  </ul>
+                  }*@
+                  <ul>
+                    <li>
+                      <img src="/_inc/images/tmp/examples/droid1.jpg" alt="" />
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="slide-gallery win">
+                <div class="carousel-off">
+                  <ul>
+                    <li>
+                      <img src="/_inc/images/tmp/examples/win1.jpg" alt="" />
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <img src="/_inc/images/phone-example.png" alt="Smartphone examples">
+              <a href="/vui3/benchmarking" class="slide-link win"></a><a href="/vui3/services/4oD#slide-benchmarking" class="slide-link droid"></a>
+            </section>
+          </div>
+        </div>
+        
+        <div id="home-slide4" class="home-slide">
+          <div class="inner">
+            <img class="logo" src="/_inc/images/logo.png" alt="logo icon">
+            <h2>
+              @Model.ratingsTitle
+            </h2>
+            <section class="slide-content">
+              @Model.ratingsBody
+            </section>
+            <section class="slide-img">
+              <div class="slide-gallery">
+                <div class="carousel-off">
+                @*if (@Model.ratingsImages.GetType() == typeof(umbraco.MacroEngines.DynamicXml))
+                {
+                    var iiIDs = @Model.ratingsImages.GetEnumerator();
+                    <ul>
+                    @foreach (var imageID in @iiIDs)
+                    {
+                        dynamic iImage = @Model.MediaById(@imageID.InnerText);
+                        <li>
+                            <img src="@iImage.umbracoFile" />
+                        </li>
+                    }
+                    </ul>
+                }
+                else
+                {
+                  <ul>
+                    <li>
+                      <img src="/_inc/images/tmp/examples/ipad1.jpg" alt="" />
+                    </li>
+                  </ul>
+                }*@
+                  <ul>
+                    <li>
+                      <img src="/_inc/images/tmp/examples/ipad1.png" alt="" />
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <img src="/_inc/images/ipad-example.png" alt="iPad example"><a class="slide-link ipad" href="/vui3/services/4oD#slide-ratings"></a>
+            </section>
+          </div>
+        </div>
+        
+        <div id="home-slide5" class="home-slide">
+          <div class="inner">
+            <img class="logo" src="/_inc/images/logo.png" alt="logo icon">
+            <h2>
+              @Model.analysisTitle
+            </h2>
+            <section class="slide-img">
+              <div class="slide-gallery">
+                <div class="carousel-off">
+                    @*if (@Model.analysisImages.GetType() == typeof(umbraco.MacroEngines.DynamicXml))
+                    {
+                        var iiIDs = @Model.analysisImages.GetEnumerator();
+                        <ul>
+                        @foreach (var imageID in @iiIDs)
+                        {
+                            dynamic iImage = @Model.MediaById(@imageID.InnerText);
+                            <li>
+                                <img src="@iImage.umbracoFile" />
+                            </li>
+                        }
+                        </ul>
+                    }
+                    else
+                    {
+                  <ul>
+                    <li>
+                      <img src="/_inc/images/tmp/examples/laptop1.jpg" alt="">
+                    </li>
+                  </ul>
+                    }
+                  *@
+                  <ul>
+                    <li>
+                      <img src="/_inc/images/tmp/examples/laptop-1.png" alt="">
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <img src="/_inc/images/laptop-example-2.png" alt="Laptop example" /><a href="/vui3/best-practice-guides" class="slide-link laptop"></a>
+            </section>
+            <section class="slide-content">
+              @Model.analysisBody
+            </section>
+          </div>
+        </div>
+        
+      </div>
+    </div>        
+        
+   <div class="b-nav-panel">
+    <ul>
+      <li class="active">
+        <a href="#home-slide1" class="icon-home"></a>
+      </li>
+      <li>
+        <a href="#home-slide2" class="icon-camera"></a>
+      </li>
+      <li>
+        <a href="#home-slide3" class="icon-bar-chart"></a>
+      </li>
+      <li>
+        <a href="#home-slide4" class="icon-star"></a>
+      </li>
+      <li>
+        <a href="#home-slide5" class="icon-pencil"></a>
+      </li>
+    </ul>
+  </div>
+        
+           
+    
+    }
+
+  @* LOGGED IN STATE *@
+    else
+    {
+
+        string userFirstName = u.Member.getProperty("firstName").Value.ToString();
+
+        string linkedin = u.Member.getProperty("linkedIn").Value.ToString();
+        string jobtitle = u.Member.getProperty("jobTitle").Value.ToString();
+        string userImage = u.Member.getProperty("vuiUserImage").Value.ToString();
+
+        string userImageClass = "";
+        if (String.IsNullOrEmpty(userImage))
+        {
+            userImageClass = "hidden";
+        }
+        
+        
+        <div id="main">
+          <div class="main-top">
+            <div class="inner">
+              <div class="b-logged-news">
+                <h1>
+                  @Model.loggedInTitleNews
+                </h1>
+                <ul>
+                @{
+        List<NewsItem> news = VUI3News.GetNews(6);
+        foreach (NewsItem n in news)
+        {
+            string iconclass = "";
+            if (n.NewsType.Equals(VUI3News.NEWSTYPE_SYSTEM))
+            {
+                iconclass = "wrench";
+            }
+            if (n.NewsType.Equals(VUI3News.NEWSTYPE_VERSION))
+            {
+                if (n.AppStore.Equals(VUI3News.NEWSSTORE_APPLE))
+                {
+                    iconclass = "apple";
+                } if (n.AppStore.Equals(VUI3News.NEWSSTORE_GOOGLE))
+                {
+                    iconclass = "android";
+                } if (n.AppStore.Equals(VUI3News.NEWSSTORE_WINDOWS))
+                {
+                    iconclass = "windows";
+                }
+            }
+            if (n.NewsType.Equals(VUI3News.NEWSTYPE_SCREENSHOT))
+            {
+                iconclass = "camera";
+            }
+            if (n.NewsType.Equals(VUI3News.NEWSTYPE_BENCHMARK))
+            {
+                iconclass = "bar-chart";
+            }
+            if (n.NewsType.Equals(VUI3News.NEWSTYPE_NEW))
+            {
+                iconclass = "exclamation-sign";
+            }
+                        <li>
+                        @if(!String.IsNullOrEmpty(@n.Url)) {
+                          <a href="@n.Url" class="news">
+                          
+                            <span class="icon-@iconclass"></span>@n.Description 
+                          </a>
+                        }
+                        else
+                        {
+                            <span class="icon-@iconclass"></span>@n.Description 
+                        }
+                        </li>
+        }
+                  }
+                </ul>
+
+
+                <section class="slide-img">
+              <div class="b-iphone">
+                <div class="iphone-gallery">
+                @if (@Model.introImages.GetType() == typeof(umbraco.MacroEngines.DynamicXml))
+                {
+                    var iiIDs = @Model.introImages.GetEnumerator();
+                    <ul>
+                    @foreach (var imageID in @iiIDs)
+                    {
+                        dynamic iImage = @Model.MediaById(@imageID.InnerText);
+                        <li>
+                            <img src="@iImage.umbracoFile" />
+                        </li>
+                    }
+                    </ul>
+                }
+                </div>
+              </div>
+            </section>
+
+
+                @*
+                 **********************
+                     WELCOME BOX
+                 **********************
+                <div class="b-logged-wellcome">
+                  <div class="logged-wellcome-title">
+                    Welcome @userFirstName
+                  </div>
+                  
+                    <div class="logged-wellcome-img">
+                      <span class="img">
+                        <img src="@userImage" alt="" class="@userImageClass" />
+                        <span class="hidden"><em class="icon-cloud-upload"></em>Upload a profile picture. Square is best</span>
+                      </span>
+                      <span class="btn btn-success fileinput-button">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        <!-- The file input field used as target for the file upload widget -->
+                        <input id="fileupload" type="file" name="files[]" />
+                      </span>
+                      <!-- The global progress bar -->
+                      <div id="progress" class="progress">
+                        <div class="progress-bar progress-bar-success"></div>
+                      </div>
+                    </div>
+                    <input id="user-jobtitle" data-dirtyval="@jobtitle" data-initval="Job Title" data-field="jobtitle" type="text" placeholder="Job Title" value="@jobtitle" class="quiet-save text-prefill" />
+                    <input data-dirtyval="@linkedin" data-field="linkedin" id="user-linkedin" type="text" data-initval="LinkedIn URL" placeholder="LinkedIn URL" value="@linkedin" class="quiet-save text-prefill" />
+                  
+                  <p>
+                    @{
+        string dateValid = "";
+        DateTime endDate = DateTime.Now;
+        if (!u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_ADMIN))
+        {
+            Member adm = VUIfunctions.GetVUIAdminForCurrentUser();
+            string adminName = adm.getProperty("fullName").Value.ToString();
+            endDate = (DateTime)adm.getProperty("vuiEndDate").Value;
+                
+                                            @: Your VUI Administrator is @adminName <br/>
+                        }
+        else
+        {
+            if (u.Member.getProperty("vuiEndDate").Value != null)
+            {
+                endDate = (DateTime)u.Member.getProperty("vuiEndDate").Value;
+            }
+                                @: You are the Administrator for your organisation <br/>   
+                        }
+        dateValid = endDate.ToString("dd MMM yyyy");
+                        @: Your account is active until @dateValid
+                    }
+                  </p>
+                  <!-- <a>Tell a friend about the VUI Library</a> -->
+                </div>
+              *@
+              </div>
+            </div>
+          </div>
+
+          @{
+        // int numVodServices = VUI3Utility.AllServicesSimple().ServiceMasters.Count;
+        int numVodServices = VUI3Utility.NumberOfVUIProducts();
+        int numScreenshots = VUI3Utility.NumScreenshots();
+
+        //VUI3BenchmarkMatrix bmatrix = new VUI3BenchmarkMatrix();
+        //int numBenchmarks = bmatrix.GetScores("About", "Overall").Max;
+        int numBenchmarks = VUI3Utility.NumberOfVUIBenchmarks();
+          <div class="main-content">
+            <div class="inner-title"><h2 class="title">Today in the VUI Library</h2></div>
+            
+            <div class="b-logged-stats">
+              <div class="inner">
+                <ul>
+                  <li>
+                    <div>
+                      <span class="icon-play-circle"></span>
+                      <div class="title">
+                        @numVodServices VOD Products
+                      </div>
+                      <div class="text">
+                        tracked for you
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                   <a href="/vui3/screenshots/">
+                    <div>
+                      <span class="icon-camera"></span>
+                      <div class="title">
+                        @String.Format("{0:#,##}", numScreenshots) screenshots
+                      </div>
+                      <div class="text">
+                        from @numVodServices services, across 7 platforms
+                      </div>
+                    </div>
+                   </a>
+                  </li>
+                  <li>
+                   <a href="/vui3/benchmarking/">
+                    <div>
+                      <span class="icon-bar-chart"></span>
+                      <div class="title">
+                        @numBenchmarks Benchmarks
+                      </div>
+                      <div class="text">
+                        against 25 common and 10 hot functions
+                      </div>
+                    </div>
+                   </a>
+                  </li>
+                  <li>
+                   <a href="/vui3/appstore-ratings/">
+                    <div>
+                      <span class="icon-star-empty"></span>
+                      <div class="title">
+                        App Store Ratings
+                      </div>
+                      <div class="text">
+                        Apple and Google Play, updated daily
+                      </div>
+                    </div>
+                   </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        }
+
+
+      
+
+        @{
+
+        VUI3ServiceSnapshotList favouriteServices = u.FavouriteServiceSnapshots;
+        int counter = 0;
+        
+        
+          <div class="b-logged-service">
+            <div class="inner">
+              <h2 class="title">
+                @Model.loggedInTitleFavouriteServices
+              </h2>
+            </div>
+            <div class="b-tabs">
+              <ul class="tabs">
+              @foreach (VUI3ServiceSnapshot snap in favouriteServices.results)
+              {
+                  if (snap != null)
+                  {
+                      string activeclass = (++counter == 1) ? "active" : "";
+                <li class="@activeclass" data-id="@snap.id">
+                  <a href="#">@snap.serviceName</a>
+                </li>
+                  }
+              }
+                <li class="choose">
+                  <a href="#">Choose VOD Services<span class="icon-retweet"></span></a>
+                </li>
+              </ul>
+              <div class="panes">
+        
+            @foreach (VUI3ServiceSnapshot snap in favouriteServices.results)
+            {
+                if (snap != null)
+                {
+                    DateTime snapshotDate = snap.snapshotDate;
+                    string snapshotTaken = String.Empty;
+                    if (snapshotDate.ToString("yyyyMMdd").Equals(DateTime.Today.ToString("yyyyMMdd")))
+                    {
+                        snapshotTaken = "today";
+                    }
+                    else if (snapshotDate.ToString("yyyyMMdd").Equals(DateTime.Today.AddDays(-1).ToString("yyyyMMdd")))
+                    {
+                        snapshotTaken = "yesterday";
+                    }
+                    else
+                    {
+                        snapshotTaken = snapshotDate.ToString("dd MMM yyyy");
+                    }
+                
+                <div class="pane" data-id="@snap.id">
+                  <div class="inner">
+                   <a href="@snap.Url">
+                    <ul>
+                    @if (@snap.HasScreenshots())
+                    {
+                      <li>
+                        <div class="counter">
+                          @snap.numScreenshots<span class="icon-camera"></span>
+                        </div>
+                        <div class="text">
+                          Screenshots from <br> @snap.numScreenshotDevices different devices
+                        </div>
+                      </li>
+                    }
+                    @if (@snap.HasBenchmarks())
+                    {
+                      <li>
+                        <div class="counter">
+                          @snap.benchmarkAverage<i>/25 </i><span class="icon-bar-chart"></span>
+                        </div>
+                        <div class="text">
+                          Average benchmark score <br> across all devices
+                        </div>
+                      </li>
+                    }
+                    @if (@snap.HasRatings())
+                    {
+                      <li>
+                        <div class="counter">
+                          @snap.ratingAverage<i>/5</i><span class="icon-star-empty"></span>
+                        </div>
+                        <div class="text">
+                          Average App Store Rating from<br> Apple / Google Play
+                        </div>
+                      </li>
+                    }
+                    @if (@snap.HasTwitter())
+                    {
+                      <li>
+                        <div class="counter">
+                          @snap.twitterFollowers.ToString("#,#") <span class="icon-twitter"></span>
+                        </div>
+                        <div class="text">
+                          Twitter Followers<br> (as of @snapshotTaken)
+                        </div>
+                        <div class="rate">
+                          @* <span class="icon-sort-up"></span>since 26 July *@
+                        </div>
+                      </li>
+                    }
+                    @if (@snap.HasFacebook())
+                    {
+                      <li>
+                        <div class="counter">
+                          @snap.facebookLikes.ToString("#,#") <span class="icon-thumbs-up-alt"></span>
+                        </div>
+                        <div class="text">
+                          Facebook likes <br> (as of @snapshotTaken)
+                        </div>
+                        <div class="rate">
+                          @* <span class="icon-sort-up"></span>since 26 July *@
+                        </div>
+                      </li>
+                    }
+                    @if (@snap.HasYoutube())
+                    {
+                      <li>
+                        <div class="counter">
+                          @snap.ytSubscriberCount.ToString("#,#") <span class="icon-youtube"></span>
+                        </div>
+                        <div class="text">
+                          Subscribers on<br> YouTube (as of @snapshotTaken)
+                        </div>
+                        <div class="rate">
+                          @* <span class="icon-sort-down"></span>since 26 July *@
+                        </div>
+                      </li>
+                    }
+                    </ul>
+                   </a>
+                  </div>
+                </div>
+                }
+            }
+                <div class="pane favs">
+                  <div class="inner">
+                   <div class="col first">
+                    <h2>Your favourite VOD services</h2>
+                    <p>Select up to five services to track on your home page.</p>
+                    <select id="select-favourite-service">
+                    @{
+                        VUI3SimpleServiceMasterCollection services = VUI3Utility.AllServicesSimple();
+                        foreach (VUI3SimpleServiceMaster service in services.ServiceMasters)
+                        {
+                            <option value="@service.Id" data-url="@service.URL">@service.ServiceName</option>    
+                        }
+                    }
+                    </select>
+                    <a href="#" class="add-favourite-service"><span class="icon-plus-sign"></span></a>
+                   </div>
+
+                   <div class="col">
+                    <ul class="favourite-services">
+                        @foreach (VUI3ServiceSnapshot snap in favouriteServices.results)
+                        {
+                            if (snap != null)
+                            {
+                                <li><a href="#" data-id="@snap.id"><span class="icon-minus-sign"></span></a> @snap.serviceName</li>
+                            }
+                        }
+                    </ul>
+                    
+                   </div>
+
+                   <div class="col last">
+                   
+                    You can also add a favourite on a service home page by clicking the <span class="icon-plus-sign"></span> next to the service name
+
+                   </div>
+
+                  </div>
+                </div>
+            
+              </div>
+            </div>
+          </div>
+        }
+
+
+        @{
+          <div class="b-logged-screenshots">
+            <div class="inner">
+              <h2 class="title">
+                @Model.loggedInTitleScreenshots
+              </h2>
+            </div>
+            <div class="pane">
+             <div class="inner">
+              <div class="screenshots-carousel">
+                <div class="shadow-left"></div>
+                <div class="shadow-right"></div>
+
+            @{
+              List<VUI3Screenshot> favs = u.FavouriteImages.AllFavouriteImages();
+              if (favs.Count > 0)
+              {
+                <div class="carousel">
+                  <ul>
+                  @foreach (VUI3Screenshot scrn in favs)
+                  {
+                    <li>
+                      <a href="#"><span class="player">@scrn.ServiceName</span><span class="name">@scrn.PageType</span><span class="device">@scrn.Device</span><span class="date">@scrn.ImportTag</span><span class="img"><img src="@scrn.ImageURL_th" /></span></a>
+                    </li>
+                  }
+                  </ul>
+                </div>
+              }
+
+              <div class="favourite-images-message">
+                Save your favourite images by clicking the <span class="icon-paper-clip"></span> next to any screenshot in the lightbox. <br /><a href="/vui3/screenshots">Jump straight to screenshots</a>.
+              </div>
+              
+            }
+              </div>
+            </div>
+           </div>
+          </div>
+        }
+
+        @*
+        if (@Model.loggedInInfo.GetType() != typeof(umbraco.MacroEngines.DynamicNull) && !String.IsNullOrEmpty(@Model.loggedInInfo.ToString()))
+        {      
+            <div class="help">
+            <div class="inner">
+                <h2 class="title">
+                Help
+                </h2>
+                @Model.loggedInInfo
+            </div>
+            </div>
+        }
+        *@
+        </div>
+    }  
+}

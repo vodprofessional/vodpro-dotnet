@@ -1,0 +1,21 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VUIMaster.master" AutoEventWireup="true" %>
+
+<%@ Register TagPrefix="vp" TagName="VuiUserAdmin" src="~/umbraco/plugins/vui/usercontrols/vui-public-user-admin.ascx" %>
+ 
+<asp:content ContentPlaceHolderId="ContentPlaceHolder1" runat="server">
+  
+  <div class="ui-scrolling-column">
+    
+    <div class="ui-heading">
+      <h1>Account Administration</h1>
+    </div>
+      
+    
+    
+    
+    <vp:VuiUserAdmin runat="server" ID="vuiUserAdmin" />
+    
+  </div>
+  
+  <script type="text/javascript">document.title = 'VUI Library - Account Administration';</script>
+</asp:content>

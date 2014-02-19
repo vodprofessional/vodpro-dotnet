@@ -1,0 +1,56 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VodProMaster.master" AutoEventWireup="true" %>
+<asp:Content ContentPlaceHolderID="VodProHead" runat="server">
+<link href="/css/carousel.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/scripts/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="/scripts/jcarousel.min.js"></script>
+<script type="text/javascript" src="/scripts/carousel.js"></script>
+<umbraco:Macro  runat="server" language="cshtml">
+@{
+  int timeout = 5000;
+  if(Model.carousel.GetType() == typeof(System.Int32))
+  { 
+    dynamic carousel = @Model.NodeById(@Model.carousel);
+    timeout = carousel.carouselTime * 1000;
+  }
+}
+<script type="text/javascript">
+   $(document).ready(function() { 
+   $('#s3slider').s3Slider({ 
+      timeOut: @timeout
+   });
+}); 
+</script>
+
+</umbraco:Macro>
+</asp:Content>  
+
+  <asp:Content ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+<umbraco:Macro  runat="server" language="cshtml">
+@{
+  if(Model.carousel.GetType() == typeof(System.Int32))
+  { 
+    dynamic carousel = @Model.NodeById(@Model.carousel);
+      
+    <div id="s3slider">
+    <ul id="s3sliderContent">
+    @foreach(dynamic carouselItem in @carousel.Children.OrderBy("carouselSortOrder"))
+    {
+      <li class="s3sliderImage">
+        <img src="@carouselItem.carouselItemImage" alt="@carouselItem.carouselItemTitle" />
+        <span class="cbottom"> 
+          <a href="@umbraco.library.NiceUrl(@carouselItem.carouselItemLink)">
+            <strong>@carouselItem.carouselItemTitle</strong>
+           <br />
+           @carouselItem.carouselItemText
+          </a>
+        </span>
+      </li>  
+    }
+    </ul>
+  </div>
+  }
+}
+</umbraco:Macro>
+<umbraco:Macro Alias="VpAllNewsRzr" runat="server"></umbraco:Macro>
+</asp:Content>

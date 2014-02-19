@@ -1,0 +1,48 @@
+
+#regwall { float:left; width:615px; margin:10px 0 15px 0; padding:0; }
+#regwall #banner {position:absolute; right:0px; margin-top:-10px; width:218px; height:103px; z-index:3; background: url('/css/images/regwall-banner.png') transparent;}
+#regwall .box {float:left; width:597px; 
+  background: url('/css/images/form-bg.png') repeat-x #f1f2f4; border:1px solid #ccc; margin:0 0 0 5px;
+  box-shadow: 0px 2px 1px 0px #999; border-radius: 10px;}
+#regwall h2 { color: #f00; font-size:1.2em; margin: 10px 0 10px 10px; padding:0 0 8px; border-bottom: 1px solid #ccc;}
+#regwall p  { font-family: "Lucida Sans",sans-serif; font-size:0.83em; margin:0 10px 5px; padding:0;}
+#regwall h3 { font-size: 1em; color:#7E8085; }
+#regwall #login { float:left; width:210px; margin:0 10px; }
+#regwall #divider { float:left; display:block; width:115px; height:135px;margin:0; }
+#regwall #register { float:left; width:210px; margin:0 10px; }
+#regwall #register p  { font-family: "Lucida Sans",sans-serif; font-size:0.83em; margin:0 0 3px  0; padding:0;}
+#regwall input[type=text], #regwall input[type=password] { width: 200px; color:#666; border: solid 1px #999; padding: 2px 3px; margin: 0 0 6px 0; border:1px solid #ccc; border-radius: 5px; box-shadow: 0 1px 0 0 #aaa;}
+/*#regwall input[type=button], #regwall input[type=submit] { font-weight: bold; cursor: pointer; border: none; background-image: url('/css/images/btn-bg-slice.png'); background-repeat: horizontal; color: #fff; height:23px; padding: 3px 5px; margin: 0 5px; float:right;border-radius: 3px 3px 3px 3px;}
+*/
+#regwall input[type=button], #regwall input[type=submit] {  background: url("/css/images/arrow-button.png") no-repeat scroll right center transparent; float:right; border: 1px solid #bbb; border-top:1px solid #e0e0e0; border-bottom: 1px solid #666; border-radius: 3px; color: #fff; width: auto; min-width:80px; height:27px; padding: 1px 50px 0 15px; text-shadow: 0 1px 0 #666666;}
+#regwall #VPLoginError_user, #regwall #VPLoginError_password, #regwall #VPRegError_email { display: none; float:left; width:140px; font-family: "Lucida Sans",sans-serif; font-size:0.83em; font-weight: bold; color: #f00; line-height: 1em;}
+#regwall #VPRegError_email { width: auto; margin: 3px 0; float:left;}
+#regwall #VPLoginError_user a, #regwall #VPLoginError_password a { color: #f00; text-decoration: underline; }
+h2.membercontent { margin: 10px 0 0 0; background: url('/css/images/regwall-member-content.png') no-repeat; height: 10px; padding: 5px 0; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* EDITOR PROPERTIES - PLEASE DON'T DELETE THIS LINE TO AVOID DUPLICATE PROPERTIES */

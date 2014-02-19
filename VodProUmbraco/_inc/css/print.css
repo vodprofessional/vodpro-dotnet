@@ -1,0 +1,80 @@
+﻿html:not(.lightbox-on) .lightbox 
+{
+    display:none;   
+}
+html footer, html .b-right-nav, html .b-nav-panel
+{
+    display:none;   
+}
+html *, *
+{
+    background-color: #fff !IMPORTANT;
+    color: #000  !IMPORTANT;
+}
+
+html.lightbox-on #wrapper,    html.lightbox-on .lightbox-header, html.lightbox-on .lightbox-leftside,  
+html.lightbox-on .lightbox-gallery > a,  html.lightbox-on .lightbox-header,  html.lightbox-on .lightbox-gallery .carousel ul li:not(.active) ,  
+html.lightbox-on .lightbox-gallery .lightbox-item-panel
+{
+    display: none;
+    float:none;
+    position: inherit;
+    overflow:inherit;
+}
+
+html.lightbox-on, html.lightbox-on body { overflow:inherit; min-height:inherit; }
+
+html.lightbox-on .lightbox , 
+html.lightbox-on .lightbox-item-header
+{
+    background-color: #fff;
+}
+
+
+html.lightbox-on .carousel[style], html.lightbox-on .lightbox-item[style] {
+    border:0 none;
+    width:inherit !IMPORTANT;
+    float:none;
+}
+
+html.lightbox-on .lightbox-item-img 
+{
+    padding:0;
+}
+html.lightbox-on .lightbox-item-img-inner  {
+    border:0 none;
+    height:auto !IMPORTANT;
+}
+
+html.lightbox-on .lightbox-item-img-inner img
+{
+    max-width:640px;
+    margin:0;
+}
+
+html.lightbox-on .lightbox { margin:0; position:inherit; min-width:0; }
+html.lightbox-on .lightbox-gallery { margin:0; 
+    overflow:inherit;}
+html.lightbox-on .lightbox-item.active .lightbox-item-package
+{
+    float:none;
+    display: block;
+    color:#000;
+}
+html.lightbox-on .lightbox-item.active .lightbox-item-header
+{
+    padding:0;
+    height:auto;
+    margin:6px 0;
+}
+
+html.lightbox-on .lightbox h1
+{
+    display:block;
+    padding:0;
+    height:auto;
+    margin:6px 0;
+    font-size:1.4em;
+}
+
+html.lightbox-on *[style] { height:auto !IMPORTANT; }

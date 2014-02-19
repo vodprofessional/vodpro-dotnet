@@ -1,0 +1,32 @@
+﻿
+    <div id="subnav">
+      <ul class="nav">
+        @{
+  var level = 3;
+  var currentPage = Model;
+  while (@currentPage.Level > @level-1){ currentPage = @currentPage.Parent; }
+  /* .Where("umbracoNaviHide") */
+  foreach(var page in @currentPage.Children.Where("nodeTypeAlias=\"vodProSection\"").Where("hideFromNavigation=false").OrderBy("navigationSortOrder"))
+  {
+    if(@page.Level == @level)
+    {
+      if(@page.Id == @currentPage.Id)
+      {
+        <li class="current">
+          <a class="navigation" href="@page.Url">@page.Name</a>
+        </li>
+      }
+      else
+      {
+        <li>
+          <a class="navigation" href="@page.Url">@page.Name</a>
+        </li>
+      }
+    }
+  }         
+}
+  </ul>
+     </div>
+
+        
+          

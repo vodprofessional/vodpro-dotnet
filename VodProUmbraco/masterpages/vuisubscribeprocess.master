@@ -1,0 +1,9 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/umbraco/masterpages/default.master" AutoEventWireup="true" %>
+<%@ Register TagPrefix="vp" TagName="VuiProcess" src="~/umbraco/plugins/vui/usercontrols/vui-subscribe-process.ascx" %>
+  
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolderDefault" runat="server">
+  
+  <vp:VuiProcess runat="server" id="VUIProcess" />
+  
+</asp:content>

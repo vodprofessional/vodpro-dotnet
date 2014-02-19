@@ -1,0 +1,279 @@
+.newform
+{
+    background: url("/css/images/form-bg.png") repeat-x scroll left top #F1F2F4;
+    border-radius: 10px;
+    box-shadow: 0 2px 1px 0px #999999;
+    border:1px solid #ccc; 
+    display:block;
+    padding: 5px;
+    float:left;  
+    color: #505050;
+}
+#regform.newform { float:none; }
+
+#regform table
+{
+    width:100%;
+    margin: 5px;
+    border: collapse none;
+    width: 
+}
+
+#regform table table
+{
+  box-shadow: 0 0 0 0 #999999;
+  background: none transparent;
+  border-radius: 0;
+}
+
+#regform td{
+  text-align:left; 
+}
+#regform td.align-right { text-align:right; }
+#regform table table { width:96%; }
+#regform table table td+td {
+  text-align: right;
+}
+
+#regform input[type=submit], .newform input[type=submit]
+{
+/*  font-weight: bold; cursor: pointer; border: none; background-image: url('/css/images/btn-bg-slice.png');
+  background-repeat: horizontal; color: #fff; height:23px; padding: 3px 5px; margin: 0 10px;
+  border-radius: 3px 3px 3px 3px; */
+  background: url("/css/images/arrow-button.png") no-repeat scroll right center transparent; 
+  border: 1px solid #bbb; border-top:1px solid #e0e0e0; border-bottom: 1px solid #666; border-radius: 3px; color: #fff; 
+  width: auto; min-width:80px; height:27px; padding: 1px 50px 0 15px; text-shadow: 0 1px 0 #666666; font-size:1.3em; cursor: pointer; 
+}
+
+#regform input.plain-button, input.plain-button { background:url("/css/images/plain-button.png") repeat-x transparent; border: 1px solid #bbb; border-top:1px solid #e0e0e0; border-bottom: 1px solid #666; border-radius: 3px; color: #66717e; 
+  width: auto; min-width:80px; height:27px; padding: 1px 15px 0 15px; text-shadow: none; font-size:1.3em; cursor: pointer; }
+
+input.align-right{ float:right; }
+
+.vodform
+{
+    padding: 5px;
+}
+
+.vodform.login {
+    margin: 20px 0; 
+}
+
+.vodform.login {
+  
+}
+
+.vodform.login table {
+  
+}
+
+.vodform.login table tr td {
+  padding: 5px 15px 5px 15px;
+  font-family:"Lucida Sans", sans-serif;
+}
+.vodform.login table tr:last-child td {
+  border-bottom: none;
+}
+
+.vodform.login input[type=checkbox] { margin-left: 215px; }
+.vodform.login input[type=submit]   { margin-left: 215px; }
+.vodform.login td[style] { padding-left:230px; }
+
+#regform table .vodform { padding-right:15px; float:left; }
+
+.vodform div.entry
+{  
+  float:left;
+  width: 580px;
+/*  background-color: #eef;
+  border-bottom: 1px solid #DEEEF7;*/
+  padding: 5px 0 5px 5px;
+  font-family:"Lucida Sans", sans-serif;
+}
+
+#regform table .vodform  div.entry {   width: 570px; }
+
+.vodform div.entry.last
+{
+  border: none;
+  margin: 0 0 10px 0;
+}
+
+.vodform div.entry label
+{
+  width: 200px;
+  float: left;
+  display: block;
+  padding-top: 3px;
+  padding-bottom: 10px;
+  padding-right:10px;
+}
+.vodform div.entry label.checkbox
+{
+  width: 550px;
+  display: inline;
+  float: none;
+}
+.vodform div.entry input[type=text], .vodform div.entry input[type=password], .vodform div.entry select, 
+  .login table input[type=text], .login table input[type=password]
+{
+    float:right;
+    font-family:"Lucida Sans", sans-serif;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 1px 0 #BBBBBB;
+    padding: 3px;
+    width: 350px;
+}
+.vodform div.entry select { width: 358px; }
+
+.vodform div.entry select + input { margin-top: 5px; }
+
+.vodform div.entry input.wide
+{
+  width: 380px;
+}
+
+.vodform div.entry textarea {   
+    font-family:"Lucida Sans", sans-serif;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 1px 0 #BBBBBB;
+    padding: 3px; }
+
+.vodform div.entry span.error
+{
+  font-size: 0.83em;
+  color: #f00;
+  font-weight: normal;
+}
+
+.vodform div.entry span.errorFloating
+{
+  font-size: 0.83em;
+  color: #f00;
+  font-weight: normal;
+  float: left;
+}
+.vodform div.entry span.errorFloating.wide
+{
+  margin-left: 200px;
+}
+
+.vodform div.entry .notes
+{
+  float: left;
+  margin: 8px 0 8px 200px;  
+}
+
+.vodform div.entry .jobDescShort
+{
+  font-size: 1em;
+  width: 385px;
+  height: 80px;
+}
+.vodform div.entry .jobDesc
+{
+  font-size: 1em;
+  width: 385px;
+  height: 200px;
+}
+
+.vodform div.entry em
+{
+  color: #666;
+}
+
+
+
+.formintrotext
+{
+  font-size: 1.2em;
+  line-height:1.4em;
+  padding: 10px;
+}
+
+.formendtext
+{
+  line-height:1.4em;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+
+
+
+
+.storytext table {
+  background-color: #eef;
+  width: 600px;
+  margin: 10px 0 10px 20px;
+}
+
+.storytext table tr {
+  border-bottom: 1px solid #cce;  
+}
+
+.storytext table td, .storyText table th {
+  padding: 5px;
+}
+
+#disqus_thread {
+    float: left;
+    width: 620px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* EDITOR PROPERTIES - PLEASE DON'T DELETE THIS LINE TO AVOID DUPLICATE PROPERTIES */

@@ -1,0 +1,46 @@
+﻿
+  @using umbraco.MacroEngines
+  @using uComponents.Core
+  @using uComponents.Core.uQueryExtensions
+  @using System.Linq
+  @{    
+    
+  bool hideSponsors = false;
+    
+  if (@Model.hideSponsors.GetType() == typeof(Boolean))
+  {   
+   if(@Model.hideSponsors)
+   {  
+    hideSponsors = true;
+   }
+  }
+    
+  if(!hideSponsors)
+  {
+    
+    if (@Model.AncestorOrSelf().sponsors.GetType() == typeof(umbraco.MacroEngines.DynamicXml))
+    {
+        var sponsorIDs = @Model.AncestorOrSelf().sponsors.GetEnumerator();
+    
+    <div class="hplabel"><h1 class="nobottomborder">Site Sponsors</h1></div>
+    <div class="productreviews">
+     
+        @foreach(var sponsorID in @sponsorIDs )
+        {
+          dynamic sponsor = @Model.NodeById(@sponsorID.InnerText);
+    
+          string sponsorurl = "#";
+         
+          if(sponsor.sponsorStory.GetType()==typeof(System.Int32)) {  
+            sponsorurl = umbraco.library.NiceUrl(sponsor.sponsorStory);
+          }
+          else if (sponsor.sponsorUrl.GetType()==typeof(System.String)) {  
+            sponsorurl = @sponsor.sponsorUrl;
+          }
+          <div class="sponsor"><a href="@sponsorurl"><img src="@sponsor.sponsorImage" /></a></div>
+          
+       }
+    </div>
+    }    
+  }
+  }

@@ -1,0 +1,31 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VUIMaster.master" AutoEventWireup="true" %>
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolderHead" runat="server">
+  <script type="text/javascript">document.title = 'VUI Library - Become a Subscriber';</script>
+</asp:content>
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolder1" runat="server">
+  
+  <div class="ui-heading">
+    <h1>Subscribing to the VUI Library</h1>
+  </div>
+    
+  <umbraco:Macro language="cshtml" runat="server">
+    @using VUI.classes;
+    @using umbraco.MacroEngines;
+    @using System.Web;
+    @{  
+        var id = @VUIfunctions.VUI_codesnippet_buy;
+        DynamicNode node = new DynamicNode(id);    
+        <span>
+         @Html.Raw(umbraco.library.RenderMacroContent(node.GetProperty("code").Value, @Model.Id))
+        </span>
+        
+    } 
+  </umbraco:Macro>  
+  
+</asp:content>
+
+<asp:content ContentPlaceHolderId="ContentPostScript" runat="server">
+  
+</asp:content>

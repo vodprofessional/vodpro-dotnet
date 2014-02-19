@@ -1,0 +1,60 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VodProMaster2.master" AutoEventWireup="true" %>
+
+<asp:Content ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+  
+
+  <div id="maincontent">
+<umbraco:Macro runat="server" language="cshtml">
+@using umbraco.MacroEngines
+@using umbraco.interfaces
+@using uComponents.Core
+@using uComponents.Core.uQueryExtensions
+@using System.Linq
+@{
+  <div class="hplabel">
+    <h1>@Model.title</h1></div>
+  // Case 1: Tags Exist
+  var localTags = @Model.sectiontags;
+  int numItems  = @Model.numberOfItemsToShow;
+  if(numItems < 1) {
+    numItems = 10;
+  }
+  dynamic subNodes;
+  VODPro.code.Paging paging;
+
+  if (@localTags.Length == 0)
+  {
+   subNodes = @Model.DescendantsOrSelf("vodProStory").OrderBy("storydate desc, storydate desc").Items;
+   paging = VODPro.code.Paging.GetPages(subNodes.Count, numItems);
+   subNodes = subNodes.GetRange(paging.Skip,paging.Take);
+  }
+  else
+  {   
+   subNodes = uQuery.GetNodesByType("vodProStory").Where(y=>y.GetPropertyAsString("storytags").Contains(localTags)).OrderByDescending(x => x.GetPropertyAsString("storydate")).ToList();
+   paging = VODPro.code.Paging.GetPages(subNodes.Count, numItems);
+   subNodes = subNodes.GetRange(paging.Skip,paging.Take);
+  }
+
+  foreach(dynamic c in @subNodes) {
+   <div id="parentarticle">
+   @if(c.GetProperty("storyimage").Value.Length > 0) {
+    dynamic media = @Model.MediaById(@c.GetProperty("storyimage").Value);
+    string mediaName = @media.umbracoFile;
+    string thumbName = @mediaName.Replace(".jpg","_thumb_195.jpg");
+    <div class="image"><a href="@c.Url"><img src="@thumbName"/></a></div>
+   }
+     <div class="headline"><h2><a href="@c.Url">@c.GetProperty("title").Value</a></h2></div>
+    <div class="text">@c.GetProperty("storyteaser").Value
+     <div class="more"><a href="@c.Url"><img src="/css/images/More3.png"></a></div>
+     </div>
+    
+   </div>
+  }
+      <div class="paging">@PagingTemplate.RenderPaging(paging, Current.Id)</div>
+
+ }
+  
+</umbraco:Macro>
+  </div>
+</asp:Content>

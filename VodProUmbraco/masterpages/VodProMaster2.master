@@ -1,0 +1,359 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/umbraco/masterpages/default.master" AutoEventWireup="true" %>
+<script runat="server">
+protected void Page_Load(object sender, EventArgs e)
+{
+  
+  Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache);
+  Response.Cache.SetNoStore();
+  
+  // Both set to false to Hide from Navigation
+  plcNotLoggedIn.Visible = true;
+  plcLoggedIn.Visible = false;
+  
+  if (Request.IsAuthenticated)
+  {
+    MembershipUser user = Membership.GetUser();
+    
+    if (user != null)
+    {
+      umbraco.cms.businesslogic.member.Member member = new umbraco.cms.businesslogic.member.Member((int)user.ProviderUserKey);
+      if (member != null)
+      {
+           lblLoginName.Text = member.getProperty("firstName").Value.ToString() + " " + member.getProperty("lastName").Value.ToString();
+           plcNotLoggedIn.Visible = false;
+           plcLoggedIn.Visible = true;
+      }
+    }   
+  }
+}
+
+protected void Search(object sender, EventArgs e)
+{
+  if (!SearchString.Text.Trim().Equals(""))
+  {
+    Response.Redirect("/search?search=" + Server.UrlEncode(SearchString.Text.Trim()));
+  }
+}
+    
+protected void BeginRegistration(object sender, EventArgs e)
+{
+  if (!EmailStartReg.Text.Trim().Equals(""))
+  {
+    Response.Redirect("/register?email=" + Server.UrlEncode(EmailStartReg.Text.Trim()));
+  }
+}    
+  
+protected void LoginStatus1_LoggedOut(object sender, EventArgs e)
+{
+ Session.Abandon();
+ FormsAuthentication.SignOut();
+}
+  
+</script>
+<asp:content id="Content1" contentplaceholderid="ContentPlaceHolderDefault" runat="server">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"[]> 
+<!--[if IE 9 ]><html class="ie9" xmlns="http://www.w3.org/1999/xhtml"> <![endif]--> 
+<!--[if (gt IE 9)|!(IE)]><!--> <html xmlns="http://www.w3.org/1999/xhtml"> <!--<![endif]--> 
+  
+  <head id="head" runat="server">
+    
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      
+  <title><asp:placeholder runat="server"><umbraco:item id="Item1" runat="server" field="title"></umbraco:item></asp:placeholder></title>
+  <umbraco:Macro runat="server" language="cshtml">
+    <meta name="keywords" content="@Model.metaKeywords" />
+    <meta name="description" content="@Model.metaDescription" />   
+  </umbraco:Macro>
+    <meta name="viewport" content="width = 1000">
+    <!--<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">-->
+
+  <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript">
+      window.jQuery || document.write("<script src='/_inc/js/jquery.min.js'>\x3C/script>")
+  </script>
+  <script src="/scripts/jquery.lightbox-0.5.min.js" type="text/javascript"></script> 
+  <script src="/scripts/jquery.jfeed.js" type="text/javascript"></script>
+  <script src="/scripts/scripts.js" type="text/javascript"></script>
+   <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet">
+   <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+   <link rel="stylesheet" type="text/css" href="/css/2colhome.css" />
+   <link rel="stylesheet" type="text/css" href="/css/form.css" />
+   <link rel="stylesheet" type="text/css" href="/css/jquery.lightbox-0.5.css" media="screen" />
+   <link rel="stylesheet" type="text/css" href="/css/slider.css" media="screen" />
+   <link rel="stylesheet" type="text/css" href="/css/regwall.css" /> 
+    <link rel="stylesheet" type="text/css" href="/css/spi.css" /> 
+  <link rel="stylesheet" type="text/css" href="/css/VP50.css" />
+    <link rel="alternate" type="application/rss+xml" href="/rss/" title="VOD Pro RSS feed" />
+    <link rel="icon" type="image/png" href="/css/images/favicon.png" />
+
+
+<umbraco:Macro Alias="VpGA" runat="server"></umbraco:Macro>
+
+    <script type='text/javascript' src='https://partner.googleadservices.com/gampad/google_service.js'>
+    </script>
+    <script type='text/javascript'>
+    GS_googleAddAdSenseService("ca-pub-8868631671512351");
+    GS_googleEnableAllServices();
+    </script>
+    <script type='text/javascript'>
+    GA_googleAddSlot("ca-pub-8868631671512351", "VOD_PRO_LEADERBOARD_ROS");
+    GA_googleAddSlot("ca-pub-8868631671512351", "VOD_PRO_MPU_ROS");
+    </script>
+    <script type='text/javascript'>
+    GA_googleFetchAds();
+    </script>
+
+    <script type='text/javascript'>
+      var googletag = googletag || {};
+      googletag.cmd = googletag.cmd || [];
+      (function() {
+        var gads = document.createElement('script');
+        gads.async = true;
+        gads.type = 'text/javascript';
+        var useSSL = 'https:' == document.location.protocol;
+        gads.src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+        var node = document.getElementsByTagName('script')[0];
+        node.parentNode.insertBefore(gads, node);
+      })();
+    </script>
+    
+    <script type='text/javascript'>
+      googletag.cmd.push(function() {
+        googletag.defineSlot('/11576661/VOD_PRO_607x30', [607, 30], 'div-gpt-ad-1339509551821-0').addService(googletag.pubads());
+        googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+      });
+    </script>      
+    
+    <asp:contentplaceholder id="VodProHead" runat="server"></asp:contentplaceholder>
+    <script type="text/javascript">var switchTo5x=true;</script>
+    <script type="text/javascript" src="https://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">stLight.options({publisher: "cff238cd-a32c-49ee-927d-c36cabcc2747"}); </script>
+  
+  </head>
+  <body><!-- <div style="background:#f00; color: #fff">DEV SITE</div>--><form runat="server">
+<div id="header-top"></div>
+<div id="pagecontainer">
+<div id="wrapper">
+  <div class="leaderboard-adtop"></div>
+  <div id="leaderboard" class="centred"> 
+    <!-- VOD_PRO_LEADERBOARD_ROS -->
+    <script type='text/javascript'>
+      GA_googleFillSlot("VOD_PRO_LEADERBOARD_ROS");
+    </script> 
+  </div>
+   <div id="headerlogo" class="smaller"><a href="/"><img src="/css/images/white_on_black_logo.png"><!-- newvplogo4_sept2012.jpg --></a></div>
+  
+    <div class="sitesearch">
+      <div class="txt"> Search VOD Professional</div>
+    <asp:TextBox runat="server" ID="SearchString"
+      onFocus="if(this.value==this.defaultValue)this.value=''"
+      onBlur="if(this.value=='')this.value=this.defaultValue>" class="subnav_searchtext" /><asp:Button CssClass="submitimage" Text="Search" runat="server" OnClick="Search" />
+      <div class="login">
+        <asp:PlaceHolder ID="plcNotLoggedIn" runat="server">
+          <a href="/register">Register</a> | <asp:LoginStatus runat="server" ID="LoginStatus1" LogoutText="Logout" LoginText="Sign in" OnLoggedOut="LoginStatus1_LoggedOut" LogoutAction="Refresh" />
+        </asp:PlaceHolder>
+        <asp:PlaceHolder ID="plcLoggedIn" runat="server">
+          Welcome <asp:Label ID="lblLoginName" runat="server" /> |
+          <umbraco:Macro runat="server" language="cshtml">
+            <a href="@umbraco.library.NiceUrl(1148)">My account</a>
+          </umbraco:Macro>
+        </asp:PlaceHolder>
+      </div>
+    </div>
+
+    
+<div id="mainnav">
+  
+<umbraco:Macro runat="server" language="cshtml">
+<ul class="nav">
+@{
+  
+  umbraco.cms.businesslogic.template.Template t = new umbraco.cms.businesslogic.template.Template(Model.template);
+  
+  <input type="hidden" name="jklj" value="@t.Alias" />
+  
+  var level = 2;
+  var currentPage = Model;
+  while (@currentPage.Level > @level-1)
+  { 
+    currentPage = @currentPage.Parent; 
+  }
+  /* .Where("umbracoNaviHide") */
+  <li class="current">
+    <a class="navigation" href="/news">NEWS</a>
+  </li>
+  foreach(var page in @currentPage.Children.Where("nodeTypeAlias=\"vodProSection\"").Where("hideFromNavigation=false").OrderBy("navigationSortOrder")) 
+  {
+    if (umbraco.library.HasAccess(@page.Id,@page.Path))
+    {
+      if(@page.Level == @level)
+      {
+        if(@page.Id == @currentPage.Id)
+        {
+          <li class="current">
+           <a class="navigation" href="@page.Url">@page.Name</a>
+          </li>
+        }
+        else
+        {
+          <li>
+           <a class="navigation" href="@page.Url">@page.Name</a>
+          </li>
+        }
+      }
+    }
+  else { <li>No access</li> }
+  }
+}
+  </umbraco:Macro>
+  <li><a href="/vui/" title="Video User Interface Library">VUI LIBRARY</a></li>
+<%--    <asp:PlaceHolder ID="plcNotLoggedIn" runat="server">
+      <li><a href="/register">REGISTER</a></li>
+      <li><asp:LoginStatus runat="server" ID="LoginStatus1" LogoutText="Logout" LoginText="SIGN IN" OnLoggedOut="LoginStatus1_LoggedOut" LogoutAction="Refresh" /></li>
+    </asp:PlaceHolder>
+    <asp:PlaceHolder ID="plcLoggedIn" runat="server">
+      <li>
+        <asp:Label ID="lblLoginName" runat="server" Visible="false" />
+        <umbraco:Macro runat="server" language="cshtml">
+          <a href="@umbraco.library.NiceUrl(1148)">MY ACCOUNT</a>
+        </umbraco:Macro>
+      </li>
+    </asp:PlaceHolder> --%>
+  </ul>
+  
+    <ul class="social">
+     <li>
+       <a href="http://www.twitter.com/vodprofessional" target="_blank" title="VOD Professional on Twitter"><img src="/css/images/nav-twitter.png"  /></a>
+     </li>
+     <li>
+      <a type="application/rss+xml" href="/rss/"  title="Subscribe to the RSS feed"><img src="/css/images/nav-rss.png" /></a>
+      </li>
+    </ul>
+  </div>
+  
+  
+  <div id="CookieMessage">
+    <p>
+     VOD Professional uses cookies. Some may have been set already. 
+     Please click the button to accept our cookies. If you continue to use the site, we'll assume you're happy to accept the cookies anyway.
+    </p>
+    <input type="button" id="CookieMessageAgree" value="I'm fine with this [X]" />
+  </div>
+
+  
+<div class="hpColmask hpThreecol">
+  <div class="hpColmid">
+    <div class="hpColleft">  
+  
+      
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+ 
+        </asp:ContentPlaceHolder>
+     <!-- This would be included in the page template <div id="maincontent"></div> -->
+ 
+    
+<div class="righthand">
+
+  
+  <div class="emailbox ">
+    
+          
+    <h1 class="nobottomborder">Get New Posts Sent to<br/>Your Email Inbox</h1>
+    
+    <asp:TextBox runat="server" Id="EmailStartReg" Text="Enter email address"
+      onFocus="if(this.value==this.defaultValue)this.value=''"
+      onBlur="if(this.value=='')this.value=this.defaultValue" class="emailtextinput"  />    
+    <asp:Button CssClass="emailbutton" runat="server" OnClick="BeginRegistration" Text="Next" />
+        
+  </div>  
+  
+ 
+  <umbraco:Macro Alias="VpRHSponsors" runat="server"></umbraco:Macro>
+
+  <umbraco:Macro Alias="VpRHNewHere" runat="server"></umbraco:Macro>
+  
+  <umbraco:Macro Alias="VpRHMPU" runat="server"></umbraco:Macro>
+  
+  <umbraco:Macro Alias="VpRHJobs" runat="server"></umbraco:Macro>
+  
+  <umbraco:Macro Alias="VpRHMostPopular" runat="server"></umbraco:Macro>
+  
+  
+  <umbraco:Macro Alias="VpRHProducts" runat="server"></umbraco:Macro>
+  
+</div>
+  
+      </div></div>        
+    
+    
+  
+    </div>
+  </div> <!-- End three COls -->
+    
+
+</div>
+  <umbraco:Macro runat="server" language="cshtml">
+
+<div class="footerbg">
+<div class="footercontainer">
+
+<div id="footer"> 
+  <div id="footerleft"><img src="/css/images/white_on_black_logo_sm.png" />
+    <div class="footerlabel"><h2>Sections</h2></div>
+    <div class="footer">
+      <ul>
+          <li><a href="@umbraco.library.NiceUrl(1058)" title="News">News</a></li>
+          <li><a href="@umbraco.library.NiceUrl(1078)" title="Features">Features</a></li>
+          <!-- <li><a href="/home" title="Home">People |</a></li> -->
+          <li><a href="@umbraco.library.NiceUrl(1077)" title="Research">Research</a></li>
+          <!-- <li><a href="/home" title="Home">Forum |</a></li> -->
+          <!-- <li><a href="/home" title="Home">Jobs |</a></li> -->
+          <!-- <li><a href="/home" title="Home">Events |</a></li> -->
+          <li><a href="/vui" title="VUI Library">VUI Library</a></li>
+      </ul>
+    </div>
+  </div>
+  <div id="footermiddle">
+    <div class="footerlabel"><h2>Connect</h2></div>
+    <div class="footer">
+      <ul>      
+          <li><a href="/vui" title="Subscribe to the VUI Library">Subscribe to the VUI Library</a></li>
+        <li><a href="http://www.twitter.com/vodprofessional" target="_blank" title="Twitter">Join us on Twitter</a></li>
+          <li><a href="@umbraco.library.NiceUrl(1106)" title="Sign up for email alerts">Sign up for email alerts</a></li>
+          <li><a href="@umbraco.library.NiceUrl(1186)" title="Send us some News">Send us some News</a></li>
+        <li><a type="application/rss+xml" href="/rss/"  title="Subscribe to the RSS feed">Subscribe to the RSS feed</a>
+      </ul>
+    </div>
+  </div>
+
+  <div id="footerright">
+    <div class="footerlabel"><h2>VOD Professional</h2></div>
+    <div class="footer">
+      <ul>
+        <li><a href="@umbraco.library.NiceUrl(1178)" title="About VOD Professional">About VOD Professional</a></li>
+        <!-- <li><a href="@umbraco.library.NiceUrl(1178)" title="Home">Contributors |</a></li> -->
+        <!-- <li><a href="@umbraco.library.NiceUrl(1186)" title="Home">Advertise |</a></li> -->
+        <li><a href="@umbraco.library.NiceUrl(1186)" title="Contact Us">Contact Us</a></li>
+        <li><a href="@umbraco.library.NiceUrl(1179)" title="Terms and Conditions">Terms and Conditions</a></li>
+        <li><a href="@umbraco.library.NiceUrl(1180)" title="Privacy Policy">Privacy Policy</a></li>
+        <!-- <li><a href="@umbraco.library.NiceUrl(1186)" title="Home">Media |</a></li> -->
+        </ul>
+    </div>
+  </div>   
+  <div class="copyright">
+    &copy; VOD Professional @DateTime.Now.ToString("yyyy")
+  </div>
+          
+</div>
+</div>  
+        </div>
+    </umbraco:Macro>
+
+<umbraco:Macro Alias="VpSlider" runat="server"></umbraco:Macro>
+          
+    </form>
+    </body>
+  </html>
+</asp:content>

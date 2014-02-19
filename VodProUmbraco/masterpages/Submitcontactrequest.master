@@ -1,0 +1,100 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VodProMaster2.master" AutoEventWireup="true" %>
+<script runat="server">
+protected void SubmitContactForm(object sender, EventArgs e)
+{
+  if(Page.IsValid)
+  {
+    string body = txtBody.Text + "\n\nReason: " + ddWhy.Text;
+  
+    SendMail("kauserkanji@vodprofessional.com", txtSubject.Text, body, txtEmail.Text, txtName.Text);
+  
+    Response.Redirect(umbraco.library.NiceUrl(1187));
+  
+  }
+}
+    
+private void SendMail(string to, string subject, string message, string emailFrom, string emailFromName)
+{
+    var m = new System.Net.Mail.MailMessage(); 
+    m.From = new System.Net.Mail.MailAddress(emailFrom, emailFromName);
+    m.Subject = subject;
+    m.IsBodyHtml = false;
+    m.To.Add(to);
+    m.CC.Add("support@vodprofessional.com");
+    
+    m.Body = "CONTACT REQUEST FROM " + emailFromName + @" <" + emailFrom + @">" + Environment.NewLine + Environment.NewLine + message;
+    
+    var s = new System.Net.Mail.SmtpClient();
+    s.Send(m);   
+}     
+
+</script>
+  
+<asp:content ContentPlaceHolderId="ContentPlaceHolder1" runat="server">
+  <div id="maincontent">
+  <umbraco:Macro runat="server" language="cshtml">
+    <h1>@Model.title</h1>
+    <div class="standard">
+      @Model.story
+    </div>
+  </umbraco:Macro>
+
+  <div class="vodform newform">
+    
+    <div class="entry">
+      <asp:Label runat="server" AssociatedControlID="txtName" Text="Your name" />
+      <asp:TextBox runat="server" ID="txtName" />
+      <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtName"
+        ErrorMessage="Your name is a mandatory field." ValidationGroup="contactForm" Cssclass="error" />
+    </div>
+    
+    <div class="entry">
+      <asp:Label runat="server" AssociatedControlID="txtEmail" Text="Your email address" />
+      <asp:TextBox runat="server" ID="txtEmail" />
+      <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="txtEmail"
+        ErrorMessage="Your email address is a mandatory field." ValidationGroup="contactForm" Cssclass="error" />
+      <br/><asp:RegularExpressionValidator
+        id="regEmail" ValidationGroup="contactForm"
+        ControlToValidate="txtEmail"
+        Text="Invalid email format" Cssclass="error"
+        ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
+        Runat="server" /> 
+    </div>
+    
+    <div class="entry">
+      <asp:Label runat="server" AssociatedControlID="ddWhy" Text="Why are you contacting us?" />
+      <asp:DropDownList runat="server" ID="ddWhy">
+        <asp:ListItem>To discuss the VUI Library</asp:ListItem>     
+
+        <asp:ListItem>To submit a news story</asp:ListItem>      
+        <asp:ListItem>To contribute an article</asp:ListItem>     
+        
+        <asp:ListItem>To post a job</asp:ListItem>
+        <asp:ListItem>To discuss commercial opportunities</asp:ListItem>
+        <asp:ListItem>To talk about something else</asp:ListItem>
+      </asp:DropDownList>
+    </div>
+        
+    <div class="entry">
+      <asp:Label runat="server" AssociatedControlID="txtSubject" Text="Subject line" />
+      <asp:TextBox runat="server" ID="txtSubject" />
+      <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ControlToValidate="txtSubject"
+        ErrorMessage="Subject is a mandatory field." ValidationGroup="contactForm" Cssclass="error" />
+    </div>
+    
+    <div class="entry">
+      <asp:Label runat="server" AssociatedControlID="txtBody" Text="Your message" />
+      <asp:TextBox runat="server" ID="txtBody" TextMode="Multiline" Width="573px" Height="250px" />
+      <br/>
+      <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="txtBody"
+        ErrorMessage="Body is a mandatory field." ValidationGroup="contactForm" Cssclass="error" />
+    </div>
+    
+    <div class="entry">
+      <asp:Button runat="server" ID="btnContact" CausesValidation="true" ValidationGroup="contactForm" OnClick="SubmitContactForm" CssClass="align-right" Text="Send your message" />
+    </div>
+    
+  </div>
+  </div>
+  
+</asp:content>

@@ -1,0 +1,178 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VUIMaster.master" AutoEventWireup="true" %>
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolderHead" runat="server">
+  <script type="text/javascript">document.title = 'VUI Library - Subscription (Checkout)';</script>
+</asp:content>
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolder1" runat="server">
+ 
+  <div class="ui-heading">
+    <h1>Subscription - Checkout</h1>
+  </div>
+
+<umbraco:Macro runat="server" language="cshtml">
+@using VUI.classes;
+@using umbraco.MacroEngines;
+@using System.Web.Security;
+@using umbraco.cms.businesslogic.member;
+@using umbraco.cms.businesslogic.web;
+@{  
+  if(Session["VUI_PRODUCT_CODE"] == null || String.IsNullOrEmpty(Session["VUI_PRODUCT_CODE"].ToString()) || Session["VUITXID"] == null || String.IsNullOrEmpty(Session["VUITXID"].ToString()))
+  {
+    Response.Redirect(VUIfunctions.VUI_subscribe_page);
+    Response.End();
+  }
+  string PRODUCTCODE = Session["VUI_PRODUCT_CODE"].ToString();
+  string TRANSACTIONCODE = Session["VUITXID"].ToString();
+  //  try
+  //{
+    DynamicNode product = (new DynamicNode(VUIfunctions.VUI_product_list)).Descendants("VUISubscriptionProduct").Items.Where(n => n.GetProperty("productCode").Value.ToUpper().Equals(PRODUCTCODE)).ToList().First();
+  
+    int txn;
+    if(Int32.TryParse(TRANSACTIONCODE, out txn))
+    {
+      Document transaction = new Document(txn);
+      
+      if (Session["PROMOINVALID"] != null)
+      {
+          Session.Remove("PROMOINVALID");
+          <p class="error">Sorry, that promotion code is invalid</p>
+      }
+
+      string priceBeforeDiscount = transaction.getProperty("priceBeforeDiscount").Value.ToString();
+      string discountAmount      = transaction.getProperty("promotionDiscount").Value.ToString();
+      string price = transaction.getProperty("price").Value.ToString();
+      string tax   = transaction.getProperty("tax").Value.ToString();
+      string currency = transaction.getProperty("currency").Value.ToString();
+      string currSymbol = "&pound;";
+      
+      // string linkedProduct =  transaction.getProperty("linkedProduct").Value.ToString();
+
+      if(currency.Equals("USD")) {
+        currSymbol = "$";
+      }
+
+      double dPrice = Double.Parse(price);
+      double dTax = Double.Parse(tax);
+      string total = String.Format("{0:0.00}",dPrice + dTax);
+  
+      Member m = VUIfunctions.CurrentUser();
+
+
+
+      <div class="ui-checkout">
+        
+        <div class="buy-button">
+          <div class="paypal-logo"><img src="https://www.paypal.com/en_GB/Marketing/i/logo/PayPal_logo_150x65.gif" border="0" alt="PayPal-Standard-Logo"></div>
+          <a href="/vui/subscribe/process/PAYPAL"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" alt="PayPal - The safer, easier way to pay online!" /></a>
+        </div>
+
+        
+        <div class="label">
+          Product: 
+        </div>
+        <div class="detail">
+          @product.GetProperty("productName").ToString()
+        </div>
+
+        @if(!String.IsNullOrEmpty(transaction.getProperty("promotionCode").Value.ToString()))
+        {
+            <div class="label">
+              Price before discount: 
+            </div>
+            <div class="detail">
+              @currSymbol@VUIfunctions.StringToCurrency(priceBeforeDiscount)
+            </div>
+          <div class="label">
+            Discount
+          </div>
+          <div class="detail">
+            @currSymbol@VUIfunctions.StringToCurrency(discountAmount)
+          </div>
+            <div class="label">
+              Price after discount: 
+            </div>
+            <div class="detail">
+              @currSymbol@VUIfunctions.StringToCurrency(price)
+            </div>
+        }
+        else
+        {
+            <div class="label">
+              Price: 
+            </div>
+            <div class="detail">
+              @currSymbol@VUIfunctions.StringToCurrency(price)
+            </div>
+        }
+        <div class="label">
+          UK VAT at 20%:
+        </div>
+        <div class="detail">
+          @currSymbol@VUIfunctions.StringToCurrency(tax)
+        </div>        
+        <div class="label">
+          Total Cost:
+        </div>
+        <div class="detail">
+          @currSymbol@VUIfunctions.StringToCurrency(total)
+        </div>
+
+        @if(String.IsNullOrEmpty(transaction.getProperty("promotionCode").Value.ToString()))
+        {
+            <div class="eu-vat"><strong>Got a promotion code?</strong> enter it here to get a discount
+              <br/>
+              <input type="text" id="promoCode" />
+              <input type="button" value="Apply my Discount Code" id="btnPromoCode" />
+            </div>
+        }
+
+
+        @if (VUIfunctions.CountryIsInEU(m.getProperty("companyCountry").Value.ToString()))
+        {
+          if(!String.IsNullOrEmpty(transaction.getProperty("euVATNumber").Value.ToString()))
+          {
+            <div class="label">EU VAT Number:</div>
+            <div class="detail">@transaction.getProperty("euVATNumber").Value.ToString()</div>
+          }
+          else
+          {
+            <div class="eu-vat">If you are registered for VAT in your country (@m.getProperty("companyCountry").Value.ToString()) you should enter your VAT number
+              so we can remove the UK VAT from your bill
+              <br/>
+              <input type="text" id="euVATNumber" />
+              <input type="button" value="Save EU VAT number" id="btnEUVatNumber" />
+            </div>
+          }
+        }
+
+        @if(!String.IsNullOrEmpty(transaction.getProperty("purchaseOrderNumber").Value.ToString()))
+        {
+          <div class="label">
+            Purchase Order
+          </div>
+          <div class="detail">
+            @transaction.getProperty("purchaseOrderNumber").Value.ToString()
+          </div>
+        }
+        else
+        {
+          <div class="eu-vat">If you wish to add a purchase order number to your purchase, do it here
+            <br/>
+            <input type="text" id="purchaseOrderNumber" />
+            <input type="button" value="Save PO Number" id="btnPONumber" />
+          </div>
+        }
+        
+       <!-- <p>We think PayPal is the safest way to make purchases online... Find out more here</p>-->
+  </div>
+          
+  } 
+}
+</umbraco:Macro>
+  
+</asp:content>
+
+<asp:content ContentPlaceHolderId="ContentPostScript" runat="server">
+  
+</asp:content>

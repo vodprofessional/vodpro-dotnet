@@ -1,0 +1,82 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VodProMaster2.master" AutoEventWireup="true" %>
+<asp:Content ContentPlaceHolderID="ContentPlaceHolder1" runat="server"> 
+<div id="maincontent">
+<umbraco:Macro  runat="server" language="cshtml">
+  <h1 class="storyTitle">@Model.title</h1>
+  @{
+   if(@Model.miniTeaser != null && @Model.miniTeaser.ToString().Trim().Length > 0)
+  {
+    <h2 class="storySubtitle">@Model.miniTeaser</h2>
+  }
+  }
+  <p class="storysub">
+    
+    <div class="storybyline">@Model.storyauthor 
+      @{
+       if (@Model.storydate.ToString().Trim().Length > 0)
+       {
+         var dte = String.Format("{0:d MMM yyyy}", @Model.storydate);
+      <span class="storydate"> - @dte</span>
+       }
+      }
+    </div>
+    
+    
+        
+<!-- <div class="story_addthis"></div> -->
+   
+     <span class="story_sharethis">
+<!-- <span class='st_twitter_hcount' displayText='Tweet'></span>
+<span class='st_linkedin_hcount' displayText='LinkedIn'></span>
+<span class='st_facebook_hcount' displayText='Facebook'></span>
+<span class='st_email_hcount' displayText='Email'></span> -->
+          
+      @{
+      if (Model.NodeTypeAlias.Equals("vodProStory"))
+      {
+        var fb_like_layout = "fb:like:layout";
+    <!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_linkedin_counter"></a>
+
+</div>
+<script type="text/javascript">
+var addthis_config = {
+   "data_track_clickback": true,
+   ui_click: true
+   };
+</script>
+<script type="text/javascript" src="https://s7.addthis.com/js/250/addthis_widget.js#pubid=cnaacc"></script>
+<!-- AddThis Button END -->
+      }}          
+          
+          
+      </span>
+    
+  </p>
+  </umbraco:Macro>
+  
+  <div class="storytext">  
+  
+
+  <umbraco:Macro runat="server" language="cshtml">
+    @if(@Model.storyimage.GetType() == typeof(System.Int32))
+    {
+    dynamic storyImage = @Model.MediaById(@Model.storyimage);
+    <img src="@storyImage.umbracoFile" align="right" style="margin-left:15px;margin-bottom:15px" />
+    }    
+  </umbraco:Macro>
+     <umbraco:Item field="story" runat="server"></umbraco:Item>
+     
+     <umbraco:Macro Alias="VpRegWall" runat="server"></umbraco:Macro>
+    
+     <umbraco:Macro Alias="VpRelatedStories" runat="server"></umbraco:Macro>
+  </div>
+  
+  <umbraco:Macro  runat="server" language="cshtml" Alias="VpStoryComments"></umbraco:Macro>
+
+  
+
+  </div>
+</asp:Content>

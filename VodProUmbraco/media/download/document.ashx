@@ -1,0 +1,1 @@
+<%@ WebHandler Language="C#" CodeBehind="Render.ashx.cs" Class="com.vodprofessional.Render" %>

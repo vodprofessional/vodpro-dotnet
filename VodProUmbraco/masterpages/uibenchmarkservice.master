@@ -1,0 +1,13 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VUIMaster.master" AutoEventWireup="true" %>
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolderHead" runat="server">
+  
+</asp:content>
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolder1" runat="server">
+    <umbraco:Macro Alias="VUI_BenchmarkingService" runat="server" serviceid="[@serviceid]" platform="[@platform]" device="[@device]"></umbraco:Macro>
+</asp:content>
+
+<asp:content ContentPlaceHolderId="ContentPostScript" runat="server">
+  
+</asp:content>

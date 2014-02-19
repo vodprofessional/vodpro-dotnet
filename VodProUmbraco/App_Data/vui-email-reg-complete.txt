@@ -1,0 +1,8 @@
+Hi #USERNAME#,
+
+You are now a registered user of VOD Professional, which means you can access our special reports and features. 
+
+You can log in to http://www.vodprofessional.com/vui using the email and password you chose when registering.
+
+Thanks,
+VOD Professional

@@ -1,0 +1,74 @@
+﻿@using System.Text.RegularExpressions;
+@using umbraco.cms.businesslogic.member;
+@using SYstem.Web.Security;
+
+@{
+  
+  
+  if(Request.QueryString != null)
+  {
+    // Check the format of the QS
+    string username = Server.UrlDecode(Request.QueryString.ToString());
+    
+   
+    string MatchEmailPattern =
+      @"^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@"
+     + @"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?
+        [0-9]{1,2}|25[0-5]|2[0-4][0-9])\."
+     + @"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?
+        [0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+     + @"([a-zA-Z]+[\w-]+\.)+[a-zA-Z]{2,4})$";
+   
+    bool isEmail = false;
+    if (username!= null) {
+       isEmail = Regex.IsMatch(username, MatchEmailPattern);
+    }
+    else {
+       isEmail = false;
+    }
+   
+    if (isEmail)
+    {      
+      MembershipUser User = Membership.GetUser(username);
+      if(User != null)
+      {
+        Member member = new Member((int)User.ProviderUserKey);
+        
+        member.getProperty("confirmedFromEmail").Value = true;
+        member.AddGroup(1095);  // Group ID
+        member.Save();
+        FormsAuthentication.SetAuthCookie(username, true);
+
+       
+        <h1>@Model.title</h1>
+          <div class="formendtext">
+          <p>
+            Congratulations! You have confirmed your registration to VOD Professsional.  
+          </p>
+        </div>       
+       
+       
+        try {
+          int returnPage = Int32.Parse(member.getProperty("returnPage").Value.ToString());
+          if (returnPage != null)
+          {
+            <p><a href="@umbraco.library.NiceUrl(returnPage)">Continue reading the article you came from</a></p>
+          }
+        }
+       catch(Exception ex)
+       {
+          <p><a href="/">Continue browsing</a></p> 
+       }
+      }
+      else
+      {
+        Response.Redirect("/register/");
+      }
+    }
+  }
+  else {
+    Response.Redirect("/register/");
+  }
+} 
+  
+  

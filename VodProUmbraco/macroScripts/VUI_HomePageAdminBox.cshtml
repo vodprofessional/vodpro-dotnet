@@ -1,0 +1,44 @@
+﻿@using VUI.classes;
+@using umbraco.cms.businesslogic.member;
+@using System.Web;
+@{
+  Member c = VUIfunctions.CurrentUser();
+  string user_status = VUIfunctions.VUI_USERTYPE_NONE;    
+  if(c != null)
+  {
+      user_status = VUIfunctions.MemberVUIStatus(c);
+  }
+  if(user_status.Equals(VUIfunctions.VUI_USERTYPE_ADMIN))
+  {
+     string url = !String.IsNullOrEmpty(@Parameter.adminURL) ? @Parameter.adminURL : "/vui/vuiadmin" ;
+     
+     <a href="@url">
+      <h2>@Parameter.adminTitle</h2>
+      @if (!String.IsNullOrEmpty(@Parameter.adminImage))
+      {
+        <img src="@Model.MediaById(@Parameter.adminImage).umbracoFile" />
+      }
+      @Parameter.adminText
+     </a>
+  }
+  else if(user_status.Equals(VUIfunctions.VUI_USERTYPE_USER))
+  {
+    string url = !String.IsNullOrEmpty(@Parameter.defaultURL) ? @Parameter.adminURL : "/vui/vuiadmin" ;
+     
+    if(!String.IsNullOrEmpty(@Parameter.defaultURL))
+    {
+       @: <a href="@Parameter.defaultURL">
+    }
+    <h2>@Parameter.adminTitle</h2>
+    if (!String.IsNullOrEmpty(@Parameter.defaultImage))
+    {
+      <img src="@Model.MediaById(@Parameter.defaultImage).umbracoFile" />
+    }
+    @Parameter.defaultText
+    if(!String.IsNullOrEmpty(@Parameter.defaultURL))
+    {
+       @:</a>
+    }
+  }
+}
+

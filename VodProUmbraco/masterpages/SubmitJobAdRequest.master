@@ -1,0 +1,204 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VodProMaster2.master" AutoEventWireup="true" %>
+<script runat="server">
+
+protected void PostNewJobAd(object sender, EventArgs e)
+{
+  Response.Redirect(umbraco.library.NiceUrl(1647));
+}  
+  
+protected void SubmitJobAdForm(object sender, EventArgs e)
+{
+  string errorclass = "";
+  
+  if(Page.IsValid)
+  {    
+    // The documenttype that should be used, replace 10 with the id of your documenttype
+    umbraco.cms.businesslogic.web.DocumentType dt = new umbraco.cms.businesslogic.web.DocumentType(1246);
+ 
+    // The umbraco user that should create the document, 
+    // 0 is the umbraco system user, and always exists
+  
+    umbraco.BusinessLogic.User u = new umbraco.BusinessLogic.User("websitecontentuser");
+ 
+    // The id of the parent document
+    int parent = 1579;
+ 
+    string jobTitle = txtJobTitle.Text;
+    // Create the document
+    umbraco.cms.businesslogic.web.Document d = umbraco.cms.businesslogic.web.Document.MakeNew("User-job-"+jobTitle.Replace(' ','-'), dt, u, parent);
+ 
+
+  // Add values to the generic properties of the document 
+    d.getProperty("jobTitle").Value = jobTitle;
+    d.getProperty("jobType").Value  = ddJobType.SelectedValue;
+    d.getProperty("jobStartDate").Value = txtJobStartDate.Text;
+    d.getProperty("jobDuration").Value = txtJobDuration.Text;
+    d.getProperty("jobLocation").Value = txtJobLocation.Text;
+    d.getProperty("jobSalary").Value = txtJobSalary.Text;
+    d.getProperty("jobSalaryPer").Value = ddJobSalaryPer.SelectedValue;
+    d.getProperty("jobShortDesc").Value = txtJobShortDesc.Text;
+    d.getProperty("jobHowToApply").Value = txtHowToApply.Text;
+    d.getProperty("jobDescription").Value = txtJobDescription.Text;
+    d.getProperty("jobAdDuration").Value = ddJobAdDuration.SelectedValue;
+
+  //    string username = "oliver.t.wood@gmail.com";
+  //  MembershipUser User = Membership.GetUser(username);
+  //  umbraco.cms.businesslogic.member.Member member = new umbraco.cms.businesslogic.member.Member((int)User.ProviderUserKey);
+    umbraco.cms.businesslogic.member.Member member = umbraco.cms.businesslogic.member.Member.GetCurrentMember();
+    d.getProperty("createdBy").Value = member.Id;
+
+  
+    // Set the publish status of the document and there by create a new version 
+    d.Save();
+
+    // Tell the runtime environment to publish this document 
+      //    umbraco.library.PublishSingleNode(d.Id);
+  
+    SendMail("kauserkanji@vodprofessional.com", "VODPro Jobs - New job added", "Content Jobs/User-job-"+jobTitle.Replace(' ','-'), "support@vodprofessional.com", "VOD Professional Support");
+
+  // ID of Jobs Thankyou page
+      //  Response.Redirect(umbraco.library.NiceUrl(1187));
+    JobForm.Visible = false;
+    JobThanks.Visible = true;
+  }
+}
+    
+private void SendMail(string to, string subject, string message, string emailFrom, string emailFromName)
+{
+    var m = new System.Net.Mail.MailMessage();
+    m.From = new System.Net.Mail.MailAddress(emailFrom, emailFromName);
+    m.Subject = subject;
+    m.IsBodyHtml = false;
+    m.To.Add(to);
+    m.CC.Add("support@vodprofessional.com");
+    
+    m.Body = message;
+    var s = new System.Net.Mail.SmtpClient("localhost");
+    s.Send(m);
+}     
+
+</script>
+<asp:content ContentPlaceHolderId="ContentPlaceHolder1" runat="server">
+  <div id="maincontent">
+  <asp:Panel runat="server" ID="JobForm" CssClass="vodform">
+  
+  <umbraco:Macro runat="server" language="cshtml">
+  @using umbraco.MacroEngines
+  @{
+  <h1 class="storyTitle">@Model.title</h1>
+  @Model.sectionIntro  
+  }
+  </umbraco:Macro>
+  
+  
+       <div class="formintrotext">
+       <p>
+Advertising jobs on VOD Professional is free. To add a job to the site please provide the
+following information (all mandatory):
+         </p>
+    </div>
+         
+
+     <div class="entry">
+      
+      <asp:Label runat="server" AssociatedControlID="txtJobTitle">Job title *</asp:Label>
+<asp:TextBox runat="server" ID="txtJobTitle" CssClass="wide" />
+  <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtJobTitle"
+    ErrorMessage="Job title is a mandatory field." ValidationGroup="jobValidation" CssClass="errorFloating" />
+    </div>
+    
+    <div class="entry">
+      <asp:Label runat="server" AssociatedControlID="ddJobType">Job type *</asp:Label>
+      <asp:DropDownList runat="server" ID="ddJobType">
+       <asp:ListItem Value="28">Contract</asp:ListItem>
+       <asp:ListItem Value="29">Permanent</asp:ListItem>
+      </asp:DropDownList>
+    </div>
+    <div class="entry">
+      <asp:Label runat="server" AssociatedControlID="txtJobStartDate">Start date *<br/><em>e.g. 13 August 2011 or 13/08/2011</em></asp:Label>
+      <asp:TextBox runat="server" ID="txtJobStartDate" />
+      <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="txtJobStartDate"
+    ErrorMessage="Start date is a mandatory field." ValidationGroup="jobValidation" CssClass="error" />
+    </div>
+    <div class="entry">
+      <asp:Label runat="server" AssociatedControlID="txtJobDuration">Duration of contract</asp:Label>
+      <asp:TextBox runat="server" ID="txtJobDuration" />
+    </div>
+    <div class="entry">
+      <asp:Label runat="server" AssociatedControlID="txtJobLocation">Location (City / Country) *</asp:Label>
+<asp:TextBox runat="server" ID="txtJobLocation" CssClass="wide" />
+    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ControlToValidate="txtJobLocation"
+    ErrorMessage="Location is a mandatory field." ValidationGroup="jobValidation" CssClass="errorFloating" />
+    </div>
+    <div class="entry">
+      <asp:Label runat="server" AssociatedControlID="txtJobSalary">Salary / rate *<br/><em>GBP unless specified</em></asp:Label>
+      <asp:TextBox runat="server" ID="txtJobSalary" />
+      <asp:DropDownList runat="server" ID="ddJobSalaryPer">
+       <asp:ListItem Value="23">Per day</asp:ListItem>
+       <asp:ListItem Value="24">Per week</asp:ListItem>
+       <asp:ListItem Value="25">Per month</asp:ListItem>
+       <asp:ListItem Value="27">Per year</asp:ListItem>
+      </asp:DropDownList>
+      <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="txtJobSalary"
+    ErrorMessage="Salary is a mandatory field" ValidationGroup="jobValidation" CssClass="error" />
+    
+    </div>
+    <div class="entry">
+      <asp:Label runat="server" AssociatedControlID="txtJobShortDesc">Short job description *<br/><em>Appears on the job listing page</em></asp:Label>
+      <asp:TextBox runat="server" ID="txtJobShortDesc" TextMode="Multiline" CssClass="jobDescShort" />
+      <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator5" ControlToValidate="txtJobShortDesc"
+    ErrorMessage="Short job description is a mandatory field" ValidationGroup="jobValidation" CssClass="errorFloating wide" />
+    
+    </div>
+    <div class="entry">
+      <asp:Label runat="server" AssociatedControlID="txtJobDescription">Job description *<br/></asp:Label>
+      <asp:TextBox runat="server" ID="txtJobDescription" TextMode="Multiline" CssClass="jobDesc" />
+      <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator6" ControlToValidate="txtJobDescription"
+    ErrorMessage="Job description is a mandatory field." ValidationGroup="jobValidation" CssClass="errorFloating wide" />
+    </div>
+    
+    <div class="entry">
+      <asp:Label runat="server" AssociatedControlID="txtHowToApply">How to apply*<br/><em>please include your contact details here</em></asp:Label>
+      <asp:TextBox runat="server" ID="txtHowToApply" TextMode="Multiline" CssClass="jobDescShort" />
+      <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator7" ControlToValidate="txtHowToApply"
+    ErrorMessage="How to apply is a mandatory field." ValidationGroup="jobValidation" CssClass="errorFloating wide" />
+    </div>
+    
+    <div class="entry">
+      <asp:Label runat="server" AssociatedControlID="ddJobAdDuration">Duration of Job AD *<br/><em>The ad will come off automatically after this time</em></asp:Label>
+      <asp:DropDownList runat="server" ID="ddJobAdDuration">
+       <asp:ListItem Value="20">1 week</asp:ListItem>
+       <asp:ListItem Value="21">2 weeks</asp:ListItem>
+       <asp:ListItem Value="22">1 month</asp:ListItem>
+      </asp:DropDownList>
+      <br/>
+    </div>
+
+    <div class="entry">
+      <div class="formendtext">
+        <p>If your position gets filled quickly or you change your mind about the duration just send us an email and we'll amend the ad or remove it from the site.</p>
+        
+        <p>
+          When you click the button below the ad is sent to us for final validation before it appears on the site. This typically takes less than 24 hours
+        </p>
+        
+          <asp:Button runat="server" ID="btnJobAd" CausesValidation="true" ValidationGroup="jobValidation" OnClick="SubmitJobAdForm" Text="Submit your job" />
+      </div>
+    </div>
+  </asp:Panel>
+  
+  <asp:Panel runat="server" ID="JobThanks" Visible="false" CssClass="vodform">
+    <h1>Thanks for submitting a Job Ad</h1>
+    <div class="formintrotext">
+    <p>
+      We'll validate your ad within 24 hours and send you an email to let you know that it's live on vodprofessional.com. Your ad will stay live for the duration you set or until you tell us otherwise!
+    </p>
+    <p>
+
+        <asp:Button runat="server" ID="PostNewJob" OnClick="PostNewJobAd" Text="Add another job ad" />
+        
+    </p>
+  </div>
+  </asp:Panel>  
+  </div>
+</asp:content>

@@ -1,0 +1,63 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VodProMaster2.master" AutoEventWireup="true" %>
+
+<asp:Content ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+  <div id="maincontent">
+    
+    <umbraco:Macro runat="server" language="cshtml">
+    @using umbraco.MacroEngines
+    @using umbraco.interfaces
+    @{
+      <div class="hplabel">
+        <h1>@Model.title</h1></div>
+      
+      <div id="jobIntro">
+        @Model.sectionIntro
+      </div>
+
+       VODPro.code.Paging paging;
+       VODPro.code.VPJobs jobs = new VODPro.code.VPJobs();
+       jobs.Url = "http://www.labs.jobserve.com/services/v0.3.7/Core.svc/SiteGBR?source=39FB8404A11155&pagesize=100&sort=EXPLORER_DATE_DESC&skills=vod%20or%20%22video%20on%20demand%22%20or%20video%20or%20iptv%20or%20%22connected%20tv%22%20or%20television%20or%20transcode%20or%20ingest";
+       jobs.DescriptionSize = 300;
+       jobs.PopulateJobList();
+       var jobList = jobs.JobList;
+      
+       paging = VODPro.code.Paging.GetPages(jobs.NumResults, 10);
+      
+       jobList = jobList .GetRange(paging.Skip,paging.Take);
+       string sep = " / ";
+       <div id="jobListing">
+       @foreach(VODPro.code.Job j in jobList)
+       {
+          <div class="job">
+          <h2><a href="@j.Url" target="_blank">@j.Title</a></h2>
+      
+          <div class="jobCreated">Posted on: @j.Date</div>
+          <p>
+            @j.Description
+          </p>
+          <div class="jobMetadata">
+            @j.Location
+            @sep
+            @j.Contract
+            @sep
+            @j.Rate
+          </div>        
+          <div>
+           <a href="@j.Url" target="_blank">
+            <img src="/css/images/More3.png">
+           </a>
+          </div>
+        </div>
+          
+       }
+       </div>
+       <div class="paging">@PagingTemplate.RenderPaging(paging, Current.Id)</div>
+    
+     }
+      
+    </umbraco:Macro>
+  
+  
+  
+  </div>
+</asp:Content>

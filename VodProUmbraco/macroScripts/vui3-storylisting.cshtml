@@ -1,0 +1,45 @@
+@using umbraco.MacroEngines
+@using umbraco.interfaces
+@using uComponents.Core
+@using uComponents.Core.uQueryExtensions
+@using System.Linq
+@{
+    dynamic subNodes;
+    subNodes = @Model.DescendantsOrSelf("vodProStory").OrderBy("storydate desc, storydate desc").Items;
+
+     <div id="main">
+        <div class="main-top">
+            <div class="inner">
+    
+                <h1>@Model.title</h1>
+  
+  
+                  <ul class="bp-features">
+                  @foreach (dynamic feature in @subNodes)
+                  {
+                      string url = @feature.Url.Replace("/vui/","/vui3/");
+                      
+                       <li class="bp-feature">
+                         <a href="@url">
+                          
+                          @if (feature.GetProperty("storyimage").Value.Length > 0)
+                          {
+                              dynamic media = @Model.MediaById(@feature.GetProperty("storyimage").Value);
+                              string mediaName = media.umbracoFile;
+                            <div class="bp-image"><img src="@mediaName" /></div>
+                          }
+                          <div class="bp-text">
+                              <h2>
+                                @feature.title                
+                              </h2>
+                              <span>@feature.miniTeaser</span>
+                          </div>
+                           
+                         </a>
+                       </li>
+                  }
+                  </ul>
+            </div>
+        </div>
+     </div>
+}

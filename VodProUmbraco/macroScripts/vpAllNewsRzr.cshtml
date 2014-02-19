@@ -1,0 +1,30 @@
+﻿@using uComponents.Core
+@using uComponents.Core.uQueryExtensions
+@using System.Linq
+@{
+  int numItems = 10;
+  var foundNodes = uQuery.GetNodesByType("vodProStory").OrderByDescending(x => x.GetPropertyAsString("storydate")).ToList();
+
+  VODPro.code.Paging paging = VODPro.code.Paging.GetPages(foundNodes.Count, numItems);
+   foundNodes = foundNodes.GetRange(paging.Skip,paging.Take);
+  
+ }
+ 
+@foreach (var c in foundNodes) {
+   
+   <div id="parentarticle">
+   @if(c.GetProperty("storyimage").Value.Length > 0) {
+    dynamic media = @Model.MediaById(@c.GetProperty("storyimage").Value);
+    string mediaName = @media.umbracoFile;
+    string thumbName = @mediaName.Replace(".jpg","_thumb_195.jpg");
+    <div class="image"><img src="@thumbName"/></div>
+   }                                
+    <div class="headline"><h2><a href="@c.Url">@c.GetProperty("title").Value</a></h2></div>
+    <div class="text">@c.GetProperty("storyteaser").Value
+      <div class="more"><a href="@c.Url"><img src="/css/images/More3.png" /></a></div>                            
+    </div>
+    
+   </div>
+}
+<div class="paging">@PagingTemplate.RenderPaging(paging, Current.Id)</div>
+

@@ -1,0 +1,74 @@
+
+div.SPI { float:left; width: 598px; border-radius: 6px 6px 6px 6px; background: url("/css/images/regform-bg-slice.png") repeat-x scroll left bottom #BFD2DC;
+    box-shadow: 0 3px 3px 2px #999999; padding: 8px; }
+
+.SPI table { width: 595px; float:left; margin: 8px 0 12px 0; border: 1px solid #fff}
+.SPI table tr th { font-weight: bold; color: #fff; }
+.SPI table tr th, .SPI table tr td{ padding: 5px; text-align: center; }
+.SPI table tr td:first-child, .SPI table tr th:first-child { text-align: left;}
+.SPI table tr:nth-child(odd) { background-color: #ccc; }
+.SPI table tr:nth-child(even) { background-color: #eee; }
+.SPI table tr:first-child { background-color: #86ACC0; }
+
+.SPI table label { display: none }
+.SPI table label.text { display: inline }
+
+.SPI .field { margin: 0 0 7px 0; float:left; width: 610px; }
+.SPI .field label { width: 250px; float:left; margin: 0; padding-top:5px; }
+.SPI .field label.number { width: 330px; }
+
+.SPI .field input, .SPI .field textarea{ float:left; width: 300px; }
+.SPI .field textarea{ font-size: 1em; }
+.SPI .field input[type=text] { width: 300px; }
+.SPI .field input[type=file] { width: 250px; }
+.SPI .field input[type=text].number { width: 100px; }
+
+/*.SPI .field textarea{ width: 370px; }*/
+.SPI .field .instruction { color: #666; font-style: italic; }
+.SPI h2 { display: block;  float:left; border-top: 1px solid #fff; margin-top:24px; padding-top: 18px; width: 600px; font-size: 1.5em;}
+.SPI h2.no-border { border: 0px none; margin-top:0px; padding-top: 6px;}
+.SPI input[type=submit] { background-image: url("/css/images/btn-bg-slice.png");
+    border: medium none;
+    border-radius: 3px 3px 3px 3px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-weight: bold;
+    height: 23px;
+    padding: 3px 5px; }
+
+p.spi { margin: 10px 0;  font-family: "Georgia", serif; font-size: 1.2em; line-height: 1.5em;}
+
+.spiErrorMessage { color:#fff; font-weight:bold; margin:15px; border-radius: 6px 6px 6px 6px; background-color: #F6342F; padding: 8px; box-shadow: 0 3px 3px 2px #999999; }
+.spiCompletedMessage { font-size: 1.5em; text-align: center; margin:15px; border-radius: 6px 6px 6px 6px; background-color: #F6A92F; padding: 8px; box-shadow: 0 3px 3px 2px #999999; }
+
+.SPI a.lightbox, .SPI a.non-lightbox { float: left;  padding: 6px 10px; }
+.SPI a.lightbox:hover, .SPI a.non-lightbox:hover  { text-decoration: underline; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* EDITOR PROPERTIES - PLEASE DON'T DELETE THIS LINE TO AVOID DUPLICATE PROPERTIES */

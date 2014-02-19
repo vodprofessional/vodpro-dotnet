@@ -1,0 +1,153 @@
+﻿@using VUI.classes;
+@using VUI.VUI2.classes;
+@using umbraco.MacroEngines;
+@using System.Web.Security;
+@using umbraco.cms.businesslogic.member;
+@functions{
+    static bool IsFullMode = false;
+    static Member m = VUIfunctions.CurrentUser();
+}
+@*helper DrawDefaultScreenshotURL(int DefaultScreenshotId)
+{
+            
+    string defaultScreenshot = String.Empty;
+    if (DefaultScreenshotId > 0)
+    {
+        DynamicNode img = new DynamicNode(DefaultScreenshotId);
+        string thumbimage = img.GetProperty("thFile").Value;
+        defaultScreenshot = thumbimage.Replace("&", "%26");
+    }
+    if (!String.IsNullOrEmpty(defaultScreenshot))
+    {
+    //    return Utility.GetConst("VUI_mediafolder").Replace("~","") + @"md/" + defaultScreenshot;
+    }
+    else
+    {
+    //    return Utility.GetConst("VUI_mediafolder").Replace("~", "") + @"md/holding-screenshot.png";
+    }
+}
+*@
+@helper DrawMatrixLink(MatrixService s, string context)
+{
+    string url = "";
+    string modeClass = "matrix-tick";
+    
+    if(context.Equals("all"))
+    {
+        url = "/vui/" + MatrixService.URLfromContext[context] + "/" + Utility.NiceUrlName(s.ServiceName) + "/screenshots";
+        <a href="@url">@s.ServiceName</a>
+    }
+    else if (s.Counts[MatrixService.MatrixPositions[context]] > 0)
+    {
+        if (IsFullMode || s.IsPreviewable)
+        {
+            url = "/vui/" + MatrixService.URLfromContext[context] + "/" + Utility.NiceUrlName(s.ServiceName) + "/screenshots";
+        }
+        else
+        {
+            url = "#";
+            modeClass += " ui-preview-disabled";
+        }
+        <a href="@url" class="@modeClass">@s.ServiceName screenshots</a>
+    }
+}
+
+@helper SearchServiceDD() 
+{
+    List<string> services = VUIDataFunctions.SearchServices();
+    foreach(string s in services)
+    {
+        <option id="@s">@s</option>   
+    }   
+}
+
+@{
+  
+    string user_status = VUIfunctions.MemberVUIStatus(m);
+    IsFullMode = VUIfunctions.MemberVUIFullMode(user_status);
+    string PageTitle = "Screenshots for all Video Services on all Platforms";
+    string context = "All";
+    }
+    <div class="ui-heading large">
+        <h1>@Html.Raw(PageTitle)</h1>
+        @if(context.Equals("All"))
+        {
+        <ul class="ui-screenshot-view-selector">
+            <li><a href="#tiles" class="tiles" title="View as tiles">View as tiles</a></li>
+            <li><a href="#matrix" class="matrix" title="View as matrix">View as matrix</a>
+             <span id="matrix-pop-out"><div id="matrix-pop-out-arrow"></div><div id="matrix-pop-out-text">Try our new matrix view</div></span>
+            </li>
+            <li><a href="#search" class="search" title="Search screenshots">Search screenshots</a>
+             <span id="search-pop-out"><div id="search-pop-out-inner">
+               <select id="search-service">
+                 @SearchServiceDD()
+               </select>
+               </div>
+             </span>
+            </li>
+        </ul>
+        }
+        <!-- <ul class="ui-screenshot-tabs">
+            <li><a href="/vui/all/screenshots">All</a></li>
+            <li><a href="/vui/tablet/screenshots/">Tablet</a></li>
+            <li><a href="/vui/web/screenshots">Web</a></li>
+        </ul>
+        -->
+    </div>
+
+    <div id="search-results">
+    <ul>
+      
+    </ul>
+  </div>   
+    <span id="search-result-template">
+      <li>
+        <dl>
+            <dd prop="service" class="service">Service Name</dd>
+            <dd prop="pagetype" class="pagetype">Page Type</dd>
+        </dl>
+        <img src="" data-pagetype="" data-service="" data-device="" data-platform="" data-isfavourite="False" data-id="" />
+        <span class="platform">Platform</span>
+      </li>
+    </span>
+    
+
+@{
+    List<MatrixService> matrix = VUIDataFunctions.ScreenshotMatrix();
+
+    int count = 0;
+  
+  <div id="screenshot-matrix">
+  <table>
+      <tr class="matrix-header">
+        <th class="first">&nbsp;</th>
+        <th><div class="androidtab" title="Android Tablet">Android Tablet</div></th>
+        <th><div class="androidphone" title="Android Phone">Android Phone</div></th>
+        <th><div class="ipad" title="iPad">iPad</div></th>
+        <th><div class="iphone" title="iPhone">iPhone</div></th>
+        <th><div class="winphone" title="Windows Phone">Windows Phone</div></th>
+        <th><div class="wintab" title="Other Windows">Other Windows</div></th>
+        <th><div class="web" title="Web">Web</div></th>
+    </tr>    
+  @foreach (MatrixService s in matrix)
+  {
+      if(count > 10) { break; }
+   count++;   
+      if (s.Counts[MatrixService.MatrixPositions["Total"]] > 0)
+      {
+    <tr>
+        <td class="first">@DrawMatrixLink(s, "all")</td>
+        <td>@DrawMatrixLink(s, "TabletAndroid")</td>
+        <td>@DrawMatrixLink(s, "SmartphoneAndroid")</td>
+        <td>@DrawMatrixLink(s, "TabletiPad")</td>
+        <td>@DrawMatrixLink(s, "SmartphoneiPhone")</td>
+        <td>@DrawMatrixLink(s, "SmartphoneWindows")</td>
+        <td></td>
+        <td>@DrawMatrixLink(s, "Web")</td>
+    </tr>    
+      }
+  }
+  
+  </table>
+  </div>
+}

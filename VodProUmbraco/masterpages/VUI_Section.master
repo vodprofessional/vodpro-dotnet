@@ -1,0 +1,49 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VUIMaster.master" AutoEventWireup="true" %>
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolder1" runat="server">
+  
+  <div class="ui-scrolling-column">
+    
+<umbraco:Macro runat="server" language="cshtml">
+@using umbraco.MacroEngines
+@using umbraco.interfaces
+@using uComponents.Core
+@using uComponents.Core.uQueryExtensions
+@using System.Linq
+@{
+  
+  <div class="ui-heading"><h1>@Model.title</h1></div>
+  
+  dynamic subNodes;
+  subNodes = @Model.DescendantsOrSelf("vodProStory").OrderBy("storydate desc, storydate desc").Items;
+
+  <div class="ui-center-align">
+  <ul class="bp-features">
+  @foreach(dynamic feature  in @subNodes) 
+  {
+       <li class="bp-feature">
+         <a href="@feature.Url">
+          <div class="bp-headline">
+              <h2>
+                @feature.title                
+              </h2>
+          </div>
+          @if(feature.GetProperty("storyimage").Value.Length > 0)
+          {
+            dynamic media = @Model.MediaById(@feature.GetProperty("storyimage").Value);
+            string mediaName = media.umbracoFile;
+            <div class="bp-image"><img src="@mediaName" /></div>
+          }
+           @{
+             @: @feature.miniTeaser
+           }
+         </a>
+       </li>
+   }
+  </ul>
+  </div>
+}
+</umbraco:Macro>
+
+  </div>
+</asp:content>

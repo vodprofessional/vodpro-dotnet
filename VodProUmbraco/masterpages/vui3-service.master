@@ -1,0 +1,40 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/vui3-master.master" AutoEventWireup="true" %>
+
+
+<asp:Content ID="ContentHead" ContentPlaceHolderID="ContentPlaceHolderHead" runat="server">
+    <title>VUI Library Service</title>
+</asp:Content>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderBodyTag" runat="server">
+    <umbraco:Macro ID="Macro2" runat="server" Language="cshtml">
+    @using VUI.VUI3.classes;
+    @using System.Web;
+    @{
+        string cssclass = "second service service-slide";
+        @: @Html.Raw(VUI3Utility.PageBody(cssclass))
+    }
+    </umbraco:Macro>
+</asp:Content>
+
+<asp:Content ID="ContentBody" ContentPlaceHolderID="ContentPlaceHolderBody" runat="server">
+
+  <umbraco:Macro ID="Macro1" Alias="vui3-service" runat="server"></umbraco:Macro>
+
+    <div class="b-nav-panel">
+    <ul>
+      <li class="active">
+        <a href="#main" class="icon-home"></a>
+      </li>
+      <li>
+        <a href="#slide-screenshots" class="icon-camera"></a>
+      </li>
+      <li>
+        <a href="#slide-benchmarking" class="icon-bar-chart"></a>
+      </li>
+      <li>
+        <a href="#slide-ratings" class="icon-star" title="Ratings"></a>
+      </li>
+    </ul>
+  </div>
+
+</asp:Content>

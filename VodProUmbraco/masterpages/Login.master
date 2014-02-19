@@ -1,0 +1,63 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VodProMaster2.master" AutoEventWireup="true" %>
+<script runat="server">
+private bool VPAuthenticationMethod(string UserName, string Password)
+{
+  // Have to check that the user has confirmed their registration by being part of the active group
+  umbraco.cms.businesslogic.member.Member member = umbraco.cms.businesslogic.member.Member.GetMemberFromLoginNameAndPassword(UserName,Password);
+
+  if (member != null)
+  {
+    if (member.Groups.Contains(1095)) { 
+      return true;
+    }
+    else {
+      Login1.FailureText = "It looks like your account has not been confirmed. Please check your email (and spam) for a confirmation email from VOD Professional and click the link contained in it.";
+    }
+  }
+  else
+  {
+    Login1.FailureText = "Incorrect email address/password.";
+  }
+  return false;
+}
+
+private void OnAuthenticate(object sender, AuthenticateEventArgs e)
+{
+    bool Authenticated = false;
+    Authenticated = VPAuthenticationMethod(Login1.UserName, Login1.Password);
+    e.Authenticated = Authenticated;
+}
+protected void Login1_LoggedIn(object sender, EventArgs e)
+{
+    Response.Redirect(umbraco.library.NiceUrl(1148));
+} 
+
+</script>
+<asp:Content ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+  <div id="maincontent">
+<umbraco:Macro runat="server" language="cshtml">
+@using umbraco.MacroEngines
+@using umbraco.interfaces
+@using uComponents.Core
+@using uComponents.Core.uQueryExtensions
+@using System.Linq
+@{
+
+  <h1 class="storyTitle">@Model.title</h1>
+  
+  @Model.sectionIntro  
+  
+}
+  
+</umbraco:Macro>
+  <div class="vodform login newform" id="regform">
+    <asp:Login id="Login1" runat="server" OnAuthenticate="OnAuthenticate" OnLoggedIn="Login1_LoggedIn"
+      UserNameLabelText="Your email address:" RenderOuterTable="false" TitleText="" 
+      PasswordRequiredErrorMessage="Password required"
+      UserNameRequiredErrorMessage="Please enter your email address"
+      RememberMeText = "Remember me"
+        LoginButtonText = "Sign in"
+    ></asp:Login>
+  </div>
+ </div>
+</asp:Content>

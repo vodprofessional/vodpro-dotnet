@@ -1,0 +1,42 @@
+@{
+    string currentNavRegion = String.Empty;
+    string path = Request.Url.AbsolutePath;
+    string activeclass = String.Empty;
+    <ul>
+    
+        @if (path.EndsWith("/vui3-home"))
+        { 
+            activeclass = "active"; 
+        } else { activeclass=String.Empty; }
+        <li class="header-nav-item @(activeclass)">
+            <a href="/vui">Home</a>
+        </li>
+        @if(path.Contains("/screenshots")) { 
+            activeclass = "active"; 
+        } else { activeclass=String.Empty; }
+        <li class="header-nav-item @(activeclass)">
+            <a href="/vui/screenshots">Screenshots</a>
+        </li>
+        @if (path.Contains("/benchmarking"))
+        { 
+            activeclass = "active"; 
+        } else { activeclass=String.Empty; }
+        <li class="header-nav-item @(activeclass)">
+            <a href="/vui/benchmarking">Benchmarking</a>
+        </li>
+        @if (path.Contains("/appstore-ratings"))
+        { 
+            activeclass = "active"; 
+        } else { activeclass=String.Empty; }
+        <li class="header-nav-item @(activeclass)">
+            <a href="/vui/appstore-ratings">Tables</a>
+        </li>
+        @if (path.Contains("/best-practice-guides"))
+        { 
+            activeclass = "active"; 
+        } else { activeclass=String.Empty; }
+        <li class="header-nav-item @(activeclass)">
+            <a href="/vui/best-practice-guides">Analysis</a>
+        </li>
+    </ul>
+}

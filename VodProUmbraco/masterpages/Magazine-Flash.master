@@ -1,0 +1,29 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VodProMaster2.master" AutoEventWireup="true" %>
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolder1" runat="server">
+  <div id="maincontent">
+  <umbraco:Macro  runat="server" language="cshtml">
+  
+  <div class="storytext">
+    
+    @{
+  if(@Model.storyimage.GetType() == typeof(System.Int32))
+  {
+    dynamic storyImage = @Model.MediaById(@Model.storyimage);
+    
+    <OBJECT classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" 
+      codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" 
+      WIDTH="600" height="460" id="@storyImage.umbracoFile" ALIGN="">
+<PARAM NAME=movie VALUE="@storyImage.umbracoFile">
+  <PARAM NAME=quality VALUE=high> 
+    <PARAM NAME=bgcolor VALUE=#ffffff> 
+      <EMBED src="@storyImage.umbracoFile" quality="high" bgcolor="#ffffff" WIDTH="600" height="460" NAME="@storyImage.umbracoFile" ALIGN="" TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"></EMBED> </OBJECT> 
+   
+  }
+    }
+    
+  </div>
+  
+  </umbraco:Macro>
+    </div>
+</asp:content>

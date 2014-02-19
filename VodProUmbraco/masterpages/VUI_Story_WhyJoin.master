@@ -1,0 +1,70 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VUIMaster.master" AutoEventWireup="true" %>
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolder1" runat="server">
+<div class="ui-scrolling-column">
+  
+  <div class="ui-heading">
+    <h1>
+<umbraco:Macro  runat="server" language="cshtml">
+@using VUI.classes
+  @{      
+      <a href="@VUIfunctions.VUI_subscribe_page" class="bp-breadcrumb-link">Subscribe</a>
+  }
+</umbraco:Macro>
+    </h1>
+  </div>
+ 
+  <div class="bp-main-story-column">
+    <h1><umbraco:Item field="title" runat="server"></umbraco:Item></h1>
+<umbraco:Macro  runat="server" language="cshtml">
+@{
+   if(@Model.miniTeaser != null && @Model.miniTeaser.ToString().Trim().Length > 0)
+   {
+    <h2 class="storySubtitle">@Model.miniTeaser</h2>
+   }
+
+}
+</umbraco:Macro>
+    
+
+ 
+  
+      <div class="storytext">  
+        
+        <umbraco:Macro runat="server" language="cshtml">
+          @if(@Model.storyimage.GetType() == typeof(System.Int32))
+          {
+            dynamic storyImage = @Model.MediaById(@Model.storyimage);
+            <img src="@storyImage.umbracoFile" align="right" class="bp-story-image" />
+          }    
+        </umbraco:Macro>        
+        
+        <umbraco:Item field="story" runat="server"></umbraco:Item>
+        
+        <umbraco:Macro Alias="VpRegWall" runat="server"></umbraco:Macro>
+        
+      </div>
+      
+      <umbraco:Macro  runat="server" language="cshtml" Alias="VpStoryComments"></umbraco:Macro>
+
+  </div>
+  
+  
+  <div class="bp-right-story-column why-join">
+    <umbraco:Macro runat="server" language="cshtml">
+      @using VUI.classes;
+      @{
+    try {
+      var id = 6834; // @VUIfunctions.VUI_codesnippet_unauth;
+        <span>@Html.Raw(umbraco.library.RenderTemplate(id))</span>
+      }
+      catch(Exception ex) { <strong>@ex.Message;</strong> }
+    }
+    </umbraco:Macro>
+    
+    <umbraco:Macro Alias="VpVUIRelatedStories" runat="server"></umbraco:Macro>
+  
+  </div>
+  
+  </div>  
+</asp:content>

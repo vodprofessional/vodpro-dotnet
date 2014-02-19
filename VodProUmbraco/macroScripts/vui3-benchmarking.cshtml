@@ -1,0 +1,783 @@
+@using VUI.classes;
+@using VUI.VUI3.classes;
+@using umbraco.cms.businesslogic.member;
+@using System.Web;
+@functions{
+    static bool IsFullMode = false;
+    static VUIUser u = VUI3Utility.GetUser();
+    static Member c = u.Member;
+    static VUI3PageFunctionDescriptions PageDescriptions;
+}
+@helper DrawBenchmarkingPane(VUI3BenchmarkMatrix matrix, string platformDevice, int deviceId, int platformId)
+{
+                <div class="item-block">
+                  <h3>
+                    Content Discovery & Recommendation
+                  </h3>
+                  <div class="b-content">
+                    <ul class="b-title">
+                      <li>
+                        <strong>01.</strong> Featured content 
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("Featured content"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                      <li>
+                        <strong>02.</strong> Categorisation 
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("Categorisation"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                      <li>
+                        <strong>03.</strong> Category homepage
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("Category homepage"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                      <li>
+                        <strong>04.</strong> Most popular
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("Most popular"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                      <li>
+                        <strong>05.</strong> Recently added
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("Recently added"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                      <li>
+                        <strong>06.</strong> More episodes
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("More episodes"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                      <li>
+                        <strong>07.</strong> Content recommendation
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("Content recommendation"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                      <li>
+                        <strong>08.</strong> EPG (Electronic Programming Guide)
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("EPG"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                      <li>
+                        <strong>09.</strong> Search
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("Search"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                      <li>
+                        <strong>10.</strong> Predictive search
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("Predictive search"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                      <li>
+                        <strong>11.</strong> A-Z page
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("A-Z page"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                      <li>
+                        <strong>12.</strong> Social Sharing (Outbound)
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("Social sharing (out)"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                      <li>
+                        <strong>13.</strong> Social sharing (in-service)
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("Social sharing (in-service)"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                    </ul>
+                    <ul class="b-percentage">
+                        @WriteScore(matrix, "Featured content", platformDevice)
+                        @WriteScore(matrix, "Categorisation", platformDevice)
+                        @WriteScore(matrix, "Category homepage", platformDevice)
+                        @WriteScore(matrix, "Most popular", platformDevice)
+                        @WriteScore(matrix, "Recently added", platformDevice)
+                        @WriteScore(matrix, "More episodes", platformDevice)
+                        @WriteScore(matrix, "Content recommendation", platformDevice)
+                        @WriteScore(matrix, "EPG", platformDevice)
+                        @WriteScore(matrix, "Search", platformDevice)
+                        @WriteScore(matrix, "Predictive search", platformDevice)
+                        @WriteScore(matrix, "A-Z page", platformDevice)
+                        @WriteScore(matrix, "Social sharing (out)", platformDevice)
+                        @WriteScore(matrix, "Social sharing (in-service)", platformDevice)
+                    </ul>
+                  </div>
+                </div>
+                <div class="item-block">
+                  <h3>
+                    Video Player
+                  </h3>
+                  <div class="b-content">
+                    <ul class="b-title">
+                      <li>
+                        <strong>14.</strong> Customised video player  
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("Social sharing (in-service)"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                      <li>
+                        <strong>15.</strong> Video description 
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("Video description"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                    </ul>
+                    <ul class="b-percentage">
+                        @WriteScore(matrix, "Customised video player", platformDevice)
+                        @WriteScore(matrix, "Video description", platformDevice)
+                    </ul>
+                  </div>
+                </div>
+                <div class="item-block">
+                  <h3>
+                    Personalisation
+                  </h3>
+                  <div class="b-content">
+                    <ul class="b-title">
+                      <li><strong>16.</strong> Favourites
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("Favourites"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                      <li><strong>17.</strong> Playlists
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("Playlists"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                      <li><strong>18.</strong> Sign in / Register
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("Sign in / Register"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                      <li><strong>19.</strong> Social sign-on
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("Social sign-on"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                      <li><strong>20.</strong> Parental controls
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("Parental controls"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                    </ul>
+                    <ul class="b-percentage">
+                        @WriteScore(matrix, "Favourites", platformDevice)
+                        @WriteScore(matrix, "Playlists", platformDevice)
+                        @WriteScore(matrix, "Sign in / Register", platformDevice)
+                        @WriteScore(matrix, "Social sign-on", platformDevice)
+                        @WriteScore(matrix, "Parental controls", platformDevice)
+                    </ul>
+                  </div>
+                </div>
+                <div class="item-block">
+                  <h3>
+                    Support
+                  </h3>
+                  <div class="b-content">
+                    <ul class="b-title">
+                      <li><strong>21.</strong> Help 
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("Help"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                      <li><strong>22.</strong> About 
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("About"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                      <li><strong>23.</strong> Contact 
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("Contact"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                      <li><strong>24.</strong> Accessibility 
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("Accessibility"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                      <li><strong>25.</strong> Watch on other platforms
+                        <span class="description">
+                            <span class="desc-inner">
+                                @Html.Raw(PageDescriptions.GetDescription("Watch on other platforms"))
+                            </span>
+                            <span class="arrow"></span> 
+                        </span>
+                      </li>
+                    </ul>
+                    <ul class="b-percentage">
+                        @WriteScore(matrix, "Help", platformDevice)
+                        @WriteScore(matrix, "About", platformDevice)
+                        @WriteScore(matrix, "Contact", platformDevice)
+                        @WriteScore(matrix, "Accessibility", platformDevice)
+                        @WriteScore(matrix, "Watch on other platforms", platformDevice)
+                    </ul>
+                  </div>
+                </div>
+    if(!IsFullMode)
+    {
+        <div class="b-carousel small">
+        <h3>
+                      Best in Class
+                      </h3>
+                      <p>When you subscribe, you’ll be able to see the breakdown for individual platforms (like Web, Tablet, Smartphone etc.) and find out which existing video services display the greatest range of functionality.</p>
+              </div>           
+    }
+    if (IsFullMode && !platformDevice.Equals("Overall"))
+    {
+
+        List<VUI3ServiceMasterMatrixItem> serviceList;
+        if (deviceId != -1)
+        {
+            serviceList = VUI3Utility.GetBestServicesForDevice(deviceId);
+        }
+        else
+        {
+            serviceList = VUI3Utility.GetBestServicesForPlatform(platformId);
+        }
+
+        if (serviceList != null && serviceList.Count > 0)
+        {
+            int counter = 0;
+            int maxtoshow = 50;
+            
+                    <div class="b-carousel small">
+                      <h3>
+                        Best in Class
+                      </h3>
+                      <div class="carousel">
+                        <ul>
+                            
+                            @foreach (VUI3ServiceMasterMatrixItem s in serviceList)
+                            {
+                                counter++;
+                                if (counter <= maxtoshow)
+                                {
+                                    string url = @s.URL + "#slide-benchmarking!" + platformDevice.Replace(" ", String.Empty).ToLower();
+                                <li>
+                                    <a href="@url">
+                                        <h4>@s.ServiceName</h4>
+                                        <img data-original="@s.IconURL" class="lazy" src="/vui-media/media/vui-loaderb64.gif" />
+                                        <div class="ui-service-score">@s.BestBenchmarkScore.ToString()</div>
+                                    </a>
+                                </li>
+                                }
+                            }
+                        </ul>
+                      </div>
+                      <a class="arrow prev" href="#"><span class="icon-chevron-left"></span></a><a class="arrow next" href="#"><span class="icon-chevron-right"></span></a>
+                    </div>
+        }
+    }
+
+}
+@helper WriteScore(VUI3BenchmarkMatrix matrix, string feature, string platformDevice)
+    {
+    int maxwidth = 430;
+    int score = matrix.GetScores(feature, platformDevice).Score;
+    int width = (maxwidth * score) / 100;
+    string style = "width:" + width + "px;";
+    <li style="@style">@score%</li>    
+}
+@{
+    PageDescriptions = new VUI3PageFunctionDescriptions();
+    
+    VUIUser u = VUI3Utility.GetUser(); // This inadvertently makes the page work by overriding the static variable. Otherwise caching kills it.
+    string strDisabled = "";
+    string serviceclass = "";
+    string uberDisabled = "";
+
+    if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_NONE))
+    {
+        IsFullMode = false;
+        strDisabled = "_device-disabled";
+        serviceclass = "preview-link";
+    }
+    else if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_ADMIN) || u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_USER))
+    {
+        IsFullMode = true;
+    }
+
+
+    VUI3BenchmarkMatrix matrix = new VUI3BenchmarkMatrix();
+    <div id="main">
+      <div class="main-top">
+        <div class="inner">
+          <h1>
+            @Model.title
+          </h1>
+          @Model.introduction
+        </div>
+      </div>
+      <div class="main-content">
+       <div class="inner">
+        <div class="b-tabs b-tabs-devices uber-tabs">
+        @*
+          <ul class="tabs inner">
+                <li>
+                  <a href="#"><img src="/_inc/images/tmp/platforms/overall.png" alt=""></a>
+                </li> 
+                <li>
+                  <a href="#" class="@serviceclass"><img src="/_inc/images/tmp/platforms/web@(strDisabled).png" alt=""></a>
+                </li> 
+                <li>
+                  <a href="#" class="@serviceclass"><img src="/_inc/images/tmp/platforms/ipad@(strDisabled).png" alt=""></a>
+                </li>
+                <li>
+                  <a href="#" class="@serviceclass"><img src="/_inc/images/tmp/platforms/iphone@(strDisabled).png" alt=""></a>
+                </li>
+                <li>
+                  <a href="#" class="@serviceclass"><img src="/_inc/images/tmp/platforms/android-tablet@(strDisabled).png" alt=""></a>
+                </li>
+                <li>
+                  <a href="#" class="@serviceclass"><img src="/_inc/images/tmp/platforms/android-phone@(strDisabled).png" alt=""></a>
+                </li>
+                <li>
+                  <a href="#" class="_device-disabled @serviceclass"><img src="/_inc/images/tmp/platforms/windows-tablet_device-disabled.png" alt="" class="device-coming-soon"></a>
+                </li>
+                <li>
+                  <a href="#" class="_device-disabled @serviceclass"><img src="/_inc/images/tmp/platforms/windows-phone_device-disabled.png" alt="" class="device-coming-soon"></a>
+                </li>
+          </ul>
+          *@
+
+          <ul class="tabs inner">
+                <span class="uber-tab @(uberDisabled)" data-devicegroup="overall" title="Overall">
+                  <span class="title"><h3>Overall</h3>
+                    <img src="/_inc/images/tmp/platforms/overall.png" class="platform-image" />
+                  </span> 
+                  <li>
+                    <a href="#"><img src="/_inc/images/tmp/platforms/overall.png" width="62" alt=""></a>
+                  </li>
+                </span>
+              @{
+                  if (!matrix.HasBenchmarksForPlatform("Web"))
+                  {
+                      strDisabled = "_device-disabled";
+                      uberDisabled = "_platform-disabled";
+                  }
+                  else { strDisabled = ""; uberDisabled = ""; }
+                
+                <span class="uber-tab @(uberDisabled)" data-devicegroup="web" title="Web">
+                  <span class="title"><h3>Web</h3>
+                    <img src="/_inc/images/new-platform/platform-web@(uberDisabled).png"  class="platform-image" />
+                  </span>  
+                    <li>
+                      <a href="#" class="@strDisabled @serviceclass">
+                        <img src="/_inc/images/new-platform/device-chrome@(strDisabled).png" alt=""><h3>Chrome</h3></a>
+                    </li>
+                </span>
+                  
+                
+                if (!matrix.HasBenchmarksForPlatform("TabletiPad") && !matrix.HasBenchmarksForPlatform("TabletAndroid") && !matrix.HasBenchmarksForPlatform("TabletWindows"))
+                {
+                    uberDisabled = "_platform-disabled";
+                }
+                else { uberDisabled = ""; }
+                <span class="uber-tab @(uberDisabled)" data-devicegroup="tablets" title="Tablets">
+                    <span class="title">
+                      <h3>Tablet</h3>
+                      <img src="/_inc/images/new-platform/platform-tablet@(uberDisabled).png" class="platform-image" />
+                    </span>
+
+                      @if (!matrix.HasBenchmarksForPlatform("TabletiPad"))
+                      {
+                          strDisabled = "_device-disabled";
+                      }
+                      else { strDisabled = ""; }
+                    <li title="iPad">
+                      <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-apple@(strDisabled).png" alt=""><h3>iPad</h3></a>
+                    </li> 
+
+                      @if (!matrix.HasBenchmarksForPlatform("TabletAndroid"))
+                      {
+                          strDisabled = "_device-disabled";
+                      }
+                      else { strDisabled = ""; }
+                    <li title="Android Tablet">
+                      <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-droid@(strDisabled).png" alt=""><h3>Android</h3></a>
+                    </li> 
+                      @if (!matrix.HasBenchmarksForPlatform("TabletWindows"))
+                      {
+                          strDisabled = "_device-disabled";
+                      }
+                      else { strDisabled = ""; }
+                    <li title="Windows 8 Tablet">
+                      <a href="#" class="@strDisabled"><img src="/_inc/images/new-platform/device-win@(strDisabled).png" alt=""><h3>Windows</h3></a>
+                    </li>
+                </span>
+                  
+                  
+                  if (!matrix.HasBenchmarksForPlatform("SmartphoneiPhone") && !matrix.HasBenchmarksForPlatform("SmartphoneAndroid") && !matrix.HasBenchmarksForPlatform("SmartphoneWindows"))
+                  {
+                      uberDisabled = "_platform-disabled";
+                  }
+                  else { uberDisabled = ""; }
+                <span class="uber-tab @(uberDisabled) @serviceclass" data-devicegroup="smartphone" title="Smartphones">   
+                  
+                  <span class="title">
+                    <h3>Smartphone</h3>
+                      <img src="/_inc/images/new-platform/platform-smartphone@(uberDisabled).png" class="platform-image" />
+                  </span>
+
+                    @if (!matrix.HasBenchmarksForPlatform("SmartphoneiPhone"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                    <li title="iPhone">
+                      <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-apple@(strDisabled).png" alt=""><h3>iPhone</h3></a>
+                    </li> 
+      
+                      @if (!matrix.HasBenchmarksForPlatform("SmartphoneAndroid"))
+                      {
+                          strDisabled = "_device-disabled";
+                      }
+                      else { strDisabled = ""; }
+                    <li title="Andoird Smartphone">
+                      <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-droid@(strDisabled).png" alt=""><h3>Android</h3></a>
+                    </li> 
+                    @if (!matrix.HasBenchmarksForPlatform("SmartphoneWindows"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                  <li title="Windows 8 Smartphone">
+                    <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-win@(strDisabled).png" alt=""><h3>Windows</h3></a>
+                  </li>
+                </span>
+      
+                  if (!matrix.HasBenchmarksForPlatform("Connected TV-Samsung") && !matrix.HasBenchmarksForPlatform("Connected TV-Sony") && !matrix.HasBenchmarksForPlatform("Connected TV-LG"))
+                  {
+                      uberDisabled = "_platform-disabled";
+                  }
+                  else { uberDisabled = ""; }
+                <span class="uber-tab @(uberDisabled)" data-devicegroup="connectedtv" title="Connected TVs">
+                  <span class="title">
+                    <h3>TV</h3>
+                      <img src="/_inc/images/new-platform/platform-tv@(uberDisabled).png" class="platform-image" />
+                  </span>
+                     @if (!matrix.HasBenchmarksForPlatform("Connected TV-Samsung"))
+                     {
+                         strDisabled = "_device-disabled";
+                     }
+                     else { strDisabled = ""; }
+                    <li title="Samsung">
+                      <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-smart@(strDisabled).png" alt=""><h3>Samsung</h3></a>
+                    </li> 
+
+                    @if (!matrix.HasBenchmarksForPlatform("Connected TV-Sony"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                    <li title="Sony">
+                      <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-sony@(strDisabled).png" alt=""><h3>Sony</h3></a>
+                    </li>
+                    
+                    @if (!matrix.HasBenchmarksForPlatform("Connected TV-LG"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                    <li title="LG">
+                      <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-lg@(strDisabled).png" alt=""><h3>LG</h3></a>
+                    </li>
+                </span>   
+                  
+      
+                  if (!matrix.HasBenchmarksForPlatform("STB-Now TV") && !matrix.HasBenchmarksForPlatform("STB-Roku"))
+                  {
+                      uberDisabled = "_platform-disabled";
+                  }
+                  else { uberDisabled = ""; }
+                <span class="uber-tab @(uberDisabled)" data-devicegroup="connectedtv" title="Set-Top Boxes">
+                  <span class="title">
+                    <h3>STBs</h3>
+                      <img src="/_inc/images/new-platform/platform-stb@(uberDisabled).png" class="platform-image" />
+                  </span>
+                     @if (!matrix.HasBenchmarksForPlatform("STB-Now TV"))
+                     {
+                         strDisabled = "_device-disabled";
+                     }
+                     else { strDisabled = ""; }
+                    <li title="Now TV">
+                      <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-nowtv@(strDisabled).png" alt=""><h3>Now TV</h3></a>
+                    </li> 
+                    @if (!matrix.HasBenchmarksForPlatform("STB-Roku"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                  <li title="Roku">
+                    <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-roku@(strDisabled).png" alt=""><h3>Roku</h3></a>
+                  </li>
+                </span>
+                             
+                  if (!matrix.HasBenchmarksForPlatform("Games Consoles-Playstation") && !matrix.HasBenchmarksForPlatform("Games Consoles-XBox"))
+                  {
+                      uberDisabled = "_platform-disabled";
+                  }
+                  else { uberDisabled = ""; }
+                <span class="uber-tab @(uberDisabled)" data-devicegroup="gamesconsoles" title="Games Consoles">
+                  <span class="title">
+                    <h3>Consoles</h3>
+                      <img src="/_inc/images/new-platform/platform-console@(uberDisabled).png" class="platform-image" />
+                  </span>
+                     @if (!matrix.HasBenchmarksForPlatform("Games Consoles-Playstation"))
+                     {
+                         strDisabled = "_device-disabled";
+                     }
+                     else { strDisabled = ""; }
+                    <li title="Playstation">
+                      <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-ps@(strDisabled).png" alt=""><h3>Playstation</h3></a>
+                    </li> 
+                    @if (!matrix.HasBenchmarksForPlatform("Games Consoles-XBox"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                  <li title="XBox">
+                    <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-xbox@(strDisabled).png" alt=""><h3>XBox</h3></a>
+                  </li>
+                </span>
+                }
+              </ul>
+
+          <div class="panes">
+            <div class="pane">
+              <div class="inner">
+                <p>
+                  Based on the most recent benchmarks of all services in @matrix.GetScores("About", "Overall").Max combinations across platforms
+                </p>
+                @DrawBenchmarkingPane(matrix, "Overall", -1, -1)
+              </div>
+            </div>
+            
+            @if (!IsFullMode)
+            {
+                for (int i = 0; i < 6; i++)
+                {
+                <div class="pane">
+                    <div class="inner preview">
+                        <p>
+                            Subscriber-only content.
+                        </p>
+                    </div>
+                </div>
+                }
+            }
+            else
+            {
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "Web").Max services on Web
+                </p>
+                @DrawBenchmarkingPane(matrix, "Web", -1, 10306)
+                </div>
+            </div>    
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "TabletiPad").Max services on iPad
+                </p>
+                @DrawBenchmarkingPane(matrix, "TabletiPad", 10115, 10114)
+                </div>
+            </div>
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "TabletAndroid").Max services on Android Tablets
+                </p>
+                @DrawBenchmarkingPane(matrix, "TabletAndroid", 10209, 10114)
+                </div>
+            </div>
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "TabletWindows").Max services on Windows Tablet
+                </p>
+                @DrawBenchmarkingPane(matrix, "TabletWindows", 10209, 10114)
+                </div>
+            </div>
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "SmartphoneiPhone").Max services on iPhone
+                </p>
+                @DrawBenchmarkingPane(matrix, "SmartphoneiPhone", 10799, 10798)
+                </div>
+            </div>
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "SmartphoneAndroid").Max services on Android Smartphones
+                </p>
+                @DrawBenchmarkingPane(matrix, "SmartphoneAndroid", 10892, 10798)
+                </div>
+            </div>
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "SmartphoneWindows").Max services on Windows Phone
+                </p>
+                @DrawBenchmarkingPane(matrix, "SmartphoneWindows", 10985, 10798)
+                </div>
+            </div>
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "Connected TV-Samsung").Max services on Samsung Smart TV
+                </p>
+                @DrawBenchmarkingPane(matrix, "Connected TV-Samsung", 10406, 10405)
+                </div>
+            </div>
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "Connected TV-Sony").Max services on Sony Connected TV
+                </p>
+                @DrawBenchmarkingPane(matrix, "Connected TV-Sony", 10513, 10405)
+                </div>
+            </div>
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "Connected TV-LG").Max services on LG Connected TV
+                </p>
+                @DrawBenchmarkingPane(matrix, "Connected TV-LG", 22774, 10405)
+                </div>
+            </div>
+            <!--
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @@matrix.GetScores("About", "Connected TV-Panasonic").Max services on Sony Connected TV
+                </p>
+                @@DrawBenchmarkingPane(matrix, "Connected TV-Panasonic", 10985, 10798)
+                </div>
+            </div>
+            -->
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Now TV").Max services on Now TV
+                </p>
+                @DrawBenchmarkingPane(matrix, "STB-Now TV", 10985, 10798)
+                </div>
+            </div>
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Roku").Max services on Roku
+                </p>
+                @DrawBenchmarkingPane(matrix, "STB-Roku", 10985, 10798)
+                </div>
+            </div>
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "Games Consoles-Playstation").Max services on Sony Playstation
+                </p>
+                @DrawBenchmarkingPane(matrix, "Games Consoles-Playstation", 10985, 10798)
+                </div>
+            </div>
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "Games Consoles-XBox").Max services on XBox
+                </p>
+                @DrawBenchmarkingPane(matrix, "Games Consoles-XBox", 10985, 10798)
+                </div>
+            </div>
+            }
+        </div>
+      </div>
+       </div>
+    </div>
+
+</div>
+    
+    
+}

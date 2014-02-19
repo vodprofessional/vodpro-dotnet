@@ -1,0 +1,20 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/vui3-master.master" AutoEventWireup="true" %>
+
+<asp:Content ID="ContentHead" ContentPlaceHolderID="ContentPlaceHolderHead" runat="server">
+    <title>VUI Library Screenshots</title>
+</asp:Content>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderBodyTag" runat="server">
+    <umbraco:Macro ID="Macro2" runat="server" Language="cshtml">
+    @using VUI.VUI3.classes;
+    @using System.Web;
+    @{
+        string cssclass = "second screenshot";
+        @: @Html.Raw(VUI3Utility.PageBody(cssclass))
+    }
+    </umbraco:Macro>
+</asp:Content>
+
+<asp:Content ID="ContentBody" ContentPlaceHolderID="ContentPlaceHolderBody" runat="server">
+  <umbraco:Macro ID="Screenshots" Alias="vui3-screenshots" runat="server" cachebust="[@vid]"></umbraco:Macro>
+</asp:Content>

@@ -1,0 +1,3095 @@
+@charset "UTF-8"
+
+html
+  margin: 0
+  padding: 0
+  border: 0
+  outline: 0
+  font-size: 100%
+  vertical-align: baseline
+  background: transparent
+
+body
+  margin: 0
+  padding: 0
+  border: 0
+  outline: 0
+  font-size: 100%
+  vertical-align: baseline
+  background: transparent
+  div
+    margin: 0
+    padding: 0
+    border: 0
+    outline: 0
+    font-size: 100%
+    vertical-align: baseline
+    background: transparent
+
+span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, hgroup, menu, nav, section, time, mark, audio, video
+  margin: 0
+  padding: 0
+  border: 0
+  outline: 0
+  font-size: 100%
+  vertical-align: baseline
+  background: transparent
+
+article, aside, figure, footer, header, hgroup, nav, section
+  display: block
+
+table
+  border-collapse: collapse
+  border-spacing: 0
+
+td
+  font-weight: normal
+  vertical-align: top
+
+button::-moz-focus-inner
+  padding: 0
+  border: none
+
+input
+  &[type="button"]::-moz-focus-inner, &[type="submit"]::-moz-focus-inner
+    padding: 0
+    border: none
+
+.ie
+  button:focus
+    outline: none
+  input
+    &[type="button"]:focus, &[type="submit"]:focus
+      outline: none
+
+img
+  &[align=left]
+    float: left
+  &[align=right]
+    float: right
+
+address
+  font-style: normal
+
+a img
+  border: none
+
+*
+  -webkit-box-sizing: border-box
+  -moz-box-sizing: border-box
+  box-sizing: border-box
+
+ul
+  margin: 0
+  padding: 0
+  list-style: none
+
+html
+  height: 100%
+
+body
+  height: 100%
+  padding: 0
+  margin: 0
+  background: white
+  font: normal 14px "Lato", Arial, FreeSans, sans-serif
+  color: black
+
+input, textarea
+  font: 14px "Lato", Arial, FreeSans, sans-serif
+  color: black
+
+.clr
+  zoom: 1
+  &:before
+    content: "\0020"
+    display: block
+    height: 0
+    overflow: hidden
+  &:after
+    content: "\0020"
+    display: block
+    height: 0
+    overflow: hidden
+    clear: both
+
+a
+  text-decoration: none
+  color: #00a2ff
+  &:hover
+    text-decoration: none
+  &:active, &:focus
+    outline: none
+
+.center
+  text-align: center
+
+.left
+  text-align: left
+
+.right
+  text-align: right
+
+.fleft
+  float: left
+
+.fright
+  float: right
+
+.break
+  word-wrap: break-word
+  -ms-word-break: break-all
+  word-break: break-all
+  word-break: break-word
+  -webkit-hyphens: auto
+  -moz-hyphens: auto
+  hyphens: auto
+
+#wrapper
+  min-width: 1200px
+  min-height: 100%
+  margin: 0 auto
+  position: relative
+  overflow: hidden
+
+.inner
+  position: relative
+  width: 1200px
+  margin: 0 auto
+
+.second
+  #main .inner
+    width: 915px
+  h2
+    font-size: 48px
+    font-style: italic
+    font-weight: 300
+    line-height: 50px
+    padding: 0 0 0 32px
+
+#popup-layout
+  background: #000
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60)
+  opacity: 0.6
+  display: none
+  height: 100%
+  position: fixed
+  top: 0
+  width: 100%
+  z-index: 90
+
+
+header
+  height: 127px
+  position: relative
+  border-top: 4px solid #181829
+  .inner
+    height: 123px
+
+.b-logo
+  display: inline-block
+  position: relative
+  top: 30px
+
+.logo
+  position: absolute
+  top: -55px
+  left: -8px
+
+.site-name
+  display: inline-block
+  margin: 0 0 0 148px
+  color: #181829
+  font-size: 42px
+  font-weight: 300
+
+.slogan
+  margin: 0 0 0 150px
+  font-size: 10px
+  font-weight: bold
+
+.b-header-nav
+  position: absolute
+  right: 600px
+  top: 2px
+
+.header-nav-item
+  vertical-align: top
+  display: inline
+  + .header-nav-item:before
+    content: "|"
+    display: inline-block
+    margin: 0 7px 0 4px
+    color: #cfcfcf
+  a
+    font-family: Arial
+    color: #787878
+  &.active a, a:hover
+    border-bottom: 3px solid #cfcfcf
+
+.b-service-finder
+  position: absolute
+  left: 613px
+  top: 0
+  background: #94c938
+  -webkit-box-shadow: rgba(0, 0, 0, 0.36) 0 0 5px
+  -moz-box-shadow: rgba(0, 0, 0, 0.36) 0 0 5px
+  box-shadow: rgba(0, 0, 0, 0.36) 0 0 5px
+  -webkit-border-radius: 0 0 8px 8px
+  -moz-border-radius: 0 0 8px 8px
+  -ms-border-radius: 0 0 8px 8px
+  -o-border-radius: 0 0 8px 8px
+  border-radius: 0 0 8px 8px
+  a
+    vertical-align: top
+    display: block
+    color: #fff
+    padding: 0 15px
+    height: 23px
+    line-height: 22px
+    position: relative
+    span.icon-chevron-down
+      vertical-align: top
+      margin: 0 0 0 10px
+      font-size: 16px
+
+.sub-menu
+  -webkit-box-shadow: rgba(0, 0, 0, 0.55) 0 0 10px
+  -moz-box-shadow: rgba(0, 0, 0, 0.55) 0 0 10px
+  box-shadow: rgba(0, 0, 0, 0.55) 0 0 10px
+  -webkit-border-radius: 0 0 8px 8px
+  -moz-border-radius: 0 0 8px 8px
+  -ms-border-radius: 0 0 8px 8px
+  -o-border-radius: 0 0 8px 8px
+  border-radius: 0 0 8px 8px
+  background: #96cb3a
+  cursor: default
+  display: none
+  height: 64px
+  padding: 13px 15px 17px
+  position: absolute
+  right: -2px
+  top: 0
+  width: 330px
+  z-index: 10
+  .selecter
+    font-weight: bold
+    height: 34px
+    width: 244px
+    .selecter-selected
+      -webkit-border-radius: 5px
+      -moz-border-radius: 5px
+      -ms-border-radius: 5px
+      -o-border-radius: 5px
+      border-radius: 5px
+      background: url('../images/sprite.png') 100% -495px no-repeat white
+      color: #999
+      padding: 5px 8px 5px 14px
+    .selecter-options
+      width: 100%
+  .form-submit
+    background-color: #528b0b
+    color: #fff
+    float: right
+    font-size: 18px
+    height: 34px
+    text-align: center
+    vertical-align: top
+    width: 46px
+
+.b-right-nav
+  -webkit-border-radius: 5px
+  -moz-border-radius: 5px
+  -ms-border-radius: 5px
+  -o-border-radius: 5px
+  border-radius: 5px
+  background: #181829
+  border: 1px solid #dedede
+  margin: 54px -592px 0 0
+  position: fixed
+  right: 50%
+  top: 0
+  z-index: 95
+
+.w1200 .b-right-nav
+  margin: 50px 0 0
+  position: absolute
+  right: 9px
+
+.b-right-nav ul
+  padding: 2px
+  li
+    border-top: 1px solid #8c8c94
+    height: 28px
+    line-height: 24px
+    padding: 0 5px
+    &:first-child
+      border-top: none
+    a
+      color: #fff
+      display: block
+      font-size: 14px
+      overflow: hidden
+      span
+        float: right
+        font-size: 18px
+        padding-top: 2px
+        margin-left: 5px
+        width: 20px
+
+.b-nav-panel
+  z-index: 20
+  position: fixed
+  top: 0
+  left: 50%
+  margin: 96px 0 0 -563px
+
+.w1200 .b-nav-panel
+  position: absolute
+  left: 32px
+  margin: 92px 0 0
+
+.b-nav-panel
+  a
+    display: block
+    width: 55px
+    height: 55px
+    font-size: 26px
+    line-height: 55px
+    text-align: center
+    border-style: solid
+    border-width: 0 1px 1px
+    border-color: #d7d4d4
+    color: #303030
+    background: #f0f0f0
+    cursor: pointer
+  li
+    &:first-child a
+      border-top-width: 1px
+      -webkit-border-radius: 4px 4px 0 0
+      -moz-border-radius: 4px 4px 0 0
+      -ms-border-radius: 4px 4px 0 0
+      -o-border-radius: 4px 4px 0 0
+      border-radius: 4px 4px 0 0
+    &:last-child a
+      -webkit-border-radius: 0 0 4px 4px
+      -moz-border-radius: 0 0 4px 4px
+      -ms-border-radius: 0 0 4px 4px
+      -o-border-radius: 0 0 4px 4px
+      border-radius: 0 0 4px 4px
+    a:hover, &.active a
+      background: #fff
+      color: #1063b8
+
+.vod-link
+  overflow: hidden
+  display: block
+  position: absolute
+  left: 795px
+  top: -4px
+  z-index: 100
+
+/* End Header
+  Footer */
+
+footer
+  min-width: 1200px
+  padding-bottom: 1px
+  overflow: hidden
+  background: #181829
+  position: relative
+  z-index: 96
+
+.vod-logo
+  display: inline-block
+  margin: 14px 0 0 2px
+
+.b-footer-nav
+  margin: 35px 55px
+  text-align: right
+
+.footer-nav-col
+  vertical-align: top
+  display: inline-block
+  text-align: left
+  margin: 0 140px 0 0
+
+.footer-nav-title
+  margin: 0 0 3px
+  color: #fff
+  font-size: 18px
+  font-weight: bold
+  text-transform: uppercase
+
+.footer-nav-item a
+  color: #fff
+  &:hover
+    text-decoration: underline
+
+/* End Footer */
+
+.form-submit
+  -webkit-border-radius: 5px
+  -moz-border-radius: 5px
+  -ms-border-radius: 5px
+  -o-border-radius: 5px
+  border-radius: 5px
+  border: none
+  margin: 0
+  padding: 0
+  -webkit-appearance: none
+
+/*
+ * Selecter Plugin [Formstone Library]
+ * @author Ben Plum
+ * @version 2.1.4
+ *
+ * Copyright © 2013 Ben Plum <mr@benplum.com>
+ * Released under the MIT License <http://www.opensource.org/licenses/mit-license.php>
+ */
+
+.selecter-element
+  *left: -999999px
+  position: absolute
+  opacity: 0
+
+.selecter
+  display: inline-block
+  height: 32px
+  position: relative
+  width: 230px
+  z-index: 1
+  .selecter-selected
+    background: url('../images/sprite.png') 100% -537px no-repeat white
+    border: none
+    -webkit-border-radius: 5px
+    -moz-border-radius: 5px
+    -ms-border-radius: 5px
+    -o-border-radius: 5px
+    border-radius: 5px
+    color: #000
+    cursor: pointer
+    display: block
+    font-size: 18px
+    line-height: 24px
+    margin: 0
+    overflow: hidden
+    padding: 4px 10px 4px 15px
+    position: relative
+    text-overflow: clip
+    z-index: 49
+  .selecter-options
+    -webkit-box-shadow: rgba(0, 0, 0, 0.49) 0 0 7px
+    -moz-box-shadow: rgba(0, 0, 0, 0.49) 0 0 7px
+    box-shadow: rgba(0, 0, 0, 0.49) 0 0 7px
+    -webkit-border-radius: 0 0 8px 8px
+    -moz-border-radius: 0 0 8px 8px
+    -ms-border-radius: 0 0 8px 8px
+    -o-border-radius: 0 0 8px 8px
+    border-radius: 0 0 8px 8px
+    background-color: #fff
+    display: none
+    left: 0
+    margin: 0
+    max-height: 245px
+    overflow: auto
+    overflow-x: hidden
+    padding: 12px 30px 7px 10px
+    position: absolute
+    top: 100%
+    width: 361px
+    *width: auto
+    z-index: 50
+  .selecter-item
+    color: #000
+    cursor: pointer
+    display: block
+    font-size: 18px
+    height: 28px
+    line-height: 28px
+    margin: 0 0 5px
+    overflow: hidden
+    padding: 0 3px
+    text-overflow: ellipsis
+    width: 100%
+    &:hover, &.selected
+      -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 0 5px
+      -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 0 5px
+      box-shadow: rgba(0, 0, 0, 0.3) 0 0 5px
+      -webkit-border-radius: 3px
+      -moz-border-radius: 3px
+      -ms-border-radius: 3px
+      -o-border-radius: 3px
+      border-radius: 3px
+      background-color: #f0f0f0
+  &.focus .selecter-selected, &:hover .selecter-selected, &.disabled .selecter-item:hover
+    background-color: #fff
+  &.open
+    z-index: 3
+    .selecter-selected
+      -webkit-border-radius: 8px 8px 0 0
+      -moz-border-radius: 8px 8px 0 0
+      -ms-border-radius: 8px 8px 0 0
+      -o-border-radius: 8px 8px 0 0
+      border-radius: 8px 8px 0 0
+      background: #fff
+      z-index: 51
+  &.cover
+    .selecter-options
+      -webkit-border-radius: 5px
+      -moz-border-radius: 5px
+      -ms-border-radius: 5px
+      -o-border-radius: 5px
+      border-radius: 5px
+      top: 0
+    &.open .selecter-selected
+      -webkit-border-radius: 8px 8px 0 0
+      -moz-border-radius: 8px 8px 0 0
+      -ms-border-radius: 8px 8px 0 0
+      -o-border-radius: 8px 8px 0 0
+      border-radius: 8px 8px 0 0
+      z-index: 49
+
+
+.b-carousel
+  -webkit-box-shadow: inset rgba(0, 0, 0, 0.15) 0 4px 6px -4px
+  -moz-box-shadow: inset rgba(0, 0, 0, 0.15) 0 4px 6px -4px
+  box-shadow: inset rgba(0, 0, 0, 0.15) 0 4px 6px -4px
+  margin: 20px -69px 0
+  padding: 12px 69px 18px
+  position: relative
+  h3
+    font-size: 24px
+    line-height: 26px
+    font-weight: bold
+    padding: 0 0 8px 5px
+  .carousel
+    overflow: hidden
+    width: 756px
+    margin-left: -16px
+    ul li
+      height: 115px
+      margin-left: 16px
+      width: 177px
+      a
+        display: block
+  .arrow
+    display: block
+    position: absolute
+    top: 85px
+    z-index: 50
+    span
+      color: #ccc
+      font-size: 44px
+    &.next
+      right: 33px
+    &.prev
+      left: 31px
+    &.disabled
+      display: none
+
+/* Home */
+
+.home
+  .b-logo
+    left: 73px
+  .b-header-nav
+    right: 440px
+  h1
+    color: #181829
+    font-size: 72px
+    font-weight: 300
+  .slogan
+    margin: 15px 0 5px
+    font-size: 18px
+  p
+    margin: 15px 0
+    line-height: 24px
+  .b-right-nav
+    text-align: right
+    span
+      margin: 0 5px 0 0
+      float: left
+      text-align: left
+  header
+    z-index: 2
+
+.home-slides
+  margin-top: -127px
+
+.home-slide
+  overflow: hidden
+  .inner
+    padding: 1px 0
+    position: relative
+    width: 1200px
+  .logo
+    position: absolute
+    left: 109px
+    top: 32px
+  .slide-img, .slide-content
+    vertical-align: top
+    display: inline-block
+  .slide-img
+    position: relative
+    > img
+      z-index: 2
+      position: relative
+  h2
+    font-size: 48px
+    font-weight: 300
+    font-style: italic
+    margin: 83px 0 15px 261px
+  h3
+    margin: 15px 0 5px
+    font-size: 18px
+    + p
+      margin-top: 0
+
+.slide-gallery
+  overflow: hidden
+  position: absolute
+  top: 0
+
+#home-slide1
+  background: #fff
+  margin: 0 auto
+  padding: 57px 0 25px
+  .slide-content
+    width: 384px
+    margin: 0 46px 0 396px
+  .slide-img
+    width: 174px
+  p
+    margin: 5px 0
+
+.b-home-logos
+  overflow: hidden
+  ul
+    margin-right: -15px
+  li
+    vertical-align: top
+    display: inline-block
+    margin: 16px 12px 0 0
+
+.b-home-btns
+  margin: 40px 0
+  .btn
+    vertical-align: top
+    display: inline-block
+    height: 41px
+    padding: 0 21px
+    color: #fff
+    background: #1ea6de
+    font-size: 22px
+    line-height: 39px
+    -webkit-box-shadow: inset 2px 2px 2px rgba(255, 255, 255, 0.45), inset -2px -2px 2px rgba(0, 0, 0, 0.25)
+    -moz-box-shadow: inset 2px 2px 2px rgba(255, 255, 255, 0.45), inset -2px -2px 2px rgba(0, 0, 0, 0.25)
+    box-shadow: inset 2px 2px 2px rgba(255, 255, 255, 0.45), inset -2px -2px 2px rgba(0, 0, 0, 0.25)
+    &:first-child
+      -webkit-border-radius: 5px 0 0 5px
+      -moz-border-radius: 5px 0 0 5px
+      -ms-border-radius: 5px 0 0 5px
+      -o-border-radius: 5px 0 0 5px
+      border-radius: 5px 0 0 5px
+    &:last-child
+      padding-right: 15px
+      -webkit-border-radius: 0 5px 5px 0
+      -moz-border-radius: 0 5px 5px 0
+      -ms-border-radius: 0 5px 5px 0
+      -o-border-radius: 0 5px 5px 0
+      border-radius: 0 5px 5px 0
+    &:active
+      -webkit-box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25), inset -2px -2px 2px rgba(255, 255, 255, 0.45)
+      -moz-box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25), inset -2px -2px 2px rgba(255, 255, 255, 0.45)
+      box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25), inset -2px -2px 2px rgba(255, 255, 255, 0.45)
+    + .btn
+      margin: 0 0 0 1px
+  span
+    vertical-align: middle
+    margin-left: 10px
+
+.b-iphone
+  width: 174px
+  height: 366px
+  margin: 138px 0 0
+  position: relative
+  background: url('../images/iphone.png') no-repeat
+  &:before
+    z-index: 3
+    content: ""
+    display: block
+    width: 100px
+    height: 242px
+    position: absolute
+    right: 0
+    top: 0
+    background: url('../images/iphone.png') -184px 0 no-repeat
+
+.iphone-gallery
+  overflow: hidden
+  position: relative
+  top: 54px
+  left: 13px !important
+  width: 150px
+  height: 262px
+
+#home-slide2, #home-slide4
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzFmYTZkZSIvPjxzdG9wIG9mZnNldD0iMjAlIiBzdG9wLWNvbG9yPSIjM2RjNWZkIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g')
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #1fa6de), color-stop(20%, #3dc5fd))
+  background: -webkit-linear-gradient(#1fa6de 0%, #3dc5fd 20%)
+  background: -moz-linear-gradient(#1fa6de 0%, #3dc5fd 20%)
+  background: -o-linear-gradient(#1fa6de 0%, #3dc5fd 20%)
+  background: linear-gradient(#1fa6de 0%, #3dc5fd 20%)
+  -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 0 13px 5px
+  -moz-box-shadow: rgba(0, 0, 0, 0.15) 0 0 13px 5px
+  box-shadow: rgba(0, 0, 0, 0.15) 0 0 13px 5px
+
+.ie8
+  #home-slide2, #home-slide4
+    background: #3dc5fd !important
+
+#home-slide2
+  h2, h3
+    color: #fff
+
+#home-slide4
+  h2, h3
+    color: #fff
+
+#home-slide2
+  padding: 0 0 125px
+  .slide-content
+    width: 383px
+    margin: 0 24px 0 261px
+  .slide-img
+    width: 334px
+  .slide-gallery
+    width: 327px
+    left: 2px
+  .carousel
+    height: 296px
+
+#home-slide3, #home-slide5
+  background: #fff
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2U3ZTdlNyIvPjxzdG9wIG9mZnNldD0iMjQlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g')
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e7e7e7), color-stop(24%, white))
+  background: -webkit-linear-gradient(#e7e7e7 0%, white 24%)
+  background: -moz-linear-gradient(#e7e7e7 0%, white 24%)
+  background: -o-linear-gradient(#e7e7e7 0%, white 24%)
+  background: linear-gradient(#e7e7e7 0%, white 24%)
+
+#home-slide3
+  padding: 0 0 105px
+  .slide-content
+    display: block
+    margin: 0 0 15px 261px
+  .col
+    vertical-align: top
+    display: inline-block
+    width: 275px
+    margin: 0 75px 0 0
+  .slide-img
+    display: block
+    width: 766px
+    margin: 0 auto
+  .slide-gallery
+    &.droid
+      width: 283px
+      left: 50px
+      top: 6px
+      .carousel
+        height: 189px
+    &.win
+      width: 323px
+      left: 378px
+      top: 14px
+      .carousel
+        height: 186px
+
+#home-slide4
+  padding: 0 0 105px
+  .slide-content
+    width: 275px
+    margin: 0 0 0 261px
+    position: relative
+  .slide-img
+    margin: 0 0 0 -113px
+  h2
+    margin-bottom: 20px
+  .slide-gallery
+    width: 361px
+    left: 143px
+    top: 35px
+  .carousel
+    height: 300px
+
+#home-slide5
+  padding: 0 0 170px
+  .slide-content
+    width: 275px
+    margin: 0 0 0 11px
+  .slide-img
+    width: 432px
+    margin: 65px 0 0 205px
+  .slide-gallery
+    width: 296px
+    left: 31px
+    top: 24px
+  .carousel
+    height: 173px
+
+/* end Home */
+
+/* Screenshot */
+
+.screenshot
+  .main-content
+    margin-top: -33px
+  .panes
+    margin-top: -13px
+
+.main-top
+  .inner
+    background: url('../images/bg-main-top.png') no-repeat
+    min-height: 113px
+    padding: 25px 28px 10px
+  h1
+    color: #000
+    font-size: 36px
+    font-weight: 300
+    line-height: 30px
+    padding: 0 0 15px
+  p
+    line-height: 18px
+
+.tabs
+  overflow: hidden
+  padding: 13px 42px 0
+  z-index: 15
+  li
+    float: left
+    margin-left: 5px
+    a
+      -webkit-border-radius: 5px 5px 0 0
+      -moz-border-radius: 5px 5px 0 0
+      -ms-border-radius: 5px 5px 0 0
+      -o-border-radius: 5px 5px 0 0
+      border-radius: 5px 5px 0 0
+      border-color: #efefef
+      border-style: solid
+      border-width: 2px 2px 0
+      color: #999
+      display: block
+      font-size: 18px
+      height: 29px
+      line-height: 20px
+      margin: 2px 0 0
+      padding: 4px 8px 0 12px
+      width: 170px
+      &.current
+        -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 0 13px
+        -moz-box-shadow: rgba(0, 0, 0, 0.15) 0 0 13px
+        box-shadow: rgba(0, 0, 0, 0.15) 0 0 13px
+        background: #fff
+        color: #000
+        border-width: 0
+        height: 31px
+        margin: 0
+        padding-top: 8px
+
+.ie8 .tabs li a.current
+  border-width: 2px 2px 0px
+
+.tabs li
+  a span
+    float: right
+  &.search
+    float: right
+    margin-right: 10px
+    a
+      background: #3ac2fb
+      color: #fff
+      border-width: 1px 1px 0
+
+.panes .nav-line
+  background: url('../images/bg-nav-line.png') repeat-x 0 0
+  height: 113px
+  padding: 13px 0
+  position: relative
+  z-index: 10
+
+.b-rightside-panel
+  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 0 0 5px
+  -moz-box-shadow: rgba(0, 0, 0, 0.75) 0 0 5px
+  box-shadow: rgba(0, 0, 0, 0.75) 0 0 5px
+  background: #181829
+  display: none
+  padding: 56px 28px 0 33px
+  position: fixed
+  right: 0
+  bottom: 0
+  top: 0
+  width: 293px
+  z-index: 96
+  .close
+    background: url('../images/sprite.png') 0 -404px no-repeat
+    color: #fff
+    display: block
+    height: 32px
+    line-height: 32px
+    margin: 0 0 20px -6px
+    padding: 0 8px
+    width: 32px
+    span
+      font-size: 18px
+  h1
+    color: #fff
+    font-size: 30px
+    font-weight: normal
+    line-height: 32px
+    padding: 0 0 35px
+  .form-item
+    overflow: hidden
+    padding: 0 0 7px
+  .form-text
+    -webkit-border-radius: 5px
+    -moz-border-radius: 5px
+    -ms-border-radius: 5px
+    -o-border-radius: 5px
+    border-radius: 5px
+    background: #484872
+    border: 1px solid #fff
+    color: #fff
+    height: 34px
+    padding: 0 10px
+    width: 232px
+    &::-webkit-input-placeholder, &::-moz-placeholder, &:-ms-input-placeholder
+      color: #fff
+  .form-submit
+    -webkit-border-radius: 5px
+    -moz-border-radius: 5px
+    -ms-border-radius: 5px
+    -o-border-radius: 5px
+    border-radius: 5px
+    background: #181829
+    border: 2px solid #fff
+    color: #fff
+    float: right
+    font-size: 16px
+    font-weight: bold
+    height: 33px
+    line-height: 30px
+    margin: 15px 0 0
+    text-align: center
+    width: 116px
+    span
+      font-size: 14px
+      margin: 0 0 0 10px
+
+.ie8 .b-rightside-panel .form-submit span
+  display: none
+
+.b-popup
+  -webkit-box-shadow: rgba(0, 0, 0, 0.33) 0 0 5px
+  -moz-box-shadow: rgba(0, 0, 0, 0.33) 0 0 5px
+  box-shadow: rgba(0, 0, 0, 0.33) 0 0 5px
+  -webkit-border-radius: 10px
+  -moz-border-radius: 10px
+  -ms-border-radius: 10px
+  -o-border-radius: 10px
+  border-radius: 10px
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzFmYTVkZSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzNhYzJmYSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==')
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #1fa5de), color-stop(100%, #3ac2fa))
+  background: -webkit-linear-gradient(#1fa5de, #3ac2fa)
+  background: -moz-linear-gradient(#1fa5de, #3ac2fa)
+  background: -o-linear-gradient(#1fa5de, #3ac2fa)
+  background: linear-gradient(#1fa5de, #3ac2fa)
+  display: none
+  margin-left: -429px
+  padding: 10px 28px
+  position: absolute
+  left: 50%
+  top: 0
+  width: 858px
+  z-index: 99
+
+.ie8 .b-popup
+  background: #3ac2fa !important
+
+.b-popup
+  .popup-close
+    color: #fff
+    font-size: 18px
+    position: absolute
+    right: 14px
+    top: 12px
+  h1
+    color: #fff
+    font-size: 22px
+    font-weight: bold
+    line-height: 24px
+    padding: 0 0 22px
+  .form-item
+    clear: both
+    padding: 0 0 20px
+    label
+      color: #fff
+      float: left
+      font-size: 18px
+      font-weight: normal
+      line-height: 32px
+      padding-right: 5px
+    .selecter
+      margin: 0 10px
+    .form-submit
+      background-color: #138cbf
+      color: #fff
+      font-size: 18px
+      font-weight: bold
+      height: 32px
+      text-align: center
+      vertical-align: top
+      width: 46px
+
+.b-matrix-nav
+  &.fixed
+    position: fixed
+    left: 0
+    right: 0
+    top: -13px
+  .inner
+    padding: 23px 8px 0 26px
+  ul
+    display: table
+    li
+      display: table-cell
+      min-width: 93px
+      text-align: center
+      &:first-child
+        width: 219px
+
+.b-matrix-files .inner
+  background: url('../images/bg-content-line.png') repeat-y 0 120px
+  > ul
+    background: url('../images/bg-main-bottom.png') no-repeat 0 0
+    padding: 6px 17px 60px 26px
+  .matrix-block
+    border-top: 2px dotted #f5f3f3
+    height: 41px
+    line-height: 32px
+    overflow: hidden
+    padding: 2px 0 3px 3px
+    &:first-child
+      border: none
+    ul
+      display: table
+      width: 100%
+      li
+        display: table-cell
+        height: 39px
+        text-align: center
+        vertical-align: top
+        width: 93px
+        &:first-child
+          text-align: left
+          width: 216px
+        .img
+          float: left
+          height: 27px
+          margin: 2px 10px 0 0
+          width: 27px
+        a
+          color: #0759ff
+          display: inline-block
+          text-decoration: underline
+          &:hover
+            text-decoration: none
+        .checkmark
+          -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 0 5px
+          -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 0 5px
+          box-shadow: rgba(0, 0, 0, 0.1) 0 0 5px
+          -webkit-border-radius: 5px
+          -moz-border-radius: 5px
+          -ms-border-radius: 5px
+          -o-border-radius: 5px
+          border-radius: 5px
+          height: 34px
+          margin: 0 auto
+          width: 34px
+          img
+            display: block
+
+.b-tiles-nav ul
+  display: table
+  margin: 33px -5px 0 0
+  li
+    display: table-cell
+    padding: 0 10px
+    a
+      color: #00a2ff
+      display: block
+      font-size: 20px
+      font-weight: bold
+      white-space: nowrap
+
+.b-tiles-tiles
+  .inner
+    text-align: center
+    width: 100% !important
+  ul
+    font-size: 0
+    padding: 25px 0
+    .service-item
+      display: inline-block
+      height: 268px
+      text-align: center
+      vertical-align: top
+      width: 266px
+      a
+        color: #000
+        display: block
+        font-size: 20px
+        font-weight: bold
+        line-height: 24px
+        padding: 8px 25px
+        &:hover
+          -webkit-box-shadow: rgba(0, 0, 0, 0.41) 0 0 13px
+          -moz-box-shadow: rgba(0, 0, 0, 0.41) 0 0 13px
+          box-shadow: rgba(0, 0, 0, 0.41) 0 0 13px
+          -webkit-border-radius: 10px
+          -moz-border-radius: 10px
+          -ms-border-radius: 10px
+          -o-border-radius: 10px
+          border-radius: 10px
+          .service-photos-count
+            display: block
+      .service-title
+        display: table-cell
+        height: 50px
+        padding: 0 0 5px
+        vertical-align: bottom
+        width: 216px
+      .service-img
+        height: 160px
+        margin: 0 auto
+        width: 160px
+        img
+          display: block
+      .service-photos-count
+        display: none
+        padding: 8px 0 0
+        .icon-camera
+          font-size: 18px
+          padding-left: 2px
+
+/* end Screenshot */
+/* Benchmarking */
+
+.benchmarking
+  .main-top
+    padding-bottom: 15px
+  .item-block .b-content
+    .b-title
+      float: left
+      width: 235px
+      li
+        font-size: 16px
+        line-height: 16px
+        min-height: 22px
+        margin: 0 0 9px
+    .b-percentage
+      margin-left: 235px
+      li
+        -webkit-box-shadow: rgba(0, 0, 0, 0.35) 0 0 5px
+        -moz-box-shadow: rgba(0, 0, 0, 0.35) 0 0 5px
+        box-shadow: rgba(0, 0, 0, 0.35) 0 0 5px
+        -webkit-border-radius: 5px
+        -moz-border-radius: 5px
+        -ms-border-radius: 5px
+        -o-border-radius: 5px
+        border-radius: 5px
+        background: #e88628
+        color: #fff
+        font-size: 16px
+        font-weight: bold
+        height: 22px
+        line-height: 18px
+        margin: 0 0 9px
+        padding: 0 8px
+        text-align: right
+
+.b-tabs-devices
+  padding: 0 0 65px
+  .tabs
+    display: table
+    padding: 25px 10px 0
+    li
+      display: table-cell
+      float: none
+      margin: 0
+      min-width: 70px
+      text-align: center
+      position: relative
+      + li a:before
+        border-left: 1px solid #ccc
+        content: ''
+        display: block
+        height: 68px
+        position: absolute
+        bottom: 8px
+      a
+        -webkit-border-radius: 10px 10px 0 0
+        -moz-border-radius: 10px 10px 0 0
+        -ms-border-radius: 10px 10px 0 0
+        -o-border-radius: 10px 10px 0 0
+        border-radius: 10px 10px 0 0
+        border: none
+        font-size: 0
+        margin: 0
+        height: 92px
+        padding: 16px 0 0
+        width: auto
+        &.current
+          height: 92px
+          z-index: 2
+          margin: 0 -1px
+          position: relative
+          -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 0 10px
+          -moz-box-shadow: rgba(0, 0, 0, 0.15) 0 0 10px
+          box-shadow: rgba(0, 0, 0, 0.15) 0 0 10px
+          &:before
+            border: none
+
+.ie8 .b-tabs-devices .tabs li a.current
+  border-color: #efefef
+  border-style: solid
+  border-width: 5px 5px 0
+
+.b-tabs-devices
+  .tabs li
+    &:first-child
+      padding-left: 10px
+    &:last-child
+      padding-right: 10px
+  .panes .inner
+    -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 0 10px
+    -moz-box-shadow: rgba(0, 0, 0, 0.15) 0 0 10px
+    box-shadow: rgba(0, 0, 0, 0.15) 0 0 10px
+    overflow: hidden
+    padding: 30px 67px 10px
+    width: 895px !important
+
+.ie8 .b-tabs-devices .panes .inner
+  border-color: #efefef
+  border-style: solid
+  border-width: 5px
+  margin-top: -5px
+
+.b-tabs-devices .panes p
+  font-size: 18px
+  line-height: 24px
+  margin: 0 0 30px
+
+.item-block
+  -webkit-box-shadow: rgba(0, 0, 0, 0.24) 0 0 5px
+  -moz-box-shadow: rgba(0, 0, 0, 0.24) 0 0 5px
+  box-shadow: rgba(0, 0, 0, 0.24) 0 0 5px
+  -webkit-border-radius: 5px
+  -moz-border-radius: 5px
+  -ms-border-radius: 5px
+  -o-border-radius: 5px
+  border-radius: 5px
+  margin: 0 0 22px
+
+.ie8 .item-block
+  border-color: #efefef
+  border-style: solid
+  border-width: 2px
+
+.item-block h3
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzIzYWJlMyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzM5YzBmOSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==')
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #23abe3), color-stop(100%, #39c0f9))
+  background: -webkit-linear-gradient(top, #23abe3, #39c0f9)
+  background: -moz-linear-gradient(top, #23abe3, #39c0f9)
+  background: -o-linear-gradient(top, #23abe3, #39c0f9)
+  background: linear-gradient(top, #23abe3, #39c0f9)
+  -webkit-border-radius: 5px 5px 0 0
+  -moz-border-radius: 5px 5px 0 0
+  -ms-border-radius: 5px 5px 0 0
+  -o-border-radius: 5px 5px 0 0
+  border-radius: 5px 5px 0 0
+  color: #fff
+  font-size: 18px
+  font-weight: bold
+  height: 44px
+  line-height: 44px
+  padding: 0 22px
+
+.ie8 .item-block h3
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF23ABE3', endColorstr='#FF39C0F9')
+
+.item-block .b-content
+  overflow: hidden
+  padding: 20px 45px 10px 20px
+
+/* end Benchmarking */
+
+/* Service */
+
+.service
+  .b-nav-panel
+    margin-top: 134px
+  .main-top .inner
+    background: url('../images/bg-main-top2.png') no-repeat
+    padding-bottom: 27px
+  h2
+    padding: 0 0 0 32px
+  .introduction
+    margin: 0 7px 0 0
+    .b-info
+      -webkit-box-shadow: rgba(0, 0, 0, 0.27) 0 0 10px
+      -moz-box-shadow: rgba(0, 0, 0, 0.27) 0 0 10px
+      box-shadow: rgba(0, 0, 0, 0.27) 0 0 10px
+      -webkit-border-radius: 5px
+      -moz-border-radius: 5px
+      -ms-border-radius: 5px
+      -o-border-radius: 5px
+      border-radius: 5px
+      float: right
+      height: 123px
+      padding: 5px 13px 2px
+      width: 236px
+
+.ie8 .service .introduction .b-info
+  border-color: #efefef
+  border-style: solid
+  border-width: 5px
+
+.service
+  .introduction
+    .b-info dl
+      height: 100%
+      line-height: 26px
+      dt
+        float: left
+        font-weight: bold
+        height: 100%
+        padding-right: 22px
+        position: relative
+        &:after
+          content: ""
+          display: block
+          border-right: 1px solid #e8e8e8
+          position: absolute
+          right: 14px
+          bottom: 0
+          top: 0
+      dd
+        overflow: hidden
+      span
+        display: block
+    .img
+      float: left
+      height: 160px
+      width: 160px
+    .desc
+      margin-left: 180px
+      width: 380px
+      p
+        margin: 0
+  .main-content
+    overflow: hidden
+    padding: 13px 0 0
+  .b-stats
+    background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzFmYTZkZSIvPjxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjM2RjNWZkIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g')
+    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #1fa6de), color-stop(40%, #3dc5fd))
+    background: -webkit-linear-gradient(#1fa6de 0%, #3dc5fd 40%)
+    background: -moz-linear-gradient(#1fa6de 0%, #3dc5fd 40%)
+    background: -o-linear-gradient(#1fa6de 0%, #3dc5fd 40%)
+    background: linear-gradient(#1fa6de 0%, #3dc5fd 40%)
+    -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 0 13px
+    -moz-box-shadow: rgba(0, 0, 0, 0.15) 0 0 13px
+    box-shadow: rgba(0, 0, 0, 0.15) 0 0 13px
+    height: 137px
+
+.ie8 .service .b-stats
+  background: #3dc5fd !important
+
+.service
+  .b-stats
+    .inner
+      width: 1070px !important
+    ul
+      display: table
+      height: 137px
+      overflow: hidden
+      padding: 9px 0 6px
+      width: 100%
+      li
+        color: #fff
+        display: table-cell
+        text-align: center
+        + li div:before
+          content: ""
+          display: block
+          border-left: 1px solid #5ec0e9
+          height: 122px
+          position: absolute
+          bottom: 0
+          left: 0
+        > div
+          height: 122px
+          padding: 0 12px
+          position: relative
+        .count
+          font-size: 36px
+          font-weight: bold
+          line-height: 28px
+          padding: 15px 0 5px
+          i
+            font-size: 28px
+            font-style: normal
+          span
+            font-size: 24px
+            line-height: 30px
+            margin-left: 5px
+        .title
+          line-height: 16px
+  .b-screenshots
+    background: #fff
+    padding: 40px 0 0
+    .b-carousel
+      -webkit-box-shadow: none
+      -moz-box-shadow: none
+      box-shadow: none
+      margin: 0 -13px
+      padding: 22px 0 30px
+      .carousel
+        margin-left: -20px
+        width: 805px !important
+        li
+          height: 205px
+          margin-left: 20px
+          width: 268px
+          a
+            color: #000
+            font-size: 18px
+            font-weight: bold
+            line-height: 24px
+            cursor: pointer
+          .screenshot-img
+            height: 172px
+            margin: 0 0 5px
+          .screenshot-count
+            float: right
+            padding-right: 10px
+            span
+              margin-left: 5px
+          .screenshot-title
+            padding-left: 10px
+      .arrow
+        height: 172px
+        top: 22px
+        width: 158px
+        &.next
+          background: url('../images/sprite.png') 0 0 no-repeat
+          right: -50px
+        &.prev
+          background: url('../images/sprite.png') 0 -202px no-repeat
+          left: -50px
+  .b-bencmarking .item-block
+    .b-carousel
+      -webkit-box-shadow: none
+      -moz-box-shadow: none
+      box-shadow: none
+      margin: 0
+      padding: 0
+      .carousel
+        margin: 0
+        ul li
+          height: auto
+          margin: 0
+          width: 471px !important
+      .arrow
+        margin: -22px 0 0
+        top: 50%
+        &.next
+          right: -10px
+        &.prev
+          left: -15px
+    .b-content
+      padding-top: 7px
+      .block
+        display: table
+        width: 100%
+        .b-left
+          display: table-cell
+          vertical-align: top
+          width: 225px
+        .b-right
+          display: table-cell
+          vertical-align: top
+          width: 471px
+      .t-block
+        width: 100%
+        td
+          font-size: 16px
+          line-height: 20px
+          padding: 0 0 5px
+          .icon-ok
+            color: #000
+            font-size: 24px
+          .icon-remove
+            color: #999
+            font-size: 26px
+          .number
+            -webkit-box-shadow: rgba(0, 0, 0, 0.33) 0 0 5px
+            -moz-box-shadow: rgba(0, 0, 0, 0.33) 0 0 5px
+            box-shadow: rgba(0, 0, 0, 0.33) 0 0 5px
+            -webkit-border-radius: 5px
+            -moz-border-radius: 5px
+            -ms-border-radius: 5px
+            -o-border-radius: 5px
+            border-radius: 5px
+            background: #ff9900
+            color: #fff
+            font-size: 48px
+            font-weight: bold
+            height: 52px
+            line-height: 48px
+            margin: 0 auto
+            text-align: center
+            width: 78px
+        .title
+          width: 225px
+        .data
+          font-weight: bold
+          padding: 0 25px
+          text-align: center
+          width: 160px
+        .empty
+          width: 151px
+        tbody tr
+          border-top: 3px dotted #f5f3f3
+          &:first-child
+            border: none
+  .b-app-stores
+    background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzFmYTZkZSIvPjxzdG9wIG9mZnNldD0iMjAlIiBzdG9wLWNvbG9yPSIjM2RjNWZkIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g')
+    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #1fa6de), color-stop(20%, #3dc5fd))
+    background: -webkit-linear-gradient(#1fa6de 0%, #3dc5fd 20%)
+    background: -moz-linear-gradient(#1fa6de 0%, #3dc5fd 20%)
+    background: -o-linear-gradient(#1fa6de 0%, #3dc5fd 20%)
+    background: linear-gradient(#1fa6de 0%, #3dc5fd 20%)
+    -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 0 13px 5px
+    -moz-box-shadow: rgba(0, 0, 0, 0.15) 0 0 13px 5px
+    box-shadow: rgba(0, 0, 0, 0.15) 0 0 13px 5px
+    padding: 0 0 50px
+
+.ie8 .service .b-app-stores
+  background: #3dc5fd !important
+
+.service .b-app-stores
+  h2
+    color: #fff
+    padding: 25px 0
+  .b-stores-devices
+    -webkit-box-shadow: rgba(0, 0, 0, 0.18) 0 0 10px
+    -moz-box-shadow: rgba(0, 0, 0, 0.18) 0 0 10px
+    box-shadow: rgba(0, 0, 0, 0.18) 0 0 10px
+    background: #fff
+    padding: 20px 49px 65px 90px
+
+.ie8 .service .b-app-stores .b-stores-devices
+  border-color: #efefef
+  border-style: solid
+  border-width: 5px
+
+.service
+  .b-app-stores
+    .tblock
+      width: 100%
+      td
+        font-size: 16px
+        line-height: 38px
+        text-align: center
+        width: 160px
+        &:first-child
+          text-align: left
+          width: 170px
+        &.number
+          font-size: 12px
+          line-height: 42px
+      tbody tr
+        border-top: 2px dotted #f5f3f3
+        &:first-child
+          border: none
+          td
+            padding: 15px 0
+    .rate
+      display: block
+      height: 22px
+      margin: 7px auto 0
+      width: 120px
+      &.rate0
+        background: url('../images/rating-stars.png') no-repeat 0 0px
+      &.rate1
+        background: url('../images/rating-stars.png') no-repeat 0 -32px
+      &.rate2
+        background: url('../images/rating-stars.png') no-repeat 0 -64px
+      &.rate3
+        background: url('../images/rating-stars.png') no-repeat 0 -96px
+      &.rate4
+        background: url('../images/rating-stars.png') no-repeat 0 -128px
+      &.rate5
+        background: url('../images/rating-stars.png') no-repeat 0 -160px
+  .b-indent
+    background: #fff
+    height: 70px
+
+.lightbox-on
+  overflow: hidden
+  min-height: 100%
+  body
+    overflow: hidden
+    min-height: 100%
+
+.lightbox
+  z-index: 500
+  overflow: hidden
+  display: none
+  position: fixed
+  top: 0
+  left: 0
+  min-width: 1200px
+  width: 100%
+  height: 100%
+  background: #808080
+
+@media (max-width: 1200px)
+  .lightbox
+    .lightbox-gallery
+      width: 890px
+    .lightbox-item
+      width: 830px !important
+    .lightbox-next
+      left: 1116px
+    .group-selected
+      margin-left: 10%
+
+.lightbox-header
+  height: 43px
+  position: relative
+  background: #000
+  border-bottom: 1px solid #fff
+
+.lightbox-logo
+  vertical-align: top
+  display: inline-block
+  overflow: hidden
+  margin: 5px 0 0 15px
+
+.lightbox-title
+  vertical-align: top
+  display: inline-block
+  margin: 0 0 0 15px
+  color: #fff
+  font-size: 24px
+  line-height: 42px
+
+.lightbox-close
+  display: inline-block
+  width: 43px
+  position: absolute
+  right: 0
+  top: 0
+  color: #fff
+  font-size: 18px
+  line-height: 43px
+  text-align: center
+  cursor: pointer
+
+.lightbox-dropdown
+  display: inline-block
+  margin: 9px 0 0 34px
+  .selecter
+    width: 360px
+  .selecter-selected
+    &:hover
+      background: #424141 url('../images/sprite.png') 100% -456px no-repeat
+      border-style: solid
+      border-width: 1px 1px 0
+      border-color: #6c6c6c
+      color: #fff
+      -webkit-border-radius: 5px 5px 0 0
+      -moz-border-radius: 5px 5px 0 0
+      -ms-border-radius: 5px 5px 0 0
+      -o-border-radius: 5px 5px 0 0
+      border-radius: 5px 5px 0 0
+    background: #424141 url('../images/sprite.png') 100% -456px no-repeat
+    border-style: solid
+    border-width: 1px 1px 0
+    border-color: #6c6c6c
+    color: #fff
+    -webkit-border-radius: 5px 5px 0 0
+    -moz-border-radius: 5px 5px 0 0
+    -ms-border-radius: 5px 5px 0 0
+    -o-border-radius: 5px 5px 0 0
+    border-radius: 5px 5px 0 0
+
+.group-selected
+  margin-left: 19%
+
+.lightbox-leftside
+  overflow: hidden
+  position: absolute
+  left: 0
+  top: 44px
+  bottom: 0
+  width: 315px
+  border-right: 1px solid #bababa
+  background: #808080
+  padding-right: 35px
+
+.lightbox-nav
+  height: 100%
+  overflow-y: auto
+  overflow-x: hidden
+  a
+    display: block
+    color: #fff
+    padding: 23px 0 21px 65px
+    border-top: 1px solid #939393
+    &:first-child
+      border-top: 0
+    .thumb-info
+      display: none
+    &.vis .thumb-info
+      display: block
+  .thumb-info
+    padding: 0 15px 0 0
+    font-size: 12px
+    word-wrap: break-word
+    .player
+      margin: -3px 0 0
+      font-weight: bold
+      font-size: 14px
+  .thumb-img
+    width: 170px
+    margin: 5px 0 0
+    img
+      display: block
+      max-width: 100%
+      margin: 0 auto
+
+.lightbox-gallery
+  overflow: hidden
+  margin: 0 0 0 315px
+
+.lightbox-item
+  width: 1084px !important
+  height: auto !important
+  border-right: 1px solid #bababa
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40)
+  opacity: 0.4
+  -webkit-transition: opacity 0.3s
+  -moz-transition: opacity 0.3s
+  -o-transition: opacity 0.3s
+  transition: opacity 0.3s
+  &.active
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100)
+    opacity: 1
+
+.lightbox-item-header
+  height: 37px
+  padding: 0 30px
+  color: #fff
+  background: #989898
+
+.lightbox-item-title
+  margin: 0 170px 0 0
+  font-size: 18px
+  font-weight: bold
+  line-height: 37px
+
+.lightbox-item-panel
+  float: right
+  font-size: 18px
+  line-height: 37px
+  white-space: nowrap
+  a
+    vertical-align: top
+    margin: 0 10px 0 0
+    font-size: 24px
+    color: #fff
+    &.clip
+      margin-right: 15px
+  .count
+    vertical-align: top
+    font-weight: bold
+
+.lightbox-item-img
+  padding: 24px 30px
+
+.lightbox-item-img-inner
+  overflow-y: auto
+  img
+    max-width: 100%
+    display: block
+    margin: 0 auto
+    cursor: pointer
+
+.lightbox-prev, .lightbox-next
+  z-index: 510
+  display: block
+  color: #fff
+  font-size: 80px
+  line-height: 768px
+  position: absolute
+  top: 50%
+  margin: -384px 0 0
+
+.lightbox-prev.disabled, .lightbox-next.disabled
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=20)
+  opacity: 0.2
+  cursor: default
+
+.lightbox-prev
+  left: 288px
+
+.lightbox-next
+  left: 1370px
+
+#lightbox-fullscreen
+  display: none
+  background: #000
+  z-index: 600
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  line-height: 100%
+  overflow: auto
+
+.lightbox-fullscreen-img
+  display: table
+  width: 100%
+  height: 100%
+
+.lightbox-fullscreen-img-inner
+  display: table-cell
+  text-align: center
+  vertical-align: middle
+
+.lightbox-fullscreen-close
+  display: block
+  height: 30px
+  width: 30px
+  position: fixed
+  right: 20px
+  top: 20px
+  color: #fff
+  font-size: 20px
+  line-height: 30px
+  text-align: center
+  background: #000
+  cursor: pointer
+
+/* end Service
+/* Loggedin
+
+.loggedin .main-top .inner
+  background: none
+
+.b-logged-news
+  height: 330px
+  position: relative
+  h1
+    font-style: italic
+  ul li
+    font-size: 16px
+    padding: 9px 0
+    span
+      font-size: 30px
+      width: 35px
+      margin-right: 20px
+      display: inline-block
+      text-align: center
+      vertical-align: middle
+  .b-logged-wellcome
+    width: 296px
+    height: 321px
+    position: absolute
+    top: 0
+    right: 10px
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.35)
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.35)
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.35)
+    -webkit-border-radius: 15px
+    -moz-border-radius: 15px
+    -ms-border-radius: 15px
+    -o-border-radius: 15px
+    border-radius: 15px
+    text-align: center
+
+.ie8 .b-logged-news .b-logged-wellcome
+  border: 1px solid #ccc
+
+.b-logged-news .b-logged-wellcome
+  .logged-wellcome-title
+    font-size: 22px
+    line-height: 40px
+    text-align: center
+  .logged-wellcome-img
+    text-align: center
+  input
+    border: 2px solid #ccc
+    -webkit-border-radius: 5px
+    -moz-border-radius: 5px
+    -ms-border-radius: 5px
+    -o-border-radius: 5px
+    border-radius: 5px
+    padding: 0 10px
+    width: 160px
+    height: 28px
+    margin: 5px auto
+  p
+    font-size: 12px
+    margin: 7px auto 7px
+  a
+    text-decoration: underline
+
+.b-logged-stats
+  -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 0 13px
+  -moz-box-shadow: rgba(0, 0, 0, 0.15) 0 0 13px
+  box-shadow: rgba(0, 0, 0, 0.15) 0 0 13px
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzFmYTZkZSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzNiYzJmYyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==')
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #1fa6de), color-stop(100%, #3bc2fc))
+  background: -webkit-linear-gradient(top, #1fa6de, #3bc2fc)
+  background: -moz-linear-gradient(top, #1fa6de, #3bc2fc)
+  background: -o-linear-gradient(top, #1fa6de, #3bc2fc)
+  background: linear-gradient(top, #1fa6de, #3bc2fc)
+  height: 145px
+  margin: 76px 0 40px
+
+.ie8 .b-logged-stats
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF1FA6DE', endColorstr='#FF3BC2FC')
+
+.b-logged-stats .inner
+  width: 1100px !important
+  ul
+    display: table
+    overflow: hidden
+    padding: 9px 0 6px
+    width: 100%
+    li
+      color: #fff
+      display: table-cell
+      text-align: center
+      border-right: 1px solid #5ec0e9
+      padding: 0 10px
+      span
+        display: block
+        font-size: 50px
+        vertical-align: middle
+        margin: 5px auto
+      .title
+        font-size: 30px
+        font-style: italic
+        white-space: nowrap
+      &:last-child
+        border-right: none
+
+.b-logged-service
+  height: 215px
+  margin-bottom: 60px
+  .inner
+    width: 1150px !important
+    .title
+      font-size: 32px
+      font-style: italic
+      font-weight: 300
+      padding-left: 118px
+  ul.tabs
+    position: relative
+    width: 1150px
+    padding: 0
+    margin: 15px auto 0
+    li
+      a
+        display: inline-block
+        border: 2px solid #de7d1f
+        border-bottom: none
+        background: #fff
+        height: 26px
+        -webkit-border-radius: 10px 10px 0 0
+        -moz-border-radius: 10px 10px 0 0
+        -ms-border-radius: 10px 10px 0 0
+        -o-border-radius: 10px 10px 0 0
+        border-radius: 10px 10px 0 0
+        color: #de7d1f
+        font-size: 16px
+        margin: 2px 0 0 0
+        width: auto !important
+        padding: 2px 20px !important
+        &.current
+          background: #de7d1f
+          color: #fff
+          font-size: 22px
+          height: 28px
+          margin-top: 0
+      &.choose
+        float: right
+        a
+          background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzNhYzJmYiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzMxYTNkMyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==')
+          background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #3ac2fb), color-stop(100%, #31a3d3))
+          background: -webkit-linear-gradient(top, #3ac2fb, #31a3d3)
+          background: -moz-linear-gradient(top, #3ac2fb, #31a3d3)
+          background: -o-linear-gradient(top, #3ac2fb, #31a3d3)
+          background: linear-gradient(top, #3ac2fb, #31a3d3)
+          border: none
+          color: #fff
+          line-height: 23px
+          font-size: 16px
+          &.current
+            background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzNhYzJmYiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzMxYTNkMyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==')
+            background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #3ac2fb), color-stop(100%, #31a3d3))
+            background: -webkit-linear-gradient(top, #3ac2fb, #31a3d3)
+            background: -moz-linear-gradient(top, #3ac2fb, #31a3d3)
+            background: -o-linear-gradient(top, #3ac2fb, #31a3d3)
+            background: linear-gradient(top, #3ac2fb, #31a3d3)
+            border: none
+            color: #fff
+            line-height: 23px
+            font-size: 16px
+
+.ie8 .b-logged-service ul.tabs li.choose a
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF3AC2FB', endColorstr='#FF31A3D3')
+  &.current
+    filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF3AC2FB', endColorstr='#FF31A3D3')
+
+.b-logged-service
+  ul.tabs li.choose span
+    display: block
+    margin-left: 10px
+    color: #fff
+  .panes
+    height: 138px
+    background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2RlN2MxZSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZiOTkzYiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==')
+    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #de7c1e), color-stop(100%, #fb993b))
+    background: -webkit-linear-gradient(top, #de7c1e, #fb993b)
+    background: -moz-linear-gradient(top, #de7c1e, #fb993b)
+    background: -o-linear-gradient(top, #de7c1e, #fb993b)
+    background: linear-gradient(top, #de7c1e, #fb993b)
+
+.ie8 .b-logged-service .panes
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFDE7C1E', endColorstr='#FFFB993B')
+
+.b-logged-service .panes .pane
+  width: 1130px
+  height: 138px
+  padding: 0 10px
+  margin: 0 auto
+  ul
+    height: 128px
+    padding: 5px 0
+    li
+      display: inline-block
+      border-right: 1px solid #f9b36f
+      color: #fff
+      padding: 0 24px
+      text-align: center
+      vertical-align: top
+      height: 127px
+      .counter
+        font-size: 36px
+        margin-top: 25px
+        i
+          font-size: 28px
+          font-style: normal
+        span
+          font-size: 28px
+      .rate
+        font-size: 14px
+        vertical-align: top
+        span
+          vertical-align: top
+          display: inline-block
+          line-height: 14px
+          margin-right: 5px
+          &.icon-sort-up
+            position: relative
+            top: 7px
+          &.icon-sort-down
+            position: relative
+            top: 0
+      &:last-child
+        border-right: none
+
+.b-logged-screenshots
+  height: 285px
+  margin-bottom: 80px
+  .inner
+    width: 1150px !important
+    .title
+      font-size: 32px
+      font-style: italic
+      font-weight: 300
+      padding-left: 118px
+    .screenshots-carousel
+      width: 1141px
+      height: 199px
+      overflow: hidden
+      margin-top: 37px
+      position: relative
+      .shadow-left
+        position: absolute
+        height: 125px
+        width: 63px
+        background: url('../images/shadow-left.png') repeat-y
+        bottom: 1px
+        left: 0
+        z-index: 50
+      .shadow-right
+        position: absolute
+        height: 125px
+        width: 63px
+        background: url('../images/shadow-left.png') repeat-y
+        bottom: 1px
+        left: 0
+        z-index: 50
+        right: 0
+        left: auto
+        background: url('../images/shadow-right.png') repeat-y
+      ul
+        margin: 36px 0 0
+        padding: 0
+        li
+          vertical-align: top
+          display: inline-block
+          text-align: left
+          margin: 0 32px 0 0
+          width: 165px !important
+          margin-right: 30px
+          word-wrap: break-word
+          a
+            color: #7a7a7a
+          span
+            display: block
+            &.player
+              font-weight: bold
+          img
+            margin-top: 5px
+
+.help
+  margin-bottom: 60px
+  .title
+    font-size: 32px
+    font-style: italic
+    font-weight: 300
+    padding: 0
+  p
+    margin-top: 25px
+
+/* end Loggedin */
+
+
+
+/* CSS Document */
+
+.service .b-nav-panel
+  position: fixed
+
+.b-logo .big-logo
+  display: none
+  .logo
+    width: 220px
+
+.home
+  .b-logo .small-logo
+    display: none
+  .slogan
+    margin: 0 0 25px
+
+.vod-logo
+  margin-left: 101px
+
+.b-footer-nav
+  margin-left: 147px
+  text-align: left
+  padding-bottom: 15px
+
+.footer-nav-col
+  margin-right: 160px
+
+.copyright
+  clear: left
+  color: #FFFFFF
+  float: left
+  font-size: 0.83em
+  margin: 20px 0 0
+  width: 100%
+
+header
+  height: 150px
+
+.home
+  header
+    height: 130px
+  h1
+    font-weight: normal
+  p
+    font-size: 16px
+
+h1, h2, .main-top h1
+  font-weight: normal
+
+.b-header-nav
+  right: 620px
+
+.home .b-header-nav
+  right: 445px
+
+.header-nav-item a
+  font-weight: bold
+
+.home .home-slide .slide-content h2
+  font-size: 18px
+  margin: 15px 0 5px
+  font-weight: bold
+  font-style: normal
+
+.device-coming-soon-sash
+  position: absolute
+  z-index: 3
+  opacity: 0.85
+  top: 0
+  left: 0
+  background: url(/_inc/images/tmp/coming-soon.png) top left no-repeat
+  float: none
+  width: 80px
+  height: 80px
+
+.b-matrix-nav
+  ul li a
+    display: block
+  .device-coming-soon-sash
+    top: -18px
+
+.second .slide-img
+  width: 174px
+  position: absolute
+  right: 13px
+  display: inline-block
+  vertical-align: top
+  .b-iphone
+    margin-top: 0
+  ul li
+    width: 150px
+    clear: none !IMPORTANT
+    img
+      vertical-align: inherit
+
+#home-slide1 .slide-content
+  margin: 0 46px 0 327px
+  width: 485px
+
+#home-slide4 .slide-content
+  z-index: 3
+
+#home-slide5
+  .slide-img > img
+    left: -62px
+    top: -30px
+  .slide-gallery
+    left: -28px
+    top: -4px
+    width: 327px
+
+.home .slide-img
+  a
+    z-index: 3
+  ul li img
+    vertical-align: inherit
+  > .slide-link
+    position: absolute
+    z-index: 3
+    display: block
+
+.slide-link
+  &.win
+    height: 202px
+    right: 60px
+    top: 0
+    width: 339px
+  &.droid
+    height: 202px
+    left: 10px
+    top: 0
+    width: 339px
+  &.ipad
+    height: 350px
+    left: 120px
+    top: 0
+    width: 450px
+  &.laptop
+    height: 246px
+    left: -37px
+    top: -20px
+    width: 354px
+
+.main-top .inner
+  background: url("/_inc/images/bg-main-top.png") no-repeat scroll 0 0 transparent
+  p
+    font-size: 16px
+    margin-bottom: 10px
+
+.loggedin .main-top .inner
+  background: none transparent
+  padding-left: 5px
+
+.b-logo
+  top: 35px
+
+.site-name
+  font-size: 48px
+
+.slogan
+  font-size: 18px
+
+.b-right-nav
+  right: 20px
+  left: inherit
+  margin-right: 0px
+  ul li
+    padding: 2px 7px
+    a
+      font-size: 16px
+      span
+        padding-top: 0
+        float: left
+        margin: 0 10px 0 0
+
+.home .b-right-nav span
+  padding-top: 0
+  float: left
+  margin: 0 10px 0 0
+
+.b-right-nav .favs-count
+  padding: inherit
+  margin: 0
+  float: none
+  width: inherit
+
+.tabs li a
+  background-color: #FAFAFA
+
+.b-tabs-devices .tabs li a
+  background-color: #FAFAFA
+  position: relative
+  &.current
+    background-color: #FFFFFF
+
+.b-logged-service
+  .panes
+    background: #7db51c
+    /* Old browsers
+    /* IE9 SVG, needs conditional override of 'filter' to 'none'
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzdkYjUxYyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM5N2NlMzIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+)
+    background: -moz-linear-gradient(top, #7db51c 0%, #97ce32 100%)
+    /* FF3.6+
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #7db51c), color-stop(100%, #97ce32))
+    /* Chrome,Safari4+
+    background: -webkit-linear-gradient(top, #7db51c 0%, #97ce32 100%)
+    /* Chrome10+,Safari5.1+
+    background: -o-linear-gradient(top, #7db51c 0%, #97ce32 100%)
+    /* Opera 11.10+
+    background: -ms-linear-gradient(top, #7db51c 0%, #97ce32 100%)
+    /* IE10+
+    background: linear-gradient(to bottom, #7db51c 0%, #97ce32 100%)
+    /* W3C
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7db51c', endColorstr='#97ce32',GradientType=0 )
+    /* IE6-8
+    box-shadow: 0 0 13px rgba(0, 0, 0, 0.15)
+  ul.tabs li.choose a
+    background: #7db51c
+    border: medium none
+    color: #FFFFFF
+    font-size: 16px
+    line-height: 23px
+    &.current
+      background: #7db51c
+      border: medium none
+      color: #FFFFFF
+      font-size: 16px
+      line-height: 23px
+
+.b-logged-screenshots
+  .pane a
+    color: #fff
+  .inner .screenshots-carousel ul li
+    a
+      color: #fff
+    &[style]
+      overflow: hidden !IMPORTANT
+  .pane
+    color: #fff
+    background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2RlN2MxZSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZiOTkzYiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==')
+    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #de7c1e), color-stop(100%, #fb993b))
+    background: -webkit-linear-gradient(top, #de7c1e, #fb993b)
+    background: -moz-linear-gradient(top, #de7c1e, #fb993b)
+    background: -o-linear-gradient(top, #de7c1e, #fb993b)
+    background: linear-gradient(top, #de7c1e, #fb993b)
+  .inner .screenshots-carousel
+    .shadow-left, .shadow-right
+      background: none transparent
+
+.b-logged-service
+  .panes .pane ul li
+    border-right: 1px solid #abd267
+  ul.tabs li a
+    color: #000
+    border-color: #7db51c
+    &.current
+      background: none repeat scroll 0 0 #7db51c
+      color: #fff
+  .panes .pane.favs
+    .col
+      float: left
+      width: 150px
+      font-size: 1.1em
+      margin: 0 100px 0 0
+      &.first
+        margin-left: 250px
+        margin-right: 20px
+        width: 400px
+      &.last
+        margin-right: 0
+        margin-top: 30px
+        vertical-align: bottom
+        color: #fff
+        width: 200px
+        font-style: italic
+      h2
+        font-size: 1.6em
+        font-weight: bold
+        color: #fff
+        padding: 0
+        margin: 10px 0 0
+        line-height: normal
+      p
+        margin: 5px 0
+    ul
+      margin: 2px 0 20px
+      li
+        display: block
+        float: none
+        border: 0px none
+        height: auto
+        padding: 2px 0
+        text-align: left
+    a
+      color: #fff
+      &.add-favourite-service
+        font-size: 24px
+        margin: 0 0 0 6px
+        vertical-align: top
+
+.favourite-images-message
+  display: none
+  width: 400px
+  margin: 50px auto 0
+  font-size: 1.2em
+  text-align: center
+  padding: 15px
+  box-shadow: 0 0 13px rgba(0, 0, 0, 0.15)
+  border-radius: 8px
+
+#favourite-template, #favourite-image-template
+  display: none
+
+.b-logged-screenshots
+  .inner .screenshots-carousel
+    margin-top: 10px
+    ul li span.img
+      height: 125px
+      overflow: hidden
+  .pane
+    background-color: #ffffff
+    box-shadow: 0 0 13px rgba(0, 0, 0, 0.15)
+    .inner
+      margin: 10px auto
+  .inner .screenshots-carousel ul li
+    margin-top: 10px
+    margin-bottom: 10px
+
+.panes .b-tiles-tiles .inner
+  width: 100% !important
+
+#btn-image-search
+  cursor: pointer
+
+.selecter.open
+  z-index: 550
+
+.b-tabs-devices .panes .inner
+  border-radius: 10px
+
+.service
+  .b-app-stores
+    .b-stores-devices
+      border-radius: 10px
+    .tblock td
+      height: 50px
+      vertical-align: middle
+      width: 160px
+      line-height: normal
+    .rate
+      &.rate05
+        background: url('../images/rating-stars.png') no-repeat 0 -192px
+      &.rate15
+        background: url('../images/rating-stars.png') no-repeat 0 -224px
+      &.rate25
+        background: url('../images/rating-stars.png') no-repeat 0 -256px
+      &.rate35
+        background: url('../images/rating-stars.png') no-repeat 0 -288px
+      &.rate45
+        background: url('../images/rating-stars.png') no-repeat 0 -320px
+  .service-category
+    line-height: 1.2em
+    padding-top: 6px
+
+.b-matrix-files
+  img.service-icon
+    height: 27px
+  .inner .matrix-block
+    ul li .img
+      overflow: hidden
+    a:hover
+      font-weight: bold
+      ul
+        background-color: #fafafa
+
+.ratings .b-matrix-nav ul
+  display: table
+  width: 100%
+
+.b-matrix-nav ul li a
+  position: relative
+
+.ratings
+  .b-matrix-nav ul li:first-child
+    width: 319px
+  .b-matrix-files li .score
+    color: #000
+
+.screenshot.ratings .main-content
+  margin-top: 0
+
+.article
+  h2
+    padding-left: 0px
+    font-size: 26px
+    line-height: normal
+    margin-bottom: 15px
+    &.storySubtitle
+      font-style: normal
+      font-size: 20px
+      margin-bottom: 10px
+  .storybyline
+    margin-bottom: 15px
+  .storytext
+    margin-bottom: 30px
+    margin-top: 30px
+    font-size: 16px
+    line-height: 24px
+    p
+      font-size: 16px
+      line-height: 24px
+      margin-bottom: 16px
+    margin-bottom: 30px
+    .bp-story-image
+      max-width: 250px
+      border-radius: 10px
+      margin-left: 20px
+      margin-bottom: 20px
+    ol
+      margin-left: 35px
+      margin-bottom: 15px
+    ul
+      margin-left: 35px
+      margin-bottom: 15px
+      list-style: disc
+
+#regwall
+  h2
+    font-weight: normal
+    font-style: normal
+  p
+    font-family: "Lato"
+    font-size: 1em
+  #register p
+    font-family: "Lato"
+    font-size: 1em
+    font-size: 0.83em
+
+h2.membercontent
+  height: 20px
+  color: #000
+  background: transparent none
+  font-weight: normal
+  border-top: 1px dashed #999
+  margin-top: 20px
+
+.article .other-stories
+  &.b-carousel
+    box-shadow: inherit
+    margin-bottom: 40px
+    clear: left
+    .carousel
+      overflow: hidden
+      width: 750px
+      margin-left: -15px
+      ul li
+        display: inline
+        width: 275px
+        height: 330px
+        float: left
+        -webkit-box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.15)
+        -moz-box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.15)
+        box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.15)
+        margin: 5px 15px
+        a
+          padding: 10px
+        .mostpopimg
+          text-align: center
+        img
+          max-width: 165px
+          border-radius: 5px
+  .arrow span
+    color: #CCCCCC
+    font-size: 60px
+  &.b-carousel .arrow
+    &.next
+      right: -5px
+    display: block
+    position: absolute
+    top: 185px
+    z-index: 50
+    &.disabled
+      display: none
+    &.prev
+      left: 15px
+  h2
+    font-weight: normal
+
+.articlelist ul.bp-features
+  position: relative
+  li
+    width: 100%
+    border-top: 2px dotted #F5F3F3
+    padding: 10px 0
+    display: table
+    h2
+      font-style: normal
+      font-size: 26px
+      padding-left: 0px
+      line-height: normal
+      color: #000
+    .bp-image
+      display: table-cell
+      vertical-align: top
+      img
+        max-width: 200px
+        margin: 0 15px 0 0
+        border-radius: 5px
+    .bp-text
+      display: table-cell
+
+.panes
+  .b-matrix-files .inner .item-block ul li .img
+    overflow: hidden
+    border-radius: 3px
+    img
+      height: 27px
+  .b-tiles-tiles ul .service-item .service-img
+    overflow: hidden
+    border-radius: 5px
+    img
+      height: 160px
+
+.b-carousel.small h3 + p
+  margin-left: 5px
+
+a._device-disabled
+  cursor: default
+
+.service
+  .main-top .introduction .img
+    overflow: hidden
+    border-radius: 8px
+    img
+      height: 160px
+  .introduction .b-info
+    height: 160px
+    table
+      width: 100%
+      tr
+        border-bottom: 1px solid #E8E8E8
+        &.last
+          border-bottom: transparent none
+      th, td
+        text-align: left
+        padding: 7px 5px
+      th
+        width: 30%
+  .b-screenshots .carousel .screenshot-img
+    overflow: hidden
+    border-radius: 12px
+    width: 268px
+    height: 172px
+    img
+      width: 268px
+  .b-carousel .carousel ul li
+    overflow: hidden
+    border-radius: 8px
+    height: 160px
+
+.benchmarking .b-carousel .carousel ul li
+  overflow: hidden
+  border-radius: 8px
+  height: 160px
+
+.b-carousel .carousel ul li a
+  position: relative
+
+.service .b-carousel.small ul li a img, .benchmarking .b-carousel.small ul li a img
+  height: 160px
+
+.service .b-carousel.small ul li a h4, .benchmarking .b-carousel.small ul li a h4
+  background-color: #FFFFFF
+  box-shadow: 1px 1px 3px 0 #666666
+  height: 20px
+  left: 2px
+  line-height: 20px
+  margin: 0
+  opacity: 0.95
+  padding: 2px 4px
+  position: absolute
+  top: 2px
+
+.service .b-carousel.small li a .ui-service-score, .benchmarking .b-carousel.small li a .ui-service-score
+  background-color: #FF9900
+  border-radius: 5px 5px 5px 5px
+  bottom: 4px
+  color: #FFFFFF
+  font-size: 2em
+  font-weight: bold
+  height: 31px
+  line-height: 25px
+  padding: 3px 8px
+  position: absolute
+  right: 19px
+  text-align: center
+
+.service .service-favourite
+  color: #7db51c
+  position: absolute
+  right: 30px
+  font-size: 26px
+  &.favourite-disabled
+    color: #999
+    cursor: default
+
+.item-block.hot-features h3
+  background: #e32a23
+  /* Old browsers
+  /* IE9 SVG, needs conditional override of 'filter' to 'none'
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2UzMmEyMyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmYjZiMzgiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmI2YjM4IiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==)
+  background: -moz-linear-gradient(top, #e32a23 0%, #fb6b38 100%, #fb6b38 100%)
+  /* FF3.6+
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e32a23), color-stop(100%, #fb6b38), color-stop(100%, #fb6b38))
+  /* Chrome,Safari4+
+  background: -webkit-linear-gradient(top, #e32a23 0%, #fb6b38 100%, #fb6b38 100%)
+  /* Chrome10+,Safari5.1+
+  background: -o-linear-gradient(top, #e32a23 0%, #fb6b38 100%, #fb6b38 100%)
+  /* Opera 11.10+
+  background: -ms-linear-gradient(top, #e32a23 0%, #fb6b38 100%, #fb6b38 100%)
+  /* IE10+
+  background: linear-gradient(to bottom, #e32a23 0%, #fb6b38 100%, #fb6b38 100%)
+  /* W3C
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e32a23', endColorstr='#fb6b38',GradientType=0 )
+  /* IE6-8
+
+.loggedin h1
+  font-weight: normal
+
+.main-content .inner-title
+  h2.title
+    font-size: 32px
+    font-style: italic
+    font-weight: normal
+    padding-left: 118px
+  width: 1150px !important
+  margin: 90px auto 0
+
+.b-logged-service .inner .title, .b-logged-screenshots .inner .title
+  font-weight: normal
+
+.b-logged-stats
+  margin-top: 20px
+  a
+    color: #fff
+
+/* same as b-appstores
+
+.service .b-stats
+  -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 0 13px 5px
+  -moz-box-shadow: rgba(0, 0, 0, 0.15) 0 0 13px 5px
+  box-shadow: rgba(0, 0, 0, 0.15) 0 0 13px 5px
+
+.b-logged-news
+  ul
+    float: left
+    width: 580px
+    li
+      span
+        float: left
+        height: 45px
+      clear: left
+  a.news
+    span
+      color: #000
+    &:hover
+      color: #00A2FF
+
+#lightbox-templates
+  display: none
+
+.lightbox
+  background-color: rgba(128, 128, 128, 0.9)
+
+.lightbox-leftside
+  background: none transparent
+
+.lightbox-nav .thumb-img
+  max-height: 150px
+  overflow: hidden
+
+/*.lightbox-item { border-right:0px none; }
+
+.lightbox-item-img
+  overflow-y: auto
+
+.lightbox-dropdown .selecter
+  width: 300px
+
+.lightbox
+  .service-selected
+    margin-left: 260px
+  .group-selected
+    margin-left: 34px
+
+.lightbox-item-package
+  float: left
+  font-size: 18px
+  line-height: 37px
+  margin-right: 5px
+
+.lightbox
+  &.favourites .lightbox-dropdown .selecter-selected
+    color: #999999
+  .lightbox-dropdown .selecter-selected, .favourites
+    z-index: 549
+  &.favourites .favourites
+    color: #FFFFFF
+  .favourites
+    background: url("../images/sprite.png") no-repeat scroll 100% -456px #424141
+    border-color: #6C6C6C
+    border-radius: 5px 5px 0 0
+    border-style: solid
+    border-width: 1px 1px 0
+    color: #999999
+    cursor: pointer
+    display: inline-block
+    font-size: 18px
+    line-height: 24px
+    margin: 0 0 0 34px
+    overflow: hidden
+    padding: 4px 10px 4px 15px
+    position: relative
+    text-overflow: clip
+    width: 180px
+
+.input-loading
+  background: url("/_inc/images/loading-animation.gif") no-repeat scroll right center transparent
+
+.logged-wellcome-img
+  overflow: hidden
+  position: relative
+  .img
+    overflow: hidden
+    position: relative
+    display: block
+    width: 110px
+    height: 110px
+    margin: 10px auto
+    border-radius: 10px 10px 10px 10px
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.35)
+    color: #fff
+    background: url(/_inc/images/member-image.png) no-repeat top left
+    span
+      font-size: 12px
+      position: absolute
+      bottom: 10px
+      left: 0
+      width: 110px
+      em
+        font-size: 24px
+        display: block
+    img
+      max-width: 110px
+      max-height: 110px
+    .hidden
+      display: none
+  input#fileupload
+    cursor: pointer
+    direction: ltr
+    font-size: 23px
+    height: 120px
+    left: 0
+    margin: 0
+    opacity: 0
+    position: absolute
+    top: 0
+    width: 100%
+
+#action-forms
+  display: none
+
+.b-rightside-panel .form-text.invalid
+  border-color: #FF0000
+
+fieldset.submitting
+  opacity: 0.95
+
+.b-rightside-panel
+  fieldset
+    position: relative
+    font-size: 1.1em
+  .error, .data-error
+    display: none
+  .error.form-error, .data-error.form-error
+    opacity: 0.92
+    bottom: 70px
+    left: 20px
+    padding: 20px
+    font-size: 16px
+    display: block
+    /* position:absolute;
+    margin-top: 5px
+    width: 280px
+    color: #000
+    background-color: #fff
+    border: 2px solid #fff
+    border-radius: 5px
+    cursor: pointer
+  .error a.error-close, .data-error a.error-close
+    /* position:absolute;
+    margin-top: 5px
+    top: 5px
+    right: 5px
+    color: #000
+  .complete
+    display: none
+    &.form-complete
+      opacity: 0.92
+      bottom: 70px
+      left: 20px
+      padding: 20px
+      font-size: 16px
+      display: block
+      /* position:absolute;
+      margin-top: 5px
+      width: 280px
+      color: #000
+      background-color: #fff
+      border: 2px solid #fff
+      border-radius: 5px
+      cursor: pointer
+  .form-password-recover
+    display: none
+    color: #fff
+
+.forgotten-password
+  margin: -32px 0 0 12px
+  position: absolute
+
+.b-rightside-panel
+  fieldset
+    margin-bottom: 15px
+  color: #fff
+  width: 340px
+  .form-text
+    width: 278px
+  h1
+    padding-bottom: 10px
+  h2
+    font-size: 20px
+    line-height: normal
+  p
+    padding-bottom: 10px
+  .form-submit
+    width: auto
+    padding: 0 10px
+    margin-top: 7px
+    &[disabled]
+      color: #bbb
+      border-color: #bbb
+  .form-expand
+    display: none
+  .account-add-user, #account-users
+    font-size: 1.2em
+  .account-add-user
+    margin-bottom: 5px
+    display: block
+    span
+      margin-right: 5px
+  #account-users span
+    margin-right: 5px
+  h2.account-users
+    display: none
+    font-style: normal
+    font-weight: bold
+    margin: 15px 0 0
+    padding: 0
+  #account-users
+    background-color: #36364d
+    overflow-y: auto
+    padding: 2px
+    li
+      margin: 3px 0
+
+/*
+ *-webkit-border-radius: 0 0 8px 8px;
+ *-moz-border-radius: 0 0 8px 8px;
+ *-ms-border-radius: 0 0 8px 8px;
+ *-o-border-radius: 0 0 8px 8px;
+ *border-radius: 0 0 8px 8px;
+
+@media (min-width: 1200px) and (max-width: 1439px)
+  .lightbox-dropdown .selecter
+    width: 280px
+  .lightbox .service-selected
+    margin-left: 100px
+
+@media (min-width: 481px) and (max-width: 1199px)
+  #wrapper, .inner, footer
+    min-width: inherit
+  .lightbox-dropdown .selecter
+    width: 250px
+  .lightbox .service-selected
+    margin-left: 100px
+  #main .inner
+    margin: 0 auto

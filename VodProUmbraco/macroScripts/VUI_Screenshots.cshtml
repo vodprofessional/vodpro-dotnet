@@ -1,0 +1,396 @@
+﻿@using VUI.classes;
+@using umbraco.MacroEngines;
+@using System.Web.Security;
+@using umbraco.cms.businesslogic.member;
+@{  
+
+  string Mode = "";
+  bool IsFullMode = false;
+  
+  Member m = VUIfunctions.CurrentUser();
+  string user_status = VUIfunctions.MemberVUIStatus(m);
+  
+  IsFullMode = VUIfunctions.MemberVUIFullMode(user_status);
+
+  
+  VUIfunctions.InitScores();
+  int score = VUIfunctions.TotalFunctionScore;
+    
+  string Platform = @Request.QueryString["platform"];
+  string Service  = @Request.QueryString["service"];
+  string Device   = @Request.QueryString["device"];
+  
+  string PlatformTitle = VUIfunctions.GetTidyVUIFolderName(Platform, VUIfunctions.VUI_PLATFORM);
+  string ServiceTitle  = VUIfunctions.GetTidyVUIFolderName(Service, VUIfunctions.VUI_SERVICE);
+  string DeviceTitle   = VUIfunctions.GetTidyVUIFolderName(Device, VUIfunctions.VUI_DEVICE);
+  
+  bool   ShowDeviceBreakdown = true;
+  
+  List<VUIService> serviceList;
+       
+  VUIService vuiservice = null;
+  
+  
+  try
+  {
+  
+    // Platform List Only
+    if(!String.IsNullOrEmpty(Platform) && String.IsNullOrEmpty(Service))
+    {
+        Mode = "SERVICE_LIST_BY_PLATFORM";
+    }
+    
+    // Platform and Service Sepcified
+    //  - If Devices exist for this platform try to list them
+    //  - If there is only one Service in the platform go straight to the definition
+    if(!String.IsNullOrEmpty(Platform) && !String.IsNullOrEmpty(Service))
+    {
+      if(String.IsNullOrEmpty(Device))
+      {
+         if(!VUIfunctions.ServiceHasDevicesOnPlatform(Service, Platform))
+         {
+            Mode = "SERVICE_DESCRIPTION";
+         }
+         else
+         {
+            Mode = "SERVICE_LIST_BY_PLATFORM_AND_DEVICE";
+         }
+      }
+      else
+      {
+         Mode = "SERVICE_DESCRIPTION";
+      }
+    }
+    
+    
+    if(Mode.Equals("SERVICE_DESCRIPTION"))
+    {
+      vuiservice = VUIfunctions.ServiceDescription(@Platform, @Service, @Device);
+    }
+    
+    //Lay out Header  
+    
+    string PageTitle = "";
+    
+  
+       if(Mode.Equals("SERVICE_LIST_BY_PLATFORM"))
+       {
+          PageTitle += PlatformTitle;
+  
+          if(Platform.ToLower().Equals("all"))
+          {
+            PageTitle = "Screenshots for all Video Services on all Platforms";
+          }
+          else
+          {
+            PageTitle = "Screenshots for Video Services on " + PlatformTitle;
+          }
+       }
+       else
+       {
+          PageTitle += "<a class=\"ui-link-platform\" href=\"/vui/screenshots/" + Platform + "\">" + PlatformTitle + "</a>";
+       }
+          
+       if(Mode.Equals("SERVICE_LIST_BY_PLATFORM_AND_DEVICE"))
+       {
+          PageTitle += " | " + ServiceTitle;
+       }
+        
+       if (Mode.Equals("SERVICE_DESCRIPTION") && !String.IsNullOrEmpty(Device))
+       {
+          PageTitle += " | <a href=\"/vui/screenshots/" + Platform + "/" + Service + "\">" + DeviceTitle + "</a>";
+          PageTitle += " | " + ServiceTitle ;
+       }
+       else if(Mode.Equals("SERVICE_DESCRIPTION") && !String.IsNullOrEmpty(ServiceTitle))
+       {
+          PageTitle += " | " + ServiceTitle;
+       }
+      <script type="text/javascript">document.title += ' @ServiceTitle @PlatformTitle @DeviceTitle ';</script>
+      
+      if (Mode.Equals("SERVICE_DESCRIPTION"))
+      {
+        if(IsFullMode || VUIfunctions.ServiceIsPreviewable(vuiservice.ServiceName))
+        {
+          int sizeOfStar = 15;
+          int starOriginalOffset = -150;
+          int starVerticalOffset = 0;
+          int xoffset = starOriginalOffset + Convert.ToInt32(@vuiservice.personalRating.Rating) * sizeOfStar;
+          string starPos = "background-position:" + xoffset + "px " + starVerticalOffset + "px";
+    
+    
+          <div class="ui-heading large">
+           <h1>@Html.Raw(PageTitle)</h1>
+          
+            <div class="ui-rating ui-hide-from-print ui-visible">
+              <div class="ui-item-rating">@String.Format("{0:0.0}", @vuiservice.overallRating.Rating)</div>
+              <div class="ui-item-rate" data-serviceid="@vuiservice.ServiceId" data-rating="@vuiservice.personalRating.Rating">
+                 <a href="#" style="@starPos"></a>
+                 <span>
+                @if(vuiservice.personalRating.Rating > 0)
+                {
+                  string s = @vuiservice.personalRating.Rating + "/10";
+                  @:@s
+                }
+                  </span>
+                 <input type="hidden" id="service-rating" size="2" />
+              </div>
+              <div class="ui-item-overall-rating">
+                @if(!IsFullMode && VUIfunctions.ServiceIsPreviewable(vuiservice.ServiceName))
+                {
+                 @: Subscribers can rate services!
+                }
+                else if(IsFullMode && vuiservice.overallRating.NumRaters > 0)
+                {
+                  string s = "rated " + String.Format("{0:0.0}", @vuiservice.overallRating.Rating) + "/10 by " + @vuiservice.overallRating.NumRaters + " users";
+                  @:@s
+                }
+              </div>
+            </div>
+          </div>  
+         }
+      }
+      else
+      {
+        <div class="ui-heading large">
+           <h1>@Html.Raw(PageTitle)</h1>
+          @if(Mode.Equals("SERVICE_LIST_BY_PLATFORM"))
+          {
+            <ul class="ui-screenshot-tabs">
+              <li><a href="/vui/screenshots/All">All</a></li>
+              <li><a href="/vui/screenshots/Tablet">Tablet</a></li>
+              <li><a href="/vui/screenshots/Smartphone">Phone</a></li>
+              <li><a href="/vui/screenshots/Connected-TV">TV</a></li>
+              <li><a href="/vui/screenshots/Web">Web</a></li>
+           
+            </ul>
+          }
+        </div>
+      }
+    
+    
+    
+    <div id="main-ui-grid-wrapper" class="ui-grid">        
+        <div id="main-ui-grid" class="ui-hidden-scroll-main-area">
+          
+  
+  
+    @if(Mode.Equals("SERVICE_LIST_BY_PLATFORM") || Mode.Equals("SERVICE_LIST_BY_PLATFORM_AND_DEVICE"))
+    {
+         <ul class="ui-list">
+      @{
+        List<VUIService> services = VUIfunctions.ServiceListByPlatformAndService(@Platform, @Service);
+                  
+        foreach(VUIService serviceItem in services )
+        {
+          string DeviceName = String.Empty;
+          string url = "/vui/screenshots";
+          string modeClass = "";
+            
+          if(IsFullMode || VUIfunctions.ServiceIsPreviewable(serviceItem.ServiceName))
+          {
+            if(Mode.Equals("SERVICE_LIST_BY_PLATFORM"))
+            {
+              if(serviceItem.ServiceCount > 1)
+              {
+                url += "/" + Platform + "/" + serviceItem.ServiceName.Replace(' ','-');
+              }
+              else
+              {              
+        @*  url += "/service/" + serviceItem.Platform + "/" + serviceItem.ServiceName.Replace(' ','-'); *@
+        url += "/service" + serviceItem.WebTileUIURL;
+              }
+            }
+            else if (Mode.Equals("SERVICE_LIST_BY_PLATFORM_AND_DEVICE"))
+            {
+        url = "/vui/screenshots/service" + serviceItem.WebTileUIURL;
+            } 
+          }
+          else
+          {
+            url = "#";
+            modeClass = "ui-preview-disabled";
+          }
+          <li class="ui-service-template ui-service @modeClass">
+            <a href="@url" title="See @serviceItem.NumImages VUI screenshots for this service">
+              <h2>
+                  @serviceItem.ServiceName
+                  @if(Mode.Equals("SERVICE_LIST_BY_PLATFORM_AND_DEVICE"))
+                  {
+                      if(String.IsNullOrEmpty(serviceItem.Device))
+                      {
+                        @: | @serviceItem.Platform
+                      }
+                      else
+                      {
+                        @: | @serviceItem.Device
+                      }
+                  }
+                  @* (@serviceItem.NumImages) *@
+              </h2>
+              <div class="ui-image-bg">
+                <div class="ui-image-box"><img data-original="@serviceItem.ImageURL_th" class="lazy" src="/vui-media/media/vui-loaderb64.gif"></div>
+              </div>
+              <div class="ui-service-score">
+              @if(IsFullMode || VUIfunctions.ServiceIsPreviewable(serviceItem.ServiceName))
+              {
+                if(Mode.Equals("SERVICE_LIST_BY_PLATFORM_AND_DEVICE") && serviceItem.Score > 0)
+                {
+                  <div class="score">@serviceItem.Score</div>
+                  <div class="score-text">common VUI functions</div>
+                }
+              }
+              </div>
+            </a>
+            @if(!(IsFullMode || VUIfunctions.ServiceIsPreviewable(serviceItem.ServiceName)))
+            {
+              <a class="ui-preview-overlay" href="/vui/subscribe"><span>Subscribe to see this resource</span></a>
+            }
+          </li>
+         }
+        }
+        </ul>
+      }  
+    
+      @if(Mode.Equals("SERVICE_DESCRIPTION"))
+      {
+         
+         if(IsFullMode || VUIfunctions.ServiceIsPreviewable(vuiservice.ServiceName))
+         {
+           int total = vuiservice.Screenshots.Count;
+           int counter = 0;
+           
+            
+           
+           <div class="ui-screenshots-desc-col">
+             <ul>
+              @if(vuiservice.Score > 0 && !vuiservice.IsComingSoon)
+              {
+                string bUrl = "/vui/benchmarking/service/";
+                bUrl  += vuiservice.ServiceId + "/" + vuiservice.ServiceName.Replace(" ","-") + "/" + Platform;
+                if(!String.IsNullOrEmpty(Device))
+                {
+                  bUrl += "/" + Device;
+                }
+                 <li>
+                    <h2>Functionality</h2>
+                    <a href="@bUrl" title="View this service's benchmarking profile">
+                      <div class="score-description">
+                        This service contains at least
+                      </div>
+                      <div class="score">@vuiservice.Score</div>
+                      <div class="score-description">
+                        common VUI functions
+                      </div>
+                    </a>
+                 </li>
+              }
+               <li>
+                <div class="ui-service-info ui-visible">
+                  <h2>Service Information</h2>
+                  
+                  <span class="ui-service-info-desc">@vuiservice.Description</span>
+                  <dl>
+                  @if(!String.IsNullOrEmpty(vuiservice.Region))
+                  {
+                    <dt title="Geographical regions">Availability:</dt><dd>@vuiservice.Region</dd>
+                  }
+                  @if(!String.IsNullOrEmpty(vuiservice.ServiceType))
+                  {
+                    <dt title="Service types">Type:</dt><dd>@vuiservice.ServiceType.Replace(",",", ")</dd>
+                  }
+                  @if(!String.IsNullOrEmpty(vuiservice.ServiceCategory))
+                  {
+                    <dt title="Service categories">Category:</dt><dd>@vuiservice.ServiceCategory.Replace(",",", ")</dd>
+                  }
+                  </dl>
+                  
+                </div>
+               </li>
+             </ul>
+           
+           </div>
+            
+           <ul class="ui-list ui-screenshot-tiles">
+           @foreach(VUIImage screenshot in vuiservice.Screenshots)
+           {
+              counter ++;
+              string imgurl = "ui-lightbox-" + screenshot.Node.Id;
+    
+             <li class="ui-service-image">
+                <a rel="fancybox-group" href="#@imgurl" class="ui-lightbox">
+                  <div class="ui-image-box">
+                    @*                    <img class="lazy"
+                      data-id="@screenshot.Node.Id" data-isfavourite="@screenshot.IsFavourite"
+                      data-platform="@vuiservice.Platform"
+                      data-device="@vuiservice.Device"
+                      data-service="@vuiservice.ServiceName"
+                      data-pagetype="screenshot.PageType"               
+                      data-original="@screenshot.ImageURL_th" src="/vui-media/media/vui-loaderb64.gif"> *@
+                    <img data-id="@screenshot.Node.Id" data-isfavourite="@screenshot.IsFavourite"
+                      data-platform="@vuiservice.Platform"
+                      data-device="@vuiservice.Device"
+                      data-service="@vuiservice.ServiceName"
+                      data-pagetype="screenshot.PageType"               
+                      src="@screenshot.ImageURL_th"></div>
+                  <div class="ui-image-pagetype">@screenshot.PageType</div>
+                  @if(screenshot.IsFavourite)
+                  {
+                    <div class="ui-image-info ui-favourite" data-id="@screenshot.Node.Id"></div>           
+                  }
+                  else
+                  {
+                    <div class="ui-image-info" data-id="@screenshot.Node.Id"></div>   
+                  }
+                  
+                </a>          
+                <div class="ui-lightbox-view" style="display:none" id="@imgurl">
+                  <div class="ui-lightbox-heading">
+                    <h1>@ServiceTitle |
+                      @if(!String.IsNullOrEmpty(DeviceTitle))
+                      {
+                        @: @DeviceTitle  |
+                      }
+                      @screenshot.VuiDate | @counter of @total </h1>
+                    <div class="ui-lightbox-tools ui-hide-from-print">
+                      <div class="ui-lightbox-fave">
+                        @if(screenshot.IsFavourite)
+                        {
+                          <a class="ui-favourite-link ui-favourite" href="#" data-id="@screenshot.Node.Id" title="This is one of your favourite images"></a>
+                        }
+                        else
+                        {
+                          <a class="ui-favourite-link" href="#" data-id="@screenshot.Node.Id" title="Add to favourite"></a>
+                        }
+                      </div>
+                      <div class="ui-lightbox-print"><a class="ui-print-link" href="#" title="Print"></a></div>
+                    </div>
+                    <h2>@screenshot.PageType</h2>
+                  </div>
+                  <div class="ui-lightbox-image"><img src="@screenshot.ImageURL_full" /></div>
+                </div>
+              </li>
+            }
+            </ul>
+            
+            
+          }
+                    
+          else
+          {
+            <div class="ui-subscription-message">You need to be a subscriber to see this</div>
+          }
+                    
+      }
+  
+          
+          
+        </div>
+    </div>
+  
+   }
+   catch(Exception ex1)
+    {
+      <div class="ui-error-message">There was an error</div>
+    }
+  
+}

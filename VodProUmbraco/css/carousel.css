@@ -1,0 +1,130 @@
+/* Sort of generic elements */
+
+#s3slider {
+   position: relative; /* important */
+   overflow: hidden; /* important */
+   font-family: Arial, Helvetica, sans-serif;
+   font-size:12px;
+}
+
+#s3slider a{
+   color:#000;
+}
+
+#s3sliderContent {
+   position: absolute; /* important */
+   top: 0; /* important */
+   margin-left: 0; /* important */
+   padding:0px;
+   list-style: none;
+}
+
+.s3sliderImage {
+   float: left; /* important */
+   position: relative; /* important */
+   display: none; /* important */
+}
+
+.s3sliderImage span {
+   position: absolute; /* important */
+   padding: 10px 15px;
+   filter: alpha(opacity=70); /* here you can set the opacity of box with text */
+   -moz-opacity: 0.7; /* here you can set the opacity of box with text */
+   -khtml-opacity: 0.7; /* here you can set the opacity of box with text */
+   opacity: 0.7; /* here you can set the opacity of box with text */
+   color: #000;
+   display: none; /* important */
+
+   /*
+       if you put
+       top: 0; -> the box with text will be shown at the top of the image
+       if you put
+       bottom: 0; -> the box with text will be shown at the bottom of the image
+   */
+}
+
+.s3sliderImage span.ctop
+{
+  top:0;
+  left:0;
+}
+
+.s3sliderImage span.cbottom
+{
+  bottom:0;
+  left:0;
+  font-size: 1.5em;
+}
+
+.s3sliderImage span.cleft
+{
+  top:0;
+  left:0;
+}
+
+.s3sliderImage span.ccenter
+{
+  top:30%;
+  left:22%;
+}
+
+.s3sliderImage span.cright
+{
+  top:0;
+  right:0;
+}
+
+#s3slider p
+{
+  font-size:13px;
+  margin-top:3px; 
+}
+
+
+.clear {
+   clear: both;
+} 
+
+/* Sort of skinning elements */
+#s3slider
+{
+  width:615px;
+  height:340px;
+  margin: 0 0 20px 0;
+  border: 2px solid #000;
+}
+#s3sliderContent
+{
+  width:585px;
+}
+.s3sliderImage span {
+  background-color:#fff;
+}
+.s3sliderImage span strong {
+  font-weight: bold;
+}
+
+.s3sliderImage span.ctop,.s3sliderImage span.cbottom
+{
+  width:585px;  
+}
+.s3sliderImage span.cleft,.s3sliderImage span.cright
+{
+  width: 140px;
+  height:320px;  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* EDITOR PROPERTIES - PLEASE DON'T DELETE THIS LINE TO AVOID DUPLICATE PROPERTIES */

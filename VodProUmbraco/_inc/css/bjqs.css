@@ -1,0 +1,74 @@
+/* Basic jQuery Slider essential styles */
+
+ul.bjqs{position:relative;list-style:none;padding:0;margin:0;overflow:hidden; display:none;}
+li.bjqs-slide{position:absolute; display:block;}
+ul.bjqs-controls{list-style:none;margin:0;padding:0;z-index:9999;}
+ul.bjqs-controls.v-centered li a{position:absolute;}
+ol.bjqs-markers{list-style: none; padding: 0; margin: 0; width:100%;}
+ol.bjqs-markers.h-centered{text-align: center;}
+ol.bjqs-markers li{
+	display:inline-block;
+	width:16px;
+	height:16px;
+	background-image:url(/_inc/images/vui-marketing-2014/sliders/button.png); 
+	background-repeat:no-repeat;
+	margin:0 7px;
+	border:none;
+}
+ol.bjqs-markers li a {
+	display:inline-block;
+	overflow:hidden; 
+	height:16px; 
+	width:0; 
+	padding-left:15px;
+	border:none;
+}
+
+ol.bjqs-markers li:hover {
+		background-image:url(/_inc/images/vui-marketing-2014/sliders/button-hov.png); 
+		background-repeat:no-repeat;
+}
+
+ol.bjqs-markers li.active-marker {
+		background-image:url(/_inc/images/vui-marketing-2014/sliders/button-hov.png); 
+		background-repeat:no-repeat;
+
+}
+
+
+
+p.bjqs-caption{display:block;width:96%;margin:0;padding:2%;position:absolute;bottom:0;}
+
+
+#carousel2 ol {
+	margin-top:40px;
+}
+
+#carousel2 ol.bjqs-markers li{
+	display:inline-block;
+	width:16px;
+	height:16px;
+	background-image:url(/_inc/images/vui-marketing-2014/sliders/c-button.png); 
+	background-repeat:no-repeat;
+	margin:0 7px;
+	border:none;
+}
+#carousel2 ol.bjqs-markers li a {
+	display:inline-block;
+	overflow:hidden; 
+	height:16px; 
+	width:0; 
+	padding-left:15px;
+	border:none;
+}
+
+#carousel2 ol.bjqs-markers li:hover {
+		background-image:url(/_inc/images/vui-marketing-2014/sliders/c-button-hov.png); 
+		background-repeat:no-repeat;
+}
+
+#carousel2 ol.bjqs-markers li.active-marker {
+		background-image:url(/_inc/images/vui-marketing-2014/sliders/c-button-hov.png); 
+		background-repeat:no-repeat;
+
+}

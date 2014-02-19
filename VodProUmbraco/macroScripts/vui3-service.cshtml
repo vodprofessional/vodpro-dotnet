@@ -1,0 +1,1565 @@
+@using VUI.classes;
+@using VUI.VUI3.classes;
+@using umbraco.cms.businesslogic.member;
+@using System.Web;
+@helper WriteAnalysis(VUI3ServiceMaster service, string platformName, string deviceName)
+    {
+    <div class="pane">
+      <div class="inner">
+        <div class="b-carousel big">
+          <div class="carousel">
+            <ul>    
+    
+    @foreach (VUI3ScreenshotAnalysis analysis in service.ScreenshotPackages.GetScreenshotsForPlatform(platformName, deviceName).Where(a => a.ImageCount > 0).OrderByDescending(a => a.AnalysisDate))
+    {
+        string pd = @analysis.PlatformName;
+        if (!String.IsNullOrEmpty(@analysis.DeviceName))
+        {
+            pd += @"/" + @analysis.DeviceName;
+        }
+              <li>
+                <a class="open-lightbox" data-service="@service.ServiceName" data-analysis="@analysis.DateTag" data-id="@analysis.Id" data-serviceid="@service.Id" data-device="@pd">
+                  <div class="screenshot-img">
+                    <img src="@analysis.DefaultImageURL_md" alt="" />
+                  </div>
+                  <div class="screenshot-count" title="@analysis.ImageCount screenshots">
+                    @analysis.ImageCount<span class="icon-camera"></span>
+                  </div>
+                  <div class="screenshot-title">
+                    @analysis.DateTag
+                  </div>
+                </a>
+               </li>
+                
+    @*<div>
+        <h2>@analysis.DateTag</h2>
+        <a href="#" class="screenshot-analysis" data-id="@analysis.Id" data-service="@service.Id"><img src="@analysis.DefaultImageURL_md" /></a>
+    </div> *@
+    }
+            </ul>
+          </div>
+          <a class="arrow prev" href="#"></a><a class="arrow next" href="#"></a>
+        </div>
+      </div>
+    </div>
+}
+
+@helper WriteBenchmark(VUI3ServiceMaster service, string platformName, string deviceName)
+    {
+        if (service.ScreenshotPackages.HasBenchmarksForPlatform(platformName, deviceName))
+        {
+            List<VUI3ScreenshotAnalysis> Benchmarks = service.ScreenshotPackages.GetScreenshotsForPlatform(platformName, deviceName).Where(b => b.Benchmark.BenchmarkScore > 0).OrderByDescending(a => a.Benchmark.BenchmarkDate).ToList();
+       
+      <div class="pane">
+        <div class="inner">
+          <p>
+            This service was most recently benchmarked on @Benchmarks[0].Benchmark.BenchmarkDate.ToString("dd MMM yyyy") using @Benchmarks[0].Benchmark.DeviceDescription
+          </p>
+          <div class="item-block">
+
+            <h3>
+            Total Benchmark Scores
+            </h3>
+            <div class="b-content">
+                <table class="t-block">
+                    <thead>
+                    <tr>
+                        <td class="title">&nbsp;
+                                
+                        </td>
+                        @foreach (VUI3ScreenshotAnalysis benchmark in Benchmarks)
+                        {
+                            <td class="data">@benchmark.Benchmark.BenchmarkDate.ToString("dd MMM yyyy")</td>   
+                        }
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="title">&nbsp;
+                                   
+                        </td>
+                        @foreach (VUI3ScreenshotAnalysis benchmark in Benchmarks)
+                        {
+                            <td class="data"><div class="number">@benchmark.Benchmark.BenchmarkScore</div></td>   
+                        }
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+          </div>
+          
+
+            <div class="item-block">
+                <h3>
+                Content Discovery & Recommendation
+                </h3>
+                <div class="b-content">
+                <table class="t-block">
+                    <thead>
+                    <tr>
+                        <td class="title">&nbsp;
+                                
+                        </td>
+                    @foreach (VUI3ScreenshotAnalysis benchmark in Benchmarks)
+                    {
+                        <td class="data">@benchmark.Benchmark.BenchmarkDate.ToString("dd MMM yyyy")</td>   
+                    }
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @WriteCapability(Benchmarks, "Featured content", String.Empty, "01. ")
+                    @WriteCapability(Benchmarks, "Categorisation", String.Empty, "02. ")
+                    @WriteCapability(Benchmarks, "Category homepage", String.Empty, "03. ")
+                    @WriteCapability(Benchmarks, "Most popular", String.Empty, "04. ")
+                    @WriteCapability(Benchmarks, "Recently added", String.Empty, "05. ")
+                    @WriteCapability(Benchmarks, "More episodes", String.Empty, "06. ")
+                    @WriteCapability(Benchmarks, "Content recommendation", String.Empty, "07. ")
+                    @WriteCapability(Benchmarks, "EPG", String.Empty, "08. ")
+                    @WriteCapability(Benchmarks, "Search", String.Empty, "09. ")
+                    @WriteCapability(Benchmarks, "Predictive search", String.Empty, "10. ")
+                    @WriteCapability(Benchmarks, "A-Z page", String.Empty, "11. ")
+                    @WriteCapability(Benchmarks, "Social sharing (out)", "Social Sharing (Outbound)", "12. ")
+                    @WriteCapability(Benchmarks, "Social sharing (in-service)", String.Empty, "13. ")
+                    </tbody>
+                </table>
+                </div>
+            </div>
+
+            <div class="item-block">
+                <h3>
+                Video Player
+                </h3>
+                <div class="b-content">
+                <table class="t-block">
+                    <thead>
+                    <tr>
+                        <td class="title">&nbsp;
+                                
+                        </td>
+                    @foreach (VUI3ScreenshotAnalysis benchmark in Benchmarks)
+                    {
+                        <td class="data">@benchmark.Benchmark.BenchmarkDate.ToString("dd MMM yyyy")</td>   
+                    }
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @WriteCapability(Benchmarks, "Customised video player", String.Empty, "14. ")
+                    @WriteCapability(Benchmarks, "Video description", String.Empty, "15. ")
+                    </tbody>
+                </table>
+                </div>
+            </div>
+
+            <div class="item-block">
+                <h3>
+                Personalisation
+                </h3>
+                <div class="b-content">
+                <table class="t-block">
+                    <thead>
+                    <tr>
+                        <td class="title">&nbsp;
+                                
+                        </td>
+                    @foreach (VUI3ScreenshotAnalysis benchmark in Benchmarks)
+                    {
+                        <td class="data">@benchmark.Benchmark.BenchmarkDate.ToString("dd MMM yyyy")</td>   
+                    }
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @WriteCapability(Benchmarks, "Favourites", String.Empty, "16. ")
+                    @WriteCapability(Benchmarks, "Playlists", String.Empty, "17. ")
+                    @WriteCapability(Benchmarks, "Sign in / Register", String.Empty, "18. ")
+                    @WriteCapability(Benchmarks, "Social sign-on", String.Empty, "19. ")
+                    @WriteCapability(Benchmarks, "Parental controls", String.Empty, "20. ")
+                    </tbody>
+                </table>
+                </div>
+            </div>
+
+            <div class="item-block">
+                <h3>
+                Support
+                </h3>
+                <div class="b-content">
+                <table class="t-block">
+                    <thead>
+                    <tr>
+                        <td class="title">&nbsp;
+                                
+                        </td>
+                    @foreach (VUI3ScreenshotAnalysis benchmark in Benchmarks)
+                    {
+                        <td class="data">@benchmark.Benchmark.BenchmarkDate.ToString("dd MMM yyyy")</td>   
+                    }
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @WriteCapability(Benchmarks, "Help", String.Empty, "21. ")
+                    @WriteCapability(Benchmarks, "About", String.Empty, "22. ")
+                    @WriteCapability(Benchmarks, "Contact", String.Empty, "23. ")
+                    @WriteCapability(Benchmarks, "Accessibility", String.Empty, "24. ")
+                    @WriteCapability(Benchmarks, "Watch on other platforms", String.Empty, "25. ")
+                    </tbody>
+                </table>
+                </div>
+            </div>
+
+            @{
+                    bool showHotFeatures = false;
+
+                    foreach (VUI3ScreenshotAnalysis benchmark in Benchmarks)
+                    {
+                        if (!benchmark.Benchmark.HideHotFeatures)
+                        {
+                            showHotFeatures = true;
+                            break;
+                        }
+                    }
+
+                    if (showHotFeatures)
+                    {
+                <div class="item-block hot-features">
+                    <h3>
+                    Hot Features <em>(not included in Benchmark scores)</em>
+                    </h3>
+                    <div class="b-content">
+                    <table class="t-block">
+                        <thead>
+                        <tr>
+                            <td class="title">&nbsp;
+                                
+                            </td>
+                        @foreach (VUI3ScreenshotAnalysis benchmark in Benchmarks)
+                        {
+                            <td class="data">@benchmark.Benchmark.BenchmarkDate.ToString("dd MMM yyyy")</td>   
+                        }
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @WriteHotFeature(Benchmarks, "Adaptive bitrate streaming", String.Empty, "26. ")
+                        @WriteHotFeature(Benchmarks, "Audio-described Shows", String.Empty, "27. ")
+                        @WriteHotFeature(Benchmarks, "Device synchronisation", String.Empty, "28. ")
+                        @WriteHotFeature(Benchmarks, "Download to device", String.Empty, "29. ")
+                        @WriteHotFeature(Benchmarks, "Extended Archive", String.Empty, "30. ")
+                        @WriteHotFeature(Benchmarks, "Last viewed", String.Empty, "31. ")
+                        @WriteHotFeature(Benchmarks, "Live Restart", String.Empty, "32. ")
+                        @WriteHotFeature(Benchmarks, "Live Viewing", String.Empty, "33. ")
+                        @WriteHotFeature(Benchmarks, "Resume after stopping", String.Empty, "34. ")
+                        @WriteHotFeature(Benchmarks, "Social recommendation", "Social content recommendation", "35. ")
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+                    }
+
+
+                    if (IsFullMode)
+                    {
+
+                        int deviceId = Benchmarks[0].DeviceId;
+                        int platformId = Benchmarks[0].PlatformId;
+
+                        List<VUI3ServiceMasterMatrixItem> serviceList;
+                        if (deviceId != -1)
+                        {
+                            serviceList = VUI3Utility.GetBestServicesForDevice(deviceId);
+                        }
+                        else
+                        {
+                            serviceList = VUI3Utility.GetBestServicesForPlatform(platformId);
+                        }
+
+                        if (serviceList != null && serviceList.Count > 0)
+                        {
+                            int counter = 0;
+                            int maxtoshow = 50;
+            
+                    <div class="b-carousel small">
+                      <h3>
+                        Best in Class
+                      </h3>
+                      <div class="carousel">
+                        <ul>
+                            
+                            @foreach (VUI3ServiceMasterMatrixItem s in serviceList)
+                            {
+                                counter++;
+                                if (counter <= maxtoshow)
+                                {
+                                <li>
+                                    <a href="@s.URL">
+                                        <h4>@s.ServiceName</h4>
+                                        <img data-original="@s.IconURL" class="lazy" src="/vui-media/media/vui-loaderb64.gif" />
+                                        <div class="ui-service-score">@s.BestBenchmarkScore.ToString()</div>
+                                    </a>
+                                </li>
+                                }
+                            }
+                        </ul>
+                      </div>
+                      <a class="arrow prev" href="#"><span class="icon-chevron-left"></span></a><a class="arrow next" href="#"><span class="icon-chevron-right"></span></a>
+                    </div>
+                        }
+                    }
+                    else
+                    {
+                    <div class="b-carousel small">
+                      <h3>
+                        Best in Class
+                      </h3>
+                      <p>When you subscribe, you’ll be able to see the breakdown for individual platforms (like Web, Tablet, Smartphone etc.) and find out which existing video services display the greatest range of functionality.</p>
+                      @*<div class="carousel">
+                        <ul>
+                            <li>
+                                <a href="#" class="preview-link">
+                                    <h4>???</h4>
+                                    <img src="/css/images/benchmarking-dummy.png" />
+                                    <div class="ui-service-score">21</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="preview-link">
+                                    <h4>???</h4>
+                                    <img src="/css/images/benchmarking-dummy.png" />
+                                    <div class="ui-service-score">20</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="preview-link">
+                                    <h4>???</h4>
+                                    <img src="/css/images/benchmarking-dummy.png" />
+                                    <div class="ui-service-score">19</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="preview-link">
+                                    <h4>???</h4>
+                                    <img src="/css/images/benchmarking-dummy.png" />
+                                    <div class="ui-service-score">18</div>
+                                </a>
+                            </li>
+                         </ul>
+                      </div>*@
+                   </div>
+                    }
+            }
+        </div>
+   
+      </div>
+        }
+        else
+        {
+        <div class="pane">
+            <div class="inner">
+              ??
+            </div>
+        </div>
+        }
+}
+
+@helper WriteCapability(List<VUI3ScreenshotAnalysis> Benchmarks, string capabilityName, string altText, string num)
+    {
+  <tr>
+    <td>
+    <div class="title">
+     <strong>@num</strong>
+
+    @if (!String.IsNullOrEmpty(altText))
+    {
+        @: @altText   
+    }
+    else
+    {
+        @: @capabilityName
+    }
+
+    <span class="description">
+        <span class="desc-inner">
+            @Html.Raw(PageDescriptions.GetDescription(capabilityName))
+        </span>
+        <span class="arrow"></span> 
+    </span>
+    </div>
+    </td>
+    @foreach (VUI3ScreenshotAnalysis benchmark in Benchmarks)
+    {
+        string str = String.Empty;
+        if (benchmark.Benchmark.HasCapability(capabilityName))
+        {
+            str = "ok";
+        }
+        else
+        {
+            str = "remove";
+        }
+        <td class="data"><span class="icon-@str"></span></td>
+    }
+</tr>
+}
+@helper WriteHotFeature(List<VUI3ScreenshotAnalysis> Benchmarks, string capabilityName, string altText, string num)
+    {
+  <tr>
+    <td>
+    <div class="title">
+    <strong>@num</strong>
+    @if (!String.IsNullOrEmpty(altText))
+    {
+        @: @altText   
+    }
+    else
+    {
+        @: @capabilityName
+    }    
+    <span class="description">
+        <span class="desc-inner">
+            @Html.Raw(PageDescriptions.GetDescription(capabilityName))
+        </span>
+        <span class="arrow"></span> 
+    </span>
+    </div>
+    </td>
+    @foreach (VUI3ScreenshotAnalysis benchmark in Benchmarks)
+    {
+        string str = String.Empty;
+        if (benchmark.Benchmark.HideHotFeatures)
+        {
+            str = "";
+        }
+        else
+        {
+            if (benchmark.Benchmark.HasHotFeature(capabilityName))
+            {
+                str = "icon-ok";
+            }
+            else
+            {
+                str = "icon-remove";
+            }
+        }
+        <td class="data"><span class="@str"></span></td>
+    }
+</tr>
+}
+@helper WriteStar(decimal rating)
+    {
+        string rateStars = "rate0";
+        if (rating > 4.75M)
+        {
+            rateStars = "rate5";
+        }
+        else if (rating <= 4.75M && rating > 4.25M)
+        {
+            rateStars = "rate45";
+        }
+        else if (rating <= 4.25M && rating > 3.75M)
+        {
+            rateStars = "rate4";
+        }
+        else if (rating <= 3.75M && rating > 3.25M)
+        {
+            rateStars = "rate35";
+        }
+        else if (rating <= 3.25M && rating > 2.75M)
+        {
+            rateStars = "rate3";
+        }
+        else if (rating <= 2.75M && rating > 2.25M)
+        {
+            rateStars = "rate25";
+        }
+        else if (rating <= 2.25M && rating > 1.75M)
+        {
+            rateStars = "rate2";
+        }
+        else if (rating <= 1.75M && rating > 1.25M)
+        {
+            rateStars = "rate15";
+        }
+        else if (rating <= 1.25M && rating > 0.75M)
+        {
+            rateStars = "rate1";
+        }
+        else if (rating <= 1.25M && rating > 0.75M)
+        {
+            rateStars = "rate05";
+        }
+        else if (rating <= 0.75M && rating > 0.25M)
+        {
+            rateStars = "rate1";
+        }
+    <div class="rate @(rateStars)"></div> 
+}
+@functions{
+    bool IsFullMode = false;
+    VUI3ServiceMasterMatrix Matrix;
+    VUI3PageFunctionDescriptions PageDescriptions;
+}
+@{
+    VUIUser u = VUI3Utility.GetUser();
+    VUI3ServiceMaster Service = new VUI3ServiceMaster(@Model.Id);
+    PageDescriptions = new VUI3PageFunctionDescriptions();
+    
+    @: @Html.Raw(@VUI3Utility.SetPageTitle(@"VUI Library - " + Model.serviceName))
+    
+    if (!Service.IsPreviewable && u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_NONE))
+    {
+        IsFullMode = false;
+        
+     <div id="main">
+      <div class="main-top">
+        <div class="inner">
+            <h1>@Model.serviceName - Available to Subscribers!</h1>
+
+              <p>
+                You will need to <a href="#" data-panelregion="action-login-form" data-panel="true">login to the VUI Library</a> in order to get more detail about this service.
+
+              </p>
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
+              <p>
+                If you don't have a login yet, you can <a href="#" data-panelregion="action-contact-form" data-panel="true">contact us to arrange a demonstration from one of our team</a>
+                and <a href="/vui3">find out more about the benefits of becoming a subscriber</a>.
+              </p>
+        </div>
+      </div>
+     </div>
+    }
+    else if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_ADMIN) || u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_USER))
+    {
+        IsFullMode = true;
+    }
+
+
+    if (Service.IsPreviewable || IsFullMode)
+    {
+        Matrix = new VUI3ServiceMasterMatrix();
+        VUI3ServiceSnapshot Snapshot = Service.GetSnapshot();
+
+        DateTime snapshotDate = DateTime.MinValue;
+        string snapshotTaken = String.Empty;
+
+
+        if (Snapshot != null)
+        {
+            snapshotDate = Snapshot.snapshotDate;
+            if (snapshotDate.ToString("yyyyMMdd").Equals(DateTime.Today.ToString("yyyyMMdd")))
+            {
+                snapshotTaken = "today";
+            }
+            else if (snapshotDate.ToString("yyyyMMdd").Equals(DateTime.Today.AddDays(-1).ToString("yyyyMMdd")))
+            {
+                snapshotTaken = "yesterday";
+            }
+            else
+            {
+                snapshotTaken = snapshotDate.ToString("dd MMM yyyy");
+            }
+        }
+
+        VUI3ServiceRatingsList Ratings = Service.GetRatings();
+        
+        
+        
+     <div id="main">
+      <div class="main-top">
+        <div class="inner">
+          @if (IsFullMode)
+          {
+              string favClass = "";
+              string disabledClass = "";
+              string favTitle = "Add to your favourite services";
+
+              List<ServiceFavourite> favs = u.FavouriteServices.serviceFavourites;
+              if (favs.Count(s => s.id.ToString().Equals(@Model.Id.ToString())) > 0)
+              {
+                  favClass = "is-favourite";
+              }
+              if (String.IsNullOrEmpty(favClass) && favs.Count >= 5)
+              {
+                  disabledClass = "favourite-disabled";
+                  favTitle = "You have reached your 5-service favourite limit. Please remove one of your other favourite services before adding this one";
+              }
+              <a data-id="@Model.Id" class="service-favourite @(favClass) @(disabledClass)" href="#" title="@(favTitle)">  
+                  <span class="icon-plus-sign"></span>
+              </a>
+          }
+          <h1>
+            @Model.serviceName 
+            
+            @if (@Model.isComingSoon)
+            {
+                <em>Coming Soon</em>   
+            }
+          </h1>
+          <div class="introduction clr">
+    @{
+            string availability = @Model.availability.Replace(",", "<br/>");
+            string subscriptionType = @Model.subscriptionType.Replace(",", "<br/>");
+            string serviceCategory = @Model.serviceCategory.Replace(",", "<br/>");
+            <div class="b-info">
+              <table border="0">
+                <tr>
+                    <th>Availability</th>
+                    <td>@Html.Raw(availability)</td>
+                </tr>
+                <tr>
+                    <th>Pay Model</th>
+                    <td>@Html.Raw(subscriptionType)</td>
+                </tr>
+                <tr class="last">
+                    <th>Category</th>
+                    <td>@Html.Raw(serviceCategory)</td>
+                </tr>
+              </table>
+              <!--
+              <dl>
+                <dt>
+                  <span></span><span></span><spab></spab>
+                  <dd>
+                    <span></span><span></span><span class="service-category"></span>
+                  </dd>
+                </dt>
+              </dl>
+              -->
+            </div>
+    }
+            <div class="img">
+              <img src="@Service.IconURL" alt="Icon for @Model.serviceName" />
+            </div>
+            <div class="desc">
+              <p>
+                @Model.description <!-- @Model.deviceAvailability -->
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+        
+        
+        
+      <div class="main-content">
+      @if (Snapshot != null)
+      {
+        <div class="b-stats">
+          <div class="inner">
+            <ul>
+            @if (@Snapshot.HasScreenshots())
+            {
+              <li>
+                <div>
+                  <div class="count">
+                    @Snapshot.numScreenshots.ToString("#,#")<span class="icon-camera"></span>
+                  </div>
+                  <div class="title">
+                    Screenshots from<br>@Snapshot.numScreenshotDevices different devices
+                  </div>
+                </div>
+              </li>
+            }
+            @if (@Snapshot.HasBenchmarks())
+            {
+              <li>
+                <div>
+                  <div class="count">
+                    @Snapshot.benchmarkAverage<i>/25</i><span class="icon-bar-chart"></span>
+                  </div>
+                  <div class="title">
+                    Average benchmark score<br> across @Snapshot.benchmarkDevices devices
+                  </div>
+                </div>
+              </li>
+            }
+            @if (@Snapshot.HasRatings())
+            {
+              <li>
+                <div>
+                  <div class="count">
+                    @Snapshot.ratingAverage.ToString("#.0#")<i>/5</i><span class="icon-star-empty"></span>
+                  </div>
+                  <div class="title">
+                    Average User Rating from<br> Apple AppStore / Google Play
+                  </div>
+                </div>
+              </li>
+            }
+            @if (@Snapshot.HasTwitter())
+            {
+              <li>
+                <div>
+                  <div class="count">
+                    @Snapshot.twitterFollowers.ToString("#,#")<span class="icon-twitter"></span>
+                  </div>
+                  <div class="title">
+                    Twitter Followers<br> (as of @snapshotTaken)
+                  </div>
+                </div>
+              </li>
+            }
+            @if (@Snapshot.HasFacebook())
+            {
+              <li>
+                <div>
+                  <div class="count">
+                    @Snapshot.facebookLikes.ToString("#,#")<span class="icon-thumbs-up-alt"></span>
+                  </div>
+                  <div class="title">
+                    Facebook likes<br> (as of @snapshotTaken)
+                  </div>
+                </div>
+              </li>
+            }
+            @if (@Snapshot.HasYoutube())
+            {
+              <li>
+                <div>
+                  <div class="count">
+                    @Snapshot.ytSubscriberCount.ToString("#,#")<span class="icon-youtube"></span>
+                  </div>
+                  <div class="title">
+                    Subscribers on<br> YouTube (as of @snapshotTaken)
+                  </div>
+                </div>
+              </li>
+            }
+            </ul>
+          </div>
+        </div>
+      }
+
+@*<div class="json">
+@Service.ScreenshotPackages.AsJson()
+</div>
+*@
+        <div class="b-screenshots service-slide" id="slide-screenshots">
+          <div class="inner">
+            <h2>
+              Screenshots
+            </h2>
+            <div class="b-tabs b-tabs-devices uber-tabs">
+              <ul class="tabs inner">
+              @{
+      string strDisabled = "";
+      string uberDisabled = "";
+
+      if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Web", String.Empty))
+      {
+          strDisabled = "_device-disabled";
+          uberDisabled = "_platform-disabled";
+      }
+      else { strDisabled = ""; uberDisabled = ""; }
+                
+                <span class="uber-tab @(uberDisabled)" data-devicegroup="web" title="Web">
+                  <span class="title"><h3>Web</h3>
+                    <img src="/_inc/images/new-platform/platform-web@(uberDisabled).png"  class="platform-image" />
+                  </span>  
+                    <li>
+                      <a href="#" class="@strDisabled" data-device="web">
+                        <img src="/_inc/images/new-platform/device-chrome@(strDisabled).png" alt=""><h3>Chrome</h3></a>
+                    </li>
+                </span>
+                  
+                
+      if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Tablet", "iPad") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Tablet", "Android") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Tablet", "Windows"))
+      {
+          uberDisabled = "_platform-disabled";
+      }
+      else { uberDisabled = ""; }
+                <span class="uber-tab @(uberDisabled)" data-devicegroup="tablets" title="Tablets">
+                    <span class="title">
+                      <h3>Tablet</h3>
+                      <img src="/_inc/images/new-platform/platform-tablet@(uberDisabled).png" class="platform-image" />
+                    </span>
+
+                      @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Tablet", "iPad"))
+                      {
+                          strDisabled = "_device-disabled";
+                      }
+                      else { strDisabled = ""; }
+                    <li title="iPad">
+                      <a href="#" class="@strDisabled" data-device="tabletipad"><img src="/_inc/images/new-platform/device-apple@(strDisabled).png" alt=""><h3>iPad</h3></a>
+                    </li> 
+
+                      @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Tablet", "Android"))
+                      {
+                          strDisabled = "_device-disabled";
+                      }
+                      else { strDisabled = ""; }
+                    <li title="Android Tablet">
+                      <a href="#" class="@strDisabled" data-device="tabletandroid"><img src="/_inc/images/new-platform/device-droid@(strDisabled).png" alt=""><h3>Android</h3></a>
+                    </li> 
+                      @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Tablet", "Windows"))
+                      {
+                          strDisabled = "_device-disabled";
+                      }
+                      else { strDisabled = ""; }
+                    <li title="Windows 8 Tablet">
+                      <a href="#" class="@strDisabled" data-device="tabletwindows"><img src="/_inc/images/new-platform/device-win@(strDisabled).png" alt=""><h3>Windows</h3></a>
+                    </li>
+                </span>
+                  
+                  
+                      if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Smartphone", "iPhone") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Smartphone", "Android") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Smartphone", "Windows"))
+                      {
+                          uberDisabled = "_platform-disabled";
+                      }
+                      else { uberDisabled = ""; }
+                <span class="uber-tab @(uberDisabled)" data-devicegroup="smartphone" title="Smartphones">   
+                  
+                  <span class="title">
+                    <h3>Smartphone</h3>
+                      <img src="/_inc/images/new-platform/platform-smartphone@(uberDisabled).png" class="platform-image" />
+                  </span>
+
+                    @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Smartphone", "iPhone"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                    <li title="iPhone">
+                      <a href="#" class="@strDisabled" data-device="smartphoneiphone"><img src="/_inc/images/new-platform/device-apple@(strDisabled).png" alt=""><h3>iPhone</h3></a>
+                    </li> 
+      
+                      @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Smartphone", "Android"))
+                      {
+                          strDisabled = "_device-disabled";
+                      }
+                      else { strDisabled = ""; }
+                    <li title="Andoird Smartphone">
+                      <a href="#" class="@strDisabled" data-device="smartphoneandroid"><img src="/_inc/images/new-platform/device-droid@(strDisabled).png" alt=""><h3>Android</h3></a>
+                    </li> 
+                    @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Smartphone", "Windows"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                  <li title="Windows 8 Smartphone">
+                    <a href="#" class="@strDisabled" data-device="smartphonewindows"><img src="/_inc/images/new-platform/device-win@(strDisabled).png" alt=""><h3>Windows</h3></a>
+                  </li>
+                </span>
+      
+                if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Samsung") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Sony")
+                    && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "LG") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Panasonic"))
+                    {
+                        uberDisabled = "_platform-disabled";
+                    }
+                    else { uberDisabled = ""; }
+                <span class="uber-tab @(uberDisabled)" data-devicegroup="connectedtv" title="Connected TVs">
+                  <span class="title">
+                    <h3>TV</h3>
+                      <img src="/_inc/images/new-platform/platform-tv@(uberDisabled).png" class="platform-image" />
+                  </span>
+                     @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Samsung"))
+                     {
+                         strDisabled = "_device-disabled";
+                     }
+                     else { strDisabled = ""; }
+                    <li title="Samsung">
+                      <a href="#" class="@strDisabled" data-device="connectedtv-samsung"><img src="/_inc/images/new-platform/device-smart@(strDisabled).png" alt=""><h3>Samsung</h3></a>
+                    </li> 
+
+                    @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Sony"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                    <li title="Sony">
+                      <a href="#" class="@strDisabled" data-device="connectedtv-sony"><img src="/_inc/images/new-platform/device-sony@(strDisabled).png" alt=""><h3>Sony</h3></a>
+                    </li>
+                    
+                    @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "LG"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                    <li title="LG">
+                      <a href="#" class="@strDisabled" data-device="connectedtv-sony"><img src="/_inc/images/new-platform/device-lg@(strDisabled).png" alt=""><h3>LG</h3></a>
+                    </li>
+
+                    @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Panasonic"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                    <!-- <li title="Panasonic">
+                      <a href="#" class="@strDisabled" data-device="connectedtv-sony"><img src="/_inc/images/new-platform/device-panasonic@(strDisabled).png" alt=""><h3>LG</h3></a>
+                    </li> -->
+                </span>   
+                  
+      
+                    if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Now TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Roku"))
+                    {
+                        uberDisabled = "_platform-disabled";
+                    }
+                    else { uberDisabled = ""; }
+                <span class="uber-tab @(uberDisabled)" data-devicegroup="stb" title="Set-Top Boxes">
+                  <span class="title">
+                    <h3>STBs</h3>
+                      <img src="/_inc/images/new-platform/platform-stb@(uberDisabled).png" class="platform-image" />
+                  </span>
+                     @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Now TV"))
+                     {
+                         strDisabled = "_device-disabled";
+                     }
+                     else { strDisabled = ""; }
+                    <li title="Now TV">
+                      <a href="#" class="@strDisabled" data-device="stb-nowtv"><img src="/_inc/images/new-platform/device-nowtv@(strDisabled).png" alt=""><h3>Now TV</h3></a>
+                    </li> 
+                    @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Roku"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                  <li title="Roku">
+                    <a href="#" class="@strDisabled" data-device="stb-roku"><img src="/_inc/images/new-platform/device-roku@(strDisabled).png" alt=""><h3>Roku</h3></a>
+                  </li>
+                </span>
+                             
+                    if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Games Consoles", "Playstation") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Games Consoles", "XBox"))
+                    {
+                        uberDisabled = "_platform-disabled";
+                    }
+                    else { uberDisabled = ""; }
+                <span class="uber-tab @(uberDisabled)" data-devicegroup="gamesconsoles" title="Games Consoles">
+                  <span class="title">
+                    <h3>Consoles</h3>
+                      <img src="/_inc/images/new-platform/platform-console@(uberDisabled).png" class="platform-image" />
+                  </span>
+                     @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Games Consoles", "Playstation"))
+                     {
+                         strDisabled = "_device-disabled";
+                     }
+                     else { strDisabled = ""; }
+                    <li title="Playstation">
+                      <a href="#" class="@strDisabled" data-device="gamesconsoles-playstation"><img src="/_inc/images/new-platform/device-ps@(strDisabled).png" alt=""><h3>Playstation</h3></a>
+                    </li> 
+                    @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Games Consoles", "XBox"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                  <li title="XBox">
+                    <a href="#" class="@strDisabled" data-device="gamesconsoles-xbox"><img src="/_inc/images/new-platform/device-xbox@(strDisabled).png" alt=""><h3>XBox</h3></a>
+                  </li>
+                </span>
+                }
+              </ul>
+              <div class="panes">
+                @WriteAnalysis(@Service, "Web", String.Empty)
+                @WriteAnalysis(@Service, "Tablet", "iPad")
+                @WriteAnalysis(@Service, "Tablet", "Android")
+                @WriteAnalysis(@Service, "Tablet", "Windows")
+                @WriteAnalysis(@Service, "Smartphone", "iPhone")
+                @WriteAnalysis(@Service, "Smartphone", "Android")
+                @WriteAnalysis(@Service, "Smartphone", "Windows")
+                @WriteAnalysis(@Service, "Connected TV", "Samsung")
+                @WriteAnalysis(@Service, "Connected TV", "Sony")
+                @WriteAnalysis(@Service, "Connected TV", "LG")
+                <!--WriteAnalysis(@Service, "Connected TV", "Panasonic")-->
+                @WriteAnalysis(@Service, "STB", "Now TV")
+                @WriteAnalysis(@Service, "STB", "Roku")
+                @WriteAnalysis(@Service, "Games Consoles", "Playstation")
+                @WriteAnalysis(@Service, "Games Consoles", "XBox")
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="b-bencmarking service-slide" id="slide-benchmarking">
+          <div class="inner">
+            <h2>
+              Benchmarking
+            </h2>
+            <div class="b-tabs b-tabs-devices uber-tabs">
+              <ul class="tabs inner">
+              @{
+                    if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Web", String.Empty))
+                    {
+                        strDisabled = "_device-disabled";
+                        uberDisabled = "_platform-disabled";
+                    }
+                    else { strDisabled = ""; uberDisabled = ""; }
+                
+                <span class="uber-tab @(uberDisabled)" data-devicegroup="web" title="Web">
+                  <span class="title"><h3>Web</h3>
+                    <img src="/_inc/images/new-platform/platform-web@(uberDisabled).png"  class="platform-image" />
+                  </span>  
+                    <li>
+                      <a href="#" class="@strDisabled" data-device="web">
+                        <img src="/_inc/images/new-platform/device-chrome@(strDisabled).png" alt=""><h3>Chrome</h3></a>
+                    </li>
+                </span>
+                  
+                
+                    if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Tablet", "iPad") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Tablet", "Android") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Tablet", "Windows"))
+                    {
+                        uberDisabled = "_platform-disabled";
+                    }
+                    else { uberDisabled = ""; }
+                <span class="uber-tab @(uberDisabled)" data-devicegroup="tablets" title="Tablets">
+                    <span class="title">
+                      <h3>Tablet</h3>
+                      <img src="/_inc/images/new-platform/platform-tablet@(uberDisabled).png" class="platform-image" />
+                    </span>
+
+                      @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Tablet", "iPad"))
+                      {
+                          strDisabled = "_device-disabled";
+                      }
+                      else { strDisabled = ""; }
+                    <li title="iPad">
+                      <a href="#" class="@strDisabled" data-device="tabletipad"><img src="/_inc/images/new-platform/device-apple@(strDisabled).png" alt=""><h3>iPad</h3></a>
+                    </li> 
+
+                      @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Tablet", "Android"))
+                      {
+                          strDisabled = "_device-disabled";
+                      }
+                      else { strDisabled = ""; }
+                    <li title="Android Tablet">
+                      <a href="#" class="@strDisabled" data-device="tabletandroid"><img src="/_inc/images/new-platform/device-droid@(strDisabled).png" alt=""><h3>Android</h3></a>
+                    </li> 
+                      @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Tablet", "Windows"))
+                      {
+                          strDisabled = "_device-disabled";
+                      }
+                      else { strDisabled = ""; }
+                    <li title="Windows 8 Tablet">
+                      <a href="#" class="@strDisabled" data-device="tabletiphone"><img src="/_inc/images/new-platform/device-win@(strDisabled).png" alt=""><h3>Windows</h3></a>
+                    </li>
+                </span>
+                  
+                  
+                      if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "iPhone") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "Android") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "Windows"))
+                      {
+                          uberDisabled = "_platform-disabled";
+                      }
+                      else { uberDisabled = ""; }
+                <span class="uber-tab @(uberDisabled)" data-devicegroup="smartphone" title="Smartphones">   
+                  
+                  <span class="title">
+                    <h3>Smartphone</h3>
+                      <img src="/_inc/images/new-platform/platform-smartphone@(uberDisabled).png" class="platform-image" />
+                  </span>
+
+                    @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "iPhone"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                    <li title="iPhone">
+                      <a href="#" class="@strDisabled" data-device="smartphoneiphone"><img src="/_inc/images/new-platform/device-apple@(strDisabled).png" alt=""><h3>iPhone</h3></a>
+                    </li> 
+      
+                      @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "Android"))
+                      {
+                          strDisabled = "_device-disabled";
+                      }
+                      else { strDisabled = ""; }
+                    <li title="Andoird Smartphone">
+                      <a href="#" class="@strDisabled" data-device="smartphoneandroid"><img src="/_inc/images/new-platform/device-droid@(strDisabled).png" alt=""><h3>Android</h3></a>
+                    </li> 
+                    @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "Windows"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                  <li title="Windows 8 Smartphone">
+                    <a href="#" class="@strDisabled" data-device="smartphonewindows"><img src="/_inc/images/new-platform/device-win@(strDisabled).png" alt=""><h3>Windows</h3></a>
+                  </li>
+                </span>
+      
+                    if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "Samsung") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "Sony"))
+                    {
+                        uberDisabled = "_platform-disabled";
+                    }
+                    else { uberDisabled = ""; }
+                <span class="uber-tab @(uberDisabled)" data-devicegroup="connectedtv" title="Connected TVs">
+                  <span class="title">
+                    <h3>TV</h3>
+                      <img src="/_inc/images/new-platform/platform-tv@(uberDisabled).png" class="platform-image" />
+                  </span>
+                     @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "Samsung"))
+                     {
+                         strDisabled = "_device-disabled";
+                     }
+                    else { strDisabled = ""; }
+                    <li title="Samsung">
+                      <a href="#" class="@strDisabled" data-device="connectedtv-samsung"><img src="/_inc/images/new-platform/device-smart@(strDisabled).png" alt=""><h3>Samsung</h3></a>
+                    </li> 
+                    @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "Sony"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                    <li title="Sony">
+                      <a href="#" class="@strDisabled" data-device="connectedtv-sony"><img src="/_inc/images/new-platform/device-sony@(strDisabled).png" alt=""><h3>Sony</h3></a>
+                    </li>
+                    @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "LG"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                    <li title="LG">
+                      <a href="#" class="@strDisabled" data-device="connectedtv-lg"><img src="/_inc/images/new-platform/device-lg@(strDisabled).png" alt=""><h3>LG</h3></a>
+                    </li>
+                </span>   
+                  
+      
+                    if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Now TV") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Roku"))
+                    {
+                        uberDisabled = "_platform-disabled";
+                    }
+                    else { uberDisabled = ""; }
+                <span class="uber-tab @(uberDisabled)" data-devicegroup="stb" title="Set-Top Boxes">
+                  <span class="title">
+                    <h3>STBs</h3>
+                      <img src="/_inc/images/new-platform/platform-stb@(uberDisabled).png" class="platform-image" />
+                  </span>
+                     @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Now TV"))
+                     {
+                         strDisabled = "_device-disabled";
+                     }
+                     else { strDisabled = ""; }
+                    <li title="Now TV">
+                      <a href="#" class="@strDisabled" data-device="stb-nowtv"><img src="/_inc/images/new-platform/device-nowtv@(strDisabled).png" alt=""><h3>Now TV</h3></a>
+                    </li> 
+                    @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Roku"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                  <li title="Roku">
+                    <a href="#" class="@strDisabled" data-device="stb-roku"><img src="/_inc/images/new-platform/device-roku@(strDisabled).png" alt=""><h3>Roku</h3></a>
+                  </li>
+                </span>
+                             
+                    if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Games Consoles", "Playstation") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Games Consoles", "XBox"))
+                    {
+                        uberDisabled = "_platform-disabled";
+                    }
+                    else { uberDisabled = ""; }
+                <span class="uber-tab @(uberDisabled)" data-devicegroup="gamesconsoles" title="Games Consoles">
+                  <span class="title">
+                    <h3>Consoles</h3>
+                      <img src="/_inc/images/new-platform/platform-console@(uberDisabled).png" class="platform-image" />
+                  </span>
+                     @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Games Consoles", "Playstation"))
+                     {
+                         strDisabled = "_device-disabled";
+                     }
+                     else { strDisabled = ""; }
+                    <li title="Playstation">
+                      <a href="#" class="@strDisabled" data-device="gamesconsoles-playstation"><img src="/_inc/images/new-platform/device-ps@(strDisabled).png" alt=""><h3>Playstation</h3></a>
+                    </li> 
+                    @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Games Consoles", "XBox"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                  <li title="XBox">
+                    <a href="#" class="@strDisabled" data-device="gamesconsoles-xbox"><img src="/_inc/images/new-platform/device-xbox@(strDisabled).png" alt=""><h3>XBox</h3></a>
+                  </li>
+                </span>
+                }
+              </ul>
+              <div class="panes">
+                @WriteBenchmark(@Service, "Web", String.Empty)
+                @WriteBenchmark(@Service, "Tablet", "iPad")
+                @WriteBenchmark(@Service, "Tablet", "Android")
+                @WriteBenchmark(@Service, "Tablet", "Windows")
+                @WriteBenchmark(@Service, "Smartphone", "iPhone")
+                @WriteBenchmark(@Service, "Smartphone", "Android")
+                @WriteBenchmark(@Service, "Smartphone", "Windows")
+                @WriteBenchmark(@Service, "Connected TV", "Samsung")
+                @WriteBenchmark(@Service, "Connected TV", "Sony")
+                @WriteBenchmark(@Service, "Connected TV", "LG")
+                <!-- WriteBenchmark(@@Service, "Connected TV", "Panasonic") -->
+                @WriteBenchmark(@Service, "STB", "Now TV")
+                @WriteBenchmark(@Service, "STB", "Roku")
+                @WriteBenchmark(@Service, "Games Consoles", "Playstation")
+                @WriteBenchmark(@Service, "Games Consoles", "XBox")
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="b-app-stores service-slide" id="slide-ratings">
+          <div class="inner">
+            <h2>
+              @Model.serviceName in the AppStores
+            </h2>
+            <div class="b-stores-devices">
+              <table class="tblock">
+                <thead>
+                  <tr>
+                    <td>&nbsp;
+                      
+                    </td>
+                @{
+                    if (Ratings.Has("Tablet/iPad")) { strDisabled = ""; }
+                    else { strDisabled = "_device-disabled"; }                          
+                    <td>
+                      <img src="/_inc/images/tmp/devices/ipad@(strDisabled).png" alt="">
+                    </td>
+                    if (Ratings.Has("Smartphone/iPhone")) { strDisabled = ""; }
+                    else { strDisabled = "_device-disabled"; }           
+                    <td>
+                      <img src="/_inc/images/tmp/devices/iphone@(strDisabled).png" alt="">
+                    </td>
+                    if (Ratings.Has("Tablet/Android")) { strDisabled = ""; }
+                    else { strDisabled = "_device-disabled"; }           
+                    <td>
+                      <img src="/_inc/images/tmp/devices/android-tablet@(strDisabled).png" alt="">
+                    </td>
+                    if (Ratings.Has("Smartphone/Android")) { strDisabled = ""; }
+                    else { strDisabled = "_device-disabled"; }           
+                    <td>
+                      <img src="/_inc/images/tmp/devices/android-phone@(strDisabled).png" alt="">
+                    </td>
+                }
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      Average user rating
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Tablet/iPad"))
+                    {
+                      <!--<div class="rate rate3"></div>-->
+                      @WriteStar(@Ratings.Get("Tablet/iPad").AverageUserRating)
+                      @: @Ratings.Get("Tablet/iPad").AverageUserRating
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Smartphone/iPhone"))
+                    {
+                      @WriteStar(@Ratings.Get("Smartphone/iPhone").AverageUserRating)
+                      @: @Ratings.Get("Smartphone/iPhone").AverageUserRating
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Tablet/Android"))
+                    {
+                        decimal r = Decimal.Multiply(Ratings.Get("Tablet/Android").AverageUserRating, new decimal(0.05));
+                      @WriteStar(r)
+                      @: @String.Format("{0:0.00}", r)
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Smartphone/Android"))
+                    {
+                        decimal r = Decimal.Multiply(Ratings.Get("Smartphone/Android").AverageUserRating, new decimal(0.05));
+                      @WriteStar(r)
+                      @: @String.Format("{0:0.00}", r)
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Number of ratings
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Tablet/iPad"))
+                    {
+                      @: @Ratings.Get("Tablet/iPad").UserRatingCount.ToString("#,#")
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Smartphone/iPhone"))
+                    {
+                      @: @Ratings.Get("Smartphone/iPhone").UserRatingCount.ToString("#,#")
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Tablet/Android"))
+                    {
+                      @: @Ratings.Get("Tablet/Android").UserRatingCount.ToString("#,#")
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Smartphone/Android"))
+                    {
+                      @: @Ratings.Get("Smartphone/Android").UserRatingCount.ToString("#,#")
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                    <td>
+                      Average user rating (Current Version)
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Tablet/iPad"))
+                    {
+                      @WriteStar(Ratings.Get("Tablet/iPad").AverageUserRatingForCurrentVersion)
+                      @: @Ratings.Get("Tablet/iPad").AverageUserRatingForCurrentVersion
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Smartphone/iPhone"))
+                    {
+                      @WriteStar(Ratings.Get("Smartphone/iPhone").AverageUserRatingForCurrentVersion)
+                      @: @Ratings.Get("Smartphone/iPhone").AverageUserRatingForCurrentVersion
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td>
+                      &nbsp;
+                    </td>
+                    <td>
+                      &nbsp;
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Number of ratings
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Tablet/iPad"))
+                    {
+                      @: @Ratings.Get("Tablet/iPad").UserRatingCountForCurrentVersion.ToString("#,#")
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Smartphone/iPhone"))
+                    {
+                      @: @Ratings.Get("Smartphone/iPhone").UserRatingCountForCurrentVersion.ToString("#,#")
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td>
+                    &nbsp;
+                    </td>
+                    <td> 
+                    &nbsp;
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      App version
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Tablet/iPad"))
+                    {
+                      @: @Ratings.Get("Tablet/iPad").Version
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Smartphone/iPhone"))
+                    {
+                      @: @Ratings.Get("Smartphone/iPhone").Version
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Tablet/Android"))
+                    {
+                      @: @Ratings.Get("Tablet/Android").Version
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Smartphone/Android"))
+                    {
+                      @: @Ratings.Get("Smartphone/Android").Version
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Most recent release
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Tablet/iPad"))
+                    {
+                      @: @Ratings.Get("Tablet/iPad").ReleaseDate.ToString("dd MMM yyyy")
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Smartphone/iPhone"))
+                    {
+                      @: @Ratings.Get("Smartphone/iPhone").ReleaseDate.ToString("dd MMM yyyy")
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Tablet/Android"))
+                    {
+                      @: @Ratings.Get("Tablet/Android").ReleaseDate.ToString("dd MMM yyyy")
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Smartphone/Android"))
+                    {
+                      @: @Ratings.Get("Smartphone/Android").ReleaseDate.ToString("dd MMM yyyy")
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Number of downloads
+                    </td>
+                    <td>&nbsp;
+                      
+                    </td>
+                    <td>&nbsp;
+                      
+                    </td>
+                    <td class="number">
+                    @if (@Ratings.Has("Tablet/Android"))
+                    {
+                      @: @Ratings.Get("Tablet/Android").NumDownloads
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td class="number">
+                    @if (@Ratings.Has("Smartphone/Android"))
+                    {
+                      @: @Ratings.Get("Smartphone/Android").NumDownloads
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Figures last updated</td>
+                    
+                    <td>
+                    @if (@Ratings.Has("Tablet/iPad"))
+                    {
+                      @: @Ratings.Get("Tablet/iPad").DateRecorded.ToString("dd MMM yyyy")
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Smartphone/iPhone"))
+                    {
+                      @: @Ratings.Get("Smartphone/iPhone").DateRecorded.ToString("dd MMM yyyy")
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Tablet/Android"))
+                    {
+                      @: @Ratings.Get("Tablet/Android").DateRecorded.ToString("dd MMM yyyy")
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Smartphone/Android"))
+                    {
+                      @: @Ratings.Get("Smartphone/Android").DateRecorded.ToString("dd MMM yyyy")
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="b-ndent"></div>
+      </div>
+    </div>
+
+    }
+}

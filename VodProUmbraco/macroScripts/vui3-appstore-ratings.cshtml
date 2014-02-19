@@ -1,0 +1,188 @@
+@using VUI.classes;
+@using VUI.VUI3.classes;
+@using umbraco.cms.businesslogic.member;
+@using System.Web;
+
+@helper DrawMatrixLink(VUI3ServiceMasterRatingMatrixItem s, string context, bool IsFullMode)
+    {
+    string url = "";
+    string modeClass = "matrix-tick";
+    string score = @"";
+
+    if (s.GetScore(context) > 0)
+    {
+        string cls = "/_inc/images/tmp/gold-star.png";
+        string text = "";
+        if (IsFullMode || VUI3Utility.ServiceIsPreviewable(s.ServiceName))
+        {
+            url = @s.Url;
+            score = String.Format("{0:0.0}", s.GetScore(context));
+
+        }
+        else
+        {
+            url = "#";
+            modeClass += " ui-preview-disabled";
+            cls = "/_inc/images/tmp/grey-star.png";
+            text = "Subscribe to see more ratings";
+        }
+        <!-- @Parameter.cachebust  == @IsFullMode  -->
+        <div class="score">
+            @score <img src="@cls" title="@text" /> <span class="gold-star"></span>
+        </div>
+        @*<a href="@url" class="@modeClass">@s.ServiceName screenshots</a>*@
+    }
+}
+@{    
+    
+    bool IsFullMode = false;
+    VUIUser u = VUI3Utility.GetUser();
+    Member c = u.Member;
+
+    VUI3ServiceMasterRatingMatrix matrix = new VUI3ServiceMasterRatingMatrix();
+
+    if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_NONE))
+    {
+        IsFullMode = false;
+    }
+    else if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_ADMIN) || u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_USER))
+    {
+        IsFullMode = true;
+    }
+
+    string orderby = Request["orderby"];
+    string deviceIsOrdered = "";
+    <div id="main">
+      <div class="main-top">
+        <div class="inner">
+          <h1>
+            @Model.title 
+          </h1>
+          @Model.introduction
+        </div>
+      </div>
+      <div class="main-content">
+        <div class="b-tabs">
+          <ul class="tabs inner">
+            <li class="matrix">
+              <a href="#">Ratings Matrix<span class="icon-table"></span></a>
+            </li>
+          </ul>
+    
+          <div class="panes">
+            <div class="pane">
+              <div class="b-matrix-nav nav-line">
+                <div class="inner">
+                  <ul>
+                    <li>@if (IsFullMode && String.IsNullOrEmpty(orderby))
+                        {
+                            deviceIsOrdered = "active";
+                        }
+                        else { deviceIsOrdered = ""; }
+                        <a href="/vui/appstore-ratings" class="@(deviceIsOrdered)">Order by name <span class="order-by icon-chevron-sign-down"></span></a>
+                        
+                    </li>
+                    <li>@if (IsFullMode && !String.IsNullOrEmpty(orderby) && orderby.ToLower().Equals("ipad"))
+                        {
+                            deviceIsOrdered = "active";
+                        }
+                        else { deviceIsOrdered = ""; }
+                      <a href="/vui/appstore-ratings/ipad" class="device @(deviceIsOrdered)"><img src="/_inc/images/tmp/devices/ipad.png" title="Order by iPad scores"><span class="order-by icon-chevron-sign-down"></span></a>
+                    </li>
+                    <li>@if (IsFullMode && !String.IsNullOrEmpty(orderby) && orderby.ToLower().Equals("iphone"))
+                        {
+                            deviceIsOrdered = "active";
+                        }
+                        else { deviceIsOrdered = ""; }
+                      <a href="/vui/appstore-ratings/iphone" class="device @(deviceIsOrdered)"><img src="/_inc/images/tmp/devices/iphone.png"  title="Order by iPhone scores"><span class="order-by icon-chevron-sign-down"></span></a>
+                    </li>
+                    <li>@if (IsFullMode && !String.IsNullOrEmpty(orderby) && orderby.ToLower().Equals("android-tablet"))
+                        {
+                            deviceIsOrdered = "active";
+                        }
+                        else { deviceIsOrdered = ""; }
+                      <a href="/vui/appstore-ratings/android-tablet" class="device @(deviceIsOrdered)"><img src="/_inc/images/tmp/devices/android-tablet.png"  title="Order by Android Tablet scores"><span class="order-by icon-chevron-sign-down"></span></a>
+                    </li>
+                    <li>@if (IsFullMode && !String.IsNullOrEmpty(orderby) && orderby.ToLower().Equals("android-phone"))
+                        {
+                            deviceIsOrdered = "active";
+                        }
+                        else { deviceIsOrdered = ""; }
+                      <a href="/vui/appstore-ratings/android-phone" class="device @(deviceIsOrdered)"><img src="/_inc/images/tmp/devices/android-phone.png"  title="Order by Android Phone scores"><span class="order-by icon-chevron-sign-down"></span></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="b-matrix-files">
+                <div class="inner">
+                  <ul>
+                  @{
+                      List<VUI3ServiceMasterRatingMatrixItem> ratings;
+
+                      if (IsFullMode)
+                      {
+
+                          if (!String.IsNullOrEmpty(orderby) && orderby.ToLower().Equals("ipad"))
+                          {
+                              ratings = matrix.Ratings.OrderByDescending(r => r.TabletiPadScore).ToList();
+                          }
+                          else if (!String.IsNullOrEmpty(orderby) && orderby.ToLower().Equals("iphone"))
+                          {
+                              ratings = matrix.Ratings.OrderByDescending(r => r.SmartphoneiPhoneScore).ToList();
+                          }
+                          else if (!String.IsNullOrEmpty(orderby) && orderby.ToLower().Equals("android-tablet"))
+                          {
+                              ratings = matrix.Ratings.OrderByDescending(r => r.TabletAndroidScore).ToList();
+                          }
+                          else if (!String.IsNullOrEmpty(orderby) && orderby.ToLower().Equals("android-phone"))
+                          {
+                              ratings = matrix.Ratings.OrderByDescending(r => r.SmartphoneAndroidScore).ToList();
+                          }
+                          else
+                          {
+                              ratings = matrix.Ratings;
+                          }
+                      }
+                      else
+                      {
+                          ratings = matrix.Ratings;
+                      }
+
+                      foreach (VUI3ServiceMasterRatingMatrixItem service in ratings)
+                      {
+                          string serviceclass = String.Empty;
+                          string url = service.Url.Replace("/vui", "/vui3") + "#slide-ratings";
+                          if (!IsFullMode && !service.IsPreviewable)
+                          {
+                              serviceclass = "preview-link";
+                              url = "#";
+                          }
+                          
+                        <li class="matrix-block">
+                         <a href="@url" class="@serviceclass">
+                          <ul>
+                            <li>
+                              <div class="img">
+                                <img alt="@service.ServiceName" data-original="@service.IconURL" class="lazy service-icon" src="/vui-media/media/vui-loaderb64.gif">
+                              </div>
+                              @service.ServiceName
+                            </li>
+                            <li>@DrawMatrixLink(service, "TabletiPad", IsFullMode)</li>
+                            <li>@DrawMatrixLink(service, "SmartphoneiPhone", IsFullMode)</li>
+                            <li>@DrawMatrixLink(service, "TabletAndroid", IsFullMode)</li>
+                            <li>@DrawMatrixLink(service, "SmartphoneAndroid", IsFullMode)</li>
+                          </ul>
+                         </a>
+                        </li>
+                      }
+                  }
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>    
+}

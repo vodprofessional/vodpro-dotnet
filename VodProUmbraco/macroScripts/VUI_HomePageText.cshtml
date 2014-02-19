@@ -1,0 +1,19 @@
+﻿@using VUI.classes;
+@using umbraco.cms.businesslogic.member;
+@using System.Web;
+@{
+  Member c = VUIfunctions.CurrentUser();
+  string user_status = VUIfunctions.VUI_USERTYPE_NONE;    
+  if(c != null)
+  {
+      user_status = VUIfunctions.MemberVUIStatus(c);
+  } 
+  if(user_status.Equals(VUIfunctions.VUI_USERTYPE_NONE))
+  {
+     <h1>@Parameter.defaultText</h1>
+  }
+  else
+  {
+     <h1>@Parameter.regText</h1>
+  }  
+}

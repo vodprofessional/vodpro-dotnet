@@ -1,0 +1,15 @@
+Hi #FIRSTNAME#,
+
+#ADMINNAME# has just created a VOD Professional "VUI Library" account for you. You now have access to thousands of video user interface screenshots, analyses, App Store ratings and functionality benchmark scores.
+
+Your username is: #USERNAME#
+Your temporary password is: #PWD#
+
+Click the link below to get started. Once you've logged in, click on "Change Password" in the floating action panel to set your own, more memorable, password.  
+
+http://www.vodprofessional.com#LOGINLINK#
+
+Thanks,
+VOD Professional
+
+

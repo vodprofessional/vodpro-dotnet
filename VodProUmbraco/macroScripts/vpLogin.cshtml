@@ -1,0 +1,86 @@
+﻿@using System.Web  
+@using System.Web.Security
+
+@helper LoginForm()
+{
+ <form id="loginForm" method="post">
+                      <div id="loginBody">
+                      <ul id="loginList">
+                        
+                                <li><label for="email">Email Address</label>
+                                  <input type="text" name="username" id="username" /></li>
+                                <li><label for="password">Password</label>
+                                  <input type="password" name="password" id="password" /></li>
+                          <li><input type="submit" id="submit" value="Sign in" /></li>
+                        
+                      </ul>
+                     </div>
+                    </form>
+}
+
+@helper LogoutForm()
+{
+  <form method="post">
+    <input type="submit" id="submit" name="submit" value="logout"/>
+  </form>
+}
+
+@helper Message(string message)
+{
+  <p>@message</p>
+}
+
+
+
+@{
+  var isSubmitLogin = (IsPost && Request["submit"]=="login");
+  var isSubmitLogout = (IsPost && Request["submit"]=="logout");
+  var currentUser = Membership.GetUser();
+  var requestedUrl = Request.Url.PathAndQuery.ToString(); // Model.Url;
+  if (Request["ReturnUrl"]!=null)
+  {
+    requestedUrl = Request["ReturnUrl"];
+  }
+
+  if (currentUser!=null)
+   {    
+    if (!isSubmitLogout)
+     {
+       @Message("Logged in : " + currentUser.UserName)
+       @LogoutForm()
+     }
+    else
+     {
+       FormsAuthentication.SignOut();
+       FormsAuthentication.RedirectToLoginPage();
+     } 
+   }
+
+  if (currentUser==null)
+   {
+    if (!isSubmitLogin)  
+     {
+       @LoginForm()
+      }
+    else
+     {
+      string username=Request["username"];
+      string password=Request["password"];
+      if (Membership.ValidateUser(username, password))
+      {
+        // RedirectFromLoginPage does not work that good within the Umbraco context
+        // FormsAuthentication.RedirectFromLoginPage(username, true);
+
+        FormsAuthentication.SetAuthCookie(username, true);
+
+        // Redirect to / refresh the requested page
+        Response.Redirect(requestedUrl);
+      }
+      else
+      {
+        @Message("Login failed for " + username)
+        @LoginForm()
+      }
+     }       
+    }
+  }

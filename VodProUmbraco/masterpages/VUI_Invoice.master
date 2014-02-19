@@ -1,0 +1,149 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VUIMaster.master" AutoEventWireup="true" %>
+
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolderHead" runat="server">
+  
+</asp:content>
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolder1" runat="server">
+
+  
+<umbraco:Macro runat="server" language="cshtml">
+@using VUI.classes;
+@using umbraco.MacroEngines;
+@using System.Web.Security;
+@using umbraco.cms.businesslogic.member;
+@{  
+
+  string Mode = "";
+  bool IsFullMode = false;
+  
+  Member m = VUIfunctions.CurrentUser();
+  string user_status = VUIfunctions.MemberVUIStatus(m);
+  
+  
+  if(Model.invoiceUser.Equals(m.Id))
+  {
+  
+    <div class="ui-heading ui-hide-from-print">
+      <h1><a href="@VUIfunctions.VUI_admin_page">Account Administration</a></h1>
+    </div>
+  
+    <div class="ui-invoice">
+      
+      <div class="ui-invoice-seller">
+        <img src="/css/images/logo-invoice.png" />
+        VOD Professional
+        <br/>
+        10-14 Accommodation Road
+        <br/>
+        London NW11 8AD
+        <br/>
+        www.vodprofessional.com
+        <br/>
+        accounts@vodprofessional.com
+      </div>
+    
+      <h1>Invoice INV-@Model.invoiceNumber</h1>
+      
+        
+      <h2>@Model.invoiceDate.ToString("dd MMM yyyy")</h2>
+      
+      <div class="ui-invoice-buyer">
+        @Model.invoiceCompany
+        <br/>
+        @Html.Raw(@Model.invoiceRecipientAddress.Replace("\n","<br/>"))
+        
+        
+        
+          <p>
+            <strong>Purchase Order:</strong> @Model.purchaseOrderNumber
+          </p>
+      </div>
+      
+
+      <table class="ui-invoice-detail">
+        
+        
+        <tr>
+          <th>
+            Item
+          </th>
+          <th>
+            Number
+          </th>
+          <th>
+            Cost per unit
+          </th>
+          <th>
+            Total
+          </th>
+        </tr>
+        
+        <tr class="lined">
+          <td>
+            @Model.invoiceFor
+          </td>
+          <td class="centred">1</td>
+          <td class="right">
+            &pound;@Model.invoiceAmountNet
+          </td>
+          <td class="right">
+            &pound;@Model.invoiceAmountNet
+          </td>
+        </tr>
+        
+        <tr>
+          <td></td>
+          <td></td>
+          <td class="lined right">VAT at 20%</td>
+          <td class="lined right">&pound;@Model.invoiceTax</td>
+        </tr>
+        
+        <tr>
+          <td></td>
+          <td></td>
+          <td class="lined total right">Total</td>
+          <td class="lined total right">&pound;@Model.invoiceAmountGross</td>
+        </tr>
+      </table>
+      
+        
+          @if(Model.invoiceStatus.ToLower().Equals("paid") || Model.invoiceStatus.ToLower().Equals("paid by paypal"))
+          {
+              <div class="ui-invoice-paymentreceived">
+                <h2>PAYMENT RECEIVED WITH THANKS</h2>
+              </div>
+          }
+          else
+          {
+              <div class="ui-invoice-paymentreceived">
+                <h2>PAYMENT DUE</h2>
+                <p>
+                  Payment is due on receipt of this invoice. To discuss your payment options please contact us at <a href="mailto:accounts@vodprofessional.com">accounts@vodprofessional.com</a> or call +44 20 7286 2008
+                </p>
+              </div>
+          }
+        
+      <p class="ui-seller-info">
+        
+        VOD Professional is the trading name of Merchant Fox Ltd, Registered in the UK 5533017
+        <br/>
+        We are registered for VAT 877550777
+        
+      </p>
+      
+    </div>
+  
+  
+    
+    <script type="text/javascript">document.title = 'VUI Library - Invoice @Model.invoiceNumber';</script>
+  }
+  else
+  {
+    <div class="ui-message">You are not authorised to view this invoice</div>
+    <script type="text/javascript">document.title = 'VUI Library - Error';</script>
+  }
+}
+</umbraco:Macro>
+</asp:Content>

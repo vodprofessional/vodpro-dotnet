@@ -1,0 +1,393 @@
+@using VUI.classes;
+@using VUI.VUI3.classes;
+@using umbraco.cms.businesslogic.member;
+@using System.Web;
+
+@helper OLDDrawMatrixLink(VUI3ServiceMasterMatrixItem s, string context, bool IsFullMode)
+{
+    string url = "";
+    string modeClass = "matrix-tick";
+
+    if (s.GetCount(context) > 0)
+    {
+        if (IsFullMode || VUI3Utility.ServiceIsPreviewable(s.ServiceName))
+        {
+            url = @s.URL;
+        }
+        else
+        {
+            url = "#";
+            modeClass += " ui-preview-disabled";
+        }
+        
+        <div class="checkmark"><img src="/_inc/images/checkmark.png" alt=""></div>
+        @*<a href="@url" class="@modeClass">@s.ServiceName screenshots</a>*@
+    }
+}
+
+@helper DrawMatrixLink(VUI3ServiceMasterMatrixItem s, string[] contexts, bool IsFullMode, bool isComp=false)
+{
+    string url = "";
+    string serviceclass = "";
+    int cnt = 0;
+    int devcnt = 0;
+    
+
+    foreach (string c in contexts)
+    {
+        
+        if (s.GetCount(c) > 0)
+        {
+            devcnt += 1;
+        }
+        cnt += s.GetCount(c);
+    }
+    if (cnt > 0)
+    {
+        if (IsFullMode || VUI3Utility.ServiceIsPreviewable(s.ServiceName))
+        {
+            
+            string hash = contexts[0].Replace(" ",String.Empty).ToLower();
+            url = @s.URL + "#slide-screenshots!" + hash;
+        }
+        else
+        {
+            url = "#";
+            serviceclass = "preview-link";
+        }
+        if(isComp) {
+            <div class="checkmark -comp" title="@(cnt) screenshots on @devcnt devices - click to expand"><img src="/_inc/images/checkmark-comp.png"></div>   
+        }        
+        else {
+            <a href="@(url)" title="@(cnt) screenshots" class="@(serviceclass)"><div class="checkmark"><img src="/_inc/images/checkmark.png"></div></a>
+        }
+    }
+}
+@{    
+    
+    bool IsFullMode = false;
+    VUIUser u = VUI3Utility.GetUser();
+    Member c = u.Member;
+
+    if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_NONE))
+    {
+        IsFullMode = false;
+    }
+    else {
+        IsFullMode = true;
+    }
+    VUI3ServiceMasterMatrix matrix = new VUI3ServiceMasterMatrix();
+    
+    
+    <div id="main">
+      <div class="main-top">
+        <div class="inner">
+          <h1>
+            @Model.title
+          </h1>
+        </div>
+      </div>
+      <div class="main-content">
+        <div class="b-tabs">
+          <ul class="tabs inner">
+            <li class="matrix">
+              <a href="#">Matrix View<span class="icon-table"></span></a>
+            </li>
+            <li class="tiles active">
+              <a href="#">Tiles View<span class="icon-th-large"></span></a>
+            </li>
+            <li class="search">
+              <a href="#">Search<span class="icon-search"></span></a>
+            </li>
+          </ul>
+    
+          <div class="panes">
+            <div class="pane">
+              <div class="b-matrix-nav nav-line">
+                <div class="inner">
+                @*  <ul>
+                    <li></li>
+                    <li>
+                      <a href="#"><img src="/_inc/images/tmp/devices/web.png" alt=""></a>
+                    </li> 
+                    <li>
+                      <a href="#"><img src="/_inc/images/tmp/devices/ipad.png" alt=""></a>
+                    </li>
+                    <li>
+                      <a href="#"><img src="/_inc/images/tmp/devices/iphone.png" alt=""></a>
+                    </li>
+                    <li>
+                      <a href="#"><img src="/_inc/images/tmp/devices/android-tablet.png" alt=""></a>
+                    </li>
+                    <li>
+                      <a href="#"><img src="/_inc/images/tmp/devices/android-phone.png" alt=""></a>
+                    </li>
+                    <li>
+                      <a href="#"><img src="/_inc/images/tmp/devices/windows-tablet_device-disabled.png" alt="" class="device-coming-soon"></a>
+                    </li>
+                    <li>
+                      <a href="#"><img src="/_inc/images/tmp/devices/windows-phone_device-disabled.png" alt="" class="device-coming-soon"></a>
+                    </li>
+                  </ul>
+                  *@
+              <ul>
+                
+              @{
+                <span class="uber-tab" data-devicegroup="web" title="Web">
+                  <span class="title"><h3>Web</h3>
+                    <img src="/_inc/images/new-platform/platform-web.png"  class="platform-image" />
+                  </span>  
+                  <span class="devices">
+                    <li>
+                      <a href="#" class="">
+                        <img src="/_inc/images/new-platform/device-chrome.png" alt=""><h3>Chrome</h3></a>
+                    </li>
+                  </span>
+                </span>
+                  
+                
+                
+                <span class="uber-tab" data-devicegroup="tablet" title="Tablets">
+                    <span class="title">
+                      <h3>Tablet</h3>
+                      <img src="/_inc/images/new-platform/platform-tablet.png" class="platform-image" />
+                    </span>
+
+                    <span class="devices">
+                    <li title="iPad">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-apple.png" alt=""><h3>iPad</h3></a>
+                    </li> 
+
+                    <li title="Android Tablet">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-droid.png" alt=""><h3>Android</h3></a>
+                    </li> 
+                    <li title="Windows 8 Tablet">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-win.png" alt=""><h3>Windows</h3></a>
+                    </li>
+                    </span>
+                </span>
+                  
+                  
+                <span class="uber-tab" data-devicegroup="smartphone" title="Smartphones">   
+                  
+                  <span class="title">
+                    <h3>Smartphone</h3>
+                      <img src="/_inc/images/new-platform/platform-smartphone.png" class="platform-image" />
+                  </span>
+                  <span class="devices">
+                    <li title="iPhone">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-apple.png" alt=""><h3>iPhone</h3></a>
+                    </li> 
+      
+                    <li title="Andoird Smartphone">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-droid.png" alt=""><h3>Android</h3></a>
+                    </li> 
+                    
+                  <li title="Windows 8 Smartphone">
+                    <a href="#" class=""><img src="/_inc/images/new-platform/device-win.png" alt=""><h3>Windows</h3></a>
+                  </li>
+                  </span>
+                </span>
+      
+                <span class="uber-tab " data-devicegroup="connectedtv" title="Connected TVs">
+                  <span class="title">
+                    <h3>TV</h3>
+                      <img src="/_inc/images/new-platform/platform-tv.png" class="platform-image" />
+                  </span>
+                  <span class="devices">
+                    <li title="Samsung">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-smart.png" alt=""><h3>Samsung</h3></a>
+                    </li> 
+                    <li title="Sony">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-sony.png" alt=""><h3>Sony</h3></a>
+                    </li>
+                    <li title="LG">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-lg.png" alt=""><h3>LG</h3></a>
+                    </li>
+                    <!--
+                    <li title="Panasonic">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-panasonic.png" alt=""><h3>Panasonic</h3></a>
+                    </li>-->
+                 </span>
+                </span>   
+                  
+               <span class="uber-tab" data-devicegroup="stb" title="Set-Top Boxes">
+                  <span class="title">
+                    <h3>STBs</h3>
+                      <img src="/_inc/images/new-platform/platform-stb.png" class="platform-image" />
+                  </span>
+                  <span class="devices">
+                    <li title="Now TV">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-nowtv.png" alt=""><h3>Now TV</h3></a>
+                    </li> 
+                  <li title="Roku">
+                    <a href="#" class=""><img src="/_inc/images/new-platform/device-roku.png" alt=""><h3>Roku</h3></a>
+                  </li>
+                  </span>
+                </span>
+                             
+                <span class="uber-tab" data-devicegroup="gamesconsole" title="Games Consoles">
+                  <span class="title">
+                    <h3>Consoles</h3>
+                      <img src="/_inc/images/new-platform/platform-console.png" class="platform-image" />
+                  </span>
+                  <span class="devices">
+                    <li title="Playstation">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-ps.png" alt=""><h3>Playstation</h3></a>
+                    </li> 
+                    <li title="XBox">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-xbox.png" alt=""><h3>XBox</h3></a>
+                    </li>
+                  </span>
+                </span>
+                }
+              </ul>
+
+
+
+                </div>
+              </div>
+              <div class="b-matrix-files">
+                <div class="inner">
+                  <ul>
+                  @{
+                      bool isPreview = false;
+                      if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_NONE))
+                      {
+                          isPreview = true;
+                      }
+                      foreach (VUI3ServiceMasterMatrixItem service in matrix.Services)
+                      {
+                          string serviceclass = String.Empty;
+                          string url = service.URL;
+                          if (isPreview && !service.IsPreviewable)
+                          {
+                              serviceclass = "preview-link";
+                              url = "#";
+                          }
+                          
+                    <li class="matrix-block">
+                     
+                      <ul>
+                        <li>
+                          <a href="@url" class="@serviceclass">
+                          <div class="img">
+                            <img alt="@service.ServiceName" data-original="@service.IconURL" class="lazy service-icon" src="/vui-media/media/vui-loaderb64.gif">
+                          </div>
+                          @service.ServiceName
+                          </a>
+                        </li>
+                        <li data-devicegroup="web" class="overall">@DrawMatrixLink(service, new string[] { "Web" }, IsFullMode, true)</li>
+                        <li data-devicegroup="web" class="device">@DrawMatrixLink(service, new string[] { "Web" }, IsFullMode)</li>
+                        <li data-devicegroup="tablet" class="overall">@DrawMatrixLink(service, new string[] { "TabletiPad", "TabletAndroid", "TabletWindows" }, IsFullMode, true)</li>
+                        <li data-devicegroup="tablet" class="device">@DrawMatrixLink(service, new string[] { "TabletiPad" }, IsFullMode)</li>
+                        <li data-devicegroup="tablet" class="device">@DrawMatrixLink(service, new string[] { "TabletAndroid" }, IsFullMode)</li>
+                        <li data-devicegroup="tablet" class="device">@DrawMatrixLink(service, new string[] { "TabletWindows" }, IsFullMode)</li>
+                        <li data-devicegroup="smartphone" class="overall">@DrawMatrixLink(service, new string[] { "SmartphoneiPhone", "SmartphoneAndroid", "SmartphoneWindows" }, IsFullMode, true)</li>
+                        <li data-devicegroup="smartphone" class="device">@DrawMatrixLink(service, new string[] { "SmartphoneiPhone" }, IsFullMode)</li>
+                        <li data-devicegroup="smartphone" class="device">@DrawMatrixLink(service, new string[] { "SmartphoneAndroid" }, IsFullMode)</li>
+                        <li data-devicegroup="smartphone" class="device">@DrawMatrixLink(service, new string[] { "SmartphoneWindows" }, IsFullMode)</li>
+                        <li data-devicegroup="connectedtv" class="overall">@DrawMatrixLink(service, new string[] { "Connected TV-Samsung", "Connected TV-Sony" }, IsFullMode, true)</li>
+                        <li data-devicegroup="connectedtv" class="device">@DrawMatrixLink(service, new string[] { "Connected TV-Samsung" }, IsFullMode)</li>
+                        <li data-devicegroup="connectedtv" class="device">@DrawMatrixLink(service, new string[] { "Connected TV-Sony" }, IsFullMode)</li>
+                        <li data-devicegroup="connectedtv" class="device">@DrawMatrixLink(service, new string[] { "Connected TV-LG" }, IsFullMode)</li>
+                        <!-- <li data-devicegroup="connectedtv" class="device">@@DrawMatrixLink(service, new string[] { "Connected TV-Panasonic" }, IsFullMode)</li> -->
+                        <li data-devicegroup="stb" class="overall">@DrawMatrixLink(service, new string[] { "STB-Now-TV", "STB-Roku" }, IsFullMode, true)</li>
+                        <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Now-TV" }, IsFullMode)</li>
+                        <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Roku" }, IsFullMode)</li>
+                        <li data-devicegroup="gamesconsole" class="overall">@DrawMatrixLink(service, new string[] { "Games Console-Playstation", "Games Console-XBox" }, IsFullMode, true)</li>
+                        <li data-devicegroup="gamesconsole" class="device">@DrawMatrixLink(service, new string[] { "Games Console-Playstation" }, IsFullMode)</li>
+                        <li data-devicegroup="gamesconsole" class="device">@DrawMatrixLink(service, new string[] { "Games Console-XBox" }, IsFullMode)</li>
+
+                      </ul>
+                    </li>
+                      }
+                      }
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+            <div class="pane">
+              <div class="b-tiles-nav nav-line">
+                <div class="inner">
+                  <ul>
+                    <li>
+                      <a href="#0">0-9</a>
+                    </li>
+                    @foreach (string letter in matrix.LetterLinks.Keys)
+                    {
+                        <li>
+                          <a href="#@matrix.LetterLinks[letter]">@letter</a>
+                        </li>
+                    }
+                  </ul>
+                </div>
+              </div>
+
+              <div class="b-tiles-tiles">
+                <div class="inner">
+                  <ul>
+                    <a name="0"></a>
+                    bool isPreview = false;
+                      if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_NONE))
+                      {
+                          isPreview = true;
+                      }
+                      foreach (VUI3ServiceMasterMatrixItem service in matrix.Services)
+                      {
+                          string serviceclass = String.Empty;
+                          string url = service.URL;
+                          if(isPreview && !service.IsPreviewable)
+                          {
+                              serviceclass = "preview-link";
+                              url = "#";
+                          }
+
+                  @{ 
+                      string firstLetter = "";
+                      foreach (VUI3ServiceMasterMatrixItem service in matrix.Services)
+                      {
+                          if (!@service.ServiceName.Substring(0, 1).ToUpper().Equals(firstLetter))
+                          {
+                              firstLetter = @service.ServiceName.Substring(0, 1).ToUpper();
+                            <a name="@firstLetter"></a>
+                          }
+                          string serviceclass = String.Empty;
+                          string url = service.URL;
+                          if (isPreview && !service.IsPreviewable)
+                          {
+                              serviceclass = "preview-link";
+                              url = "#";
+                          }
+                        <li class="service-item">
+                          <a href="@url" class="@serviceclass">
+                            <div class="service-title">
+                              @service.ServiceName
+                            </div>
+                            <div class="service-img">
+                              <img alt="@service.ServiceName" data-original="@service.IconURL" class="lazy" src="/vui-media/media/vui-loaderb64.gif" />
+                            </div>
+                            <div class="service-photos-count">
+                              @service.TotalCount<span class="icon-camera"></span>
+                            </div>
+                          </a>
+                        </li>
+                      }
+                   }
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    
+            
+}

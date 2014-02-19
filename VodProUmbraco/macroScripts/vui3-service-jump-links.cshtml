@@ -1,0 +1,31 @@
+@using VUI.classes;
+@using VUI.VUI3.classes;
+@using umbraco.cms.businesslogic.member;
+@using System.Web;
+@{
+    VUIUser u = VUI3Utility.GetUser();
+    Member c = u.Member;
+    
+    if(!u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_NONE))
+    {
+
+    <script type="text/javascript">
+ 
+    </script>
+      
+    <div class="b-service-finder">
+        <a href="#">Service Finder<span class="icon-chevron-down"></span><span class="sub-menu">
+            <input class="form-submit" id="btn-service-finder" type="submit" value="GO"><select class="finder-select" id="dd-service-finder">
+                @{
+                    VUI3SimpleServiceMasterCollection services = VUI3Utility.AllServicesSimple();
+                    foreach (VUI3SimpleServiceMaster service in services.ServiceMasters)
+                    {
+                        <option value="@service.Id" data-url="@service.URL">@service.ServiceName</option>    
+                    }
+                }
+                </select>
+        </span></a>
+    </div>
+
+    }
+}

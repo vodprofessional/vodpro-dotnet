@@ -1,0 +1,9 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/umbraco/masterpages/default.master" AutoEventWireup="true" %>
+
+<asp:Content ContentPlaceHolderID="ContentPlaceHolderDefault" runat="server">
+<umbraco:Macro  runat="server" language="cshtml">
+@{
+  Response.Redirect("/");
+}
+</umbraco:Macro>
+</asp:Content>

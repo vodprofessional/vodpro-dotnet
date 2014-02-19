@@ -1,0 +1,437 @@
+@using VUI.classes;
+@using VUI.VUI3.classes;
+@using umbraco.cms.businesslogic.member;
+@using System.Web;
+@{
+    VUIUser u = VUI3Utility.GetUser();
+    Member c = u.Member;
+    List<VUI3Preval> pageTypes = VUI3Utility.PageTypeCategoryList();
+            
+
+  <div class="b-rightside-panel">
+    <a class="close" href="#"><span class="icon-arrow-right"></span></a>
+    <div class="panel-content"></div>
+  </div>
+  
+  <div id="popup-layout"></div>
+  <div id="search-popup" class="b-popup">
+    <a class="popup-close" href="javascript:void(0)"><span class="icon-remove"></span></a>
+    <h1>
+      Search
+    </h1>
+      <div class="form-item">
+        <label>Find Screenshots</label><select class="search-select" id="dd-search-pagetype"><option value="">Any Function</option>
+        @{
+            foreach (VUI3Preval pt in pageTypes)
+            {
+                    <option value="@pt.Val">@pt.Val</option>
+            }
+        } </select><select class="search-select" id="dd-search-device"><option value="">All Devices</option>
+            <option value="Web">Web</option>
+            <option value="Tablet/iPad">Tablet / iPad</option>
+            <option value="Smartphone/iPhone">Smartphone / iPhone</option>
+            <option value="Tablet/Android">Tablet / Android</option>
+            <option value="Smartphone/Android">Smartphone / Android</option>
+            <option value="Tablet/Windows">Tablet / Windows</option>
+            <option value="Smartphone/Windows">Smartphone / Windows</option>
+            <option value="Connected TV/Samsung">Connected TV / Samsung</option>
+            <option value="Connected TV/Sony">Connected TV / Sony</option>
+            <option value="Connected TV/LG">Connected TV / LG</option>
+            <!-- <option value="Connected TV/Panasonic">Connected TV / Panasonic</option> -->
+            
+        </select><input id="btn-image-search" class="form-submit" type="submit" value="GO">
+      </div>
+  </div>
+  
+<span id="action-forms">
+    <span id="action-contact-form">
+        <fieldset class="formgroup-contact" data-action="cr">
+        
+            <h1>Contact Us</h1>
+            <p>Get in touch with us to subscribe or arrange a demo of the VUI Library. Please complete all fields!</p>
+            <div class="form-item">
+                <input type="text" id="contact-contactname" placeholder="Contact name" data-initval="Contact name" data-group="contact" itemprop="contactname" value="" class="form-text text-prefill required-field" />
+            </div>
+            <div class="form-item">
+                <input type="text" id="contact-company" placeholder="Company name" data-initval="Company name" data-group="contact" itemprop="company" value="" class="form-text text-prefill required-field" />
+            </div>
+            <div class="form-item">
+                <input type="text" id="contact-emailaddress" placeholder="Email address" data-initval="Email address" data-group="contact" itemprop="emailaddress" value="" class="form-text text-prefill email-field required-field" />
+            </div>
+            <div class="form-item">
+                <input type="text" id="contact-phone" placeholder="Telephone" data-initval="Telephone" value="" data-group="contact" itemprop="phone" class="form-text text-prefill required-field" />
+            </div>
+            <div class="form-item">
+                <input type="button" id="contact-submit-btn" class="form-submit validator" value="Submit Request" data-groupname="contact" />
+            </div>
+            <span class="error" title="Click to close">
+                There was an error with your form submission. Please complete all the fields.
+            </span>
+            <span class="complete" title="Click to close">
+                Thanks! We'll contact you shortly.
+            </span>
+        </fieldset>
+    </span>   
+
+    <span id="action-login-form">
+        <fieldset class="form-login">
+            <h1>Login</h1>
+            <p>Your username and password should have been emailed to you by your internal VUI Library administrator.</p>
+            <p>Don't know who that is? <a href="#" class="close-login-open-contact">Contact us</a> and we'll find out for you.</p>
+            <div class="form-item">
+                <input type="text" id="username" placeholder="Email address" data-initval="Email address" data-group="login" value="@VUI3Utility.GetMemberNameFromCookies()" class="form-text" />
+            </div>
+            <div class="form-item">
+                <input type="password" placeholder="Password" id="password" data-group="login" class="form-text" /> 
+            </div>
+            <div class="form-item">
+                <label for="rememberUserName">Remember Email Address?</label><input type="checkbox" id="rememberUserName" checked="checked" />
+            </div>
+            <div class="form-item">
+                <input type="button" value="Login" id="btn-login" class="form-submit" />
+            </div>
+
+            <div class="form-item">
+                <a href="#" class="forgotten-password">Forgotten your password?</a>
+            </div>
+            <span class="error" title="Click to close">
+                There was an error logging you in!
+            </span>
+        </fieldset>
+        
+        <fieldset class="form-password-recover">
+            <h2>Recover Password</h2>
+            <p>We can email a new password to you if you need it. Just enter your email address below to make it so</p>
+                <div class="form-item">
+                    <input type="email" placeholder="Email address" class="form-text" id="recover-email" />
+                </div>
+                <div class="form-item">
+                    <input type="button" value="Email my new password" id="btn-recover-password" class="form-submit" />
+                </div>
+                <span class="error" title="Click to close">
+                    There was an error with your form submission. Please complete all the fields.
+                </span>
+                <span class="complete" title="Click to close">
+                    Your password has been reset and set by email
+                </span>
+        </fieldset>
+    </span>
+
+    @if (!u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_NONE))
+    {
+        
+          if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_ADMIN))
+          {
+              string maxUsersText = "";
+              int maxUsers = u.MaxUsers(out maxUsersText);
+              <!-- Change Password Form -->
+        <span id="account-user-form">
+          <fieldset class="form-users">
+            <h1>Your Users</h1>
+            <p>
+               As the account administrator you can choose which of your colleagues have access to the VUI Library
+               @*You can add @maxUsersText users. *@
+               Each user you create will be sent an email with a temporary password. They will be prompted to login and change this. If they forget their password, they can use the "Forgotten Password" functionality on the site.
+            </p>
+            <a href="#" title="Add a User" class="account-add-user"><span class="icon-plus-sign"></span> Add a User</a>
+            <span class="form-expand">
+                
+                <div class="form-item">
+                    <input type="text" placeholder="First Name" class="form-text" id="user-first" data-group="account-users" />
+                </div>
+                <div class="form-item">
+                    <input type="text" placeholder="Last Name" class="form-text"  id="user-last" data-group="account-users" />
+                </div>
+                <div class="form-item">
+                    <input type="email" placeholder="Email address" class="form-text" id="user-email" data-group="account-users" />
+                </div>
+                <div class="form-item">
+                    <input type="button" value="Save new user" id="btn-add-user" data-groupname="account-users" class="form-submit" />
+                </div>
+            </span>
+            <span class="error" title="Click to close"><a class="error-close"><span class="icon-remove"></span></a>
+                <strong>There was a Problem!</strong><br />Please complete the first and last name and email address fields.
+            </span>
+            <span class="data-error" title="Click to close"><a class="error-close"><span class="icon-remove"></span></a>
+                <strong>There was a Problem!</strong><br /><span class="message"></span>
+            </span>
+            <span class="complete" title="Click to close"><a class="error-close"><span class="icon-remove"></span></a>
+                Your password has been changed!
+            </span>
+          </fieldset>
+          
+            <h2 class="account-users">Existing Users</h2>
+            <ul id="account-users"></ul>
+          <!-- Change Password Form -->
+        </span>
+          }       
+
+          <!-- Change Password Form -->
+        <span id="account-admin-form">
+          <fieldset class="form-change-password">
+            <h1>Change Your Password</h1>
+            <p>Your password should be between 6 and 20 characters and contain one or more numbers and non-alphanumeric characters (e.g. !, &, %) and one or more alphanumeric characters</p>
+                <div class="form-item">
+                    <input type="password" placeholder="New password" class="form-text" id="change-password-1" data-group="change-password" />
+                </div>
+                <div class="form-item">
+                    <input type="password" placeholder="Confirm password" class="form-text" id="change-password-2" data-group="change-password" />
+                </div>
+                <div class="form-item">
+                    <input type="button" value="Save new password" id="btn-change-password" data-groupname="change-password" class="form-submit" />
+                </div>
+                <span class="error" title="Click to close">
+                    <strong>There was a Problem!</strong><br />Make sure your password is between 6 and 20 characters long and contains one or more numbers and non-alphanumeric characters (e.g. !, &, %) and one or more alphanumeric characters.
+                </span>
+                <span class="complete" title="Click to close">
+                    Your password has been changed!
+                </span>
+          </fieldset>
+          
+        </span>
+    }
+</span>
+    
+  @* NOT LOGGED IN STATE *@
+    if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_NONE))
+    {
+  <nav class="b-right-nav">
+    <ul>
+      <li>
+        <a class="subscribe" href="#" data-panelregion="action-contact-form" data-panel="true" >Subscribe<span class="icon-key"></span></a>
+      </li>
+      <li>
+        <a class="subscribe" href="#" data-panelregion="action-contact-form" data-panel="true">Get a Demo<span class="icon-comment"></span></a>
+      </li>
+      <li>
+        <a class="login" href="#" data-panelregion="action-login-form" data-panel="true">Login<span class="icon-search"></span></a>
+      </li>
+    </ul>
+  </nav>
+    }
+    else
+    {
+  <nav class="b-right-nav">
+    <ul>
+      <li>
+        <a class="admin" data-panel="true" data-panelregion="account-admin-form" href="#">Change Password<span class="icon-cogs"></span></a>
+      </li>
+      @if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_ADMIN))
+      {
+      <li>
+        <a class="admin" data-panel="true" data-panelregion="account-user-form" href="#">Manage Your Users<span class="icon-user"></span></a>
+      </li>
+      }
+      @{
+      List<VUI3Screenshot> favs = u.FavouriteImages.AllFavouriteImages();
+      string searchtype = "favourites";
+      if (favs.Count == 0) { searchtype = "search"; }
+      <li>
+        <a class="favourites" data-type="@searchtype" href="#">Favourites (<span class="favs-count">@favs.Count</span>)<span class="icon-paper-clip"></span></a>
+      </li>
+      }
+      @*<li>
+        <a class="searches" href="#">Searches<span class="icon-search"></span></a>
+      </li>*@
+      @*
+      <li>
+        <a class="help" href="/vui3/help">Help<span class="icon-question"></span></a>
+      </li>
+      *@
+      <li>
+        <a class="logout" href="#">Logout<span class="icon-power-off"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+    }
+
+  <span id="lightboxes"></span>    
+  
+  
+    
+  <div id="lightbox-templates">
+
+  <div class="lightbox-template" data-analysis="" data-service="">
+    <!-- HEADER and Selector Nav -->
+    <h1>VUI Library Lightbox</h1>
+	<div class="lightbox-header">
+      <div class="lightbox-logo">
+        <img src="/_inc/images/lightbox-logo.png" alt="VUI Library">
+      </div>
+      
+      <div class="lightbox-dropdown service-selected">
+        <select id="dd-lightbox-service"><option value="">All Services</option>
+        @{
+            VUI3SimpleServiceMasterCollection services = VUI3Utility.AllServicesSimple();
+            foreach (VUI3SimpleServiceMaster service in services.ServiceMasters)
+            {
+                <option value="@service.ServiceName">@service.ServiceName</option>    
+            }
+        }
+        </select>
+      </div>
+
+      <div class="lightbox-dropdown filter-selected">
+        <select id="dd-lightbox-device"><option value="">All Devices</option>
+            <option value="Web">Web</option>
+            <option value="Tablet/iPad">Tablet / iPad</option>
+            <option value="Smartphone/iPhone">Smartphone / iPhone</option>
+            <option value="Tablet/Android">Tablet / Android</option>
+            <option value="Smartphone/Android">Smartphone / Android</option>
+            <option value="Tablet/Windows">Tablet / Windows</option>
+            <option value="Smartphone/Windows">Smartphone / Windows</option>
+            <option value="Connected TV/Samsung">Connected TV / Samsung</option>
+            <option value="Connected TV/Sony">Connected TV / Sony</option>
+            <option value="Connected TV/LG">Connected TV / LG</option>
+            <!-- <option value="Connected TV/Panasonic">Connected TV / Panasonic</option> -->
+        </select>
+      </div>
+      
+      <div class="lightbox-dropdown group-selected">
+        <select id="dd-lightbox-pagetype">
+            <option value="">All Functions</option>
+        @{
+            foreach (VUI3Preval pt in pageTypes)
+            {
+                    <option value="@pt.Val">@pt.Val</option>
+            }
+        }
+        </select>
+      </div>
+
+      <div class="favourites">
+        <span class="selecter-selected">Favourites</span>
+      </div>
+      
+      <a class="lightbox-close icon-remove" href="#"></a>
+    </div>
+    <div class="lightbox-main">
+	  <!-- Left Nav scrolling -->
+      <div class="lightbox-leftside">
+        <div class="lightbox-nav"></div>
+      </div>
+      <div class="lightbox-gallery">
+        <a class="lightbox-prev icon-chevron-left" href="#"></a>
+        <div class="carousel"><ul></ul></div>
+        <a class="lightbox-next icon-chevron-right" href="#"></a>
+      </div>
+    </div>
+  </div>
+
+
+    <span class="left-nav-template">
+	  <a href="#" class="nav"> <!--  class="active vis" for first item -->
+        <div class="thumb-info">
+          <div class="player">[Service Name]</div>
+          <div class="name">[Page Category]</div>
+          <div class="device">[Platform / Device]</div>
+          <div class="date">[Import Tag]</div>
+        </div>
+        <div class="thumb-img"><img src="images/tmp/lightbox/img-thumb1.jpg" alt="Category Homepage"></div>
+      </a>
+	</span>
+    <span class="left-nav-reload-template">
+      <a href="#" class="load-more">
+        Load More...
+      </a>
+    </span>
+	<span class="main-image-template">
+	<li class="lightbox-item"> <!-- class="active" for first item -->
+      <div class="lightbox-item-header">
+		<div class="lightbox-item-panel">
+		  <a class="print icon-print" href="#"></a><a class="clip icon-paper-clip" href="#" title="Add to your favourite screenshots"></a><span class="count">[number of number]</span>
+		</div>
+        <div class="lightbox-item-package"></div>
+		<div class="lightbox-item-title">[Page Category]</div>
+	  </div>
+	  <div class="lightbox-item-img">
+        <div class="lightbox-item-img-inner" id="">
+		  <img src="images/tmp/lightbox/img2.jpg" alt="Category Homepage">
+		</div>
+	  </div>
+	</li>
+	</span>
+  </div>        
+
+    
+ <div id="favourite-image-template">
+    <li>
+        <a href="#">
+            <span class="player" rel="servicename"></span>
+            <span class="name" rel="pagetype"></span>
+            <span class="device" rel="device"></span>
+            <span class="date" rel="importtag"></span>
+            <span class="img"><img src="" /></span>
+        </a>
+    </li>
+ </div>
+ <div id="favourite-template">
+    <div class="pane" data-id="">
+        <div class="inner">
+        <a href="">
+        <ul>
+          <li rel="ss">
+            <div class="counter">
+                 <span rel="data-1"></span><span class="icon-camera"></span>
+            </div>
+            <div class="text">
+                Screenshots from <br> <span rel="data-2"></span> different devices
+            </div>
+          </li>
+          <li rel="be">
+            <div class="counter">
+                <span rel="data-1"></span><i>/25 </i><span class="icon-bar-chart"></span>
+            </div>
+            <div class="text">
+                Average benchmark score <br> across all devices
+            </div>
+          </li>
+          <li rel="ra">
+            <div class="counter">
+                <span rel="data-1"></span><i>/5</i><span class="icon-star-empty"></span>
+            </div>
+            <div class="text">
+                Average App Store Rating from<br> Apple / Google Play
+            </div>
+          </li>
+          <li rel="tw">
+            <div class="counter">
+                <span rel="data-1"></span> <span class="icon-twitter"></span>
+            </div>
+            <div class="text">
+                Twitter Followers<br> (as of <span rel="data-date"></span>)
+            </div>
+            <div class="rate">
+                @* <span class="icon-sort-up"></span>since 26 July *@
+            </div>
+          </li>
+          <li rel="fb">
+            <div class="counter">
+                <span rel="data-1"></span> <span class="icon-thumbs-up-alt"></span>
+            </div>
+            <div class="text">
+                Facebook likes <br> (as of <span rel="data-date"></span>)
+            </div>
+            <div class="rate">
+                @* <span class="icon-sort-up"></span>since 26 July *@
+            </div>
+          </li>
+          <li rel="yt">
+            <div class="counter">
+                <span rel="data-1"></span> <span class="icon-youtube"></span>
+            </div>
+            <div class="text">
+                Subscribers on<br> YouTube (as of <span rel="data-date"></span>)
+            </div>
+            <div class="rate">
+                @* <span class="icon-sort-down"></span>since 26 July *@
+            </div>
+          </li>
+        </ul>
+        </a>
+        </div>
+    </div>
+ </div>
+    
+    }

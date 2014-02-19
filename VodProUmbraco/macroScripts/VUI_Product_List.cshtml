@@ -1,0 +1,31 @@
+﻿  
+@using VUI.classes;
+@using umbraco.MacroEngines;
+@using System.Web.Security;
+@using umbraco.cms.businesslogic.member;
+@{  
+    List<DynamicNode> products = (new DynamicNode(VUIfunctions.VUI_product_list)).Descendants("VUISubscriptionProduct").Items.ToList();
+   
+    <ul class="ui-list ui-product-list">
+    @foreach(DynamicNode product in products)
+    {
+      bool show = true;
+      if(product.HasProperty("private") && product.GetProperty("private").Value.Equals("1") )
+      { 
+        show = false;
+      }
+      
+      if(show)
+      {
+      string productCode = @product.GetProperty("productCode").Value;
+      string productSnippet = @product.GetProperty("snippetHTML").Value;
+          
+      <li>
+        @*<a href="/vui/subscribe/process/BUY/@productCode">*@
+          @Html.Raw(productSnippet)
+        @*</a>*@
+      </li>
+      }
+    }
+    </ul>
+}

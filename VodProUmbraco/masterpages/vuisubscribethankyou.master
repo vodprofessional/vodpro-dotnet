@@ -1,0 +1,155 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VUIMaster.master" AutoEventWireup="true" %>
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolderHead" runat="server">
+  <script type="text/javascript">document.title = 'VUI Library - Subscription Complete';</script>
+</asp:content>
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolder1" runat="server">
+  
+  <div class="ui-heading">
+    <h1>Payment Complete!</h1>
+  </div>
+  
+  <umbraco:Macro runat="server" language="cshtml">
+    @using VUI.classes;
+    @using umbraco.MacroEngines;
+    @using System.Web.Security;
+    @using umbraco.cms.businesslogic.member;
+    @using umbraco.cms.businesslogic.web;
+    @{
+    
+    
+    
+      @* 1. If user is not logged in, bomb out *@
+      @* 2. If there is no Session["VUITXID"] then bomb out  *@
+    
+      try
+      {
+        Member m = VUIfunctions.CurrentUser();
+        if(m == null)
+        {
+          Response.Redirect("/vui");
+          Response.End();
+        }
+  
+        int transactionId;
+        if (Request["TXN"] != null && Int32.TryParse(Request["TXN"].ToString(), out transactionId))
+        {        
+            Document transaction = new Document(transactionId);
+      
+            if(transaction.getProperty("confirmationPageSeen") != null)
+            {
+              if(!String.IsNullOrEmpty(transaction.getProperty("confirmationPageSeen").Value.ToString()) && transaction.getProperty("confirmationPageSeen").Value.ToString().Equals("1"))
+              {
+                Response.Redirect("/vui");
+                Response.End();
+              }
+              else
+              {
+                transaction.getProperty("confirmationPageSeen").Value = "1";
+                transaction.Save();
+              }
+            }
+      
+            string STATUS = transaction.getProperty("status").Value.ToString();
+            int txUser = -1;
+            Int32.TryParse(transaction.getProperty("user").Value.ToString(), out txUser);
+            
+            // Hey Get out of here!
+            if(!txUser.Equals(m.Id))
+            {
+              Response.Redirect("/vui"); 
+              Response.End();
+            }
+
+            // Linked Products (for ROVI)
+            string linkedProduct = transaction.getProperty("linkedProduct").Value.ToString();
+            string linkedProductCode = String.Empty;
+            string linkedProductName = string.Empty;
+            if(!String.IsNullOrEmpty(linkedProduct))
+            {
+               DynamicNode lp = new DynamicNode(linkedProduct);
+               linkedProductCode = lp.GetProperty("productCode").ToString();
+               linkedProductName = lp.GetProperty("productName").ToString();
+            }
+
+            if(STATUS.ToLower().Equals("paypal completed") || STATUS.ToLower().Equals("paypal pending multi_currency"))
+            {
+              <div class="ui-checkout">
+               <div class="confirmation">         
+                <h2>You are now a VUI Library Subscriber</h2>
+                
+                <div class="label">
+                  You bought
+                </div>  
+                <div class="detail">
+                  @transaction.getProperty("productID").Value.ToString() - @transaction.getProperty("productName").Value.ToString()
+                </div>
+                
+                <div class="label">
+                  Our reference
+                </div> 
+                <div class="detail">
+                  @transaction.getProperty("transactionNumber").Value.ToString()
+                </div>
+        
+                <div class="label">
+                  Your invoice
+                </div>
+                <div class="detail">
+                  Can be found under <a href="/vui/vuiadmin">Account Administration</a>
+                </div>
+                
+                @if(!String.IsNullOrEmpty(linkedProductCode))
+                {
+                    string url = "/vui/subscribe/process/BUY/" + @linkedProductCode;
+                    <h3><a href="@url">Please complete the purchase of @linkedProductName</a></h3>
+                }
+                else
+                {
+                    <h3><a href="/vui">Back to the Home Page to start using the VUI Library</a></h3>
+                }
+                </div>
+              </div>    
+              }
+              else 
+              {
+                <div class="ui-checkout">
+                 <div class="confirmation">         
+                  <h2>There was a problem with your purchase</h2>
+                
+                   <p>
+                      Your payment has a status of @STATUS. 
+                   </p>
+                   <p>
+                     Please contact us quoting this reference number @Request["TXN"].ToString()
+                   </p>
+                  </div>
+                </div>
+              }
+         
+        }
+        else
+        {
+          Response.Redirect("/vui");
+          Response.End();
+        }
+      }
+      catch(Exception ex)
+      {
+        <div class="ui-checkout">
+           <div class="confirmation">         
+            <h2>There was a problem with this page</h2>
+             <p>There was an error on the page</p>
+             <p>If you believe there was a problem processing your payment please contact us</p>
+          </div>
+        </div>
+      }
+    }
+    
+  </umbraco:Macro>
+</asp:content>
+
+<asp:content ContentPlaceHolderId="ContentPostScript" runat="server">
+  
+</asp:content>

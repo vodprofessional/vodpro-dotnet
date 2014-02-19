@@ -1,0 +1,50 @@
+﻿@using umbraco.MacroEngines;
+@{
+  
+  var content50VPID = @Parameter.content50VP;
+  string extraClass = @Parameter.extraClass;
+  string content50VPUrl = "";
+  
+  //var hideResults;
+  
+  if(content50VPID != null)
+  {
+    content50VPUrl = umbraco.library.NiceUrl(Int32.Parse(content50VPID));
+    content50VPUrl = String.Format(@"/media/VP50/{0}.js?", content50VPUrl.Replace("/", ""));
+      
+    //DynamicNode vp50node = new DynamicNode(content50VPID);
+
+
+    //hideResults = vp50node.GetProperty("vp50HideResults").Value;
+      
+  }
+  
+<div id="VP50lightbox" class="@extraClass"><span id="sash"></span>
+  <div id="VP50content" data-url="@content50VPUrl">
+    <div class="VP50loading"><img src="/css/images/loaderb64.gif" /></div>
+    <div class="content">
+    <div class="rhside">
+      <img class="portrait" />
+      <a href="" class="more" target="vp50story">more</a>
+    </div>
+    <h2></h2>
+    <h3></h3>
+    <p>
+      <span class="brief"></span>
+      <span class="long"></span>
+    </p>
+    
+      </div>
+  </div>
+  <div id="VP50roller_cont">
+    <div class="scrubleft"></div>
+    <div id="VP50roller">
+      <ul></ul>
+    </div>
+    <div class="scrubright"></div>
+  </div>
+  <div id="VP50ad"><!-- VOD_PRO_607x30 --><div id='div-gpt-ad-1339509551821-0' style='width:607px; height:30px;'>
+<script type='text/javascript'>googletag.cmd.push(function() { googletag.display('div-gpt-ad-1339509551821-0'); });</script></div></div>
+</div>
+
+}

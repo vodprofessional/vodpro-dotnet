@@ -1,0 +1,50 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VUIMaster.master" AutoEventWireup="true" %>
+<%@ Register TagPrefix="vp" TagName="VuiLogin" src="~/umbraco/plugins/vui/usercontrols/vui-login.ascx" %>
+<%@ Register TagPrefix="vp" TagName="VuiRegister" src="~/umbraco/plugins/vui/usercontrols/vui-register.ascx" %>
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolderHead" runat="server">
+  <script type="text/javascript">document.title = 'VUI Library - Subscription (Login or Register)';</script>
+</asp:content>
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolder1" runat="server">
+
+        <div class="ui-heading">
+          <h1>Subscribing - Login or Register</h1> 
+        </div>
+        
+          
+        
+        <h2 class="ui-home-strap">
+          To complete the subscription process we need to know some information about you.
+          If you are already a member of VOD Professional, log in here
+        </h2>
+               
+          
+            <vp:VuiLogin id="MainLogin" runat="server" Mode="FORM" NextPage="/vui/subscribe/process/BUY/" />
+        
+            
+        
+        <h2 class="ui-home-strap">
+          If you aren't yet a member of VOD Professional, register below
+        </h2>
+            
+            
+               
+            <vp:VuiRegister id="Register" runat="server" NextPage="/vui/subscribe/process/BUY/" />
+        
+         
+        <div id="home-col-container">
+          <div class="main home-column">
+         
+          
+          </div>    
+        </div>
+  
+
+        
+  
+</asp:content>
+
+<asp:content ContentPlaceHolderId="ContentPostScript" runat="server">
+  
+</asp:content>

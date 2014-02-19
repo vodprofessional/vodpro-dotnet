@@ -1,0 +1,21 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VodProMaster2.master" AutoEventWireup="true" %>
+
+<asp:Content ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+  <div id="maincontent">
+<umbraco:Macro runat="server" language="cshtml">
+@using umbraco.MacroEngines
+@using umbraco.interfaces
+@using uComponents.Core
+@using uComponents.Core.uQueryExtensions
+@using System.Linq
+@{
+<div class="hplabel">
+  <h1>@Model.title</h1>
+  </div>
+  @Model.sectionIntro  
+  
+}
+  
+</umbraco:Macro>
+  </div>
+</asp:Content>

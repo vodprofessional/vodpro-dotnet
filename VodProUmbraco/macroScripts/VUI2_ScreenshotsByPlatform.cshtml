@@ -1,0 +1,213 @@
+﻿@using VUI.classes;
+@using umbraco.MacroEngines;
+@using System.Web.Security;
+@using umbraco.cms.businesslogic.member;
+@using VUI.VUI2.classes;
+@functions
+{
+    string Mode = "";
+    bool IsFullMode = false;
+}
+@helper DrawMatrixLink(MatrixService s, string context)
+{
+    string url = "";
+    string modeClass = "matrix-tick";
+    
+    if(context.Equals("all"))
+    {
+        url = "/vui/" + MatrixService.URLfromContext[context] + "/" + Utility.NiceUrlName(s.ServiceName) + "/screenshots";
+        <a href="@url">@s.ServiceName</a>
+    }
+    else if (s.Counts[MatrixService.MatrixPositions[context]] > 0)
+    {
+        if (IsFullMode || s.IsPreviewable)
+        {
+            url = "/vui/" + MatrixService.URLfromContext[context] + "/" + Utility.NiceUrlName(s.ServiceName) + "/screenshots";
+        }
+        else
+        {
+            url = "#";
+            modeClass += " ui-preview-disabled";
+        }
+        <a href="@url" class="@modeClass">@s.ServiceName screenshots</a>
+    }
+}
+@{
+    Member m = VUIfunctions.CurrentUser();
+    string user_status = VUIfunctions.MemberVUIStatus(m);
+    IsFullMode = VUIfunctions.MemberVUIFullMode(user_status);
+    string context = "All";
+    Platform parentPlatform = null;
+    
+    if(@Model.NodeTypeAlias.Equals(Utility.GetConst("VUI2_platformtype")))
+    {
+        parentPlatform = new Platform(@Model.Id);
+        context = parentPlatform.PlatformName;
+    }
+    
+    string PageTitle = "";
+    if(context.Equals("All"))
+    {
+        PageTitle = "Screenshots for all Video Services on all Platforms";
+        <script type="text/javascript">document.title += ' Screenshots on all platforms';</script>
+    }
+    else if (parentPlatform != null)
+    {
+        PageTitle += "Screenshots for Video Services on " + parentPlatform.Name;
+        <script type="text/javascript">document.title += ' Screenshots - on @parentPlatform.Name';</script>
+    }
+
+    
+    <div class="ui-heading large">
+        <h1>@Html.Raw(PageTitle)</h1>
+        @if(context.Equals("All"))
+        {
+        <ul class="ui-screenshot-view-selector">
+            <li><a href="#" class="tiles" title="View as tiles">View as tiles</a></li>
+            <li><a href="#" class="matrix" title="View as matrix">View as matrix</a>
+             <span id="matrix-pop-out"><div id="matrix-pop-out-arrow"></div><div id="matrix-pop-out-text">Try our new matrix view</div></span>
+            </li>
+        </ul>
+        }
+        <!-- <ul class="ui-screenshot-tabs">
+            <li><a href="/vui/all/screenshots">All</a></li>
+            <li><a href="/vui/tablet/screenshots/">Tablet</a></li>
+            <li><a href="/vui/web/screenshots">Web</a></li>
+        </ul>
+        -->
+    </div>
+    
+    
+
+ if(context.Equals("All"))
+ {
+     
+  
+    
+     List<MatrixService> matrix = VUIDataFunctions.ScreenshotMatrix();
+  
+  <div id="screenshot-matrix" class="hidden">
+  <table>
+      <tr class="matrix-header">
+        <th class="first">&nbsp;</th>
+        <th><div class="androidtab" title="Android Tablet">Android Tablet</div></th>
+        <th><div class="androidphone" title="Android Phone">Android Phone</div></th>
+        <th><div class="ipad" title="iPad">iPad</div></th>
+        <th><div class="iphone" title="iPhone">iPhone</div></th>
+        <th><div class="winphone" title="Windows Phone">Windows Phone</div></th>
+        <th><div class="wintab" title="Other Windows">Other Windows</div></th>
+        <th><div class="web" title="Web">Web</div></th>
+    </tr>    
+  @foreach (MatrixService s in matrix)
+  {
+      if (s.Counts[MatrixService.MatrixPositions["Total"]] > 0)
+      {
+    <tr>
+        <td class="first">@DrawMatrixLink(s, "all")</td>
+        <td>@DrawMatrixLink(s, "TabletAndroid")</td>
+        <td>@DrawMatrixLink(s, "SmartphoneAndroid")</td>
+        <td>@DrawMatrixLink(s, "TabletiPad")</td>
+        <td>@DrawMatrixLink(s, "SmartphoneiPhone")</td>
+        <td>@DrawMatrixLink(s, "SmartphoneWindows")</td>
+        <td></td>
+        <td>@DrawMatrixLink(s, "Web")</td>
+    </tr>    
+      }
+  }
+  
+  </table>
+  </div>
+ }
+    
+    
+    
+    <div id="main-ui-grid-wrapper" class="ui-grid">        
+        <div id="main-ui-grid" class="ui-hidden-scroll-main-area">
+            <ul class="ui-list">
+                @{
+                    // Get a list of the items descendents which match the     
+
+                    List<ServiceMetadata> services = VUIDataFunctions.GetScreenshotServiceList(context);
+
+                    foreach (ServiceMetadata service in services)
+                    {
+                        if (service.ScreenshotCount > 0)
+                        {
+                            string url = "";
+                            string modeClass = "";
+
+                            if (IsFullMode || service.IsPreviewable)
+                            {
+                                if (service.HasMultipleServices)
+                                {
+                                    if (context.ToLower().Equals("all"))
+                                    {
+                                        url = "/vui/all/" + service.ServiceName + "/screenshots";
+                                    }
+                                    else
+                                    {
+                                        url = "/vui/" + context.ToLower() + "/all/" + service.ServiceName + "/screenshots";
+                                    }
+                                }
+                                else
+                                {
+                                    if (context.ToLower().Equals("all"))
+                                    {
+                                        if (service.ParentDeviceName != null)
+                                        {
+                                            url = "/vui/all/" + service.ServiceName + "/screenshots";
+                                        }
+                                        else
+                                        {
+                                            url = "/vui/all/" + service.ServiceName + "/screenshots";
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (service.ParentDeviceName != null)
+                                        {
+                                            url = "/vui/" + context.ToLower() + "/" + service.ParentDeviceName + "/" + service.ServiceName + "/screenshots";
+                                        }
+                                        else
+                                        {
+                                            url = "/vui/" + context.ToLower() + "/" + service.ServiceName + "/screenshots";
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                url = "#";
+                                modeClass = "ui-preview-disabled";
+                            }
+                            <li class="ui-service-template ui-service @modeClass">
+                                <a href="@url" title="See @service.ScreenshotCount VUI screenshots for this service">
+                                    <h2>
+                                        @service.Name
+                                    </h2>
+                                    <div class="ui-image-bg">
+                                    <div class="ui-image-box"><img data-original="@service.DefaultScreenshotURL" class="lazy" src="/vui-media/media/vui-loaderb64.gif"></div>
+                                    </div>
+                                    @* <div class="ui-service-score">
+                                    @if (IsFullMode || service.IsPreviewable)
+                                    {
+                                        if (service.HasBenchmark)
+                                        {
+                                        <div class="score">@service.BenchmarkScore</div>
+                                        <div class="score-text">common VUI functions</div>
+                                        }
+                                    }
+                                    </div>*@
+                                </a>
+                                @if (!(IsFullMode || service.IsPreviewable))
+                                {
+                                    <a class="ui-preview-overlay" href="/vui/subscribe"><span>Subscribe to see this resource</span></a>
+                                }
+                            </li>
+                        }
+                    }
+                }
+            </ul>
+        </div>
+    </div>    
+}

@@ -1,0 +1,66 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/umbraco/masterpages/default.master" AutoEventWireup="true" %>
+<asp:Content ContentPlaceHolderID="ContentPlaceHolderDefault" runat="server">
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+
+    <title>VUI Library - Affiliate Landing Page</title>
+
+    <script src="/Scripts/jquery-1.7.1.min.js"></script>
+
+    <script type='text/javascript'>
+      var googletag = googletag || {};
+      googletag.cmd = googletag.cmd || [];
+      (function () {
+          var gads = document.createElement('script');
+          gads.async = true;
+          gads.type = 'text/javascript';
+          var useSSL = 'https:' == document.location.protocol;
+          gads.src = (useSSL ? 'https:' : 'http:') + '//www.googletagservices.com/tag/js/gpt.js';
+          var node = document.getElementsByTagName('script')[0];
+          node.parentNode.insertBefore(gads, node);
+      })();
+    </script>
+    <umbraco:Macro  runat="server" language="cshtml">
+    @using umbraco.MacroEngines
+    @inherits umbraco.MacroEngines.DynamicNodeContext
+    @{
+      string affiliateId = @Model.Id.ToString();
+      string redirectTo = "/vui";
+  
+      if(@Model.isActive.GetType() != typeof(DynamicNull) && @Model.isActive)
+      {
+          if(Request.Cookies["VUI_AFFILIATE_CODE"] == null || String.IsNullOrEmpty(Request.Cookies["VUI_AFFILIATE_CODE"].Value))
+          {
+            HttpCookie myCookie = new HttpCookie("VUI_AFFILIATE_CODE", affiliateId);
+            myCookie.Expires = DateTime.Now.AddDays(90d);
+            Response.Cookies.Add(myCookie);
+          }
+          else if (Request.Cookies["VUI_AFFILIATE_CODE"].Value.Equals(affiliateId))
+          {
+            HttpCookie myCookie = new HttpCookie("VUI_AFFILIATE_CODE", affiliateId);
+            myCookie.Expires = DateTime.Now.AddDays(90d);
+            Response.Cookies.Add(myCookie);
+          }
+          try
+          {
+            redirectTo = umbraco.library.NiceUrl(@Model.redirectPage);
+          }
+          catch(Exception e)
+          { ; }
+      }
+      <script type="text/javascript">
+        $(function() {
+           document.location = '@redirectTo';
+        });
+      </script>
+    }
+    </umbraco:Macro>
+</head>
+</html>
+
+</asp:Content>

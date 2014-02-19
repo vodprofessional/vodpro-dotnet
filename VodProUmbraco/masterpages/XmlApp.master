@@ -1,0 +1,7 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/umbraco/masterpages/default.master" AutoEventWireup="true" %>
+  <%@ Register src="~/usercontrols/xml-actions/ajaxactions.ascx" tagname="AjaxActions" tagprefix="vp" %>
+
+<asp:Content ContentPlaceHolderID="ContentPlaceHolderDefault" runat="server">
+  <vp:AjaxActions ID="ajaxactions1" runat="server" />
+
+</asp:Content>

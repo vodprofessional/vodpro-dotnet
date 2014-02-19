@@ -1,0 +1,270 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/umbraco/masterpages/default.master" AutoEventWireup="true" %>
+<%@ Register TagPrefix="vp" TagName="VuiLogin" src="~/umbraco/plugins/vui/usercontrols/vui-login.ascx" %>
+  
+<asp:Content ContentPlaceHolderID="ContentPlaceHolderDefault" runat="server">
+
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/i/378 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title><asp:placeholder runat="server">VUI Library - <umbraco:item id="pgTitle" runat="server" field="title"></umbraco:item></asp:placeholder></title>
+  <meta name="description" content="">
+
+  <!-- Mobile viewport optimized: h5bp.com/viewport -->
+  <meta name="viewport" content="width=device-width">
+
+  <link rel="stylesheet" href="/css/form.css">  
+  <link rel="stylesheet" href="/css/regwall.css">  
+  <link rel="stylesheet" href="/css/vui.css">  
+  <link rel="stylesheet" href="/vui_prototype/css/jquery.lightbox-0.5.css">
+  <link rel="stylesheet" href="/css/select2.css">  
+  
+  
+
+  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
+  <!-- All JavaScript at the bottom, except this Modernizr build.
+       Modernizr enables HTML5 elements & feature detects for optimal performance.
+       Create your own custom Modernizr build: www.modernizr.com/download/ -->
+  <script src="/vui_prototype/js/libs/modernizr-2.5.3.min.js"></script>
+  
+  <asp:contentplaceholder ID="ContentPlaceHolderHead" runat="server"></asp:contentplaceholder>
+  
+  <script type='text/javascript'>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+  (function() {
+  var gads = document.createElement('script');
+  gads.async = true;
+  gads.type = 'text/javascript';
+  var useSSL = 'https:' == document.location.protocol;
+  gads.src = (useSSL ? 'https:' : 'http:') + 
+  '//www.googletagservices.com/tag/js/gpt.js';
+  var node = document.getElementsByTagName('script')[0];
+  node.parentNode.insertBefore(gads, node);
+  })();
+  </script>
+  
+  <script type='text/javascript'>
+  googletag.cmd.push(function() {
+  googletag.defineSlot('/11576661/VOD_PRO_728x30', [728, 30], 'div-gpt-ad-1345813821875-0').addService(googletag.pubads());
+  googletag.pubads().enableSingleRequest();
+  googletag.enableServices();
+  });
+  </script>  
+</head>
+  
+<body class="ui-nav-top">
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+
+  <form runat="server" id="frm">
+  
+  <div id="wrapper">
+    
+    <header class="ui-hide-from-print">
+<umbraco:Macro runat="server" language="cshtml">
+@using VUI.classes;
+@{        
+@*  <h1><a href="@umbraco.library.NiceUrl(VUIfunctions.VUIMediaRootNode)">VUI Library</a></h1> *@
+  <a class="vui-home" href="/vui/"><img src="/css/images/VUI_white_on_black_logo.png" /></a>
+}
+</umbraco:Macro>
+      
+      <a href="/" class="ui-home">Back to</a>
+      <vp:VuiLogin id="HeaderLogin" runat="server" Mode="INFO" />
+
+    </header>
+
+
+    <umbraco:Macro runat="server" language="cshtml">  
+    @using VUI.classes;
+    @using umbraco.MacroEngines;
+    @using umbraco.cms.businesslogic.member;
+    @{    
+      Member c = VUIfunctions.CurrentUser();
+      
+      string user_status = VUIfunctions.VUI_USERTYPE_NONE;
+      
+      if(c != null)
+      {
+          user_status = VUIfunctions.MemberVUIStatus(c);
+      }
+        
+      
+    <nav class="top ui-hide-from-print" >
+      <ul>
+        <li><a href="/vui/screenshots/">SCREENSHOTS</a>
+ @*          <ul class="ui-nav-level-1">
+      
+            <li class="ui-nav-platform"><a href="/vui/screenshots/All" rel="platform-type" data-id="All" data-platform="All" class="platform-type vui-platform">All</a>
+           
+          </li>
+     {
+          List<DynamicNode> platforms = VUIfunctions.PlatformList();
+          foreach(DynamicNode platform in platforms)
+          {
+            
+            string platformname = @platform.Name.Replace(" ","-");
+    
+            <li class="ui-nav-platform"><a href="/vui/@platformname/screenshots" rel="platform-type"  data-platform="@platform.Name"  data-id="@platform.Id" class="platform-type vui-platform">@platform.Name</a>
+         
+            </li>
+          }
+      }
+            <li class="ui-nav-platform"><a href="/vui/Tablet" rel="platform-type" class="platform-type vui-platform">Tablet</a></li>
+            <li class="ui-nav-platform"><a href="/vui/screenshots/Web" rel="platform-type" class="platform-type vui-platform">Web</a></li>
+
+            </ul>*@
+        </li>
+        <li><a href="/vui/benchmarking">BENCHMARKING</a></li>
+        <li><a href="/vui/best-practice-guides">BEST PRACTICE GUIDES</a></li>
+        @*<li><a href="/vui/research">RESEARCH</a></li>*@
+
+      @if (!user_status.Equals(VUIfunctions.VUI_USERTYPE_NONE) && !user_status.Equals(VUIfunctions.VUI_USERTYPE_REGISTRANT))
+      {
+        <li><a href="/vui/vuiadmin">ACCOUNT ADMIN</a></li>
+      }
+      else
+      {
+        <li class="subscribe"><a href="@VUIfunctions.VUI_subscribe_page">SUBSCRIBE</a>
+          <ul class="ui-nav-level-1">
+            <li><a href="/vui/why-join-the-vui-library">Why Subscribe</a></li>
+            <li><a href="@VUIfunctions.VUI_subscribe_page">Price Plans</a></li>
+          </ul>
+        </li>
+      }
+            <li class="ui-nav-contact"><a href="/vui/why-join-the-vui-library"><strong>Questions?</strong></a><a href="/contact-us">Email us or call +44 (0)20 7286 4224</a></li>
+      </ul>
+    </nav>
+    }
+    </umbraco:Macro>
+
+  <div id="CookieMessage">
+    <p>
+     VOD Professional uses cookies. Some may have been set already. 
+     Please click the button to accept our cookies. If you continue to use the site, we'll assume you're happy to accept the cookies anyway.
+    </p>
+    <input type="button" id="CookieMessageAgree" value="I'm fine with this [X]" />
+  </div>
+
+
+<umbraco:Macro runat="server" language="cshtml">
+@using VUI.classes;
+@using umbraco.cms.businesslogic.member;
+@{  
+
+  if (Request.Cookies["show-registration-message"] != null)
+  {
+      if (Request.Cookies["show-registration-message"].Value.Equals("YES"))
+      {
+        <div class="ui-member-message registration">
+          <strong>Thanks for registering!</strong>
+          <div>You can now read selected articles in the VUI Library. Subscribe today and see screenshots and benchmarking data from over 150 global video services.</div>
+        </div>
+      }
+      Response.Cookies["show-registration-message"].Value = "";
+      Response.Cookies.Remove("show-registration-message");
+  }
+  
+  
+  Member c = VUIfunctions.CurrentUser();
+  
+  string user_status = VUIfunctions.VUI_USERTYPE_NONE;
+  
+  if(c != null)
+  {
+      user_status = VUIfunctions.MemberVUIStatus(c);
+  }
+  
+  if (user_status.Equals(VUIfunctions.VUI_USERTYPE_ADMIN_NOTPAID))
+  {
+    <div class="ui-member-message">
+      <strong>Your Payment has not completed</strong>. You need to contact us to get full access to the VUI Library
+    </div>
+  }
+  if (user_status.Equals(VUIfunctions.VUI_USERTYPE_USER_NOTPAID))
+  {
+    Member admin = VUIfunctions.GetVUIAdminForCurrentUser();
+    <div class="ui-member-message">
+        <strong>Your Company's Payment has not completed.</strong>
+        You should ask your administrator
+      @if(admin != null)
+      {
+        @:, @admin.getProperty("fullName").Value
+      }  
+        to contact us
+    </div>
+  }
+}
+</umbraco:Macro>
+    
+    <div id="ui-col-container">
+
+      <div role="main" class="main ui-column">
+        
+          <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+   
+          </asp:ContentPlaceHolder>
+        
+      </div>
+
+    </div>
+  </div>
+  
+  </div>
+      
+    <footer class="ui-hide-from-print">
+      <div class="sponsor-message"><!-- VOD_PRO_728x30 -->
+<div id='div-gpt-ad-1345813821875-0' style='width:728px; height:30px;'>
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1345813821875-0'); });
+</script>
+</div></div>
+    </footer>
+  </form>
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="/Scripts/jquery-1.7.1.min.js"></script>
+
+
+  <!-- Fancybox scripts -->
+  <script type="text/javascript" src="/vui_prototype/js/fancybox/jquery.fancybox.js"></script>
+  <script type="text/javascript" src="/vui_prototype/js/fancybox/helpers/jquery.fancybox-buttons.js"></script>
+  <link rel="stylesheet" type="text/css" href="/vui_prototype/js/fancybox/jquery.fancybox.css"/>
+  <link rel="stylesheet" type="text/css" href="/vui_prototype/js/fancybox/helpers/jquery.fancybox-buttons.css"/>
+  
+ 
+  <!-- scripts concatenated and minified via build script -->
+  <script src="/vui_prototype/js/plugins.js"></script>
+  <script src="/Scripts/scripts.js"></script>
+  <script src="/Scripts/vui.js"></script>
+  <script src="/Scripts/select2.min.js" />
+  <!-- end scripts -->
+
+  <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+       mathiasbynens.be/notes/async-analytics-snippet -->
+  <script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+  
+  <asp:ContentPlaceHolder ID="ContentPostScript" runat="server">
+ 
+  </asp:ContentPlaceHolder>
+  
+</body>
+</html>
+</asp:Content>  

@@ -1,0 +1,35 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/umbraco/masterpages/default.master" AutoEventWireup="true" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderDefault" runat="server">
+<umbraco:ContentType ID="ContentType1" runat="server" MimeType="text/xml"></umbraco:ContentType>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>VOD Professional News Feed</title>
+    <link>http://www.vodprofessional.com/</link>
+    <description>The VODProfessional news feed</description>
+    <language>en-gb</language>
+    <image>
+      <title>The VODProfessional news feed</title>
+      <url>http://www.vodprofessional.com/css/images/logo_franklinmedium400.jpg</url>
+      <link>http://www.vodprofessional.com/</link>
+    </image>  
+  
+<umbraco:Macro ID="Macro1"  runat="server" language="cshtml">
+@{
+  var @items = @Model.Parent.DescendantsOrSelf("vodProStory").OrderBy("storydate desc, storydate desc").Items.GetRange(0,100);
+  foreach (dynamic @story in @items)
+  {
+    var url = "http://www.vodprofessional.com" + @story.Url;
+    <item>
+      <title>@story.title.Replace("&lt;","@@@#x3C;").Replace("&gt;","@@@#x3E;").Replace("&","&#x26;").Replace("@@@","&")</title>
+      <link>@url</link>
+      <description>@story.storyteaser.Replace("&lt;","@@@#x3C;").Replace("&gt;","@@@#x3E;").Replace("&","&#x26;").Replace("@@@","&")</description>
+    </item>
+  } 
+}
+</umbraco:Macro>
+<atom:link href="http://www.vodprofessional.com/rss" rel="self" type="application/rss+xml" />
+  </channel>
+</rss> 
+
+</asp:Content>

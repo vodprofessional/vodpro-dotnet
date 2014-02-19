@@ -1,0 +1,66 @@
+﻿@{
+  
+  int editorRating = Convert.ToInt32(@Parameter.numStarsEditors);
+  bool showUserStars = (@Parameter.showUserStars.Equals("1"));
+  int userRating = Convert.ToInt32(@Parameter.numStarsUser);
+  string userSource = @Parameter.userRatingSource;
+  
+  int editorStars = 0;
+  int editorHalfStar = 0;
+
+  editorStars = editorRating / 2;
+  editorHalfStar = editorRating % 2;
+  
+  <p class="rating">
+    <span class="title"><strong>Editor's rating:</strong></span>
+    <span class="stars">
+  
+  @for(int i=1; i<=5; i++) {
+    if(i <= editorStars) {
+      <img src="/css/images/gold-star.png" height="25" width="26" />
+    }
+    if(i == editorStars && editorHalfStar == 1) {
+      <img src="/css/images/gold-half-star.png" height="25" width="26" />
+      i++;
+      continue;
+    }
+    if(i > editorStars) {
+      <img src="/css/images/grey-star.png" height="25" width="26" />
+    }
+  }  
+    </span>
+  </p>
+  
+  if (showUserStars )
+  {
+    int userStars = 0;
+    int userHalfStar = 0;
+    userStars = userRating / 2;
+    userHalfStar = userRating % 2;
+  
+  <p class="rating">
+    <span class="title"><strong>User rating:</strong></span>
+    <span class="stars">
+    
+  
+  @for(int i=1; i<=5; i++) {
+    if(i <= userStars ) {
+      <img src="/css/images/red-star.png" height="25" width="26" />
+    }
+    if(i == userStars && userHalfStar == 1) {
+      <img src="/css/images/red-half-star.png" height="25" width="26" />
+      i++;
+      continue;
+    }
+    if(i > userStars ) {
+      <img src="/css/images/grey-star.png" height="25" width="26" />
+    }
+  }  
+     <br/>(@userSource)
+   </span>
+  </p>
+  
+   
+  }
+}
+

@@ -1,0 +1,26 @@
+﻿<ul id="topNavigation">
+@{
+  var level = 2;
+  var currentPage = Model;
+  while (@currentPage.Level > @level-1){ currentPage = @currentPage.Parent; }
+
+  foreach(var page in @currentPage.Children.OrderBy("navigationSortOrder"))
+  {
+    if(@page.Level == @level)
+    {
+      if(@page.Id == @currentPage.Id)
+      {
+        <li class="current">
+          <a class="navigation" href="@page.Url">@page.title - @page.navigationSortOrder</a>
+        </li>
+      }
+      else
+      {
+        <li>
+          <a class="navigation" href="@page.Url">@page.title - @page.navigationSortOrder</a>
+        </li>
+      }
+    }
+  }
+}
+</ul>

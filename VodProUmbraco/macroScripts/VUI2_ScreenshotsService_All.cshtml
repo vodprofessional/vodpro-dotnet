@@ -1,0 +1,103 @@
+@using VUI.classes;
+@using umbraco.MacroEngines;
+@using System.Web.Security;
+@using umbraco.cms.businesslogic.member;
+@using VUI.VUI2.classes;
+@{  
+    string Mode = "";
+    bool IsFullMode = false;
+
+    Member m = VUIfunctions.CurrentUser();
+    string user_status = VUIfunctions.MemberVUIStatus(m);
+    IsFullMode = VUIfunctions.MemberVUIFullMode(user_status);
+    string serviceName = Request["service"];
+    
+    List<Service> services = Service.FindServices(serviceName);
+    if (services.Count > 0)
+    {
+        serviceName = services[0].Name;
+    }
+    
+    
+
+
+    string PageTitle = "";
+    PageTitle += "<a class=\"ui-link-platform\" href=\"/vui/all/screenshots\">All</a>";
+    PageTitle += " | " + serviceName;
+    <script type="text/javascript">        document.title += ' Screenshots - @serviceName on All Platforms';</script>
+
+    
+    <div class="ui-heading large">
+     <h1>@Html.Raw(PageTitle)</h1>
+    </div>
+    
+    <div id="main-ui-grid-wrapper" class="ui-grid">        
+        <div id="main-ui-grid" class="ui-hidden-scroll-main-area">
+            <ul class="ui-list">
+                @{
+
+                    foreach (Service service in services)
+                    {
+                        service.SetAnalyses(true);
+                        string DeviceName = String.Empty;
+                        string url = "";
+                        string modeClass = "";
+
+                        if(service.ScreenshotCount > 0)
+                        {
+                            if (IsFullMode || service.IsPreviewable)
+                            {
+                                if (service.Device != null)
+                                {
+                                    url = "/vui/" + service.Platform.PlatformName + "/" + service.Device.DeviceName + "/" + service.ServiceName + "/screenshots";
+                                }
+                                else
+                                {
+                                    url = "/vui/" + service.Platform.PlatformName + "/" + service.ServiceName + "/screenshots";
+                                }
+                            }
+                            else
+                            {
+                                url = "#";
+                                modeClass = "ui-preview-disabled";
+                            }
+                            <li class="ui-service-template ui-service @modeClass">
+                            <a href="@url" title="See @service.ScreenshotCount VUI screenshots for this service">
+                                <h2>
+                                    @service.Name
+
+                                    @if (service.Device != null)
+                                    {
+                                    @: | @service.Device.Name
+                                    }
+                                    else
+                                    {
+                                    @: | @service.Platform.Name
+                                    }
+                                </h2>
+                                <div class="ui-image-bg">
+                                <div class="ui-image-box"><img data-original="@service.DefaultScreenshotMedium" class="lazy" src="/vui-media/media/vui-loaderb64.gif"></div>
+                                </div>
+                                <div class="ui-service-score">
+                                @if (IsFullMode || service.IsPreviewable)
+                                {
+                                    if (service.HasBenchmark)
+                                    {
+                                    <div class="score">@service.BenchmarkScore</div>
+                                    <div class="score-text">common VUI functions</div>
+                                    }
+                                }
+                                </div>
+                            </a>
+                            @if (!(IsFullMode || service.IsPreviewable))
+                            {
+                                <a class="ui-preview-overlay" href="/vui/subscribe"><span>Subscribe to see this resource</span></a>
+                            }
+                            </li>
+                        }
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+}

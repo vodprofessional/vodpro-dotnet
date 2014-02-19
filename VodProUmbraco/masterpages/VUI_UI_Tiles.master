@@ -1,0 +1,175 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VUIMaster.master" AutoEventWireup="true" %>
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolderHead" runat="server">
+  
+</asp:content>
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolder1" runat="server">
+
+  
+<umbraco:Macro runat="server" language="cshtml">
+@{ 
+
+  <strong>Platform: @Request.QueryString["platform"]</strong>
+  <strong>Service: @Request.QueryString["service"]</strong>
+  <strong>Device: @Request.QueryString["device"]</strong>
+  
+}  
+  </umbraco:Macro>
+  
+<umbraco:Macro runat="server" language="cshtml">
+@using VUI.classes; 
+@using umbraco.MacroEngines;
+@using System.Web.Security;
+@using umbraco.cms.businesslogic.member;
+@{  
+
+  string Mode = ""; 
+  
+  VUIfunctions.InitScores();
+  int score = VUIfunctions.TotalFunctionScore;
+    
+  
+  
+  if(Model.Descendants("VUI_Folder").Items.Count > 0)
+  {
+    Mode = "SERVICELIST";
+  }
+  else
+  {
+    if(Model.Descendants("VUI_Image").Items.Count > 0)
+    {
+      Mode = "SERVICE";
+    }
+  }
+  DynamicNode service = null;
+  DynamicNode device = null;
+  DynamicNode platform = null;
+  
+  if(Model.folderLevel.Equals("service"))
+  {
+     service  = @Model;
+     device   = @Model.parent();
+     platform = @Model.parent().parent();
+  }
+  
+  if(Model.folderLevel.Equals("device"))
+  {
+     service  = @Model;
+     platform = @Model.parent();
+  }
+  
+  if(Model.folderLevel.Equals("platform"))
+  {
+     platform = @Model;
+  }
+  
+  <div class="ui-heading">
+    <h1>
+ @{
+     if(platform != null && !Model.folderLevel.Equals("platform"))
+     {
+        <a href="@umbraco.library.NiceUrl(@platform.Id)">@platform.Name</a>
+     }
+     else if (platform != null && Model.folderLevel.Equals("platform"))
+     {
+        @platform.Name
+     }
+        
+     if(device != null && !Model.folderLevel.Equals("device"))
+     {
+        <a href="@umbraco.library.NiceUrl(@device.Id)">@device.Name</a>
+     }
+     else if (device != null && Model.folderLevel.Equals("device"))
+     {
+        @device.Name
+     }
+     
+     if (service != null)
+     {
+        @service.Name
+     }
+  }
+    </h1>
+    
+    @if (Mode.Equals("SERVICELIST"))
+    {
+      <div class="ui-rating ui-hide-from-print">
+        <div class="ui-item-rating"></div>
+        <div class="ui-item-rate">
+           <a href="#"></a>
+           <span></span>
+           <input type="hidden" id="service-rating" size="2" />
+        </div>
+        <div class="ui-item-overall-rating"></div>
+      </div>
+      <div class="ui-service-info">
+        <span class="ui-service-info-desc"></span>
+        <span class="ui-service-info-region" title="Geographical regions"></span>
+        <span class="ui-service-info-type" title="Service types"></span>
+        <span class="ui-service-info-cat" title="Service categories"></span>
+        <span class="ui-service-info-score" title='This service has at least this many of the standard set of VUI functions'></span>
+      </div>
+    }
+  </div>
+
+  
+  <div id="main-ui-grid-wrapper" class="ui-grid">        
+      <div id="main-ui-grid" class="ui-hidden-scroll-main-area">
+        
+        <ul class="ui-list">
+
+          
+    @if (Mode.Equals("SERVICELIST"))
+    {  
+      List<VUIService> services = VUIfunctions.ServiceListByPlatform(platform.Id);
+          
+      foreach(VUIService serviceItem in services )
+      {
+        <li class="ui-service-template ui-service">
+          <a href="@umbraco.library.NiceUrl(@serviceItem.Node.Id)"><h2>@serviceItem.ServiceName</h2>
+            <div class="ui-image-bg">
+              <div class="ui-image-box"><img data-original="@serviceItem.thumbimage" class="lazy" src="/vui-media/media/vui-loaderb64.gif"></div>
+            </div>
+            <div class="ui-service-score"></div>
+          </a>
+        </li>
+      }
+    }
+          
+    @if (Mode.Equals("SERVICE"))
+    {
+        <li class="ui-image-template">
+          <a class="ui-lb">
+            <div class="ui-image-box"><img class="lazy" src="/vui-media/media/vui-loaderb64.gif"></div>
+            <div class="ui-image-pagetype"></div>
+            <div class="ui-image-info"></div>
+          </a>
+          <div class="ui-lightbox-view" style="display:none">
+            <div class="ui-lightbox-heading">
+              <h1>#service# | #device# | #date# | #n# of #nn#</h1>
+              <div class="ui-lightbox-tools ui-hide-from-print">
+                <div class="ui-lightbox-fave"><a class="ui-favourite-link" href="#" title="Add to favourite"></a></div>
+                <div class="ui-lightbox-print"><a class="ui-print-link" href="#" title="Print"></a></div>
+              </div>
+              <h2></h2>
+            </div>
+            <div class="ui-lightbox-image"><img /></div>
+          </div>
+        </li>
+    }
+        </ul>
+        
+        
+      </div>
+  </div>
+  
+    }
+  </umbraco:Macro>
+  
+  
+</asp:content>
+
+<asp:content ContentPlaceHolderId="ContentPostScript" runat="server">
+  
+</asp:content>

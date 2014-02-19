@@ -1,0 +1,37 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/vui3-master.master" AutoEventWireup="true" %>
+
+
+<asp:Content ID="ContentHead" ContentPlaceHolderID="ContentPlaceHolderHead" runat="server">
+    <title>VUI Library Home</title>
+</asp:Content>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderBodyTag" runat="server">
+<umbraco:Macro ID="Macro2" runat="server" Language="cshtml">
+@using VUI.classes;
+@using VUI.VUI3.classes;
+@using umbraco.cms.businesslogic.member;
+@using System.Web;
+@{
+    VUIUser u = VUI3Utility.GetUser();
+    Member c = u.Member;
+
+    string cssclass = "second ";
+  
+  @* NOT LOGGED IN STATE *@
+    if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_NONE))
+    {
+      cssclass = "home";
+    }
+    else
+    {
+      cssclass += "loggedin";
+    }
+    @: @Html.Raw(VUI3Utility.PageBody(cssclass))
+}
+</umbraco:Macro>
+</asp:Content>
+
+
+<asp:Content ID="ContentBody" ContentPlaceHolderID="ContentPlaceHolderBody" runat="server">
+ <umbraco:Macro ID="Macro1" Alias="vui3-homepage" runat="server"></umbraco:Macro>
+</asp:Content>

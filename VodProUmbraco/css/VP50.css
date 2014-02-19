@@ -1,0 +1,217 @@
+#VP50lightbox {
+  background: url('/css/images/50VP_lightbox.png') top left no-repeat;
+  float:left;
+  width: 609px;
+  margin: 20px 3px;
+  height: 522px;
+  box-shadow: 0 3px 3px 2px #999999;
+  position:relative;
+}
+
+#VP50lightbox.vp-2013 #sash {background: url('/css/images/50VP_Lightbox-2013-sash.png') top right no-repeat; position:absolute; top:0; right:0; z-index:2; width:83px; height:83px; }
+
+
+#VP50content {
+  float: left;
+  margin: 80px 12px 12px 12px;
+  background-color:#fff;
+  padding: 12px;
+  border-radius: 5px 5px 5px 5px;
+  font-family: "Lucida Sans", sans-serif;
+  height: 300px;
+  width:  561px;
+}
+
+.VP50loading {
+  position: absolute;
+  margin-top: 118px;
+  left:    271px;
+  width:    64px;
+  height:   64px;
+  z-index:  101;
+  display:  none;
+}
+
+.content {
+  float: left;
+  display: none;
+}
+#VP50content .rhside {
+  float: right;
+  margin-left: 10px;
+  width: 202px;
+}
+
+#VP50content h2 {
+  float: left;
+  width: 340px;
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  font-family: "Lucida Sans", sans-serif;
+}
+#VP50content h3 { 
+  float: left;
+  width: 340px;
+  margin: 0;
+  padding: 0;
+  margin: 6px 0;
+  font-family: Verdana, "Sans-serif";
+}
+#VP50content p {
+  float: left; 
+  width: 340px;
+}
+#VP50content .brief {
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #c00;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+#VP50content .long {
+  font-size: 0.9em;
+  margin: 0;
+  padding: 0;
+  padding-top: 6px;  
+  display: block;
+}
+#VP50content .portrait {
+  border: 1px solid black;
+  width:  202px;
+  height: 202px;
+  margin-bottom: 12px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  float: left;
+}
+#VP50content a.more {
+    font-size: 0.8em;
+    font-style: italic;
+    font-weight: bold;
+    line-height: 1.4em;
+    margin: 0;
+    padding: 0;
+}
+#VP50navbar {
+  float: left;
+  height: 30px;
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+  background-color: #1A1F24;
+  width: 610px;
+}
+#VP50navbar a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: Verdana, "Sans-serif";
+}
+#VP50navbar a:hover {
+  cursor: pointer;
+  color: #fff;
+  text-decoration: underline;
+}
+#VP50navbar a.prev { 
+  float: left;
+}
+#VP50navbar a.next { 
+  float: right;
+}
+
+#VP50ad {
+  border: 1px solid #000;
+  float: left;
+  width: 607px;
+  height: 30px;
+  margin-top: 10px;
+}
+
+#VP50roller_cont {
+  float: left;
+  width: 609px;
+  height: 60px;
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+  background-color: #000;
+}
+#VP50roller_cont .scrubleft, #VP50roller_cont .scrubright {
+  float:left;
+  width: 16px;
+  height: 60px;
+  background-color: #000;
+  cursor: pointer;
+}
+#VP50roller_cont .scrubleft {
+  background: 0px 21px url("/css/images/scrub-left.png")no-repeat;
+}
+#VP50roller_cont .scrubright {
+  background: 0px 21px url("/css/images/scrub-right.png") no-repeat;
+}
+
+
+#VP50roller {
+  float: left;
+  width: 576px;
+  height: 60px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+#VP50roller ul {  
+  display: inline;
+  float: left;
+  position: relative;
+  left: 0px;
+  width: 3200px; /* 50 * (60+4) */
+  left: 0;
+}
+#VP50roller ul li {
+  list-style-type: none;
+  padding: 0 2px;
+  margin: 0;
+  display: inline;
+  float: left;
+  width: 60px;
+  cursor: pointer;
+}
+#VP50roller ul li img {
+  z-index: 99;
+}
+
+#VP50roller ul li .overlay {
+  background: url("/css/images/overlay.png") ;
+  width:60px;
+  height:60px;
+  z-index: 101;
+  position:absolute;
+  visibility: hidden;
+  text-align: center;
+  padding-top: 22px;
+  font-family: "Arial","Helvetica";
+  font-weight: bold;
+  font-style: italic;
+  font-size: 45px;
+  color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* EDITOR PROPERTIES - PLEASE DON'T DELETE THIS LINE TO AVOID DUPLICATE PROPERTIES */

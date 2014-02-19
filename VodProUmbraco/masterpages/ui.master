@@ -1,0 +1,79 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VUIMaster.master" AutoEventWireup="true" %>
+  
+<asp:Content ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+  
+  <div class="ui-heading"><h1></h1><a class="ui-close-to-grid" title="Show Grid View" href="#"></a> 
+    <div class="ui-rating ui-hide-from-print">
+      <div class="ui-item-rating"></div>
+      <div class="ui-item-rate">
+         <a href="#"></a>
+         <span></span>
+         <input type="hidden" id="service-rating" size="2" />
+      </div>
+      <div class="ui-item-overall-rating"></div>
+    </div>
+    <div class="ui-service-info">
+      <span class="ui-service-info-desc"></span>
+      <span class="ui-service-info-region" title="Geographical regions"></span>
+      <span class="ui-service-info-type" title="Service types"></span>
+      <span class="ui-service-info-cat" title="Service categories"></span>
+      <span class="ui-service-info-score" title='This service has at least this many of the standard set of VUI functions'></span>
+    </div>
+  </div>
+      
+      <div id="main-ui-grid-wrapper" class="ui-grid">       
+        <div id="main-ui-item" class="ui-hidden-scroll-main-area"></div>
+        <div class="scroll-up scroll-button"></div><div class="scroll-down scroll-button"></div>
+        <div id="main-ui-grid" class="ui-hidden-scroll-main-area">
+          <ul class="ui-list"></ul>
+        </div>
+      </div>
+      <div id="ui-templates">
+        <li class="ui-service-template ui-service">
+          <a><h2></h2>
+            <div class="ui-image-bg">
+              <div class="ui-image-box"><img class="lazy" src="/vui-media/media/vui-loaderb64.gif"></div>
+            </div>
+            <div class="ui-service-score"></div>
+          </a>
+        </li>
+        <li class="ui-image-template">
+          <a class="ui-lb">
+            <div class="ui-image-box"><img class="lazy" src="/vui-media/media/vui-loaderb64.gif"></div>
+            <div class="ui-image-pagetype"></div>
+            <div class="ui-image-info"></div>
+          </a>
+          <div class="ui-lightbox-view" style="display:none">
+            <div class="ui-lightbox-heading">
+              <h1>#service# | #device# | #date# | #n# of #nn#</h1>
+              <div class="ui-lightbox-tools ui-hide-from-print">
+                <div class="ui-lightbox-fave"><a class="ui-favourite-link" href="#" title="Add to favourite"></a></div>
+                <div class="ui-lightbox-print"><a class="ui-print-link" href="#" title="Print"></a></div>
+              </div>
+              <h2></h2>
+            </div>
+            <div class="ui-lightbox-image"><img /></div>
+          </div>
+        </li>
+        <div class="main-ui-image-template">
+          <a class="ui-item-next ui-nav-btn">Next</a>
+          <a class="ui-item-prev ui-nav-btn">Prev</a>
+          <a class="lightbox"><img src=""></a>
+        </div>
+      </div>
+  <umbraco:Macro runat="server" language="cshtml">
+  @using VUI.classes;  
+    @{
+      VUIfunctions.InitScores();
+    <input type="hidden" id="ui-num-functions" value="@VUIfunctions.TotalFunctionScore" />
+    }
+  </umbraco:Macro>
+</asp:Content>
+  
+<asp:Content ContentPLaceHolderID="ContentPostScript" runat="server">
+  <script type="text/javascript">
+    $(function() {
+        loadUI();
+    });
+  </script>
+</asp:Content>

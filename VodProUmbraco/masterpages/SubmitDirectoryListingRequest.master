@@ -1,0 +1,24 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VodProMaster.master" AutoEventWireup="true" %>
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolder1" runat="server">
+  
+  
+  Company name
+  
+  Number of employees
+  
+  Main area of business
+  
+  Contact name
+  
+  Contact phone
+  
+  URL
+  
+  About your company
+  
+  Image
+  
+  
+  
+</asp:content>

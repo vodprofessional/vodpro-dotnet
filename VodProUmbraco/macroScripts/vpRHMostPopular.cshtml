@@ -1,0 +1,55 @@
+﻿@using umbraco.MacroEngines
+@using uComponents.Core
+@using uComponents.Core.uQueryExtensions
+@using System.Linq
+  @{
+    int[] templatesToHide = new int[]{1105};
+    int modelTemplate = @Model.template;
+    if(!templatesToHide.Contains(modelTemplate))
+    {
+      try
+      {
+        var teaserIDs = @Model.AncestorOrSelf().mostPopular.GetEnumerator();
+        int count = 0;
+       
+       
+        if(@Model.AncestorOrSelf().mostPopular.InnerText != "")
+        {
+       
+          <div class="hplabel"><h1>Most Popular</h1></div>
+          <div id="mostpopular" class="articlebox">
+        
+          @foreach(var teaserID in @teaserIDs)
+          {
+            count++;
+            dynamic teaser = @Model.NodeById(@teaserID.InnerText);
+            if(count == 1)
+            {
+             <div class="mostpopheadline">
+               <a href="@teaser.Url">@teaser.title</a>
+             </div>
+        
+             if(teaser.GetProperty("storyimage").Value.Length > 0)
+             {
+              dynamic media = @Model.MediaById(@teaser.GetProperty("storyimage").Value);
+              string mediaName = @media.umbracoFile;
+              string thumbName = @mediaName.Replace(".jpg","_thumb_195.jpg");
+              <div class="mostpopimg"><img src="@thumbName"/></div>
+             }
+             <div class="mostpoptxt first">@teaser.storyteaser</div>
+            }
+            else
+            {
+              <div class="mostpoptxt"><a href="@teaser.Url">@teaser.title</a></div>
+            }
+          }
+          </div>
+       }
+     }
+    catch (Exception e)
+    {
+       <p>Error @e.Message</p>
+    }
+  }
+}
+      

@@ -1,0 +1,141 @@
+@using VUI.classes;
+@using umbraco.MacroEngines;
+@using System.Web.Security;
+@using umbraco.cms.businesslogic.member;
+@using VUI.VUI2.classes;
+
+@functions{
+    string Mode = String.Empty;
+    string PageTitle = String.Empty;
+
+    bool IsFullMode = false;
+    Member m = VUIfunctions.CurrentUser();
+    string user_status;
+    int score;
+    int numBenchmarks;
+
+    Dictionary<string, int> scores;
+    int max = 100;
+
+    int localscore = 0;
+    int maxlength = 400 - 2;
+    int length = 0;
+
+}
+
+@{
+    string user_status = VUIfunctions.MemberVUIStatus(m);
+    IsFullMode = VUIfunctions.MemberVUIFullMode(user_status);
+
+    List<Platform> platforms = Platform.AllPlatforms();
+    string desc = @Model.description;
+    desc = desc.Replace("\n\n", "</p><p>").Replace("\n", "<br/>");
+          
+    
+    
+  <div id="main-ui-grid-wrapper" class="ui-grid">        
+    <div id="main-ui-grid" class="ui-hidden-scroll-main-area">
+        <p>@Html.Raw(desc)</p>
+        <ul class="ui-list ui-benchmarking-list">
+            <li>
+                <a href="/vui/all/benchmarking/">
+                <h2>All Platforms</h2>
+                <img src="/css/images/benchmarking-all.png" />
+                Across all services
+                @if (!IsFullMode)
+                {
+                    @: (available to preview!)
+                }
+                </a>
+            </li>    
+    @foreach (Platform platform in platforms)
+    {
+        string img = "";
+        string url;
+        string previewClass;
+        
+        if (platform.HasDevices)
+        {
+            List<Device> devices = platform.Devices;
+
+            foreach (Device device in devices)
+            {
+                
+                int numbenchmarks = VUIDataFunctions.GetNumberOfBenchmarksByDevice(device.NodeId);
+
+                if (numbenchmarks > 0)
+                {
+                    if (!String.IsNullOrEmpty(device.ImageURL))
+                    {
+                        img = Model.MediaById(device.ImageURL).umbracoFile;
+                    }
+                    url = "/vui/" + platform.PlatformName + "~" + device.DeviceName + "/benchmarking/";
+                    previewClass = "";
+                    if (!IsFullMode)
+                    {
+                        url = VUIfunctions.VUI_subscribe_page;
+                        previewClass = "ui-preview-disabled";
+                    }                        
+                    <li class="@previewClass">
+                    <a href="@url">
+                        <h2>@platform.Name/@device.Name </h2>
+                        <img src="@img" />
+                        @if (!device.IsComingSoon)
+                        {
+                        @: (@numbenchmarks services)
+                        }
+                    </a>                        
+                    @if (device.IsComingSoon)
+                    {
+                        <div class="ui-coming-soon-overlay"></div>
+                    }
+                    @if (!IsFullMode)
+                    {
+                        <a class="ui-preview-overlay" href="/vui/subscribe"><span>Subscribe to see this resource</span></a>
+                    }
+                    </li>
+                }
+            }
+        }
+        else
+        {
+            int numbenchmarks = VUIDataFunctions.GetNumberOfBenchmarksByPlatform(platform.NodeId);
+
+            if (numbenchmarks > 0)
+            {
+                if (!String.IsNullOrEmpty(platform.ImageURL))
+                {
+                    img = Model.MediaById(platform.ImageURL).umbracoFile;
+                }
+                url = "/vui/" + platform.PlatformName + "/benchmarking/";
+                previewClass = "";
+                if (!IsFullMode)
+                {
+                    url = VUIfunctions.VUI_subscribe_page;
+                    previewClass = "ui-preview-disabled";
+                }                        
+                <li class="@previewClass">
+                <a href="@url">
+                    <h2>@platform.Name </h2>
+                    <img src="@img" />
+                    @if (!platform.IsComingSoon)
+                    {
+                    @: (@numbenchmarks services)
+                    }
+                </a>                        
+                @if (platform.IsComingSoon)
+                {
+                    <div class="ui-coming-soon-overlay"></div>
+                }
+                @if (!IsFullMode)
+                {
+                    <a class="ui-preview-overlay" href="/vui/subscribe"><span>Subscribe to see this resource</span></a>
+                }
+                </li>
+            }
+        }
+    }
+    </ul>
+  </div>
+</div>
+}

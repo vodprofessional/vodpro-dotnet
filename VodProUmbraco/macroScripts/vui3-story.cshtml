@@ -1,0 +1,149 @@
+﻿@using umbraco.MacroEngines
+@using umbraco.interfaces
+@using uComponents.Core
+@using uComponents.Core.uQueryExtensions
+@using System.Linq
+@using VUI.classes;
+@using System.Web.Security;
+@using umbraco.cms.businesslogic.member;
+@using VUI.VUI3.classes;
+@{
+  
+    @: @Html.Raw(@VUI3Utility.SetPageTitle(@"VUI Library - " + Model.title))
+    
+    bool IsFullMode = false;
+    Member m = VUIfunctions.CurrentUser();
+    string user_status;
+    string mode = "FREE";
+
+    user_status = VUIfunctions.MemberVUIStatus(m);
+    IsFullMode = VUIfunctions.MemberVUIFullMode(user_status);
+
+    var parent = @Model.Parent;
+
+    if (parent.usesPayWall.GetType() != typeof(umbraco.MacroEngines.DynamicNull) && parent.usesPayWall)
+    {
+        if (!IsFullMode)
+        {
+            Response.Redirect("/vui/vuilogin");
+            Response.End();
+        }
+    }
+
+    string[] tags = @Model.storytags.Split(',');
+
+    bool isVUIHelpPage = tags.Contains("vui-help");
+    
+    <div id="main">
+        <div class="main-top">
+            <div class="inner">
+                <h1>@Model.title</h1>
+
+                @if (@Model.miniTeaser != null && @Model.miniTeaser.ToString().Trim().Length > 0)
+                {
+                    <h2 class="storySubtitle">@Model.miniTeaser</h2>
+                }
+                <p class="storysub">
+
+                  <div class="storybyline">
+                    @Model.storyauthor
+
+                    @if (@Model.storydate.ToString().Trim().Length > 0)
+                    {
+                        var dte = String.Format("{0:d MMM yyyy}", @Model.storydate);
+                        <span class="storydate"> - @dte</span>
+                    }
+                  </div>
+                  @*
+                   <div class="story_sharethis">         
+                   @if (Model.NodeTypeAlias.Equals("vodProStory"))
+                   {
+                       var fb_like_layout = "fb:like:layout";
+                        <!-- AddThis Button BEGIN -->
+                        <div class="addthis_toolbox addthis_default_style ">
+                          <a class="addthis_button_tweet"></a>
+                          <a class="addthis_button_linkedin_counter"></a>
+                        </div>
+                        <script type="text/javascript">            var addthis_config = { "data_track_clickback": true, ui_click: true };</script>
+                        <script type="text/javascript" src="https://s7.addthis.com/js/250/addthis_widget.js#pubid=cnaacc"></script>
+                        <!-- AddThis Button END -->
+                   }
+                   </div>
+                  *@
+                </p> 
+
+                <div class="storytext">
+                  @if (@Model.storyimage.GetType() == typeof(System.Int32))
+                  {
+                      dynamic storyImage = @Model.MediaById(@Model.storyimage);
+                    <img src="@storyImage.umbracoFile" align="right" class="bp-story-image" />
+                  }  
+                  @Model.story
+        
+                  @RenderPage("~/macroScripts/vpRegWall.cshtml")
+
+              </div>
+      
+            @if (!isVUIHelpPage)
+            {
+
+              <div class="other-stories b-carousel">
+              <h2>More Resources</h2>
+                @{
+                DynamicNode node = new DynamicNode(Model.Id);
+                var otherStories = node.Parent.Descendants("vodProStory").Items.Where(n => n.Id != Model.Id).ToList();
+
+                if (otherStories.Count > 0)
+                {
+                    <div class="carousel">
+                      <ul class="bp-otherstory">
+
+                        @foreach (dynamic teaser in @otherStories)
+                        {
+                            string surl = teaser.Url.Replace("/vui/", "/vui3/");
+                         <li>
+                          <a href="@surl">
+                            <h3>@teaser.title</h3>
+       
+                           @if (teaser.GetProperty("storyimage").Value.Length > 0)
+                           {
+                               dynamic media = @Model.MediaById(@teaser.GetProperty("storyimage").Value);
+                               string mediaName = @media.umbracoFile;
+                               string thumbName = @mediaName.Replace(".jpg", "_thumb_195.jpg");
+                            <div class="mostpopimg"><img src="@mediaName"/></div>
+                           }
+                             <p>@teaser.storyteaser</p>
+                           </a>
+                          </li>
+                        }
+                      </ul>
+                    </div>
+                    <a class="arrow prev disabled" href="#">
+                        <span class="icon-chevron-left"></span>
+                    </a>
+                    <a class="arrow next" href="#">
+                        <span class="icon-chevron-right"></span>
+                    </a>
+                }
+                }
+              </div>
+
+                @RenderPage("~/macroScripts/vpStoryComments.cshtml")
+            }
+            </div>
+        </div>
+    </div>
+    
+  @*  
+  <div class="ui-heading">
+    <h1>
+      <a href="@umbraco.library.NiceUrl(parent.Id)" class="bp-breadcrumb-link">@parent.title</a>
+    </h1>
+  </div>
+  
+
+  *@
+
+  
+    }
+  

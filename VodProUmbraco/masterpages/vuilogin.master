@@ -1,0 +1,37 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VUIMaster.master" AutoEventWireup="true" %>
+<%@ Register TagPrefix="vp" TagName="VuiLogin" src="~/umbraco/plugins/vui/usercontrols/vui-login.ascx" %>
+<%@ Register TagPrefix="vp" TagName="VuiRegister" src="~/umbraco/plugins/vui/usercontrols/vui-register.ascx" %>
+  
+    
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolderHead" runat="server">
+  <script type="text/javascript">document.title = 'VUI Library - Login';</script>
+</asp:content>
+    
+<asp:content ContentPlaceHolderId="ContentPlaceHolder1" runat="server">
+
+  
+  
+  <div class="ui-heading">
+    <h1>Login</h1> 
+  </div>
+  
+
+   
+    <div id="home-col-container">
+        <div class="main home-column">
+          
+          
+          <vp:VuiLogin id="MainLogin" runat="server" Mode="FORM" />
+        
+  
+          
+        </div>
+     
+    <h2 class="ui-home-strap">If you haven’t registered before: </h2>
+    <h3 class="ui-home-strap"><a href="/vui/subscribe">Subscribe</a> to access the Screenshot Library and Benchmarking tools or
+      <a href="/vui/vuiregister">Register</a> to see extra content in our free Best Practice Guides</h3>
+       
+  </div>
+  
+</asp:content>

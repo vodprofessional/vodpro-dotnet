@@ -1,0 +1,32 @@
+﻿@using umbraco.MacroEngines
+@using uComponents.Core
+@using uComponents.Core.uQueryExtensions
+@using System.Linq
+  @{
+    int[] templatesToHide = new int[]{1105};
+    int modelTemplate = @Model.template;
+    if(!templatesToHide.Contains(modelTemplate))
+    {
+      var teaserIDs = @Model.AncestorOrSelf().teasers.GetEnumerator();
+      int count = 0;
+     
+      <div class="hplabel"><h1>New Here? Start With These</h1></div>
+      <div id="newhere" class="articlebox">
+    
+      @foreach(var teaserID in @teaserIDs)
+      {
+        count++;
+        dynamic teaser = @Model.NodeById(@teaserID.InnerText);
+        if(count % 2 == 0)
+        {
+         <div class="mostpoptxt even"><a href="@teaser.Url">@teaser.title</a></div>
+        }
+        else
+        {
+          <div class="mostpoptxt"><a href="@teaser.Url">@teaser.title</a></div>
+        }
+      }
+     </div>
+     }
+  }
+      

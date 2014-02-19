@@ -1,0 +1,90 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VodProMaster2.master" AutoEventWireup="true" %>
+
+<asp:Content ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+  <div id="maincontent">
+<umbraco:Macro  runat="server" language="cshtml">
+@{
+  <h1 class="storyTitle">@Model.jobTitle</h1>
+  <p class="storysub">
+    @Model.GetProperty("updateDate")
+    <div class="storybyline">@Model.storyauthor
+      @{
+       if (@Model.updateDate.ToString().Trim().Length > 0)
+       {
+         var dte = String.Format("{0:d MMM yyyy}", @Model.updateDate);
+      <span class="storydate"> - @dte</span>
+       }
+      }
+    </div>
+    
+    
+    <div class="story_addthis">
+    <!-- AddThis Button BEGIN -->
+      <div class="addthis_toolbox addthis_default_style addthis_16x16_style">
+      <a class="addthis_button_preferred_1"></a>
+      <a class="addthis_button_preferred_2"></a>
+      <a class="addthis_button_preferred_3"></a>
+      <a class="addthis_button_preferred_4"></a>
+      <a class="addthis_button_compact"></a>
+      <a class="addthis_counter addthis_bubble_style"></a>
+      </div>
+      <script type="text/javascript">var addthis_config = {"data_track_clickback":true,"data_track_addressbar":true};</script>
+      <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4dbdc42d4150968e"></script>
+      
+    <!-- AddThis Button END -->
+    </div>
+  </p>
+  
+  <div class="storytext">
+    @{
+    if(@Model.jobCompanyLogo != null && @Model.jobCompanyLogo != "")
+    {
+      <img src="@Model.jobCompanyLogo" align="right" style="margin-left:15px;margin-bottom:15px" />
+    }
+    string disqus_id = "vod_" + @Model.Id;
+    }
+    <dl class="jobinfo">
+      <dt>Job type:</dt>
+      <dd>@Model.jobType</dd>
+      
+    @if(Model.jobType.Equals("Contract")){
+      <dt>Duration:</dt>
+      <dd>@Model.JobDuration</dd>
+    }
+      <dt>Location:</dt>    
+      <dd>@Model.jobLocation</dd>
+      
+      <dt>Start date:</dt>  
+      <dd>
+        @if(Model.jobStartDate is System.DateTime) {
+          var dte = String.Format("{0:d MMM yyyy}", @Model.jobStartDate);
+          @dte
+        }
+        else {
+          @Model.jobStartDate.Replace("'","")
+        }
+      </dd>
+      
+      <dt>Salary:</dt>
+      <dd>@Model.jobSalary @Model.jobSalaryPer</dd>
+    </dl>
+    
+    <p>@Model.jobDescription</p>
+    
+    @if(@Model.jobHowToApply is System.String) {
+    //  string howTo = @Model.jobHowToApply.Replace("\n","<br/>");
+    //  howTo = Server.HtmlDecode(howTo);
+    <p>@Model.jobHowToApply</p>
+    }
+  </div>
+    <!--
+
+  <p>
+    @Model.createdBy
+  </p>
+  -->
+  
+}
+</umbraco:Macro>
+  </div>
+</asp:Content>

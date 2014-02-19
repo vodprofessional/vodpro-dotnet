@@ -1,0 +1,96 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VUIMaster.master" AutoEventWireup="true" %>
+
+  <%@ Register TagPrefix="vp" TagName="VuiLogin" src="~/umbraco/plugins/vui/usercontrols/vui-login.ascx" %>
+  
+    
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolderHead" runat="server">
+  <script type="text/javascript">document.title = 'VUI Library';</script>
+</asp:content>
+    
+<asp:content ContentPlaceHolderId="ContentPlaceHolder1" runat="server">
+
+  
+  <umbraco:Macro runat="server" language="cshtml">
+  
+@using VUI.classes;
+@using umbraco.cms.businesslogic.member;
+@using System.Web;
+@{
+    
+  Member c = VUIfunctions.CurrentUser(); 
+  string user_status = VUIfunctions.VUI_USERTYPE_NONE;    
+  if(c != null)
+  {
+      user_status = VUIfunctions.MemberVUIStatus(c);
+  }
+    
+  if(user_status.Equals(VUIfunctions.VUI_USERTYPE_NONE))
+  {    
+    <div class="ui-heading">
+      <h1>Helping You to Create Brilliant Video Services</h1>
+    </div>
+    <h2 class="ui-home-strap">
+      VOD Professional's VUI Library is a unique resource for us rather splendid types that work in the new television space. Here's what's inside:
+    </h2>
+  }
+  else
+  {
+    <div class="ui-heading">
+      <h1>Welcome to the VUI Library, @c.getProperty("firstName").Value</h1>
+    </div>
+  }
+     
+   
+  <div id="home-col-container">
+    
+  @{
+    if(user_status.Equals(VUIfunctions.VUI_USERTYPE_NONE))
+    {
+      // Code Snippet for non-subscribers
+      try {
+        var id = @VUIfunctions.VUI_codesnippet_unauth;
+        @: @Html.Raw(umbraco.library.RenderTemplate(id))
+      }
+      catch(Exception ex) { <strong>@ex.Message;</strong> }
+    }
+    
+    else if (user_status.Equals(VUIfunctions.VUI_USERTYPE_REGISTRANT))
+    {
+      // Code Snippet for non-subscribers
+      try {
+        var id = @VUIfunctions.VUI_codesnippet_reg;
+        @: @Html.Raw(umbraco.library.RenderTemplate(id))
+      }
+      catch(Exception ex) { <strong>@ex.Message;</strong> }    
+    }
+    
+    else if (user_status.Equals(VUIfunctions.VUI_USERTYPE_USER))
+    {
+      // Code Snippet for non-subscribers
+      try {
+        var id = @VUIfunctions.VUI_codesnippet_subs;
+        <span>@Html.Raw(umbraco.library.RenderTemplate(id))</span>
+      }
+      catch(Exception ex) { <strong>@ex.Message;</strong> }    
+    }
+    else if (user_status.Equals(VUIfunctions.VUI_USERTYPE_ADMIN))
+    {
+      // Code Snippet for non-subscribers
+      try {
+        var id = @VUIfunctions.VUI_codesnippet_subs;
+        <span>@Html.Raw(umbraco.library.RenderTemplate(id))</span>
+      }
+      catch(Exception ex) { <strong>@ex.Message;</strong> }    
+    }
+
+  }    
+    
+  </div>
+
+  
+}
+</umbraco:Macro>    
+    
+  
+</asp:content>

@@ -1,0 +1,1627 @@
+@charset "utf-8";
+
+.marketing-home * 
+{
+    box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+}
+
+.marketing-home img, object, embed, video {
+	max-width: 100%;
+}
+/* IE 6 does not support max-width so default to width 100% */
+.marketing-home .ie6 img {
+	width:100%;
+}
+html, body * { font-family: "Lato", Sans-Serif; }
+.marketing-home html, .marketing-home  body, .marketing-home  div, .marketing-home  h1, .marketing-home  h2, .marketing-home  h3, .marketing-home  h4, .marketing-home  h5, .marketing-home  h6, .marketing-home  ul, .marketing-home  ol, .marketing-home  dl, .marketing-home  li, .marketing-home  dt, .marketing-home  dd, .marketing-home  p, .marketing-home  blockquote, .marketing-home  pre, .marketing-home  form, .marketing-home  fieldset, .marketing-home  table, .marketing-home  th, .marketing-home  td, .marketing-home  a{ margin: 0; padding: 0; } 
+
+.marketing-home h2 { font-size:3em;}
+
+.marketing-home h3 { font-size:1.5em; font-weight:300;}
+
+.marketing-home p { font-size:1.5em; font-weight:300;}
+
+.marketing-home a:focus { outline:none;}
+
+.marketing-home .clear { clear:both;}
+.marketing-home .gridContainer {
+	width: 100%;
+	margin: auto;
+}
+
+.marketing-home #mainwrapper {
+	position:relative;
+	clear: both;
+	width: 100%;
+	display: block;
+	padding-bottom:15px;
+}
+
+.marketing-home #headerwrap {
+	position:relative;
+	height:auto;
+	width:100%;
+	background-color:#ffffff;
+	top:0;
+	border-bottom:none;
+	z-index:20;
+}
+
+.marketing-home header {
+	height:auto;
+	width:87%;
+	padding:20px 0 20px;
+	margin:0 auto;
+	
+}
+
+.marketing-home #logo {
+	float:none;
+	width:100%;
+	text-align:center;
+}
+
+.marketing-home nav {
+	float:none;
+	text-align:center;
+}
+
+.marketing-home nav ul {
+	margin-top:0;
+	float:none;
+	margin: 0 auto;
+}
+
+.marketing-home nav ul li {
+	display:inline-block;
+	width:100px;
+}
+
+.marketing-home nav ul li a{
+	text-decoration:none;
+	color:#000;
+	font-size:16px;
+	font-weight:600;
+	letter-spacing:.2px;
+}
+
+.marketing-home #searchbox {
+	position:relative;
+	display:none;
+	float:right;
+	height:50px;
+	width:100%;
+}
+
+/* Contents start here */
+
+.marketing-home #contentwrapper {
+	height:auto;
+	width:100%;
+	margin-top:0;
+}
+
+.marketing-home .pixel950 {
+	width:80%;
+	max-width:950px;
+	padding:60px 0;
+	margin:0 auto;
+	text-align:center;
+}
+
+.marketing-home .paddingtop0 {
+	padding:0 0 60px 0;
+}
+
+.marketing-home .top060bot40 {
+	width:80%;
+	max-width:950px;
+	padding:60px 0 10px 0;
+	margin:0 auto;
+	text-align:center;
+}
+
+.marketing-home .centertext {
+	width:83%;
+	margin:auto;
+}
+
+.marketing-home #intro {
+	height:auto;
+	width:100%;
+	background-color:#007DBA;
+	color:white;
+}
+
+.marketing-home #mainslider {
+	background: linear-gradient(to bottom, #FFFFFF 50%, #C8C8C8 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	text-align:center;
+}
+
+.marketing-home #mainslider p {
+	margin-top:20px;
+}
+
+
+/* WORKING ON STARTS HERE */
+
+.marketing-home #stats-bar {
+	color:#ffffff;
+	background-color:#333333;
+}
+
+.marketing-home .samples {
+	float:left;
+	width:25%;
+	color:#D2D3D5;
+}
+
+.marketing-home .samples h3 {
+	margin-top:20px;
+	font-size:19px;
+	font-weight:bold;
+}
+
+
+/* SPECIALTIEs START HERE */
+
+
+.marketing-home #specialties ul {
+	margin:30px auto 0;	
+}
+/*
+.marketing-home #specialties ul li {
+	display:inline-block;
+	height:30px;
+	width:35%;
+	max-width:300px;
+	background-color:#F2F2F2;
+	margin:0;
+	padding:15px 0;
+	font-size:20px;
+}
+*/
+.marketing-home #specialties ul li{
+	display:inline-block;
+}
+.marketing-home #specialties ul li a{
+	display:inline-block;
+	margin-top:4px;
+	padding:13px 0;
+	width:150px;
+	max-width:300px;
+	background:#d9d9d9;
+	font-size:20px;
+	text-decoration:none;
+	color:black;
+}
+
+.marketing-home #specialties ul li a:hover{
+	display:inline-block;
+	margin-top:0;
+	padding:13px 0;
+	width:150px;
+	max-width:300px;
+	background:#999999;
+	font-size:20px;
+	text-decoration:none;
+	color:#ffffff;
+}
+
+.marketing-home #specialties ul li.active a{
+	display:inline-block;
+	padding:13px 0;
+	margin-top:0;
+	width:150px;
+	max-width:300px;
+	background:#F2F2F2;
+	font-size:20px;
+	text-decoration:none;
+	color:#333333;
+	z-index:100;
+}
+
+.marketing-home #specialties ul li.active {
+	padding:10px 0;
+}
+
+
+.marketing-home #specialtabs {
+	width:100%;
+	max-width:900px;
+	background-color:#F2F2F2;
+	padding:35px 2%;
+	text-align:center;
+	margin-top:-13px;
+}
+
+.marketing-home #specialtabs2 {
+	width:100%;
+	max-width:900px;
+	background-color:#F2F2F2;
+	padding:35px 2%;
+	text-align:center;
+	margin-top:-13px;
+}
+
+.marketing-home .specialitem {
+	float:left;
+	width:30%;
+	padding:25px 1%;
+}
+
+.marketing-home .specleftbottom {
+	border-bottom:1px solid #E6E6E6;
+	border-left:1px solid #E6E6E6;
+}
+
+.marketing-home .specleft {
+	border-left:1px solid #E6E6E6;
+}
+
+.marketing-home .specbottom {
+	border-bottom:1px solid #E6E6E6;
+}
+
+.marketing-home .specialitem h3 {
+	margin:10px auto;
+	font-weight:700;
+}
+
+.marketing-home .specialitem p {
+	font-weight:400;
+	color:#7D6666;
+	font-size:16px;
+}
+
+.marketing-home #slider2 {
+	background-image:url(/_inc/images/vui-marketing-2014/welder1.jpg);
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	padding:60px 0 100px;
+}
+
+
+
+/* CLIENT AREA STARTS HERE */
+
+.marketing-home #customers h2 {
+	margin:0 0 35px;
+}
+
+.marketing-home #clientwrap {
+	width:100%;
+	max-width:900px;
+	padding:35px 0 0;
+	background-color:#ffffff;
+}
+
+.marketing-home .clientborder {
+	float:left;
+	height:40px;
+	width:25%;
+	border:1px solid #E6E6E6;
+	padding:25px 1%;
+	margin:2%;
+	text-align:center;
+
+}
+
+/* CONTACT FORM */
+
+.marketing-home #contact-bar {
+	background-color:#F79D00;
+	color:#ffffff;
+}
+
+.marketing-home #contact-bar h2 {
+	margin-bottom:30px;
+}
+
+.marketing-home .contactwrap {
+	display:inline-block;
+	height:120px;
+	width:180px;
+	background-color:#ffffff;
+	text-align:center;
+	color:black;
+	margin:20px;
+	font-size:15px;
+	font-weight:700;
+}
+.marketing-home .contactwrap a{
+	display:block;
+	height:100px;
+	width:180px;
+	text-align:center;
+	margin:0;
+	padding-top:20px;
+	color:black;
+	text-decoration:none;
+}
+
+.marketing-home .contacticon {
+	display:block;
+	height:90px;
+	width:160px;
+	text-align:center;
+	margin:0;
+	padding-top:20px
+}
+
+.marketing-home .contactwrap img {
+	
+}
+
+/* FOOTER LINKS */
+
+.marketing-home .ulsep {
+	float:none;
+	width:450px;
+	margin:20px auto;
+}
+
+.marketing-home footer #footerlinks ul {
+	float:left;
+	width:120px;
+	margin-right:30px;
+	text-align:left;
+}
+
+.marketing-home footer #footerlinks ul li p {
+	text-align:left;
+	margin:0 0 3px;
+	font-size:14px;
+	font-weight: 700;
+}
+
+.marketing-home footer #footerlinks ul li {
+	list-style:none;
+	margin:3px 0;
+	text-align:left;
+	
+}
+.marketing-home footer #footerlinks ul li a {
+	text-decoration:none;
+	color:#666666;
+	font-size:13px;
+	font-weight:300;
+
+}
+
+
+/* FOOTER CONTENTS */
+
+.marketing-home #footercontent {
+}
+
+.marketing-home #footercontent ul {
+	
+}
+
+.marketing-home #footercontent ul li {
+	display:inline;
+}
+
+.marketing-home #socialmedia {
+	width:40%;
+	float:left;
+	text-align:right;
+}
+
+.marketing-home #socialmedia ul li{
+	text-align:left;
+	margin-right:10px;
+}
+
+.marketing-home #information {
+	width:40%;
+	float:right;
+	text-align:left;
+}
+
+.marketing-home #information ul li{
+	text-align:right;
+	margin-left:10px;
+	font-size:11px;
+	color:#666666;
+}
+
+.marketing-home #information ul li a{
+	text-decoration:none;
+	color:#666666;
+}
+
+
+.marketing-home .slideblock {
+	width:70%;
+	height:300px;
+	padding:30px 15%;
+	background-color: rgba(255, 255, 255, 0.9);
+	font-size:80%;
+}
+
+.marketing-home .slideblock h2{
+	display:block;
+	width:70%;
+	padding:30px 15%;
+}
+
+.marketing-home .slideblock p{
+	display:none;
+}
+
+
+
+@media only screen and (min-width: 500px) {
+.marketing-home .gridContainer {
+	width: 100%;
+	margin: auto;
+}
+
+.marketing-home #mainwrapper {
+	position:relative;
+	clear: both;
+	width: 100%;
+	display: block;
+}
+
+.marketing-home #headerwrap {
+	position:fixed;
+	height:auto;
+	width:100%;
+	background-color:#ffffff;
+	top:0;
+	border-bottom:none;
+}
+
+.marketing-home header {
+	height:60px;
+	width:87%;
+	padding:20px 0 20px;
+	margin:0 auto;
+	
+}
+
+.marketing-home #logo {
+	float:none;
+	width:100%;
+}
+
+.marketing-home nav {
+	float:right;
+}
+
+.marketing-home nav ul {
+	margin-top:7px;
+	float:right;
+}
+
+.marketing-home nav ul li {
+	display:inline-block;
+	width:100px;
+}
+
+.marketing-home nav ul li a{
+	text-decoration:none;
+	color:#000;
+	font-size:16px;
+	font-weight:600;
+	letter-spacing:.2px;
+}
+
+.marketing-home #searchbox {
+	position:relative;
+	float:right;
+	height:50px;
+	width:100%;
+}
+
+/* Contents start here */
+
+.marketing-home #contentwrapper {
+	height:auto;
+	width:100%;
+	margin-top:90px;
+}
+
+.marketing-home .pixel950 {
+	width:80%;
+	max-width:950px;
+	padding:60px 0;
+	margin:0 auto;
+	text-align:center;
+}
+
+.marketing-home .paddingtop0 {
+	padding:0 0 60px 0;
+}
+
+.marketing-home .centertext {
+	width:83%;
+	margin:auto;
+}
+
+.marketing-home #intro {
+	height:auto;
+	width:100%;
+	background-color:#007DBA;
+	color:white;
+}
+
+.marketing-home #mainslider {
+	background: linear-gradient(to bottom, #FFFFFF 50%, #C8C8C8 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	text-align:center;
+}
+
+
+/* WORKING ON STARTS HERE */
+
+.marketing-home #stats-bar {
+	color:#ffffff;
+	background-color:#333333;
+}
+
+.marketing-home .samples {
+	float:left;
+	width:25%;
+	color:#D2D3D5;
+}
+
+.marketing-home .samples h3 {
+	margin-top:20px;
+	font-size:19px;
+	font-weight:bold;
+}
+
+
+/* SPECIALTIEs START HERE */
+
+
+.marketing-home #specialties ul {
+	margin:30px auto 0;	
+}
+/*
+.marketing-home #specialties ul li {
+	display:inline-block;
+	height:30px;
+	width:35%;
+	max-width:300px;
+	background-color:#F2F2F2;
+	margin:0;
+	padding:15px 0;
+	font-size:20px;
+}
+*/
+.marketing-home #specialties ul li{
+	display:inline-block;
+}
+.marketing-home #specialties ul li a{
+	display:inline-block;
+	margin-top:4px;
+	padding:13px 0;
+	width:200px;
+	max-width:300px;
+	background:#d9d9d9;
+	font-size:20px;
+	text-decoration:none;
+	color:black;
+}
+
+.marketing-home #specialties ul li a:hover{
+	display:inline-block;
+	margin-top:0;
+	padding:13px 0;
+	width:200px;
+	max-width:300px;
+	background:#999999;
+	font-size:20px;
+	text-decoration:none;
+	color:#ffffff;
+}
+
+.marketing-home #specialties ul li.active a{
+	display:inline-block;
+	padding:13px 0;
+	margin-top:0;
+	width:200px;
+	max-width:300px;
+	background:#F2F2F2;
+	font-size:20px;
+	text-decoration:none;
+	color:#333333;
+	z-index:100;
+}
+
+.marketing-home #specialties ul li.active {
+	padding:10px 0;
+}
+
+
+.marketing-home #specialtabs {
+	width:100%;
+	max-width:900px;
+	background-color:#F2F2F2;
+	padding:35px 2%;
+	text-align:center;
+	margin-top:-13px;
+}
+
+.marketing-home #specialtabs2 {
+	width:100%;
+	max-width:900px;
+	background-color:#F2F2F2;
+	padding:35px 2%;
+	text-align:center;
+	margin-top:-13px;
+}
+
+.marketing-home .specialitem {
+	float:left;
+	width:30%;
+	padding:25px 1%;
+}
+
+.marketing-home .specleftbottom {
+	border-bottom:1px solid #E6E6E6;
+	border-left:1px solid #E6E6E6;
+}
+
+.marketing-home .specleft {
+	border-left:1px solid #E6E6E6;
+}
+
+.marketing-home .specbottom {
+	border-bottom:1px solid #E6E6E6;
+}
+
+.marketing-home .specialitem h3 {
+	margin:10px auto;
+	font-weight:700;
+}
+
+.marketing-home .specialitem p {
+	font-weight:400;
+	color:#7D6666;
+	font-size:16px;
+}
+
+
+.marketing-home #slider2 {
+	background-image:url(/_inc/images/vui-marketing-2014/welder1.jpg);
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	padding:60px 0 100px;
+}
+
+
+
+/* CLIENT AREA STARTS HERE */
+
+.marketing-home #customers h2 {
+	margin:0 0 35px;
+}
+
+.marketing-home #clientwrap {
+	width:100%;
+	max-width:900px;
+	padding:35px 0 0;
+	background-color:#ffffff;
+}
+
+.marketing-home .clientborder {
+	float:left;
+	height:80px;
+	width:25%;
+	border:1px solid #E6E6E6;
+	padding:25px 1%;
+	margin:2%;
+	text-align:center;
+
+}
+
+/* CONTACT FORM */
+
+.marketing-home #contact-bar {
+	background-color:#F79D00;
+	color:#ffffff;
+}
+
+.marketing-home #contact-bar h2 {
+	margin-bottom:30px;
+}
+
+.marketing-home .contactwrap {
+	display:inline-block;
+	height:120px;
+	width:180px;
+	background-color:#ffffff;
+	text-align:center;
+	color:black;
+	margin:20px;
+	font-size:15px;
+	font-weight:700;
+}
+.marketing-home .contactwrap a{
+	display:block;
+	height:100px;
+	width:180px;
+	text-align:center;
+	margin:0;
+	padding-top:20px;
+	color:black;
+	text-decoration:none;
+}
+
+.marketing-home .contacticon {
+	display:block;
+	height:90px;
+	width:160px;
+	text-align:center;
+	margin:0;
+	padding-top:20px
+}
+
+.marketing-home .contactwrap img {
+	
+}
+
+/* FOOTER LINKS */
+
+.marketing-home .ulsep {
+	float:none;
+	width:450px;
+	margin:20px auto;
+}
+
+.marketing-home footer #footerlinks ul {
+	float:left;
+	width:120px;
+	margin-right:30px;
+	text-align:left;
+}
+
+.marketing-home footer #footerlinks ul li p {
+	text-align:center;
+	margin:0 0 3px;
+	font-size:14px;
+	font-weight: 700;
+}
+
+.marketing-home footer #footerlinks ul li {
+	list-style:none;
+	margin:3px 0;
+	text-align:center;
+	
+}
+.marketing-home footer #footerlinks ul li a {
+	text-decoration:none;
+	color:#666666;
+	font-size:13px;
+	font-weight:300;
+
+}
+
+
+/* FOOTER CONTENTS */
+
+.marketing-home #footercontent {
+	width:40%;
+	margin:0 auto;
+}
+
+.marketing-home #footercontent ul {
+	
+}
+
+.marketing-home #footercontent ul li {
+	display:block;
+}
+
+.marketing-home #socialmedia {
+	width:45%;
+	float:left;
+	text-align:right;
+}
+
+.marketing-home #socialmedia ul li{
+	text-align:left;
+	margin-right:10px;
+}
+
+.marketing-home #information {
+	width:45%;
+	float:left;
+	text-align:left;
+}
+
+.marketing-home #information ul li{
+	text-align:right;
+	margin-left:10px;
+	font-size:11px;
+	color:#666666;
+}
+
+.marketing-home #information ul li a{
+	text-decoration:none;
+	color:#666666;
+}
+
+
+.marketing-home .slideblock {
+	width:50%;
+	height:300px;
+	padding:30px 15%;
+	background-color: rgba(255, 255, 255, 0.9);
+	font-size:80%;
+}
+
+.marketing-home .slideblock h2{
+	display:block;
+	width:70%;
+	padding:30px 15%;
+}
+
+.marketing-home .slideblock p{
+	display:block;
+}
+
+
+
+}
+
+/* Desktop Layout: 769px to a max of 1232px.  Inherits styles from: Mobile Layout and Tablet Layout. */
+
+@media only screen and (min-width: 900px) {
+.marketing-home .gridContainer {
+	width: 100%;
+	margin: auto;
+}
+
+.marketing-home #mainwrapper {
+	position:relative;
+	clear: both;
+	width: 100%;
+	display: block;
+	padding-bottom:15px;
+}
+
+.marketing-home #headerwrap {
+	position:fixed;
+	height:80px;
+	width:100%;
+	background-color:#ffffff;
+	top:0;
+	border-bottom:thin solid #E6E6E6;
+}
+
+.marketing-home header {
+	height:60px;
+	width:950px;
+	padding:20px 0 0;
+	margin:0 auto;
+	
+}
+
+.marketing-home #logo {
+	float:left;
+	width:15%;
+}
+
+.marketing-home nav {
+	float:right;
+	position:relative;
+	width:80%;
+}
+
+.marketing-home nav ul {
+	margin-top:7px;
+	float:right;
+	position:absolute;
+	right:60px;
+}
+
+.marketing-home nav ul li {
+	display:inline-block;
+	width:100px;
+}
+
+.marketing-home nav ul li a{
+	text-decoration:none;
+	color:#000;
+	font-size:16px;
+	font-weight:600;
+	letter-spacing:.2px;
+}
+
+.marketing-home #searchbox {
+	display:block;
+	float:right;
+	height:50px;
+	width:90%;
+
+}
+
+/* Contents start here */
+
+.marketing-home #contentwrapper {
+	height:auto;
+	width:100%;
+	margin-top:80px;
+}
+
+.marketing-home .pixel950 {
+	width:80%;
+	max-width:950px;
+	padding:60px 0;
+	margin:0 auto;
+	text-align:center;
+}
+
+.marketing-home .top30bottom30 {
+	width:80%;
+	max-width:950px;
+	padding:30px 0;
+	margin:0 auto;
+	text-align:center;
+}
+
+.marketing-home .bordertop {
+	border-top:2px solid #E6E6E6;
+}
+
+.marketing-home .paddingtop0 {
+	padding:0 0 60px 0;
+}
+
+.marketing-home .centertext {
+	width:83%;
+	margin:auto;
+}
+
+.marketing-home #intro {
+	height:auto;
+	width:100%;
+	background-color:#007DBA;
+	color:white;
+}
+
+.marketing-home #mainslider {
+	position:relative;
+	background: linear-gradient(to bottom, #FFFFFF 50%, #C8C8C8 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	text-align:center;
+}
+
+
+/* WORKING ON STARTS HERE */
+
+.marketing-home #stats-bar {
+	color:#ffffff;
+	background-color:#333333;
+}
+
+.marketing-home .samples {
+	float:left;
+	width:25%;
+	color:#D2D3D5;
+}
+
+.marketing-home .samples h3 {
+	margin-top:20px;
+	font-size:19px;
+	font-weight:bold;
+}
+
+
+/* SPECIALTIEs START HERE */
+
+
+.marketing-home #specialties ul {
+	position:relative;
+	margin:30px auto 0;
+	height:60px;	
+}
+/*
+.marketing-home #specialties ul li {
+	display:inline-block;
+	height:20px;
+	width:35%;
+	max-width:300px;
+	background-color:#F2F2F2;
+	margin:0;
+	padding:15px 0;
+	font-size:20px;
+}
+
+.marketing-home #specialties ul li.active {
+	display:inline-block;
+	height:30px;
+	width:35%;
+	max-width:300px;
+	background-color:black;
+	margin:0;
+	padding:15px 0;
+	font-size:20px;
+	z-index:10;
+}
+*/
+
+.marketing-home #specialties ul li{
+	display:inline-block;
+}
+.marketing-home #specialties ul li a{
+	display:inline-block;
+	margin-top:4px;
+	padding:13px 0;
+	width:300px;
+	max-width:300px;
+	background:#d9d9d9;
+	font-size:20px;
+	text-decoration:none;
+	color:black;
+}
+
+.marketing-home #specialties ul li a:hover{
+	display:inline-block;
+	margin-top:0;
+	padding:13px 0;
+	width:300px;
+	max-width:300px;
+	background:#999999;
+	font-size:20px;
+	text-decoration:none;
+	color:#ffffff;
+}
+
+.marketing-home #specialties ul li.active a{
+	display:inline-block;
+	padding:25px 0;
+	margin-top:0;
+	width:300px;
+	max-width:300px;
+	background:#F2F2F2;
+	font-size:20px;
+	text-decoration:none;
+	color:#333333;
+	z-index:100;
+}
+
+.marketing-home #specialties ul li.active {
+	padding:10px 0;
+}
+
+.marketing-home #specialtabs {
+	width:100%;
+	max-width:900px;
+	background-color:#F2F2F2;
+	padding:35px 2%;
+	text-align:center;
+	margin:12px 0 0;
+}
+
+.marketing-home #specialtabs2 {
+	width:100%;
+	max-width:900px;
+	background-color:#F2F2F2;
+	padding:35px 2%;
+	text-align:center;
+	margin:12px 0 0;
+}
+
+.marketing-home .specialitem {
+	float:left;
+	width:30%;
+	padding:25px 1%;
+}
+
+.marketing-home .specleftbottom {
+	border-bottom:1px solid #E6E6E6;
+	border-left:1px solid #E6E6E6;
+}
+
+.marketing-home .specleft {
+	border-left:1px solid #E6E6E6;
+}
+
+.marketing-home .specbottom {
+	border-bottom:1px solid #E6E6E6;
+}
+
+.marketing-home .specialitem h3 {
+	margin:10px auto;
+	font-weight:700;
+}
+
+.marketing-home .specialitem p {
+	font-weight:400;
+	color:#7D6666;
+	font-size:16px;
+}
+
+
+.marketing-home #slider2 {
+	background-image:url(/_inc/images/vui-marketing-2014/welder1.jpg);
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	padding:60px 0 100px;
+}
+
+
+
+/* CLIENT AREA STARTS HERE */
+
+.marketing-home #customers h2 {
+	margin:0 0 35px;
+}
+
+.marketing-home #clientwrap {
+	width:100%;
+	max-width:900px;
+	padding:35px 0 0;
+	background-color:#ffffff;
+}
+
+.marketing-home .clientborder {
+	float:left;
+	height:100px;
+	width:27%;
+	border:1px solid #E6E6E6;
+	padding:25px 1%;
+	margin:2%;
+	text-align:center;
+
+}
+
+/* CONTACT FORM */
+
+.marketing-home #contact-bar {
+	background-color:#F79D00;
+	color:#ffffff;
+}
+
+.marketing-home #contact-bar h2 {
+	margin-bottom:30px;
+}
+
+.marketing-home .contactwrap {
+	display:inline-block;
+	height:120px;
+	width:180px;
+	background-color:#ffffff;
+	text-align:center;
+	color:black;
+	margin:20px;
+	font-size:15px;
+	font-weight:700;
+}
+.marketing-home .contactwrap a{
+	display:block;
+	height:100px;
+	width:100%;
+	text-align:center;
+	margin:0;
+	padding-top:20px;
+	color:black;
+	text-decoration:none;
+}
+
+.marketing-home .contacticon {
+	display:block;
+	height:90px;
+	width:160px;
+	text-align:center;
+	margin:0;
+	padding-top:20px
+}
+
+.marketing-home .contactwrap img {
+	
+}
+
+/* FOOTER LINKS */
+
+.marketing-home .ulsep {
+	float:left;
+	width:450px;
+	margin:20px auto;
+}
+
+.marketing-home footer #footerlinks ul {
+	float:left;
+	width:120px;
+	margin-right:30px;
+	text-align:left;
+}
+
+.marketing-home footer #footerlinks ul li p {
+	text-align:left;
+	margin:0 0 3px;
+	font-size:14px;
+	font-weight: 700;
+}
+
+.marketing-home footer #footerlinks ul li {
+	list-style:none;
+	margin:3px 0;
+	text-align:left;
+	
+}
+.marketing-home footer #footerlinks ul li a {
+	text-decoration:none;
+	color:#666666;
+	font-size:13px;
+	font-weight:300;
+
+}
+
+/* FOOTER CONTENTS */
+
+.marketing-home #footercontent {
+	width:100%;
+}
+
+.marketing-home #footercontent ul {
+	
+}
+
+.marketing-home #footercontent ul li {
+	display:inline;
+}
+
+.marketing-home #socialmedia {
+	width:50%;
+	float:left;
+	text-align:left;
+}
+
+.marketing-home #socialmedia ul li{
+	text-align:left;
+	margin-right:10px;
+}
+
+.marketing-home #information {
+	width:50%;
+	float:right;
+	text-align:right;
+}
+
+.marketing-home #information ul li{
+	text-align:right;
+	margin-left:10px;
+	font-size:11px;
+	color:#666666;
+}
+
+.marketing-home #information ul li a{
+	text-decoration:none;
+	color:#666666;
+}
+
+
+}
+
+
+.marketing-home #carousel {
+	position:relative;
+	margin: auto;	
+	padding: 0 0 70px;
+}
+
+.marketing-home #carousel2 {
+	position:relative;
+	margin:50px auto 0;	
+}
+
+
+.marketing-home .slideblock {
+	width:40%;
+	height:300px;
+	padding:30px 15%;
+	background-color: rgba(255, 255, 255, 0.9);
+	font-size:100%;
+	margin:auto;
+	text-align:center;
+}
+
+.marketing-home .slideblock h2{
+	display:block;
+	width:70%;
+	padding:30px 15%;
+}
+
+.marketing-home .slideblock p{
+	display:block;
+}
+
+
+
+
+/* OW FIXES */
+.marketing-home header { 
+	padding-top: 10px;
+	border-top: 0px none;
+	width:1000px;
+	
+}
+
+.marketing-home #logo {
+	width: 300px;
+	margin-left: 15px;
+}
+.marketing-home nav {
+	width: inherit;
+	margin-top: 10px;
+	margin-right:0;
+}
+
+#headerwrap.loggedin nav 
+{
+	margin-right:125px;
+}
+
+.marketing-home nav ul { 
+	position: inherit;
+	right: 40px;
+}
+.marketing-home nav ul li {
+	width: inherit;
+	padding: 0 10px;
+}
+.marketing-home nav ul li  a {
+    font-weight: bold;
+    color: #787878 !IMPORTANT;
+	}
+.marketing-home nav ul li  a:hover {
+	color: #666;
+	border-bottom: 3px solid #666;
+}
+
+#wrapper .marketing-home #contentwrapper { margin-top: 70px; }
+
+.marketing-home #intro {
+    background-color: none transparent;
+	background: linear-gradient(#1FA6DE 0%, #3DC5FD 20%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    color: #FFFFFF;
+    height: auto;
+    width: 100%;
+}
+
+.marketing-home .oldie #intro {
+    background: none repeat scroll 0 0 #3DC5FD !important;
+}
+
+.marketing-home #intro .pixel950 {
+	position:relative;
+}
+
+.marketing-home #intro .pixel950  .weird  { position:relative; width:50%; height: 1px; overflow: visible; }
+
+.marketing-home #intro .pixel950  .weird .wheel-icon {
+	position: absolute;
+	width: 140px;
+	height: 140px;
+	right:210px; 
+	top: -25px;
+}
+
+.marketing-home .slider-big {
+	max-width: 1280px;
+}
+
+
+.marketing-home ul.bjqs {
+    display: block;
+}
+
+.marketing-home .slider-big  ul li {
+	display:inline-block;
+}
+
+
+.marketing-home #slider2 .slideblock {  border-radius: 10px; padding: 30px 80px; }
+
+
+
+.marketing-home #carousel .centertext {
+	
+}
+
+.marketing-home #carousel a 
+{
+    color: black;   
+}
+
+.marketing-home #carousel a:hover 
+{
+    color: #00A2FF;
+    text-decoration: none;
+}
+
+.marketing-home #carousel2 .slideblock 
+{
+    padding:30px 70px;
+    vertical-align: middle;
+    height: inherit;
+    min-height: 280px;
+}
+
+.marketing-home #carousel2 .slideblock h2 
+{
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
+.marketing-home ul.bjqs-controls.v-centered li.bjqs-prev a:hover , ul.bjqs-controls.v-centered li.bjqs-next a:hover {
+    background: #666 none;
+    padding: 4px 16px;
+    text-indent: 0;
+}
+
+.marketing-home ul.bjqs-controls.v-centered li.bjqs-prev a {
+    background: #999 none;
+    left: 0;
+    padding: 4px 16px;
+    text-indent: 0;
+}
+.marketing-home ul.bjqs-controls.v-centered li.bjqs-next a {
+    background: #999 none;
+    padding: 4px 16px;
+    right: 0;
+    text-indent: 0;
+}
+.marketing-home ul.bjqs-controls.v-centered li a {
+    position: absolute;
+	color: #fff;
+	text-decoration: none;
+	font-size:40px;
+	border-radius: 5px;
+}
+
+.marketing-home #stats-bar {
+    background-color: none transparent;
+	background: linear-gradient(#1FA6DE 0%, #3DC5FD 20%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.marketing-home #stats-bar .pixel950 {
+	padding-bottom: 30px;
+}
+.marketing-home .b-mktg-stats {
+    height: 145px;
+    padding: 0 0 60px;
+}
+.marketing-home .ie8 .b-mktg-stats {
+}
+.marketing-home .b-mktg-stats .inner {
+    width: 1000px;
+	margin: 0 auto;
+}
+.marketing-home .b-mktg-stats .inner ul {
+    display: table;
+    overflow: hidden;
+    padding: 9px 0 6px;
+    width: 100%;
+}
+.marketing-home .b-mktg-stats .inner ul li {
+    color: #FFFFFF;
+    display: table-cell;
+    padding: 0 10px;
+    text-align: center;
+}
+.marketing-home .b-mktg-stats .inner ul li a {
+    color: #fff;
+}
+
+.marketing-home .b-mktg-stats .inner ul li+li a >div {
+    border-left: 1px solid #94defc;
+	padding-left:10px;
+}
+
+.marketing-home .b-mktg-stats .inner ul li span {
+    display: block;
+    font-size: 50px;
+    margin: 5px auto;
+    vertical-align: middle;
+}
+.marketing-home .b-mktg-stats .inner ul li .title {
+    font-size: 28px;
+    font-style: italic;
+    white-space: nowrap;
+}
+
+.marketing-home .b-mktg-stats .inner ul li .text {
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+
+.marketing-home .clientborder {
+    height: 75px;
+    width: 18%;
+	border-radius: 10px;
+}
+
+.marketing-home #contact-bar {
+    background-color: none transparent;
+	background: linear-gradient(#1FA6DE 0%, #3DC5FD 20%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.marketing-home .oldie #contact-bar {
+    background: none repeat scroll 0 0 #3DC5FD !important;
+}
+
+.marketing-home .contactwrap {
+	display: inline-block;
+	width: 220px;
+	height: 150px;
+	border-radius: 10px;
+	padding: 0;
+	margin: 20px;
+	vertical-align: top;
+	
+}
+.marketing-home .contacticon, .contactwrap a {
+	width:100%;
+	padding-top:10px;
+	font-size: 1.4em;
+}
+.marketing-home .contacticon .fa {
+	font-size:100px;
+	color:#ccc;
+	text-align:center;
+	padding: 0;
+	margin: 0;
+	display:block;
+}
+
+.marketing-home footer 
+{
+    background: transparent none;
+    z-index: inherit;
+    border: 0px none;
+}
+
+.b-right-nav, .w1200 .b-right-nav { margin-top:100px; }
+
+
+.marketing-home .b-service-finder {
+    background: none repeat scroll 0 0 #94C938;
+    -webkit-border-radius: 8px;
+    -moz-boreder-radius: 8px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.36);
+    position: absolute;
+    right: 0;
+    left:inherit;
+    top: 22px;
+    padding: 3px 10px;
+}
+.marketing-home .b-service-finder a 
+{
+    font-size: 1.2em;
+}
+
+.marketing-home .b-service-finder .sub-menu {
+    top: -12px;
+    right: -11px;
+}
+
+.marketing-home .b-service-finder .sub-menu
+{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+#wrapper #main
+{
+    margin-top: 100px;
+}
+
+.home h1 { font-size: inherit; }

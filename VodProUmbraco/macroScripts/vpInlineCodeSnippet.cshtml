@@ -1,0 +1,13 @@
+﻿@{
+  
+  var snippetId= @Parameter.snippet;
+  try {
+  
+    dynamic snippet = @Model.NodeById(@snippetId);
+    <span>@snippet.code</span>
+  }
+  catch (Exception e)
+  {
+    <span>Error</span>
+   }
+}

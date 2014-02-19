@@ -1,0 +1,9 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/umbraco/masterpages/default.master" AutoEventWireup="true" %>
+<%@ Register TagPrefix="vp" TagName="PayPalProcess" src="~/umbraco/plugins/vui/usercontrols/paypal-ipn-processor.ascx" %>
+  
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolderDefault" runat="server">
+  
+  <vp:PayPalProcess runat="server" id="PayPalProcess" />
+  
+</asp:Content>

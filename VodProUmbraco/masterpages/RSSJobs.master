@@ -1,0 +1,52 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/umbraco/masterpages/default.master" AutoEventWireup="true" %>
+
+<asp:Content ContentPlaceHolderID="ContentPlaceHolderDefault" runat="server">
+ 
+<umbraco:ContentType runat="server" MimeType="text/xml"></umbraco:ContentType>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>VOD Jobs</title>
+    <link>http://www.vodprofessional.com/jobs/</link>
+    <description>VODProfessional jobs feed, with jobs from JobServe</description>
+    <language>en-gb</language>
+    <image>
+      <title>The image title goes here</title>
+      <url>http://www.vodprofessional.com/css/images/logo_franklinmedium400.jpg</url>
+      <link>http://www.vodprofessional.com/jobs/</link>
+    </image>  
+  
+<umbraco:Macro  runat="server" language="cshtml">
+  
+    @using umbraco.MacroEngines
+    @using umbraco.interfaces
+    @{
+       VODPro.code.VPJobs jobs = new VODPro.code.VPJobs();
+       jobs.Url = "http://www.labs.jobserve.com/services/v0.3.7/Core.svc/SiteGBR?source=39FB8404A11155&pagesize=10&sort=EXPLORER_DATE_DESC&skills=vod%20or%20%22video%20on%20demand%22%20or%20video%20or%20iptv%20or%20%22connected%20tv%22%20or%20television%20or%20transcode%20or%20ingest";
+       jobs.DescriptionSize = 300;
+       jobs.PopulateJobList();
+       var jobList = jobs.JobList;
+
+       string sep = " / ";
+       
+       foreach(VODPro.code.Job j in jobList)
+       {
+             <item>
+              <title>@j.Title</title>
+              <link>@j.Url</link>
+              <description>@j.Location
+            @sep
+            @j.Contract
+            @sep
+            @j.Rate</description>
+             </item>
+       
+       }
+     }
+      
+    </umbraco:Macro>  
+
+
+  </channel>
+</rss>
+
+</asp:Content>

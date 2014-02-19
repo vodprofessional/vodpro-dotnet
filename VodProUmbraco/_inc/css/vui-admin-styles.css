@@ -1,0 +1,124 @@
+﻿.tree.tree-umbraco li a.unpublished 
+{
+    color: #aaa;
+}
+
+#serviceContainer
+{
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 10pt;
+    padding:20px;
+}
+
+.comments-list
+{
+    float:left;
+    display:block;
+    width:100%;
+/*    -moz-column-count:3; 
+    -webkit-column-count:3; 
+    column-count:3;
+    -moz-column-gap:20px; 
+    -webkit-column-gap:20px; 
+    column-gap:20px; */
+}
+.btn-comments
+{
+    float:left;
+    clear: left;
+}
+.comment
+{
+    float:left;
+    width:330px;
+    min-height: 240px;
+    border: 1px solid #d0d0d0;
+    padding:10px;
+    -webkit-box-shadow:  0 0 3px 2px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow:  0 0 3px 2px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.15); margin: 5px 15px;
+    margin: 10px;
+/*    -webkit-column-break-inside:avoid;
+    -moz-column-break-inside:avoid;
+    -o-column-break-inside:avoid;
+    -ms-column-break-inside:avoid;
+    column-break-inside:avoid;
+*/
+}
+.comment .title 
+{
+    font-weight:bold;
+    margin-bottom: 5px;
+}
+.comment .rating 
+{
+    float:left;
+    width:150px;
+}
+.comment .version 
+{
+    float:right;
+    width:150px;
+    text-align:right;
+}
+.comment .desc
+{
+    clear:left;
+    margin: 5px 0;
+    padding: 5px 0;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Tabs */
+ul.tabs {
+    margin: 15px auto 0;
+    padding: 0;
+    position: relative;
+    border-bottom: 1px solid #000;
+    padding-top:5px;
+}
+.tabs li {
+    float: left;
+    margin-left: 5px;
+}
+.tabs li a 
+{
+  border: 2px solid #999;
+  padding: 8px;
+  font-size:1.2em;
+  font-weight:bold;
+  color: #999;
+  text-decoration: none;
+  background-color: #d0d0d0;
+}
+.tabs li a.current
+{
+  background-color:#fff;
+  color:#000;
+}
+
+.tabs {
+    overflow: hidden;
+    padding: 13px 42px 0;
+    z-index: 15;
+}
+ul {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+h2 .app-link 
+{  
+    font-size: 10pt;    
+}
+.version-history span 
+{
+    width:60px;
+    display:inline-block;
+}
+.version-history span.date
+{
+    width:100px;
+}
+

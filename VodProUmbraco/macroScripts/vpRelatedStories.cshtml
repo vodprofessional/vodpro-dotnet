@@ -1,0 +1,48 @@
+﻿@using Examine;
+@using UmbracoExamine;
+@using Examine.LuceneEngine.SearchCriteria;
+@{
+   
+ if(@Model.relatedStorySearchTerm.GetType() == typeof(System.String)) 
+ {
+  
+   var searchTerm = @Model.relatedStorySearchTerm;
+ 
+   if(!string.IsNullOrEmpty(searchTerm))
+   {   
+     LuceneSearchCriteria criteria = (LuceneSearchCriteria)(ExamineManager.Instance
+                   .SearchProviderCollection["VPSiteSearchSearcher"]
+                   .CreateSearchCriteria());
+       
+     var filter = criteria
+       .GroupedOr(new string[]{"storytags"},searchTerm) //"title","story","storyteaser","storytags"
+       .Compile();  //.And().OrderByDescending("storydate")
+   
+     var sresults = ExamineManager.Instance
+                   .SearchProviderCollection["VPSiteSearchSearcher"]
+                   .Search(filter);
+
+     if(sresults.TotalItemCount > 0)
+     {
+       int count = 0;
+       
+       <div class="relatedstories">
+       <h3>Related Stories</h3>
+       <ul>
+       
+       @foreach (var result in sresults)
+       {    
+         if (result.Id == Model.Id) { continue; }
+         count++;
+         if (count > 5) { break; }
+   
+         <li>
+          <a href="@umbraco.library.NiceUrl(result.Id)">@result.Fields["title"]</a>
+         </li>    
+       }    
+       </ul>
+       </div>
+     }
+   }
+ }
+}

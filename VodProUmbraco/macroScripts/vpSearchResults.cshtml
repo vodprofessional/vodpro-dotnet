@@ -1,0 +1,62 @@
+﻿
+
+@using Examine;
+@using UmbracoExamine;
+
+@{
+  
+  int numItems  = @Model.numberOfItemsToShow;
+  if (numItems < 2) {numItems = 10;}
+  VODPro.code.Paging paging;
+  
+  var searchTerm = Request.QueryString["search"];
+  if(!string.IsNullOrEmpty(searchTerm))
+  {
+  
+   
+   var criteria = ExamineManager.Instance
+                   .SearchProviderCollection["VPSiteSearchSearcher"]
+                   .CreateSearchCriteria();
+   
+   var filter = criteria
+       .GroupedOr(new string[]{"title","story","storyteaser","storytags"},searchTerm)
+       .Compile();
+   
+   var sresults = ExamineManager.Instance
+                   .SearchProviderCollection["VPSiteSearchSearcher"]
+                   .Search(filter);
+  
+   paging = VODPro.code.Paging.GetPages(sresults.TotalItemCount, numItems);
+   
+   var results = sresults.Skip(paging.Skip);
+   
+  <p>You searched for @searchTerm.  Found @sresults.TotalItemCount results</p>
+  
+  int count = 0;
+   
+  foreach (var result in results)
+  {    
+    count++;
+    if (count > numItems) { break; }
+   
+    <div id="parentarticle">
+
+   @if(result.Fields.ContainsKey("storyimage")) {
+    dynamic media = @Model.MediaById(@result.Fields["storyimage"]);
+    string mediaName = @media.umbracoFile;
+    string thumbName = @mediaName.Replace(".jpg","_thumb_195.jpg");
+    <div class="image"><img src="@thumbName"/></div>
+   }
+
+     <div class="headline"><h2><a href="@umbraco.library.NiceUrl(result.Id)">@result.Fields["title"]</a></div>
+      <div class="text">@result.Fields["storyteaser"]</div>
+    </div>    
+   
+  }
+
+<div class="paging">@PagingTemplate.RenderSearchPaging(paging, Current.Id, searchTerm)</div>
+  }
+  else {
+    <p>Do nothing</p>
+  }
+}

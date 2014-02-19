@@ -1,0 +1,32 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VUIMaster.master" AutoEventWireup="true" %>
+<%@ Register TagPrefix="vp" TagName="VuiLogin" src="~/umbraco/plugins/vui/usercontrols/vui-login.ascx" %>
+<%@ Register TagPrefix="vp" TagName="VuiRegister" src="~/umbraco/plugins/vui/usercontrols/vui-register.ascx" %>
+  
+    
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolderHead" runat="server">
+  <script type="text/javascript">document.title = 'VUI Library - Register';</script>
+</asp:content>
+    
+<asp:content ContentPlaceHolderId="ContentPlaceHolder1" runat="server">
+
+  
+  
+  <div class="ui-heading">
+    <h1>Register with VOD Professional</h1>
+  </div>
+  
+  
+  <h2 class="ui-home-strap">
+    If you aren't a member yet start the registration process below, or <a href="/vui">read more about why you should join</a>
+  </h2>
+    <div id="home-col-container">
+        <div class="main home-column">
+               
+          <vp:VuiRegister id="MainRegister" runat="server" Mode="FORM" />
+          
+        </div>
+    
+  </div>
+  
+</asp:content>

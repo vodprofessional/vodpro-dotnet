@@ -1,0 +1,347 @@
+
+@using VUI.classes;
+@using umbraco.MacroEngines;
+@using System.Web.Security;
+@using umbraco.cms.businesslogic.member;
+@using VUI.VUI2.classes;
+
+@functions{
+    string Mode = String.Empty;
+    string PageTitle = String.Empty;
+
+    bool IsFullMode = false;
+    Member m = VUIfunctions.CurrentUser();
+    string user_status;
+    int score;
+    int numBenchmarks;
+
+    Dictionary<string, int> scores;
+    int max = 100;
+
+    int localscore = 0;
+    int maxlength = 400 - 2;
+    int length = 0;
+
+}
+
+@helper WriteScore(Dictionary<string, int> scores, string feature, string alttext)
+    {
+        float multiplier = (float)maxlength / max;
+    
+    <li>
+        @if (!String.IsNullOrEmpty(alttext))
+        { 
+            @: @alttext
+        }
+        else
+        {
+            @: @feature
+        }
+        <div class="scores"><span class="zero"> </span>
+        @{
+            try
+            {
+                localscore = (@scores[feature] * 100) / numBenchmarks;
+                if (localscore > 0)
+                {
+                    length = (int)(localscore * multiplier);
+                    <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+            }
+            catch (Exception ex)
+            { 
+                <span class="score" style="width:0px">0%</span>
+            } 
+        }
+        <span class="max">@max</span>
+    </li>
+}
+@{  
+    
+    user_status = VUIfunctions.MemberVUIStatus(m);
+    IsFullMode = VUIfunctions.MemberVUIFullMode(user_status);
+
+    PageTitle = @"<a class=""ui-link-platform"" href=""/vui/benchmarking/"">Benchmarking</a>";
+    if (@Model.NodeTypeAlias.Equals(Utility.GetConst("VUI2_platformtype")))
+    {
+        Mode = "PLATFORM";
+        PageTitle += " | " + @Model.Name;
+        <script type="text/javascript">document.title += ' Benchmarking - @Model.Name';</script>
+    }
+    else if (@Model.NodeTypeAlias.Equals(Utility.GetConst("VUI2_devicetype")))
+    {
+        Mode = "DEVICE";
+        PageTitle += " | " + @Model.Parent.Name + " - " + @Model.Name;
+        <script type="text/javascript">document.title += ' Benchmarking - @Model.Parent.Name - @Model.Name';</script>
+    }
+    else
+    {
+        Mode = "All";
+        PageTitle += " | All ";
+        <script type="text/javascript">document.title += ' Benchmarking - All ';</script>
+    }
+
+    
+    
+
+    <div class="ui-heading">
+        <h1>@Html.Raw(PageTitle)</h1>
+    </div>
+    
+    
+    VUIfunctions.InitScores();
+    score = VUIfunctions.TotalFunctionScore;
+
+    if (!IsFullMode && !Mode.Equals("All"))
+    {
+      <div class="ui-subscribe-message">Subscribe Message</div>
+    }
+    else
+    {
+        if (Mode.Equals("PLATFORM"))
+        {
+            numBenchmarks = VUIDataFunctions.GetNumberOfBenchmarksByPlatform(@Model.Id);
+            scores = VUIDataFunctions.GetBenchmarkScoresByPlatform(@Model.Id);
+        }
+        else if (Mode.Equals("DEVICE"))
+        {
+            numBenchmarks = VUIDataFunctions.GetNumberOfBenchmarksByDevice(@Model.Id);
+            scores = VUIDataFunctions.GetBenchmarkScoresByDevice(@Model.Id);
+        }
+        else
+        {
+            numBenchmarks = VUIDataFunctions.GetNumberOfBenchmarks();
+            scores = VUIDataFunctions.GetAllBenchmarkScores();
+        }
+        
+        <div class="ui-benchmarking">
+          <input type="hidden" name="total" value="@numBenchmarks" />
+          @if (Mode.Equals("All"))
+          {
+            <p>To date we've reviewed @numBenchmarks video services.
+                The list below shows you the functionality commonly found in video user interfaces on all
+                platforms like Web, iPad, Android tablets, and how often.
+            </p>
+          }
+          else
+          {
+            <p>@try
+               { @Model.description }
+               catch (Exception ex) { ; }
+            </p>
+            <p>To read more about each of the functions below check out our
+              <a href="/vui/best-practice-guides/the-25-most-common-functions-found-in-a-video-user-interface/">guide to the 25 Most Common Functions found in Video User Interfaces</a>.</p>
+          }
+            <h1>Content Discovery &amp; Recommendation</h1>
+            <ul class="ui-device-scores">            
+                @WriteScore(scores, "Featured content", String.Empty)
+                @WriteScore(scores, "Categorisation", String.Empty)
+                @WriteScore(scores, "Category homepage", String.Empty)
+                @WriteScore(scores, "Most popular", String.Empty)
+                @WriteScore(scores, "Recently added", String.Empty)
+                @WriteScore(scores, "More episodes", String.Empty)
+                @WriteScore(scores, "Content recommendation", String.Empty)
+                @WriteScore(scores, "EPG", "EPG (Electronic Programming Guide)")
+                @WriteScore(scores, "Search", String.Empty)
+                @WriteScore(scores, "Predictive search", String.Empty)
+                @WriteScore(scores, "A-Z page", String.Empty)
+                @WriteScore(scores, "Social sharing (out)", "Social Sharing (Outbound)")
+                @WriteScore(scores, "Social sharing (in-service)", String.Empty)
+            </ul>       
+
+            <h1>Video Player</h1>
+            <ul class="ui-device-scores">         
+                @WriteScore(scores, "Customised video player", String.Empty)
+                @WriteScore(scores, "Video description", String.Empty)
+            </ul>     
+
+            <h1>Personalisation</h1>
+            <ul class="ui-device-scores">    
+                @WriteScore(scores, "Favourites", String.Empty)
+                @WriteScore(scores, "Playlists", String.Empty)
+                @WriteScore(scores, "Sign in / Register", String.Empty)
+                @WriteScore(scores, "Social sign-on", String.Empty)
+                @WriteScore(scores, "Parental controls", String.Empty)
+            </ul>     
+
+            <h1>Support</h1>
+            <ul class="ui-device-scores">     
+                @WriteScore(scores, "Help", String.Empty)
+                @WriteScore(scores, "About", String.Empty)
+                @WriteScore(scores, "Contact", String.Empty)
+                @WriteScore(scores, "Accessibility", String.Empty)
+                @WriteScore(scores, "Watch on other platforms", String.Empty)
+            </ul>     
+                
+            @*
+            <h1 class="hot-features">Hot Features</h1>
+            <ul class="ui-device-scores">           
+                @WriteScore(scores, "Adaptive bitrate streaming", String.Empty)
+                @WriteScore(scores, "Audio-described Shows", String.Empty)
+                @WriteScore(scores, "Device synchronisation", String.Empty)
+                @WriteScore(scores, "Download to device", String.Empty)
+                @WriteScore(scores, "Extended Archive", String.Empty)
+                @WriteScore(scores, "Last viewed", String.Empty)
+                @WriteScore(scores, "Live Restart", String.Empty)
+                @WriteScore(scores, "Live Viewing", String.Empty)
+                @WriteScore(scores, "Resume after stopping", String.Empty)
+                @WriteScore(scores, "Social content recommendation", "Social recommendation")
+            </ul>  
+            *@
+        </div>
+    
+          if (!IsFullMode)
+          {
+           <div class="ui-benchmarking-related">
+         
+             <ul>
+                <li class="heading"><h2>What Subscribers Get</h2></li>
+               
+                <li>
+                  <a href="@VUIfunctions.VUI_subscribe_page">
+                    <h3>
+                      See how often the most common functions appear on individual platforms and services
+                    </h3>
+                    <p>
+                       We’ve studied over 150 video user interfaces from all over the world – and across platforms – and identified 25 key functions that commonly appear in those services. You can see these on the left with an indication of how often they're included.
+                    </p>
+                    <p>
+                       When you subscribe, you’ll be able to see the breakdown for individual platforms (like Web, Tablet, Smartphone etc.) and find out which existing video services display the greatest range of functionality.
+                    </p>
+                  </a>
+                </li>
+                <li>
+                  <a href="/vui/best-practice-guides/the-25-most-common-functions-found-in-a-video-user-interface/">
+                    <h3> 25 Most Common Functions found in Video User Interfaces </h3>
+                    <div class="ui-image-box"><img src="/media/138884/25vui.jpg" /></div>
+                    <p>We've studied over 150 VUIs, across platforms, from all over the world and here's the toolbox of features that they all share. </p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          }
+          else if (Mode.Equals("All"))
+          {
+
+              // loop through all platforms (with service children)
+              List<Platform> platforms = Platform.AllPlatforms();
+            
+            
+            
+                <div class="ui-benchmarking-related device-list">
+                  <ul>
+                    <li class="heading">
+                      <h2>Benchmarking by Device</h2>
+                    </li>
+                @foreach (Platform platform in platforms)
+                {
+                    string img = "";
+                    string url;
+                    if (platform.HasDevices)
+                    {
+                        List<Device> devices = platform.Devices;
+
+                        foreach (Device device in devices)
+                        {
+                            if (!device.IsComingSoon)
+                            {
+                                int numbenchmarks = VUIDataFunctions.GetNumberOfBenchmarksByDevice(device.NodeId);
+
+                                if (numbenchmarks > 0)
+                                {
+                                    if (!String.IsNullOrEmpty(device.ImageURL))
+                                    {
+                                        img = Model.MediaById(device.ImageURL).umbracoFile;
+                                    }
+                                    url = "/vui/" + platform.PlatformName + "~" + device.DeviceName + "/benchmarking/";
+                                    <li class="ui-service-template ui-service">
+                                        <a href="@url">
+                                        <h3>@platform.Name/@device.Name </h3>
+                                        <div class="ui-image-box"><img src="@img" /></div>
+                                        (@numbenchmarks services)
+                                        </a>
+                                    </li>
+                                }
+                            }
+                        }
+                    }
+                    else if (!platform.IsComingSoon)
+                    {
+                        int numbenchmarks = VUIDataFunctions.GetNumberOfBenchmarksByPlatform(platform.NodeId);
+
+                        if (numbenchmarks > 0)
+                        {
+                            if (!String.IsNullOrEmpty(platform.ImageURL))
+                            {
+                                img = Model.MediaById(platform.ImageURL).umbracoFile;
+                            }
+                            url = "/vui/" + platform.PlatformName + "/benchmarking/";
+                            <li class="ui-service-template ui-service">
+                                <a href="@url">
+                                <h3>@platform.Name</h3>
+                                <div class="ui-image-box"><img src="@img" /></div>
+                                (@numbenchmarks services)
+                                </a>
+                            </li>
+                        }
+                    }
+                }
+                </ul>
+              </div>
+                
+          }
+          else
+          {
+            <div class="ui-screenshots-desc-col">
+              <ul class="related-services">
+                <li class="heading"><h2>Services by Score  <em>(from @score)</em></h2></li>
+                @{
+              List<Service> serviceList;
+              if (Mode.Equals("DEVICE"))
+              {
+                  serviceList = VUIDataFunctions.GetBestServicesForDevice(@Model.Id);
+              }
+              else
+              {
+                  serviceList = VUIDataFunctions.GetBestServicesForPlatform(@Model.Id);
+              }
+
+              if (serviceList != null)
+              {
+                  foreach (Service service in serviceList)
+                  {
+                      if (service.BenchmarkScore > 0)
+                      {
+                          service.SetAnalyses(true);
+                          string url = "";
+                          url = "/vui/" + service.Platform.PlatformName;
+                          if (service.Device != null)
+                          {
+                              url += "~" + service.Device.DeviceName;
+                          }
+                          url += "/" + service.ServiceName + "/benchmarking/";
+                        
+                            <li>
+                                <a href="@url">
+                                    @service.Name
+                                    <div class="ui-service-score">
+                                        @{  
+                          string s = @service.BenchmarkScore.ToString();
+                                            @:@s
+                                        }
+                                    </div>
+                                </a>
+                            </li>
+                      }
+                  }
+              }
+                }
+                </ul>
+            </div>
+          }
+
+    }
+     
+}
+
+  

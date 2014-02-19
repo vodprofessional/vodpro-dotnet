@@ -1,0 +1,14 @@
+/* */
+
+
+
+
+.home-iphone { display:inline-block; position:relative; width:174px; height:366px; background:transparent url("/gfx/vui3/home-iphone.png") no-repeat; z-index:1; }
+.home-iphone .overlay { position:absolute; width:174px; height:366px; top:0; left:0; background:transparent url("/gfx/vui3/home-iphone-overlay.png") no-repeat; z-index:20; }
+.home-tv { position:relative; }
+.home-tv .overlay { display:inline-block; position:absolute; width:337px; height:339px; background:transparent url("/gfx/vui3/home-tv.png") no-repeat; z-index:20; }
+
+.json { border: 1px solid #ddd; background-color: #f0f0f0; color:#999; padding:10px; }
+
+
+/* EDITOR PROPERTIES - PLEASE DON'T DELETE THIS LINE TO AVOID DUPLICATE PROPERTIES */

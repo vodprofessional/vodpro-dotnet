@@ -1,0 +1,1377 @@
+﻿
+@using VUI.classes;
+@using umbraco.MacroEngines;
+@using System.Web.Security;
+@using umbraco.cms.businesslogic.member;
+@{  
+
+  string Mode = String.Empty;
+  string PageTitle = String.Empty;
+  
+  bool IsFullMode = false;
+  Member m = VUIfunctions.CurrentUser();
+  string user_status = VUIfunctions.MemberVUIStatus(m);
+  IsFullMode = VUIfunctions.MemberVUIFullMode(user_status);
+  
+  
+  
+  VUIfunctions.InitScores();
+  int score = VUIfunctions.TotalFunctionScore;
+    
+  string ServiceID = @Request.QueryString["serviceid"];
+  string Platform = @Request.QueryString["platform"];
+  string Service  = @Request.QueryString["service"];
+  string Device   = @Request.QueryString["device"];
+  
+  
+  <!--    serviceid = @ServiceID
+    <br/>
+    platform = @Platform
+    <br/>
+    service = @Service
+    <br/>
+    device = @Device
+  -->
+  
+  
+  string PlatformTitle = VUIfunctions.GetTidyVUIFolderName(Platform, VUIfunctions.VUI_PLATFORM);
+  string ServiceTitle  = VUIfunctions.GetTidyVUIFolderName(Service, VUIfunctions.VUI_SERVICE);
+  string DeviceTitle   = VUIfunctions.GetTidyVUIFolderName(Device, VUIfunctions.VUI_DEVICE);
+  
+
+  // We have a Service to show
+  if(!String.IsNullOrEmpty(ServiceID))
+  {
+      Mode = "SERVICE_DESCRIPTION";
+  }
+  // We list the devices
+  else if(String.IsNullOrEmpty(Platform))
+  {
+      Mode = "DEVICES_LIST";
+  }
+  // We list the services
+  else if(!String.IsNullOrEmpty(Platform))
+  {
+      Mode = "SERVICES_LIST";
+  }
+  
+
+   if(Mode.Equals("DEVICES_LIST"))
+   {
+      PageTitle += "Benchmarking";
+   }
+   else
+   {
+      PageTitle += @"<a class=""ui-link-platform"" href=""/vui/benchmarking/"">Benchmarking</a>";
+   }
+      
+   if(Mode.Equals("SERVICES_LIST"))
+   {
+      if(!String.IsNullOrEmpty(Device))
+      {
+        PageTitle += " | " + PlatformTitle + " - " + DeviceTitle;
+      }
+      else
+      {
+        PageTitle += " | " + PlatformTitle;
+      }
+   }
+    
+   if (Mode.Equals("SERVICE_DESCRIPTION"))
+   {
+      if(!String.IsNullOrEmpty(Device))
+      {
+        if(IsFullMode)
+        {
+          PageTitle += " | " + @"<a class=""ui-link-platform"" href=""/vui/benchmarking/devices/" + @Platform + "/" + @Device + @""">" + @PlatformTitle + " - " + @DeviceTitle + "</a>";
+        }
+        else
+        {
+          PageTitle += " | " + @PlatformTitle + " - " + @DeviceTitle;
+        }
+      }
+      else
+      {
+        if(IsFullMode)
+        {
+          PageTitle += " | " + @"<a class=""ui-link-platform"" href=""/vui/benchmarking/devices/" + @Platform + @""">" + @PlatformTitle + "</a>";
+        }
+        else
+        {
+          PageTitle += " | " + @PlatformTitle;
+        }
+      }
+      PageTitle += " | " + ServiceTitle;
+   }
+  
+   <script type="text/javascript">document.title += ' @ServiceTitle @PlatformTitle @DeviceTitle ';</script>
+
+   if (!Mode.Equals("SERVICE_DESCRIPTION"))
+   {
+      <div class="ui-heading">
+        <h1>@Html.Raw(PageTitle)</h1>
+      </div>
+      
+    }
+  
+  
+  if(Mode.Equals("DEVICES_LIST"))
+  {
+  // loop through all platforms (with service children)
+  
+    DynamicNode root = new DynamicNode(VUIfunctions.VUIMediaRootNode);
+    var platforms = root.Descendants(VUIfunctions.VUI_FOLDERTYPE).Items.Where(n => n.GetProperty("folderLevel").Value.Equals(VUIfunctions.VUI_PLATFORM));
+    <div id="main-ui-grid-wrapper" class="ui-grid">        
+      <div id="main-ui-grid" class="ui-hidden-scroll-main-area">
+        
+        
+          @if(root.GetProperty("description") != null && !String.IsNullOrEmpty(root.GetProperty("description").Value))
+          {
+            string desc = root.GetProperty("description").Value;
+            desc = desc.Replace("\n\n","</p><p>").Replace("\n","<br/>");
+            <p>@Html.Raw(desc)</p>
+          }
+        
+        
+        <ul class="ui-list ui-benchmarking-list">
+          
+        <li>
+          <a href="@VUIfunctions.VUI_preview_benchmark_url">
+            <h2>All Platforms</h2>
+            <img src="/css/images/benchmarking-all.png" />
+            Across all services
+            @if(!IsFullMode)
+            {
+             @: (available to preview!)
+            }
+          </a>
+        </li>
+        
+          
+        @foreach(DynamicNode platform in platforms)
+        {
+          string img = "";
+          if(VUIfunctions.PlatformHasDevices(platform.Name.Replace(" ","-")))
+          {
+              var devices = platform.Descendants(VUIfunctions.VUI_FOLDERTYPE).Items.Where(n => n.GetProperty("folderLevel").Value.Equals(VUIfunctions.VUI_DEVICE));         
+              
+              if(devices != null)
+              {
+                foreach(DynamicNode device in devices)
+                {
+                  int servicesCount = device.Descendants(VUIfunctions.VUI_FOLDERTYPE).Items
+                                        .Where(n => n.GetProperty("folderLevel").Value.Equals(VUIfunctions.VUI_SERVICE) && (n.GetProperty("isComingSoon")== null || !n.GetProperty("isComingSoon").Value.Equals("1")) && n.GetProperty("vuiScore") != null && !String.IsNullOrEmpty(n.GetProperty("vuiScore").Value) &&  !n.GetProperty("vuiScore").Value.Equals("0"))
+                                        .ToList().Count();
+                  if(servicesCount > 0 || (device.GetProperty("isComingSoon")!= null && device.GetProperty("isComingSoon").Value.Equals("1")))
+                  {      
+                      string p = platform.Name.Replace(" ","-");      
+                      string d = device.Name.Replace(" ","-");
+          
+                      if(device.GetProperty("folderImage") != null)
+                      {
+                        img = Model.MediaById(device.GetProperty("folderImage").Value).umbracoFile;
+                      }
+                      string burl = "/vui/benchmarking/devices/" + p + "/" + d;
+                      string previewClass = "";
+                      if(!IsFullMode)
+                      {
+                        burl = VUIfunctions.VUI_subscribe_page;
+                        previewClass = "ui-preview-disabled";
+                      }
+                      <li class="@previewClass">
+                        <a href="@burl">
+                          <h2>@platform.Name/@device.Name </h2>
+                          <img src="@img" />
+                          @if(device.GetProperty("isComingSoon")== null || !device.GetProperty("isComingSoon").Value.Equals("1"))
+                          {
+                          @: (@servicesCount services)
+                          }
+                        </a>                        
+                        @if(device.GetProperty("isComingSoon")!= null && device.GetProperty("isComingSoon").Value.Equals("1"))
+                        {
+                          <div class="ui-coming-soon-overlay"></div>
+                        }
+                        @if(!IsFullMode)
+                        {
+                          <a class="ui-preview-overlay" href="/vui/subscribe"><span>Subscribe to see this resource</span></a>
+                        }
+                      </li>
+                  }            
+                }
+              }
+          }
+          else
+          {
+            int servicesCount = platform.Descendants(VUIfunctions.VUI_FOLDERTYPE).Items
+                                  .Where(n => n.GetProperty("folderLevel").Value.Equals(VUIfunctions.VUI_SERVICE) && (n.GetProperty("isComingSoon")== null || !n.GetProperty("isComingSoon").Value.Equals("1")) && n.GetProperty("vuiScore") != null && !String.IsNullOrEmpty(n.GetProperty("vuiScore").Value) &&  !n.GetProperty("vuiScore").Value.Equals("0"))
+                                  .ToList().Count();
+            if(servicesCount > 0 || (platform.GetProperty("isComingSoon")!= null && platform.GetProperty("isComingSoon").Value.Equals("1")))
+            {
+              string p = platform.Name.Replace(" ","-");
+              if(platform.GetProperty("folderImage") != null)
+              {
+                img = Model.MediaById(platform.GetProperty("folderImage").Value).umbracoFile;
+              }
+              string burl = "/vui/benchmarking/devices/" + p;
+              string previewClass = "";
+              if(!IsFullMode)
+              {
+                burl = VUIfunctions.VUI_subscribe_page;
+                previewClass = "ui-preview-disabled";
+              }
+              <li class="@previewClass">
+                <a href="@burl">
+                  <h2>@platform.Name </h2>
+                  <img src="@img" />
+                  @if(platform.GetProperty("isComingSoon")== null || !platform.GetProperty("isComingSoon").Value.Equals("1"))
+                  {
+                   @:(@servicesCount services)
+                  }
+                </a>                       
+                @if(platform.GetProperty("isComingSoon")!= null && platform.GetProperty("isComingSoon").Value.Equals("1"))
+                {
+                  <div class="ui-coming-soon-overlay"></div>
+                }
+                @if(!IsFullMode)
+                {
+                  <a class="ui-preview-overlay" href="/vui/subscribe"><span>Subscribe to see this resource</span></a>
+                }
+              </li>
+            }
+          }
+        }
+        </ul>
+      </div>
+    </div>
+  }
+  
+  
+  if(Mode.Equals("SERVICES_LIST"))
+  {
+  
+    if(!IsFullMode && !Platform.ToLower().Equals("all"))
+    {
+      <div class="ui-subscribe-message">Subscribe Message</div>
+    }
+    
+    else
+    {
+  
+      List<VUIService> serviceList = VUIfunctions.ServicesOrderedByFunctionScore(Platform, Device);
+      
+      if(serviceList != null)
+      {   
+          int totalCount = serviceList.Count();
+         
+          int max = 100;
+          Dictionary<string,int> DeviceScores = VUIfunctions.ScoresForServiceList(serviceList);
+
+          int localscore = 0;
+          int maxlength = 400-2;
+          float multiplier = (float)maxlength / max;
+          int length = 0;
+  
+          string description = VUIfunctions.BenchmarkingDescription(Platform, Device);
+  
+  
+        <div class="ui-benchmarking">
+          <input type="hidden" name="total" value="@totalCount" />
+          
+          @if(@Platform.ToLower().Equals("all"))
+          {
+            <p>To date we've reviewed @totalCount video services.
+                The list below shows you the functionality commonly found in video user interfaces on all
+                platforms like Web, iPad, Android tablets, and how often.
+            </p>
+          }
+          else if(!String.IsNullOrEmpty(description ))
+          {
+            <p>@description </p>
+            <p>To read more about each of the functions below check out our
+              <a href="/vui/best-practice-guides/the-25-most-common-functions-found-in-a-video-user-interface/">guide to the 25 Most Common Functions found in Video User Interfaces</a>.</p>
+          }
+          <h1>Content Discovery &amp; Recommendation</h1>
+          <ul class="ui-device-scores">        
+            <li>Featured content
+              <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["Featured content"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>
+            <li>Categorisation
+              <div class="scores"><span class="zero"></span>
+              @{
+                localscore = (@DeviceScores["Categorisation"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+              <span class="max">@max</span>
+            </li>
+            <li>Category Pages
+              <div class="scores"><span class="zero"></span>
+              @{
+                localscore = (@DeviceScores["Category homepage"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>
+            <li>Most popular
+              <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["Most popular"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>
+            <li>Recently added
+              <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["Recently added"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>
+            <li>More episodes
+              <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["More episodes"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>
+            <li>Content Recommendation
+              <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["Content recommendation"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>
+            <li>EPG (Electronic Programming Guide)
+              <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["EPG"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>
+            <li>Search
+              <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["Search"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>
+            <li>Predictive search
+              <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["Predictive search"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>
+            <li>A-Z Page
+              <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["A-Z page"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>
+            <li>Social sharing (in-service)
+              <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["Social sharing (in-service)"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>
+            <li>Social sharing (outbound)
+              <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["Social sharing (out)"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>
+          </ul>
+          
+          <h1>Video Player</h1>
+          <ul class="ui-device-scores">
+            <li>Customised Video Player
+              <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["Customised video player"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>
+
+                @*              <li>Native video player
+                                    <div class="scores"><span class="zero"> </span>
+                                    @{
+                                      localscore = (@DeviceScores["Native video player"] * 100) / totalCount ;
+                                      if(localscore > 0)
+                                      {
+                                        length = (int)(localscore * multiplier);
+                                        <span class="score" style="width:@(length)px">@localscore%</span>
+                                      }
+                                    }
+                                     <span class="max">@max</span>
+                                  </li>
+                                    <li>YouTube video player
+                                    <div class="scores"><span class="zero"> </span>
+                                    @{
+                                      localscore = (@DeviceScores["YouTube video player"] * 100) / totalCount ;
+                                      if(localscore > 0)
+                                      {
+                                        length = (int)(localscore * multiplier);
+                                        <span class="score" style="width:@(length)px">@localscore%</span>
+                                      }
+                                    }
+                                     <span class="max">@max</span>
+                                  </li>
+                                    <li>Pop-out player
+                                    <div class="scores"><span class="zero"> </span>
+                                    @{
+                                      localscore = (@DeviceScores["Pop-out player"] * 100) / totalCount ;
+                                      if(localscore > 0)
+                                      {
+                                        length = (int)(localscore * multiplier);
+                                        <span class="score" style="width:@(length)px">@localscore%</span>
+                                      }
+                                    }
+                                     <span class="max">@max</span>
+                                  </li>
+                  *@
+        <li>Video Description
+          <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["Video description"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>
+          @*
+                                  <li>Watch in HD
+                                  <div class="scores"><span class="zero"> </span>
+                                  @{
+                                    localscore = (@DeviceScores["Watch in HD"] * 100) / totalCount ;
+                                    if(localscore > 0)
+                                    {
+                                      length = (int)(localscore * multiplier);
+                                      <span class="score" style="width:@(length)px">@localscore%</span>
+                                    }
+                                  }
+                                   <span class="max">@max</span>
+                                </li>
+                                  <li>Pause / resume
+                                  <div class="scores"><span class="zero"> </span>
+                                  @{
+                                    localscore = (@DeviceScores["Pause/resume"] * 100) / totalCount ;
+                                    if(localscore > 0)
+                                    {
+                                      length = (int)(localscore * multiplier);
+                                      <span class="score" style="width:@(length)px">@localscore%</span>
+                                    }
+                                  }
+                                   <span class="max">@max</span>
+                                </li>
+                                  <li>Advertising functionality
+                                  <div class="scores"><span class="zero"> </span>
+                                  @{
+                                    localscore = (@DeviceScores["Advertising functionality"] * 100) / totalCount ;
+                                    if(localscore > 0)
+                                    {
+                                      length = (int)(localscore * multiplier);
+                                      <span class="score" style="width:@(length)px">@localscore%</span>
+                                    }
+                                  }
+                                   <span class="max">@max</span>
+                                </li>
+             *@
+          </ul>
+            
+          <h1>Personalisation</h1>
+          <ul class="ui-device-scores">
+            <li>Favourites
+              <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["Favourites"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>     
+             @*
+                                      <li>Viewing history
+                                        <div class="scores"><span class="zero"> </span>
+                                        @{
+                                          localscore = (@DeviceScores["Viewing history"] * 100) / totalCount ;
+                                          if(localscore > 0)
+                                          {
+                                            length = (int)(localscore * multiplier);
+                                            <span class="score" style="width:@(length)px">@localscore%</span>
+                                          }
+                                        }
+                                         <span class="max">@max</span>
+                                      </li>
+              *@
+            <li>Playlists
+              <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["Playlists"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>
+            <li>Sign-in / Register
+              <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["Sign in / Register"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>
+            <li>Social sign-in
+              <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["Social sign-on"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>            
+            <li>Parental Controls
+              <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["Parental controls"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>
+
+          </ul>
+         
+                
+        @*                
+          <h1>Added Extras</h1>
+          <ul class="ui-device-scores">
+            
+            <li>Special functionality <a href="#special-functionality">*</a>
+              <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["Special functionality"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>
+          </ul>
+        *@
+                
+                
+          
+            <h1>Support</h1>
+            <ul class="ui-device-scores">
+              <li>Help
+              <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["Help"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>
+              <li>About
+              <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["About"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>
+              <li>Contact
+              <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["Contact"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>
+              <li>Accessibility
+              <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["Accessibility"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>
+            <li>Watch on other platforms
+              <div class="scores"><span class="zero"> </span>
+              @{
+                localscore = (@DeviceScores["Watch on other platforms"] * 100) / totalCount ;
+                if(localscore > 0)
+                {
+                  length = (int)(localscore * multiplier);
+                  <span class="score" style="width:@(length)px">@localscore%</span>
+                }
+              }
+               <span class="max">@max</span>
+            </li>
+            </ul>
+              @*
+                  DynamicNode sfn = new DynamicNode(VUIfunctions.VUI_codesnippet_special_functionality);
+                  <div id="special-functionality">
+                    @Html.Raw(sfn.GetProperty("code").Value)
+                  </div>
+              *@
+        </div>
+          
+          
+          
+             
+         if(!IsFullMode)
+         {
+           <div class="ui-benchmarking-related">
+         
+             <ul>
+                <li class="heading"><h2>What Subscribers Get</h2></li>
+               
+                <li>
+                  <a href="@VUIfunctions.VUI_subscribe_page">
+                    <h3>
+                      See how often the most common functions appear on individual platforms and services
+                    </h3>
+                    <p>
+                       We’ve studied over 150 video user interfaces from all over the world – and across platforms – and identified 25 key functions that commonly appear in those services. You can see these on the left with an indication of how often they're included.
+                    </p>
+                    <p>
+                       When you subscribe, you’ll be able to see the breakdown for individual platforms (like Web, Tablet, Smartphone etc.) and find out which existing video services display the greatest range of functionality.
+                    </p>
+                  </a>
+                </li>
+                <li>
+                  <a href="/vui/best-practice-guides/the-25-most-common-functions-found-in-a-video-user-interface/">
+                    <h3> 25 Most Common Functions found in Video User Interfaces </h3>
+                    <div class="ui-image-box"><img src="/media/138884/25vui.jpg" /></div>
+                    <p>We've studied over 150 VUIs, across platforms, from all over the world and here's the toolbox of features that they all share. </p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          }
+                
+          else if(Platform.ToLower().Equals("all"))
+          {             
+
+            // loop through all platforms (with service children)
+                      
+            DynamicNode root = new DynamicNode(VUIfunctions.VUIMediaRootNode);
+            var platforms = root.Descendants(VUIfunctions.VUI_FOLDERTYPE).Items.Where(n => n.GetProperty("folderLevel").Value.Equals(VUIfunctions.VUI_PLATFORM));
+             
+                <div class="ui-benchmarking-related device-list">
+                  <ul>
+                    <li class="heading">
+                      <h2>Benchmarking by Device</h2>
+                    </li>
+                @foreach(DynamicNode platform in platforms)
+                {
+                  string img = "";
+                  if(VUIfunctions.PlatformHasDevices(platform.Name.Replace(" ","-")))
+                  {
+                      var devices = platform.Descendants(VUIfunctions.VUI_FOLDERTYPE).Items.Where(n => n.GetProperty("folderLevel").Value.Equals(VUIfunctions.VUI_DEVICE));         
+                      
+                      if(devices != null)
+                      {
+                        foreach(DynamicNode device in devices)
+                        {
+                  
+                          if(device.GetProperty("isComingSoon")== null || !device.GetProperty("isComingSoon").Value.Equals("1"))
+                          {
+                            int servicesCount = device.Descendants(VUIfunctions.VUI_FOLDERTYPE).Items
+                                                  .Where(n => n.GetProperty("folderLevel").Value.Equals(VUIfunctions.VUI_SERVICE) && (n.GetProperty("isComingSoon")== null || !n.GetProperty("isComingSoon").Value.Equals("1")) && n.GetProperty("vuiScore") != null && !String.IsNullOrEmpty(n.GetProperty("vuiScore").Value) &&  !n.GetProperty("vuiScore").Value.Equals("0"))
+                                                  .ToList().Count();
+                            if(servicesCount > 0)
+                            {      
+                                string p = platform.Name.Replace(" ","-");      
+                                string d = device.Name.Replace(" ","-");
+                    
+                                if(device.GetProperty("folderImage") != null)
+                                {
+                                  img = Model.MediaById(device.GetProperty("folderImage").Value).umbracoFile;
+                                }
+                                string burl = "/vui/benchmarking/devices/" + p + "/" + d;
+                               
+                                <li class="ui-service-template ui-service">
+                                  <a href="@burl">
+                                    <h3>@platform.Name/@device.Name </h3>
+                                    <div class="ui-image-box"><img src="@img" /></div>
+                                    (@servicesCount services)
+                                  </a>                        
+                                  @if(device.GetProperty("isComingSoon")!= null && device.GetProperty("isComingSoon").Value.Equals("1"))
+                                  {
+                                    <div class="ui-coming-soon-overlay"></div>
+                                  }
+                                </li>
+                   
+                            }    
+                          }
+                        }
+                      }
+                  }
+                  else
+                  {
+                    if(platform.GetProperty("isComingSoon")== null || !platform.GetProperty("isComingSoon").Value.Equals("1"))
+                    {
+                      int servicesCount = platform.Descendants(VUIfunctions.VUI_FOLDERTYPE).Items
+                                            .Where(n => n.GetProperty("folderLevel").Value.Equals(VUIfunctions.VUI_SERVICE) && (n.GetProperty("isComingSoon")== null || !n.GetProperty("isComingSoon").Value.Equals("1")) && n.GetProperty("vuiScore") != null && !String.IsNullOrEmpty(n.GetProperty("vuiScore").Value) &&  !n.GetProperty("vuiScore").Value.Equals("0"))
+                                            .ToList().Count();
+                      if(servicesCount > 0)
+                      {
+                        string p = platform.Name.Replace(" ","-");
+                        if(platform.GetProperty("folderImage") != null)
+                        {
+                          img = Model.MediaById(platform.GetProperty("folderImage").Value).umbracoFile;
+                        }
+                        string burl = "/vui/benchmarking/devices/" + p;
+                        <li class="ui-service-template ui-service">
+                          <a href="@burl">
+                            <h3>@platform.Name</h3>
+                            <div class="ui-image-box"><img src="@img" /></div>
+                            (@servicesCount services)
+                          </a>                        
+                          @if(platform.GetProperty("isComingSoon")!= null && platform.GetProperty("isComingSoon").Value.Equals("1"))
+                          {
+                            <div class="ui-coming-soon-overlay"></div>
+                          }
+                        </li>                 
+                         
+                      }
+                    }
+                  }
+                }
+                </ul>
+              </div>
+                
+          }
+          else
+          {
+            <div class="ui-screenshots-desc-col">
+              <ul class="related-services">
+                <li class="heading"><h2>Services by Score  <em>(from @VUIfunctions.TotalFunctionScore)</em></h2></li>
+                @foreach(VUIService service in serviceList)
+                {
+                  string url = "";
+                                        
+                  url = "/vui/benchmarking/service/" + service.ServiceId + "/" + service.ServiceName.Replace(" ","-") + "/" + Platform;
+                  if(!String.IsNullOrEmpty(Device))
+                  {
+                    url += "/" + Device;
+                  }
+                  <li>
+                    <a href="@url">
+                      @service.ServiceName
+                        <div class="ui-service-score">
+                          @{  
+                            string s = @service.Score.ToString() ;
+                            @:@s
+                          }
+                        </div>
+                    </a>
+                  </li>
+                }
+                </ul>
+            </div>
+          }
+                 
+      }
+    }
+  }
+  
+  
+  if(Mode.Equals("SERVICE_DESCRIPTION"))
+  {
+    int id;
+    VUIService service;
+
+    try
+    {
+      if(Int32.TryParse(ServiceID, out id))
+      {
+        service = new VUIService(id);
+      }
+      else
+      {
+         service = VUIfunctions.ServiceDescription(Platform,Service,Device);
+      }
+  
+  
+        if(IsFullMode || VUIfunctions.ServiceIsPreviewable(service.ServiceName))
+        {
+   
+    
+          <div class="ui-heading large">
+           <h1>@Html.Raw(PageTitle)</h1>
+            @*
+            <div class="ui-service-info ui-visible">
+              <span class="ui-service-info-desc">@service.Description</span>
+              <div>
+              @if(!String.IsNullOrEmpty(service.Region))
+              {
+                <span class="ui-service-info-region" title="Geographical regions"><em>Geography:</em> @service.Region</span>
+              }
+              @if(!String.IsNullOrEmpty(service.ServiceType))
+              {
+                <span class="ui-service-info-type" title="Service types"><em>Type:</em> @service.ServiceType.Replace(",",", ")</span>
+              }
+              @if(!String.IsNullOrEmpty(service.ServiceCategory))
+              {
+                <span class="ui-service-info-cat" title="Service categories"><em>Category:</em> @service.ServiceCategory.Replace(",",", ")</span>
+              }
+              </div>
+              @if(service.Score > 0)
+              {
+                string bUrl = "/vui/benchmarking/service/";
+                bUrl  += service.ServiceId + "/" + service.ServiceName.Replace(" ","-") + "/" + Platform;
+                if(!String.IsNullOrEmpty(Device))
+                {
+                  bUrl += "/" + Device;
+                }
+                <a href="@bUrl" class="ui-service-info-score" title='This service has at least this many of the standard set of VUI functions'><em>VUI Functions</em> @service.Score/@VUIfunctions.TotalFunctionScore</a>
+              }
+              
+            </div>
+            *@
+          </div>
+
+  
+        <div class="ui-benchmarking">
+         
+          @if(service.Score > 0 && !service.IsComingSoon)
+          {
+            string bUrl = "/vui/benchmarking/service/";
+            bUrl  += service.ServiceId + "/" + service.ServiceName.Replace(" ","-") + "/" + Platform;
+            if(!String.IsNullOrEmpty(Device))
+            {
+              bUrl += "/" + Device;
+            }
+           
+           
+           
+           <p>
+           
+           <div class="ui-benchmarking-inset">
+             <div class="ui-image-box"><img src="@service.ImageURL_th" width="180" /></div>
+             <span class="score">@service.Score</span>
+           </div>
+           
+             Writing a requirements document or a functional specification?
+             <br/>
+             This video service contains at least <strong> <span class="score">@service.Score</span> user interface functions that commonly appear on this platform</strong>
+           </p>  
+          }
+          <p>
+            To read more about each of the functions below check out our <a href="/vui/best-practice-guides/the-25-most-common-functions-found-in-a-video-user-interface/">guide to the 25 Most Common Functions found in Video User Interfaces</a>.
+          </p>
+          @if(service.Score > 0 && !service.IsComingSoon)
+          {
+            if(@service.Node.GetProperty("benchmarkDate") != null && @service.Node.GetProperty("benchmarkDevice") != null)
+		    {
+				DateTime  dt = DateTime.Parse(@service.Node.GetProperty("benchmarkDate").Value);
+				<p style="font-size:1em; margin-top:25px; margin-bottom:-10px">
+					This service was last benchmarked on <strong>@dt.ToString("dd MMM yyyy")</strong> using <strong>@service.Node.GetProperty("benchmarkDevice").Value</strong>
+				</p>
+			}
+          }
+    @{
+       string str="";
+          
+          @*          @if(service.HasAnyCapabilityIn(new string[]{"Featured content","Categorisation","Category homepage","Most popular","Recently added","More episodes","Content recommendation","EPG","Search","Predictive search","A-Z page","Social sharing (out)","Social sharing (in-service)"}))
+          {
+          *@
+          <h1>Content Discovery &amp; Recommendation</h1>
+          <ul>        
+            @if(service.HasCapability("Featured content"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">Featured Content</li>
+            @if(service.HasCapability("Categorisation"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">Categorisation</li>
+            @if(service.HasCapability("Category homepage"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">Category Pages</li>
+            @if(service.HasCapability("Most popular"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">Most Popular</li>
+            @if(service.HasCapability("Recently added"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">Recently Added</li>
+            @if(service.HasCapability("More episodes"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">More Episodes</li>
+            @if(service.HasCapability("Content recommendation"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">Content Recommendation</li>
+            @if(service.HasCapability("EPG"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">EPG (Electronic Programming Guide)</li>
+            @if(service.HasCapability("Search"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">Search</li>
+            @if(service.HasCapability("Predictive search"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">Predictive Search</li>
+            @if(service.HasCapability("A-Z page"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">A-Z page</li>
+            @if(service.HasCapability("Social sharing (out)"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">Social Sharing (Outbound)</li>
+            @if(service.HasCapability("Social sharing (in-service)"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">Social Sharing (in-Service)</li>
+          </ul>
+            @*          }
+         
+                      @if(service.HasAnyCapabilityIn(new string[]{"Customised video player","Video description"}))
+            { *@
+          <h1>Video Player</h1>
+          <ul>
+            @if(service.HasCapability("Customised video player"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">Customised Video Player</li>
+            @if(service.HasCapability("Video description"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">Video Description</li>
+            
+           @*
+            @if(service.HasCapability("Native video player"))
+            {
+              <li>Native video player</li>
+            }
+            @if(service.HasCapability("YouTube video player"))
+            {      
+              <li>YouTube video player</li>
+            }
+            @if(service.HasCapability("Pop-out player"))
+            {      
+              <li>Pop-out player</li>
+            }
+            
+            @if(service.HasCapability("Watch in HD"))
+            {      
+              <li>Watch in HD</li>
+            }
+            @if(service.HasCapability("Pause / resume"))
+            {      
+              <li>Pause / resume</li>
+            }
+            @if(service.HasCapability("Advertising functionality"))
+            {      
+              <li>Advertising functionality</li>
+            }
+            *@
+          </ul>
+@*          }
+          
+          @if(service.HasAnyCapabilityIn(new string[]{"Favourites","Parental controls","Playlists","Sign-in / Register","Social sign-in"}))
+          {
+            *@
+          <h1>Personalisation</h1>
+          <ul>
+            @if(service.HasCapability("Favourites"))
+           {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">Favourites</li>
+            @if(service.HasCapability("Playlists"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">Playlists</li>
+            @if(service.HasCapability("Sign in / Register"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">Sign-in / Register</li>
+            @if(service.HasCapability("Social sign-on"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">Social Sign-in</li>
+            @if(service.HasCapability("Parental controls"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">Parental Controls</li>
+          </ul>
+          @*} *@
+          
+          @*
+            @if(service.HasAnyCapabilityIn(new string[]{"Watch on other platforms","Special functionality"}))
+            {
+            <h1>Added Extras</h1>
+            <ul>
+              @if(service.HasCapability("Special functionality"))
+              {      
+              <li>Special functionality</li>
+              }
+            </ul>
+            }
+          *@
+          
+          @*
+          @if(service.HasAnyCapabilityIn(new string[]{"Help","About","Contact","Accessibility","Watch on other platforms"}))
+          {
+            *@
+            <h1>Support</h1>
+            <ul>
+            @if(service.HasCapability("Help"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">Help</li>
+            @if(service.HasCapability("About"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">About</li>
+            @if(service.HasCapability("Contact"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">Contact</li>
+            @if(service.HasCapability("Accessibility"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">Accessibility</li>
+            @if(service.HasCapability("Watch on other platforms"))
+            {
+              str="has-function";
+            }
+            else { str="no-function"; }
+            <li class="@str">Watch on Other Platforms</li>
+            
+            </ul>
+@*          }*@
+            
+            
+            
+      }
+        </div>
+          
+              
+          <div class="ui-screenshots-desc-col">
+             <ul>
+         @*
+              @if(service.Score > 0 && !service.IsComingSoon)
+              {
+                string bUrl = "/vui/benchmarking/service/";
+                bUrl  += service.ServiceId + "/" + service.ServiceName.Replace(" ","-") + "/" + Platform;
+                if(!String.IsNullOrEmpty(Device))
+                {
+                  bUrl += "/" + Device;
+                }
+                 <li>
+                    <h2>Benchmarking</h2>
+                    <div class="score-description">
+                        Writing a requirements document or a functional specification? 
+                        <br/>
+                        This video service contains at least <strong> <span class="score">@service.Score</span> user interface functions that commonly appear on this platform</strong>
+                    </div>
+                 </li>
+              }
+         *@
+               <li>
+                <div class="ui-service-info ui-visible">
+                  <h2>Service Information</h2>
+                  <div class="ui-service-info-desc">@service.Description</div>
+                  <dl>
+                  @if(!String.IsNullOrEmpty(service.Region))
+                  {
+                    <dt title="Geographical regions">Availability:</dt><dd>@service.Region</dd>
+                  }
+                  @if(!String.IsNullOrEmpty(service.ServiceType))
+                  {
+                    <dt title="Service types">Type:</dt><dd>@service.ServiceType.Replace(",",", ")</dd>
+                  }
+                  @if(!String.IsNullOrEmpty(service.ServiceCategory))
+                  {
+                    <dt title="Service categories">Category:</dt><dd>@service.ServiceCategory.Replace(",",", ")</dd>
+                  }
+                  </dl>
+                  @if(service.NumImages > 0 && !service.IsComingSoon)
+                  {
+                    string surl = "/vui/screenshots/service" + service.WebTileUIURL;
+                    <a class="link-to-screenshots" href="@surl">View Service Screenshots</a>
+                  }
+                </div>
+               </li>
+             </ul>
+  
+        @{
+
+          if(IsFullMode)
+          {
+            List<VUIService> serviceList = VUIfunctions.ServicesOrderedByFunctionScore(Platform, Device);
+            if(serviceList != null)
+            {
+              int counter = 0;
+              int maxtoshow = 5;
+            
+            <ul class="related-services">
+              <li class="heading"><h2>Best in Class</h2></li>
+              @foreach(VUIService serviceItem in serviceList)
+              {
+                counter++;
+                if(counter <= maxtoshow )
+                {
+                    string url = "";
+                         
+                    url = "/vui/benchmarking/service/" + serviceItem.ServiceId + "/" + serviceItem.ServiceName.Replace(" ","-") + "/" + serviceItem.Platform.Replace(" ","-");
+                    if(!String.IsNullOrEmpty(serviceItem.Device))
+                    {
+                      url += "/" + serviceItem.Device.Replace(" ","-");
+                    }
+                    <li>
+                      <a href="@url">
+                        <h3>@serviceItem.ServiceName</h3>
+                        <div class="ui-image-box"><img src="@serviceItem.ImageURL_th" width="205"/></div>
+                          <div class="ui-service-score">
+                            @{  
+                              string s = @serviceItem.Score.ToString() ;
+                              @:@s
+                            }
+                          </div>
+                      </a>
+                    </li>
+                  }
+              }
+            </ul>
+            }
+           }
+           else
+           {
+           <ul class="related-services">
+              <li class="heading"><h2>Best in Class</h2></li>
+              <li>
+                <div class="ui-service-info-desc">When you subscribe, you’ll be able to see the breakdown for individual platforms (like Web, Tablet, Smartphone etc.) and find out which existing video services display the greatest range of functionality.</div>
+              </li>
+               <li>
+                  <a href="#">
+                    <h3>???</h3>
+                    <div class="ui-image-box"><img src="/css/images/benchmarking-dummy.png" width="205"/></div>
+                      <div class="ui-service-score">21</div>
+                  </a>
+                </li>
+               <li>
+                  <a href="#">
+                    <h3>???</h3>
+                    <div class="ui-image-box"><img src="/css/images/benchmarking-dummy.png" width="205"/></div>
+                      <div class="ui-service-score">20</div>
+                  </a>
+                </li>
+               <li>
+                  <a href="#">
+                    <h3>???</h3>
+                    <div class="ui-image-box"><img src="/css/images/benchmarking-dummy.png" width="205"/></div>
+                      <div class="ui-service-score">20</div>
+                  </a>
+                </li>
+               <li>
+                  <a href="#">
+                    <h3>???</h3>
+                    <div class="ui-image-box"><img src="/css/images/benchmarking-dummy.png" width="205"/></div>
+                      <div class="ui-service-score">19</div>
+                  </a>
+                </li>
+               <li>
+                  <a href="#">
+                    <h3>???</h3>
+                    <div class="ui-image-box"><img src="/css/images/benchmarking-dummy.png" width="205"/></div>
+                      <div class="ui-service-score">19</div>
+                  </a>
+                </li>
+           </ul>
+           }
+        }
+        </div>
+            
+  
+        
+        }
+
+  
+  
+    }
+    catch(Exception ex1)
+    {
+      if(IsFullMode)
+      {
+        <div class="ui-error-message">That Service does not exist</div>
+      }
+      else
+      {
+      
+        <div class="ui-subscription-message">You need to be a subscriber to see this</div>
+      
+      }
+    }
+      
+  }
+  
+}
