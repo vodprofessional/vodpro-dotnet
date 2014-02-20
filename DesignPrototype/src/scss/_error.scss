@@ -1,0 +1,22 @@
+#columns #main {
+  background-color: transparent;
+  box-shadow: none;
+}
+h3 {
+  font-size: 20em;
+  @media(max-width: 767px) {
+    font-size: 10em;
+  }
+  text-shadow: 10px 10px 15px #888;
+}
+#description {
+  text-align: right;
+  font-size: 2em;
+  padding-right: 20px;
+}
+#navigation {
+  padding-top: 2em;
+  font-size: 1.2em;
+  text-align: right;
+  padding-right: 20px;
+}

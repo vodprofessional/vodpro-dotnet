@@ -1,0 +1,36 @@
+#column-full {
+  h2 {
+
+  }
+
+  #inner-full {
+    .article-preview {
+      margin-top: 16px;
+      margin-bottom: 24px;
+      padding-right: 3em;
+
+      .text {
+        float: left;
+        width: 70%;
+
+        header {
+          font-size: 24px;
+          font-weight: 400;
+          margin-bottom: 5px;
+          a {
+            color: #333;
+          }
+        }
+      }
+
+      img {
+        width: 30%;
+        padding-right: 20px;
+        float: left;
+      }
+      .text {
+        font-size: 13px;
+      }
+    }
+  }
+}

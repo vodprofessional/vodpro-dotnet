@@ -1,0 +1,42 @@
+#column-full {
+  h4,h5,h6 {
+    margin-top: 1.5em;
+  }
+  .article-lead {
+    font-size: 1.3em;
+    color: #888;
+  }
+  .article-meta {
+    padding: 10px 0;
+    height: 3em;
+    @media(max-width: 400px) {
+      height: 6em;
+    }
+    border-bottom: 1px solid #DDD;
+
+    .article-info {
+      float: right;
+      @media(max-width: 400px) {
+        float: none;
+      }
+
+      .article-author {
+
+      }
+      .article-date {
+
+      }
+    }
+    .article-social {
+      float: left;
+      @media(max-width: 400px) {
+        float: none;
+        margin-top: 1em;
+      }
+    }
+  }
+
+  .article-main {
+    margin-top: 2em;
+  }
+}
