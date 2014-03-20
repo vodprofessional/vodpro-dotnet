@@ -566,16 +566,32 @@
                 </span>   
                   
       
-                  if (!matrix.HasBenchmarksForPlatform("STB-Now TV") && !matrix.HasBenchmarksForPlatform("STB-Roku"))
+                  if (!matrix.HasBenchmarksForPlatform("STB-Apple TV") && !matrix.HasBenchmarksForPlatform("STB-Now TV") && !matrix.HasBenchmarksForPlatform("STB-Freesat") && !matrix.HasBenchmarksForPlatform("STB-Roku"))
                   {
                       uberDisabled = "_platform-disabled";
                   }
                   else { uberDisabled = ""; }
-                <span class="uber-tab @(uberDisabled)" data-devicegroup="connectedtv" title="Set-Top Boxes">
+                <span class="uber-tab @(uberDisabled)" data-devicegroup="stb" title="Set-Top Boxes">
                   <span class="title">
                     <h3>STBs</h3>
                       <img src="/_inc/images/new-platform/platform-stb@(uberDisabled).png" class="platform-image" />
                   </span>
+                     @if (!matrix.HasBenchmarksForPlatform("STB-Apple TV"))
+                     {
+                         strDisabled = "_device-disabled";
+                     }
+                     else { strDisabled = ""; }
+                    <li title="Apple TV">
+                      <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-apple@(strDisabled).png" alt=""><h3>Apple TV</h3></a>
+                    </li> 
+                     @if (!matrix.HasBenchmarksForPlatform("STB-Freesat"))
+                     {
+                         strDisabled = "_device-disabled";
+                     }
+                     else { strDisabled = ""; }
+                    <li title="Freesat">
+                      <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-freesat@(strDisabled).png" alt=""><h3>Freesat</h3></a>
+                    </li> 
                      @if (!matrix.HasBenchmarksForPlatform("STB-Now TV"))
                      {
                          strDisabled = "_device-disabled";
@@ -742,9 +758,25 @@
             <div class="pane">
                 <div class="inner">
                 <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Apple TV").Max services on Apple TV
+                </p>
+                @DrawBenchmarkingPane(matrix, "STB-Apple TV", 22885, 19798)
+                </div>
+            </div>
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Freesat").Max services on Fressat
+                </p>
+                @DrawBenchmarkingPane(matrix, "STB-Freesat", 24775, 19798)
+                </div>
+            </div>
+            <div class="pane">
+                <div class="inner">
+                <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Now TV").Max services on Now TV
                 </p>
-                @DrawBenchmarkingPane(matrix, "STB-Now TV", 10985, 10798)
+                @DrawBenchmarkingPane(matrix, "STB-Now TV", 19799, 19798)
                 </div>
             </div>
             <div class="pane">
@@ -752,7 +784,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Roku").Max services on Roku
                 </p>
-                @DrawBenchmarkingPane(matrix, "STB-Roku", 10985, 10798)
+                @DrawBenchmarkingPane(matrix, "STB-Roku", 19800, 19798)
                 </div>
             </div>
             <div class="pane">

@@ -615,6 +615,7 @@ namespace VUI.VUI3.classes
                     FormsAuthentication.SetAuthCookie(username, true);
                     Member m = new Member((int)currentUser.ProviderUserKey);
 
+
                     DateTime loginDate = DateTime.Now;
 
                     // Current Login Date will be moved to Last Login Date

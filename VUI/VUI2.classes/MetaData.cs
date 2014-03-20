@@ -32,6 +32,7 @@ namespace VUI.VUI2.classes
             sbSQL.AppendLine(@"truncate table vui_Image; ");
             sbSQL.AppendLine(@"truncate table vui_Analysis; ");
             sbSQL.AppendLine(@"truncate table vui_BenchmarkScores; ");
+            sbSQL.AppendLine(@"truncate table vui_ServiceBenchmarkFeatures ; ");
 
             // Start at root node
             DynamicNode root = new DynamicNode(Utility.GetConst("VUI2_rootnodeid"));
@@ -189,6 +190,11 @@ namespace VUI.VUI2.classes
         {
             log.Debug(" --- Service:" + service.Id + " [" + service.Name + "]");
 
+            if (service.Name.Equals("4seven"))
+            {
+                string zzz = "zzz";
+            }
+
             string serviceScore = "0";
             string tempServiceScore = "0";
             string appStoreURL = "";
@@ -222,7 +228,12 @@ namespace VUI.VUI2.classes
 
             string ansql = "";
 
-            
+
+            // For new Benchmark DataPoints
+            string[] benchmarkFeatures = {""};
+            string[] hotFeatures = { "" };
+
+            string benchmarkDataSql = "";
 
             foreach(DynamicNode analysis in analyses)
             {
@@ -230,6 +241,7 @@ namespace VUI.VUI2.classes
                 bool hasImages = false;
                 int imageCount = 0;
                 int benchmarkScore = 0;
+
 
                 Int32.TryParse(analysis.GetProperty("serviceScore").Value, out benchmarkScore);
 
@@ -265,6 +277,8 @@ namespace VUI.VUI2.classes
                                 mostRecentBenchmark = benchmarkDate;
                                 serviceScore = tempServiceScore;
                                 analysisToScoreId = tempAnalysisId;
+                                benchmarkFeatures = analysis.GetProperty("serviceCapabilities").Value.Split(',');
+                                hotFeatures = analysis.GetProperty("hotFeatures").Value.Split(',');
                             }
                         }
                         else
@@ -302,10 +316,12 @@ namespace VUI.VUI2.classes
 
 
             log.Debug(" ----- Score: " + serviceScore + ";" + mostRecentBenchmark);
-
+            
             if (analysisToScoreId != -1)
             {
                 _analysisIDs.Add(analysisToScoreId);
+                benchmarkDataSql = GetBenchmarkDataSQL(benchmarkFeatures, service.Id, service.Name, platformId, deviceId);
+                benchmarkDataSql = benchmarkDataSql + GetBenchmarkDataSQL(hotFeatures, service.Id, service.Name, platformId, deviceId);
             }
 
             string sql = String.Format(@"insert into vui_Service (ID,Name,ServiceName,PlatformId,DeviceId,BenchmarkScore,DefaultScreenshotID,IsPreviewable,ScreenshotCount,AppStoreURL) values ({0}, '{1}', '{2}', {3}, {4}, {5}, {6}, {7}, {8}, '{9}'); ", new Object[] { service.Id, service.Name, Utility.NiceUrlName(service.Id), platformId, deviceId, serviceScore, defaultScreenshotID, isPreviewable, screenshotCount, appStoreURL });
@@ -343,6 +359,7 @@ namespace VUI.VUI2.classes
             }
 
             sql += ansql;
+            sql += benchmarkDataSql;
 
             log.Debug(sql);
             return sql;
@@ -409,5 +426,15 @@ namespace VUI.VUI2.classes
             return scores;
         }
 
+
+        private static string GetBenchmarkDataSQL(string[] benchmarkFeatures, int serviceId, string serviceName, int platformId, int deviceId)
+        {
+            StringBuilder sql = new StringBuilder("");
+            foreach (string feature in benchmarkFeatures)
+            {
+                sql.Append(String.Format(@"insert into vui_ServiceBenchmarkFeatures (ServiceId, ServiceName, PlatformId, DeviceId, Feature) values ({0}, '{1}', {2}, {3}, '{4}'); ", new object[] { serviceId, serviceName, platformId, deviceId, feature }));
+            }
+            return sql.ToString();
+        }
     }
 }

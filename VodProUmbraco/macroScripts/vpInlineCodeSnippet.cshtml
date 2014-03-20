@@ -1,13 +1,19 @@
-﻿@{
-  
-  var snippetId= @Parameter.snippet;
-  try {
-  
+﻿@{ 
+var snippetId = @Parameter.snippet;
+try
+{
     dynamic snippet = @Model.NodeById(@snippetId);
-    <span>@snippet.code</span>
-  }
-  catch (Exception e)
-  {
+    if (snippet.NodeTypeAlias.Equals("HTMLSnippet"))
+    {
+        <span>@Html.Raw(snippet.code)</span>    
+    }
+    else
+    {
+        <span>@snippet.code</span>    
+    }
+}
+catch (Exception e)
+{
     <span>Error</span>
-   }
+}
 }

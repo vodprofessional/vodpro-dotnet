@@ -3,13 +3,16 @@
   float:left;
   width: 609px;
   margin: 20px 3px;
-  height: 522px;
+  height: 547px;
   box-shadow: 0 3px 3px 2px #999999;
   position:relative;
 }
 
-#VP50lightbox.vp-2013 #sash {background: url('/css/images/50VP_Lightbox-2013-sash.png') top right no-repeat; position:absolute; top:0; right:0; z-index:2; width:83px; height:83px; }
+#VP50lightbox.nordic-2014 { background: url('/css/images/50VP_lightbox_nordic.png') top left no-repeat; }
 
+#VP50lightbox #sash {position:absolute; top:0; right:0; z-index:2; width:83px; height:83px; }
+#VP50lightbox.vp-2013 #sash {background: url('/css/images/50VP_Lightbox-2013-sash.png') top right no-repeat;  }
+#VP50lightbox.nordic-2014 #sash {background: url('/css/images/50VP_Lightbox-2014-sash.png') top right no-repeat;  }
 
 #VP50content {
   float: left;
@@ -18,7 +21,7 @@
   padding: 12px;
   border-radius: 5px 5px 5px 5px;
   font-family: "Lucida Sans", sans-serif;
-  height: 300px;
+  height: 325px;
   width:  561px;
 }
 

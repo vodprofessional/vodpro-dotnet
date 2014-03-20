@@ -309,6 +309,17 @@ h1, h2, .main-top h1 { font-weight:normal; }
     font-size: 20px;
     margin-bottom: 10px;
 }
+
+.article h3
+{
+    padding-left:0px;
+    font-size: 20px;
+    line-height: normal;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-style: normal;
+}
+
 .article .storybyline { margin-bottom: 15px; }
 .article .storytext {  margin-bottom: 30px; margin-top: 30px; }
 .article .storytext, .article .storytext p
@@ -500,7 +511,7 @@ a._device-disabled { cursor:default; }
  .b-tabs .tabs .uber-tab.active .platform-image { height:32px; }
 
 .b-matrix-nav ul { display:table; width:100%; }
-.b-matrix-nav ul .uber-tab:first-child { margin-left:220px; }
+.b-matrix-nav ul .uber-tab:first-child { margin-left:204px; }
 .b-matrix-nav ul .uber-tab { cursor:pointer; display: inline-block; vertical-align: top; min-width:67px; }
 .b-matrix-nav ul .uber-tab._platform-disabled { cursor:default;}
 .b-matrix-nav ul .uber-tab .title { vertical-align: top; display:block; text-align:center; }
@@ -513,21 +524,25 @@ a._device-disabled { cursor:default; }
 .b-matrix-nav ul .uber-tab.active .title { display:block; vertical-align:top; text-align:center; padding: 0 10px 0; }
 .b-matrix-nav ul .uber-tab.active .title h3{ display:block; margin-bottom: 10px;}
 .b-matrix-nav ul .uber-tab.active .title img { display:none; margin-top:0; margin-bottom: 10px; }
-.b-matrix-nav ul .uber-tab.active li { display:inline-block; padding-top:10px; vertical-align:bottom; width:100px; }
+.b-matrix-nav ul .uber-tab.active li { display:inline-block; padding-top:10px; vertical-align:bottom; width:90px; }
 .b-matrix-nav ul .uber-tab.active li h3 { display: block; font-size: 16px; margin-top:-5px; padding: 0 6px;}
 .b-matrix-nav ul .uber-tab.active li img { margin:0 6px; }
 .b-matrix-nav ul .uber-tab.active li a { height:80px; color: #000;}
 .b-matrix-nav ul .uber-tab.active li a._device-disabled { height:80px; color: #999;}
 .b-matrix-nav ul .uber-tab.active .platform-image { height:32px; }
 
+.b-matrix-nav.fixed { top: 67px; }
+
 .screenshot .panes .b-matrix-nav .inner { overflow:hidden; height: 87px; padding-top: 12px; }
 
 /*  */
 .b-matrix-files .inner .matrix-block ul li { display:inline-block; width:71px; }
 .b-matrix-files .inner .matrix-block ul li.device { display:none; }
-.b-matrix-files .inner .matrix-block ul li.device.visible { display:inline-block;width:100px;}
+.b-matrix-files .inner .matrix-block ul li.device.visible { display:inline-block;width:90px;}
 .b-matrix-files .inner .matrix-block ul li a { text-decoration: none; display:block; }
 .b-matrix-files .inner .matrix-block ul li .-comp { cursor:pointer; }
+.b-matrix-files .inner .matrix-block ul li:first-child { width: 200px; }
+
 
 /* The above screws up app-store-ratings */
 .ratings .b-matrix-files .inner .matrix-block ul li {
@@ -737,6 +752,16 @@ fieldset.submitting { opacity: 0.95; }
 .b-rightside-panel h2.account-users { display: none; font-style: normal; font-weight:bold; margin: 15px 0 0; padding: 0 }
 .b-rightside-panel #account-users { background-color: #36364d; overflow-y:auto; padding:2px; }
 .b-rightside-panel #account-users li { margin: 3px 0; }
+
+
+
+.storytext table { margin: 2em 0; width: 100%; }
+.storytext table.table-dotted-border { border-top: 1px dotted #cccccc; }
+.storytext table.table-dotted-border tr { border-bottom: 1px dotted #cccccc; }
+.storytext table.table-dotted-border td, .storytext table.table-dotted-border th { padding: 8px; text-align: left; }
+
+.storytext p.indent { padding-left:25px; }
+
 /*
   -webkit-border-radius: 0 0 8px 8px;
   -moz-border-radius: 0 0 8px 8px;

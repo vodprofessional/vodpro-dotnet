@@ -48,7 +48,7 @@ $(function () {
             + '</a>'
             + '</div>';
 
-                    html += '<div class="joblocation">'
+            html += '<div class="joblocation">'
             + $(this).find("Location").text()
             + '</div>';
 
@@ -148,7 +148,12 @@ $(function () {
             var list = [];
             $.each(vp50data, function (index, val) {
                 var thumb = '/css/images/anon-sm.png';
-                if (val.thumb != '') { thumb = val.thumb; }
+                if (val.thumb != '') {
+                    thumb = val.thumb;
+                }
+                else if (val.img != '') {
+                    thumb = val.img;
+                }
                 list.push('<li rel=\"' + index + '\"><div class=\"overlay\">' + val.rank + '</div><img src=\"' + thumb + '\" /></li>');
             });
             $("#VP50roller ul").html(list.join(''));

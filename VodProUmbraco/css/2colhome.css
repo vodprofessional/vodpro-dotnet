@@ -1,4 +1,4 @@
-
+﻿
 /*
 font-size: 12px - 14px
 font-size: 11px - 13px
@@ -7,8 +7,21 @@ font-size: 11px - 13px
 
 html, body {margin: 0;padding: 0;}
 
-body {font-family:"Lato", sans-serif;font-size: 14px;color: #000;background: #ffffff;}
-  .hidden {display: none;}
+html, body {margin: 0;padding: 0;}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {font-family:"Lato", sans-serif; }
 
 #header-top {background: #181829; height: 223px; z-index:0; width: 100%; position: absolute;}
 #pagecontainer {width:945px; margin: 0px auto 0px auto; position: relative; text-align:left}
@@ -78,13 +91,13 @@ a:focus { outline: thin dotted; }
 #carousel {width:615px; height:330px;padding-bottom:15px;text-align:left;background:#CF0}
   .separator {position:relative;clear:both;width:100%;margin:10px 0px 10px 0px;display:block;height:15px;background:#C0C;}
 
-#parentarticle {clear:both;width:100%;height:160px ;margin-bottom:20px; border-bottom:solid 1px #D4D4D4;}
-  .image {float:left;width:195px;padding-top:10px;padding-bottom:5px;}
+#parentarticle {clear:both;width:100%; margin-bottom:20px; border-bottom:solid 1px #D4D4D4;}
+  .image {float:left;width:195px;padding-top:15px;padding-bottom:10px;}
   .image img { width: 195px;}
-  .headline {float:right;width:410px;colour:#bfb;font-family:"Lato", sans-serif;padding-bottom:5px;text-transform:uppercase;}
+  .headline {float:right;width:410px;colour:#bfb;font-family:"Lato", sans-serif;padding-bottom:5px;text-transform:uppercase; margin-top:7px}
   .author {float:left;width:300px;colour:#bfb;font-family:"Lato", sans-serif;font-size: 13px;padding-bottom: 5px;}
   .date {color: #999; font-weight: bold;font-size:1.3em;}
-  .text {float:right;width:410px;colour:#bfb;font-family:"Lato", sans-serif;font-size: 14px;line-height: 1.5em;}
+  .text {float:right;width:410px;colour:#bfb;font-family:"Lato", sans-serif;font-size: 14px;line-height: 1.5em; margin-bottom:10px;}
   .more {float:left; margin-top:10px; width:100%;}
   
 #childarticle {float:left;width:615px;background:ffffff;padding-top: 10px;padding-bottom: 5px;}
@@ -169,7 +182,6 @@ a:link {text-decoration:none;}
 .storybyline {
   float: left;
   font-size: 1.2em;
-  width: 350px;
   padding-top: 6px;
   padding-bottom: 10px;
 }
@@ -296,8 +308,8 @@ p.rating .stars {
 }
 
 .righthand .hplabel { float: left; width: 298px; margin-top: 15px;}
-.hplabel h1, h1.storyTitle { font-size:1.8em; border-top: 4px solid #999; border-bottom: 1px solid #d4d4d4; padding: 8px 0; color: #000; }
-h1.storyTitle {border-bottom: none; padding: 8px 0 3px 0;}
+.hplabel h1, h1.storyTitle { font-size:1.4em; border-top: 4px solid #999; border-bottom: 1px solid #d4d4d4; padding: 8px 0; color: #000; }
+h1.storyTitle {font-size: 1.8em; border-bottom: none; padding: 8px 0 3px 0;}
 h2.storySubtitle {padding-top: 0; margin-top: 0; color: #999;}
 .hplabel.first { margin-top: 0; }
 .hplabel.first h1 { border-top: 4px solid #999; padding: 8px 0; color: #000; }
@@ -373,13 +385,16 @@ h2.storySubtitle {padding-top: 0; margin-top: 0; color: #999;}
   padding-top:0;
   position:relative;
 }  
-  
+
+.righthand { 
+  padding-left:0;
+}
 
 
 
 .hpThreecol #maincontent {left:708px; width: 615px ;margin-bottom:15px;}
-.hpThreecol #parentarticle {left:708px; width: 615px ;margin-bottom:15px; clear:both;width:100%;height:160px;margin-bottom:20px;border-bottom:1px solid #D4D4D4;}
-
+.hpThreecol #parentarticle {left:708px; width: 615px ;margin-bottom:15px; clear:both;width:100%; margin-bottom:20px;border-bottom:1px solid #D4D4D4;}
+/* height:160px; */
 
 .subnav_searchtext {border: 1px solid #333; border-right: none; margin: 1px 0; height: 16px; color: #666; padding: 1px; width: 172px;}
 
@@ -421,7 +436,7 @@ blockquote { float:right; width:200px; font-size: 20px; color: #c23a3a; padding:
 
 
 .righthand .emailbox { border: 2px solid #F3E9E9; float: left; width: 285px; background-color: #F9F3F3; padding: 5px;}
-.righthand .emailbox h1 {padding-top: 0; line-height: 1.2em;}
+.righthand .emailbox h1 {padding-top: 0; line-height: 1.2em; font-size:1.4em;}
 .righthand .emailbox .emailbutton { font-weight: bold; cursor: pointer; border: none; background-image: url('/css/images/btn-bg-slice.png'); background-repeat: horizontal; color: #fff; height:23px; padding: 3px 5px; border-radius: 3px 3px 3px 3px;}
 .righthand .emailbox .social { list-style: none; float: left; margin-top: 5px;}
 .righthand .emailbox .social li { padding: 5px 0 3px 3px; }
@@ -458,6 +473,21 @@ blockquote { float:right; width:200px; font-size: 20px; color: #c23a3a; padding:
 img.img-border, .img-border img { border: 1px solid #000; }
 
 
+
+.storytext table 
+{
+    margin: 2em 0;
+    width: 100%;
+}  
+.storytext table.table-dotted-border 
+{
+    border-top: $dotted-border;
+}
+.storytext table.table-dotted-border, table.table-dotted-border tr
+{ 
+    border-bottom: $dotted-border;
+}
+
 .storytext table.roadmap2014-suppliers {
     background-color: #FFFFFF;
     margin: 10px 0;
@@ -472,4 +502,10 @@ img.img-border, .img-border img { border: 1px solid #000; }
 }
 
 
-/* EDITOR PROPERTIES - PLEASE DON'T DELETE THIS LINE TO AVOID DUPLICATE PROPERTIES */
+
+
+
+
+
+
+​

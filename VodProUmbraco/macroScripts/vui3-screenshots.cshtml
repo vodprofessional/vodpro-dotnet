@@ -217,12 +217,18 @@
                       <img src="/_inc/images/new-platform/platform-stb.png" class="platform-image" />
                   </span>
                   <span class="devices">
+                    <li title="Apple TV">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-apple.png" alt=""><h3>Apple TV</h3></a>
+                    </li> 
+                    <li title="Freesat">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-freesat.png" alt=""><h3>Freesat</h3></a>
+                    </li> 
                     <li title="Now TV">
                       <a href="#" class=""><img src="/_inc/images/new-platform/device-nowtv.png" alt=""><h3>Now TV</h3></a>
                     </li> 
-                  <li title="Roku">
-                    <a href="#" class=""><img src="/_inc/images/new-platform/device-roku.png" alt=""><h3>Roku</h3></a>
-                  </li>
+                    <li title="Roku">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-roku.png" alt=""><h3>Roku</h3></a>
+                    </li>
                   </span>
                 </span>
                              
@@ -292,8 +298,10 @@
                         <li data-devicegroup="connectedtv" class="device">@DrawMatrixLink(service, new string[] { "Connected TV-Sony" }, IsFullMode)</li>
                         <li data-devicegroup="connectedtv" class="device">@DrawMatrixLink(service, new string[] { "Connected TV-LG" }, IsFullMode)</li>
                         <!-- <li data-devicegroup="connectedtv" class="device">@@DrawMatrixLink(service, new string[] { "Connected TV-Panasonic" }, IsFullMode)</li> -->
-                        <li data-devicegroup="stb" class="overall">@DrawMatrixLink(service, new string[] { "STB-Now-TV", "STB-Roku" }, IsFullMode, true)</li>
-                        <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Now-TV" }, IsFullMode)</li>
+                        <li data-devicegroup="stb" class="overall">@DrawMatrixLink(service, new string[] { "STB-Apple TV", "STB-Freesat", "STB-Now TV", "STB-Roku" }, IsFullMode, true)</li>
+                        <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Apple TV" }, IsFullMode)</li>
+                        <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Freesat" }, IsFullMode)</li>
+                        <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Now TV" }, IsFullMode)</li>
                         <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Roku" }, IsFullMode)</li>
                         <li data-devicegroup="gamesconsole" class="overall">@DrawMatrixLink(service, new string[] { "Games Console-Playstation", "Games Console-XBox" }, IsFullMode, true)</li>
                         <li data-devicegroup="gamesconsole" class="device">@DrawMatrixLink(service, new string[] { "Games Console-Playstation" }, IsFullMode)</li>

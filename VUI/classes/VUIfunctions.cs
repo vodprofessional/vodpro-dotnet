@@ -1263,6 +1263,22 @@ namespace VUI.classes
             return service.Equals(VUI_previewservice);
         }
 
+        private static int CompareDate(Object test)
+        {
+            // -1 means past, 1 means future
+            int comparison = -1;
+            try
+            {
+                DateTime d = (DateTime)test;
+                comparison = d.CompareTo(DateTime.Today);
+            }
+            catch
+            {
+
+            }
+            return comparison;
+        }
+
         public static string MemberVUIStatus(Member m)
         {
             string vuiViewerType = VUI_USERTYPE_NONE;
@@ -1286,6 +1302,10 @@ namespace VUI.classes
                         {
                             vuiViewerType = VUI_USERTYPE_USER_NOTPAID;
                         }
+                        else if (admin.getProperty("vuiEndDate") == null || CompareDate(admin.getProperty("vuiEndDate").Value) < 0)
+                        {
+                            vuiViewerType = VUI_USERTYPE_USER_EXPIRED;
+                        }
                         else
                         {
                             vuiViewerType = VUI_USERTYPE_USER;
@@ -1297,6 +1317,10 @@ namespace VUI.classes
                     if (m.getProperty("vuiFullyPaidUp") == null || (int)m.getProperty("vuiFullyPaidUp").Value == 0)
                     {
                         vuiViewerType = VUI_USERTYPE_ADMIN_NOTPAID;
+                    }
+                    else if (m.getProperty("vuiEndDate") == null || CompareDate(m.getProperty("vuiEndDate").Value) < 0)
+                    {
+                        vuiViewerType = VUI_USERTYPE_ADMIN_EXPIRED;
                     }
                     else
                     {

@@ -1,7 +1,5 @@
 var numResults = 100;
 
-
-
 $(document).ready(function () {
     var xmlActionsURL = '/vui/vui-xml-actions/';
     var $root = $('html, body');
@@ -235,6 +233,10 @@ $(document).ready(function () {
     }).prop('disabled', !$.support.fileInput)
         .parent().addClass($.support.fileInput ? undefined : 'disabled');
 
+
+    if ($('#subscription-notification').length > 0) {
+        $('#wrapper').addClass('subscription-notification');
+    }
 
     $("#regwall").wrap("<form method=post action=\"" + document.location.href + "\" id=\"frm\"></form>");
     $("h2.membercontent").text("Members Only Content");

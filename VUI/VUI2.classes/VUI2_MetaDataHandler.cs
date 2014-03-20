@@ -126,9 +126,13 @@ namespace VUI.VUI2.classes
 
                 foreach (DynamicNode s in serviceNodesToUnpublish)
                 {
+                    int parentid = s.Parent.Id;
+
                     Document sd = new Document(s.Id);
                     sd.UnPublish();
-                    umbraco.library.UpdateDocumentCache(sd.Id);
+                    umbraco.library.UnPublishSingleNode(sd.Id);
+                    umbraco.library.UpdateDocumentCache(parentid);
+                    umbraco.library.RefreshContent();
                 }
                 
             }

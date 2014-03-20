@@ -1625,3 +1625,20 @@ html, body * { font-family: "Lato", Sans-Serif; }
 }
 
 .home h1 { font-size: inherit; }
+
+
+#subscription-notification 
+{
+    background-color: #ddd;
+    border-bottom: thin solid #E6E6E6;
+    position: fixed;
+    padding: 8px 0;
+    top: 80px;
+    width: 100%;
+    text-align:center;
+    z-index:90;
+    font-weight:bold;
+    font-size:1.2em;
+}
+
+#wrapper.subscription-notification #main { margin-top: 120px; }

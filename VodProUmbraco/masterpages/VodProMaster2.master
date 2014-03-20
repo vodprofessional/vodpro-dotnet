@@ -274,6 +274,8 @@ protected void LoginStatus1_LoggedOut(object sender, EventArgs e)
 
   <umbraco:Macro Alias="VpRHNewHere" runat="server"></umbraco:Macro>
   
+  <a href="/vui" title="Subscribe or book a demo of VOD Professional's VUI Library"><img src="/css/images/vp-vui-advert-2014-300x500.gif" width="300" /></a>  
+  
   <umbraco:Macro Alias="VpRHMPU" runat="server"></umbraco:Macro>
   
   <umbraco:Macro Alias="VpRHJobs" runat="server"></umbraco:Macro>

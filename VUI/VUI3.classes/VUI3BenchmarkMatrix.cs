@@ -30,7 +30,7 @@ namespace VUI.VUI3.classes
         {
             _MatrixItems = new List<VUI3BenchmarkMatrixItem>();
 
-            string[] deviceTypes = { "TabletAndroid", "SmartphoneAndroid", "TabletiPad", "SmartphoneiPhone", "SmartphoneWindows", "TabletWindows", "Web", "Connected TV-Samsung", "Connected TV-Sony", "Connected TV-LG", "Connected TV-Panasonic", "Games Consoles-XBox", "Games Consoles-Playstation", "STB-Roku", "STB-Now TV", "Overall" };
+            string[] deviceTypes = { "TabletAndroid", "SmartphoneAndroid", "TabletiPad", "SmartphoneiPhone", "SmartphoneWindows", "TabletWindows", "Web", "Connected TV-Samsung", "Connected TV-Sony", "Connected TV-LG", "Connected TV-Panasonic", "Games Consoles-XBox", "Games Consoles-Playstation", "STB-Apple TV", "STB-Freesat", "STB-Roku", "STB-Now TV", "Overall" };
 
             string sql = @"vui_BenchmarkFeatureScores";
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.AppSettings["umbracoDbDSN"].ToString()))
@@ -101,5 +101,10 @@ namespace VUI.VUI3.classes
         public int Count { get; set; }
         public int Max { get; set; }
         public int Score { get; set; }
+
+        public string ToString()
+        {
+            return String.Format(@"PlatformDevice [{0}], BenchmarkFeature [{1}], Count [{2}], Max [{3}], Score [{4}]", new object[] { PlatformDevice, BenchmarkFeature, Count, Max, Score });
+        }
     }
 }

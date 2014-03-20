@@ -17,7 +17,8 @@ namespace VUI.VUI3.classes
             Services = new List<VUI3ServiceMasterMatrixItem>();
 
             string sql = @"    SELECT M.ServiceName, M.TabletAndroid  ,M.SmartphoneAndroid ,M.SmartphoneiPhone  ,M.TabletiPad  ,M.SmartphoneWindows   , M.Web, 
-                                [Connected TV-Samsung], [Connected TV-Sony],[Connected TV-LG], [Connected TV-Panasonic],[Games Consoles-XBox],[Games Consoles-Playstation],[STB-Roku], [STB-Now TV]
+                                [Connected TV-Samsung], [Connected TV-Sony],[Connected TV-LG], [Connected TV-Panasonic],[Games Consoles-XBox],[Games Consoles-Playstation],
+                                [STB-Apple TV], [STB-Freesat], [STB-Roku], [STB-Now TV]
                                 ,M.Total ,SM.Id, ISNULL(SM.IconURL,'') as IconURL
                                 FROM vui_ScreenshotMatrix M
                                 inner join vui_ServiceMasters SM on M.ServiceName = SM.ServiceName 
@@ -50,6 +51,8 @@ namespace VUI.VUI3.classes
                         i.ConnectedTVPanasonicCount = (int)sr["Connected TV-Panasonic"];
                         i.GamesConsolesXBoxCount = (int)sr["Games Consoles-XBox"];
                         i.GamesConsolesPlaystationCount = (int)sr["Games Consoles-Playstation"];
+                        i.STBAppleTVCount = (int)sr["STB-Apple TV"];
+                        i.STBFreesatCount = (int)sr["STB-Freesat"];
                         i.STBRokuCount = (int)sr["STB-Roku"];
                         i.STBNowTVCount = (int)sr["STB-Now TV"];
 
@@ -118,7 +121,9 @@ namespace VUI.VUI3.classes
         public int GamesConsolesXBoxCount { get; set; }
         public int GamesConsolesPlaystationCount{ get; set; }
         public int STBRokuCount { get; set; }
+        public int STBFreesatCount { get; set; }
         public int STBNowTVCount{ get; set; }
+        public int STBAppleTVCount { get; set; }
         public int TotalCount { get; set; }
         public string IconURL { get; set; }
         public string URL { 
@@ -184,8 +189,12 @@ namespace VUI.VUI3.classes
                 { 
                     return GamesConsolesPlaystationCount;
                 }
+                case "STB-Apple TV":
+                {
+                    return STBAppleTVCount;
+                }
                 case "STB-Roku":
-                { 
+                {
                     return STBRokuCount;
                 }
                 case "STB-Now TV":

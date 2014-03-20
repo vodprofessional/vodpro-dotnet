@@ -71,6 +71,7 @@
     </header>
     <div class="clear"></div>
   </div> <!-- headerwrap -->
+  <umbraco:Macro ID="Macro2" Alias="vui3-notifications" runat="server"></umbraco:Macro>
 </div>
 
 
