@@ -1,9 +1,13 @@
+$header-font-size: 24px;
+$header-font-weight: 400;
+$header-link-color: #333;
+
 #column-full {
   h2 {
 
   }
 
-  #inner-full {
+  #inner-full, #inner-search-results {
     .article-preview {
       margin-top: 16px;
       margin-bottom: 24px;
@@ -14,11 +18,11 @@
         width: 70%;
 
         header {
-          font-size: 24px;
-          font-weight: 400;
+          font-size: $header-font-size;
+          font-weight: $header-font-weight;
           margin-bottom: 5px;
           a {
-            color: #333;
+          /*  color: $header-link-color; */
           }
         }
       }
@@ -29,8 +33,37 @@
         float: left;
       }
       .text {
-        font-size: 13px;
+       /* font-size: 13px; */
       }
     }
   }
+  
+  #inner-job-listing {
+  
+    margin-top: 10px;
+    border-top: $dotted-border;
+  
+    .job {
+      margin-top: 16px;
+      padding-bottom: 16px;
+      margin-bottom: 6px;
+      border-bottom: $dotted-border;
+
+      padding-right: 3em;
+      
+      header {
+        font-size: $header-font-size;
+        font-weight: $header-font-weight;
+        margin-bottom: 5px;
+      }
+      .post-date {
+        color: #666;
+      }
+      .meta {
+        font-weight:700;
+      }
+    }
+  
+  }
+  
 }

@@ -3,6 +3,9 @@
 $body-font-family: Lato, Helvetica, Arial, sans-serif;
 $headline-font-family: Open Sans, "Helvetica Neue", "Helvetica", Helvetica,Arial, sans-serif;
 
+$dotted-border: 1px dotted #ccc;
+
+
 /* BASE */
 @import 'base';
 
@@ -102,26 +105,19 @@ $headline-font-family: Open Sans, "Helvetica Neue", "Helvetica", Helvetica,Arial
   }
 
   /* PROMOTION */
-  #promotion {
-    height: 1500px;
+  @import "promotion";
 
-    img {
-      margin: 0 10px 20px 0px;
-      width: 100%;
-      box-shadow: 0 0 1px #CCC;
-    }
-  }
 }
 
-#home {
+.home {
   @import "home";
 }
 
-#news {
+.news {
   @import "news";
 }
 
-#story {
+.story {
   @import "story";
 }
 
@@ -129,8 +125,14 @@ $headline-font-family: Open Sans, "Helvetica Neue", "Helvetica", Helvetica,Arial
   @import "error";
 }
 
-#signuplogin {
+.signuplogin {
   @import "signuplogin";
 }
+
+.form {
+  @import "form";
+}
+
+@import "vp50";
 
 @import "footer";

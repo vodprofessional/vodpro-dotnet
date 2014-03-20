@@ -129,6 +129,14 @@
             text-shadow: 0 0 1px #FFF;
           }
         }
+        span {
+            padding: 15px 10px;
+            padding-top: 15px;
+            line-height: 20px;
+            display: block;
+            position: relative;
+            color: #fff;
+        }
         @media(max-width: 767px) {
           color: #FFF;
         }
@@ -185,7 +193,7 @@
 
       .input-group {
         margin-top: 5px;
-        width: 15em;
+        width:16.5em;
 
         .form-control {
           -webkit-appearance: none;
@@ -195,6 +203,7 @@
 
         .input-group-addon {
           background-color: #FFF;
+          cursor:pointer;
         }
       }
     }
