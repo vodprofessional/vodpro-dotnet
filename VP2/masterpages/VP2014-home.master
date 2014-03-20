@@ -1,0 +1,39 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VP2014.master" AutoEventWireup="true" %>
+
+<asp:Content runat="server" ContentPlaceHolderID="ContentMain">
+    <!-- Main content -->
+    <div id="content" class="home container" >
+        <div id="columns" class="row">
+            <div id="xs-nav">
+                <a id="tab-news" class="active" href="#">News Feed</a>
+                <a id="tab-featured" href="#">Featured Content</a>
+            </div>
+            <div id="main" class="articles col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                <div>
+                    <section id="column-left" class="col-lg-5 col-md-5 col-sm-5 col-xs-12 active">
+                        <h2>News Feed</h2>
+                        <umbraco:Macro Alias="vp2-articlelist" runat="server" divId="inner-left" articleType="NEWS" count="20" outputType="FEED"></umbraco:Macro>
+                    </section>
+                    <section id="column-center" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+                        <h2>Featured Content</h2>
+                        <umbraco:Macro Alias="vp2-articlelist" runat="server" divId="inner-center" articleType="FEATURE" count="10" outputType="FULL"></umbraco:Macro>
+                    </section>
+                </div>
+                <div id="pager-wrap">
+                    <div class="pager-loading">
+                        <img src="/_inc/VP2014/img/loading.gif" height="30"/>
+                    </div>
+                    <ul class="pager">
+                        <li class="next"><a href="/">Newer &rarr;</a></li>
+                        <li class="previous"><a href="/">&larr; Older</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="promotion" class="col-lg-5 col-md-5 hidden-sm hidden-xs">
+                <div id="inner-promotion">
+                    <umbraco:Macro Alias="vp2-rhs" runat="server"></umbraco:Macro>
+                </div>
+            </div>
+        </div>
+    </div>
+</asp:Content>

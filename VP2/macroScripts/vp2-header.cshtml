@@ -1,0 +1,33 @@
+﻿@using umbraco.MacroEngines;
+@{
+    
+    <!-- Header -->
+    <title>VOD Professional | @Model.title</title>
+    <meta name="keywords" content="@Model.metaKeywords" />
+    <meta name="description" content="@Model.metaDescription" />
+    
+    if (@Model.NodeTypeAlias.Equals("vodProStory"))
+    {
+        string imageURL = "";
+        if (@Model.GetProperty("storyimage").Value.Length > 0)
+        {
+            try
+            {
+                int mid;
+                if (Int32.TryParse(Model.GetProperty("storyimage").Value, out mid))
+                {
+                    dynamic media = @Model.MediaById(mid);
+                    imageURL = media.umbracoFile;
+                }
+            }
+            catch (Exception ex) { ; }
+        }
+    <meta name="author" content="@Model.storyauthor" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="@@VODProfessional" />
+    <meta name="twitter:title" content="@Model.title" />
+    <meta name="twitter:description" content="@Model.miniTeaser" />
+    <meta name="twitter:image:src" content="http://www.vodprofessional.com@(imageURL)" />
+    }
+    <!-- /Header -->
+}

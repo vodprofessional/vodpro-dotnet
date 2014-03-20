@@ -1,0 +1,14 @@
+@using VUI.classes
+@using VUI.VUI3.classes
+@{
+    VUIUser u = VUI3Utility.GetUser();
+    if(!VUI3Utility.IsVUIUser(u))
+    {
+        if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_ADMIN_EXPIRED) || u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_USER_EXPIRED) || u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_ADMIN_NOTPAID) || u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_USER_NOTPAID))
+        {
+            <div id="subscription-notification">
+                <span>Your subscription to the VUI Library has expired! <a href="mailto:sales@vodprofessional.com">Contact the VOD Professional team now to arrange your renewal</a></span>
+            </div>
+        }
+    }
+}

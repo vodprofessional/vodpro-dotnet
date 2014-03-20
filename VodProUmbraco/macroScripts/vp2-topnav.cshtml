@@ -1,0 +1,28 @@
+﻿@using umbraco.MacroEngines;
+@{
+    var level = 2;
+    var currentPage = Model;
+    while (@currentPage.Level > @level - 1)
+    {
+        currentPage = @currentPage.Parent;
+    }
+    string[] r;
+
+    <!-- Top Nav -->
+    <ul id="nav-primary" class="nav navbar-nav">
+    <li><a href="/" title="VOD Professional's Home Page">HOME</a></li>
+    @foreach (var page in @currentPage.Children.Where("nodeTypeAlias=\"vodProSection\"").Where("hideFromNavigation=false").OrderBy("navigationSortOrder"))
+    {
+        if (umbraco.library.HasAccess(@page.Id, @page.Path))
+        {
+            if (@page.Level == @level)
+            {
+                <li><a href="@page.Url" title="@page.Name">@page.Name</a></li>
+            }
+        }
+     }
+     <li><a href="/about-us" title="About us">ABOUT US</a></li>
+     <li class="last"><a href="/vui/" title="Video User Interface Library">VUI LIBRARY</a></li>
+
+     </ul>   
+}

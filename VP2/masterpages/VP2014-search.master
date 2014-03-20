@@ -1,0 +1,33 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VP2014.master" AutoEventWireup="true" %>
+
+<asp:content ContentPlaceHolderId="ContentMain" runat="server">
+
+    <!-- Main content -->
+    <div id="content" class="news container" >
+        <div id="columns" class="row">
+            <div id="main" class="articles col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                <div>
+                    <section id="column-full" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 active">
+                        <h2><umbraco:item id="umbTitle" runat="server" field="title" /></h2>
+                        <umbraco:Macro Alias="Vp2-search" runat="server"></umbraco:Macro>
+                    </section>
+                </div>
+                <div id="pager-wrap">
+                    <div class="pager-loading">
+                        <img src="img/loading.gif" height="30"/>
+                    </div>
+                    <ul class="pager">
+                        <li class="next"><a href="/">Newer &rarr;</a></li>
+                        <li class="previous"><a href="/">&larr; Older</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="promotion" class="col-lg-5 col-md-5 hidden-sm hidden-xs">
+                <div id="inner-promotion">
+                    <umbraco:Macro Alias="vp2-rhs" runat="server"></umbraco:Macro>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+</asp:content>

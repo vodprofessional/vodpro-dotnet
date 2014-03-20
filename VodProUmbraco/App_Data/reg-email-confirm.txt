@@ -1,0 +1,11 @@
+Hi,
+
+You've entered <% UserName %> as the contact email address for your VOD Professional ID. To complete the process, we need to verify that this email address belongs to you. Simply click the link below and sign in using your VOD Professional ID and password.
+
+http://www.vodprofessional.com/register/confirm/?<% UserName %>
+
+Why did I get this email?
+This message is from a website called VODProfessional.com. Someone has tried to register on our site with this email address. If you didn't try to register on the site, don't worry. Your email address cannot be used as a contact address for a VOD Professional ID without your verification so you can safely ignore this correspondence. 
+
+Thanks,
+VOD Professional

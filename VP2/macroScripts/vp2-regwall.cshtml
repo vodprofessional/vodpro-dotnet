@@ -1,0 +1,108 @@
+﻿@using umbraco.cms.businesslogic.member;
+@using System.Web.Security;
+
+@helper ErrorMessage(string message)
+{
+   <div>@message</div>
+}
+@helper RegWall(string message)
+{
+    <div id="vp2-regwall" class="signuplogin">
+            
+        <h2>For Members Only</h2>
+        <p>Please register or login to unlock further content and resources on this page.</p>
+            
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#signin" data-toggle="tab">Sign In</a></li>
+            <li><a href="#register" data-toggle="tab">Register</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="signin">
+                <div class="form-signin" role="form">
+                    <input type="email" id="regwall-email" class="form-control" placeholder="Email address" required>
+                    <div class="form-error" id="regwall-email-error"></div>
+                    
+                    <input type="password" id="regwall-pwd" class="form-control" placeholder="Password" required>
+                    <div class="form-error" id="regwall-pwd-error"></div>
+
+                    <!--<label class="checkbox">
+                        <input type="checkbox" value="regwall-remember-me"> Remember me
+                    </label>-->
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" id="regwall-signin">Sign in</button>
+                </div>
+            </div>
+            <div class="tab-pane" id="register">
+                <div class="form-signin" role="form">
+                    <input type="email" class="form-control" id="regwall-email-reg" placeholder="Email address" required>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" id="regwall-register">Start Registration</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+}
+
+@helper SpecialContent()
+    {
+  <h2 id="premium" class="membercontent"></h2>
+  <p>@Html.Raw(umbraco.library.RenderMacroContent(@Model.memberStory.ToString(), @Model.Id))</p>
+    // @Logout()
+}
+
+@helper Logout()
+{
+  <a href="@Model.Url?action=logout">Logout</a>
+}
+
+
+
+@{
+  
+    if (@Model.requiresLogin.GetType() == typeof(Boolean))
+    {
+        if (@Model.requiresLogin)
+        {
+            var currentUser = Membership.GetUser();
+            if (currentUser == null)
+            {
+                if (IsPost)
+                {
+                    var email = Request["VPUserName"];
+                    var pwd = Request["VPPassword"];
+                    if (Membership.ValidateUser(email, pwd))
+                    {
+                        FormsAuthentication.SetAuthCookie(email, true);
+                        Response.Redirect(@Model.Url + "#premium");
+                    }
+                    else if (Membership.FindUsersByName(email).Count > 0)
+                    {
+          @RegWall("Incorrect password")
+                    }
+                    else
+                    {
+          @RegWall("User doesn't exist")
+                    }
+
+                }
+
+                else
+                {
+        @RegWall(String.Empty)
+                }
+            }
+            else if (Request.QueryString["action"] == "logout")
+            {
+                FormsAuthentication.SignOut();
+                Response.Redirect(@Model.Url + "#premium");
+            }
+            else
+            {
+      @SpecialContent()
+      
+    }
+   }
+  }
+}
+

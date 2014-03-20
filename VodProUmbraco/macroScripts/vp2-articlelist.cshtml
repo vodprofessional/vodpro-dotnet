@@ -1,0 +1,56 @@
+﻿@using VP2.businesslogic;
+@using umbraco.cms.businesslogic.macro;
+@using umbraco.MacroEngines;
+@{
+    string outputType = @Parameter.outputType;
+    string articleType = @Parameter.articleType;
+    string strcount = @Parameter.count;
+    string divId = @Parameter.divId;
+    
+    int rootNodeId = @Model.Id;
+    
+    int count = 0;
+    if(!Int32.TryParse(strcount, out count))
+    {
+        count = 10;   
+    }
+    
+    ArticleList articles;
+    if (!articleType.Equals(ArticleList.TYPE_ANY))
+    {
+        articles = new ArticleList(articleType);
+    }
+    else
+    {
+        articles = new ArticleList(rootNodeId);
+    }
+    articles.LoadNext(count, 0);
+    
+    <div id="@divId" data-root="@Model.Id">
+    @foreach(SimpleArticle article in articles.Articles)
+    {
+        if(outputType.Equals("FULL"))
+        {
+            <article class="item article-preview" data-articleid="@article.Id">
+                <img src="@article.Image"/>
+                <div class="text">
+                    <header><a href="@article.Url">@article.Headline</a></header>
+                    <p>@article.Teaser</p>
+                </div>
+                <div class="clearfix"></div>
+            </article>
+        }
+        else
+        {
+            <article class="item feed-preview" data-articleid="@article.Id">
+                <header><a href="@article.Url">@article.Headline</a></header>
+                <img src="@article.Image"/>
+                <div class="text">
+                    <p>@article.Teaser</p> 
+                </div>
+                <div class="clearfix"></div>
+            </article>
+        }
+    }
+    </div>
+}

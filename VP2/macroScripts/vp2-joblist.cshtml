@@ -1,0 +1,36 @@
+﻿@using umbraco.MacroEngines
+@using umbraco.interfaces
+@using VP2.businesslogic
+@{
+    VPJobs jobs = new VPJobs();
+    jobs.PopulateJobList(0,20);
+    List<Job> jobList = jobs.JobList;
+      
+    string sep = " / ";
+    
+    <div id="inner-job-listing">
+    @foreach(Job j in jobList)
+    {
+        <article class="item job">
+            <header>
+                <a href="@j.Url" target="_blank">@j.Title</a>
+            </header>
+            <div class="text">
+                <div class="post-date">Posted on: @j.Date</div>
+            @if (!String.IsNullOrEmpty(j.Description))
+            {
+                <p>
+                    @j.Description
+                </p>
+            }
+            @if (!String.IsNullOrEmpty(j.Metadata))
+            {
+                <div class="meta">
+                    @j.Metadata
+                </div>
+            }
+            </div>
+        </article>
+    }
+    </div>
+}

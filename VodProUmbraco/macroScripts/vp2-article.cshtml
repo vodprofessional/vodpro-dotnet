@@ -1,0 +1,113 @@
+﻿@using VP2.businesslogic;
+@using umbraco.cms.businesslogic.macro;
+@using umbraco.MacroEngines;
+@using Examine.LuceneEngine.SearchCriteria;
+@{
+    
+    string dateStr = "";
+    if (Model.storydate.ToString().Trim().Length > 0)
+    {
+        dateStr = String.Format("{0:d MMM yyyy}", Model.storydate);
+    }
+
+    string imageUrl = "";
+    if (Model.GetProperty("storyimage").Value.Length > 0)
+    {
+        try
+        {
+            int mid;
+            if (Int32.TryParse(Model.GetProperty("storyimage").Value, out mid))
+            {
+                dynamic media = Model.MediaById(mid);
+                imageUrl = media.umbracoFile;
+                //sa.Image = story.GetProperty("storyimage").Value;
+            }
+        }
+        catch (Exception ex) { ; }
+    }
+    
+    <article>
+        <h1>@Model.title</h1>
+        <div class="article-lead">
+            @Model.miniTeaser
+        </div>
+        <div class="article-meta">
+            <div class="article-info">
+                <span class="article-author">@Model.storyAuthor</span>
+                <span class="article-date">@dateStr</span>
+            </div>
+            <!-- SOCIAL -->
+            <div class="article-social">
+                <!-- AddThis Button BEGIN -->
+                <div class="addthis_toolbox addthis_default_style ">
+                    <a class="addthis_button_tweet"></a>
+                    <a class="addthis_button_linkedin_counter"></a>
+
+                </div>
+                <script type="text/javascript">
+                    var addthis_config = {
+                        "data_track_clickback": true,
+                        ui_click: true
+                    };
+                </script>
+                <script type="text/javascript" src="https://s7.addthis.com/js/250/addthis_widget.js#pubid=cnaacc"></script>
+                <!-- AddThis Button END -->
+            </div>
+
+        </div>
+        <div class="article-main">
+            @if (!String.IsNullOrEmpty(imageUrl))
+            {
+                <img src="@imageUrl"  style="float:right;margin-left:15px;margin-bottom:15px" />
+            }
+            @Html.Raw(umbraco.library.RenderMacroContent(Model.story.ToString(), Model.Id))
+
+            @RenderPage("~/macroScripts/vp2-regwall.cshtml")
+            @RenderPage("~/macroScripts/vpStoryComments.cshtml")
+
+        </div>
+
+    @if(Model.relatedStorySearchTerm.GetType() == typeof(System.String)) 
+    {
+       var searchTerm = Model.relatedStorySearchTerm;
+ 
+       if(!string.IsNullOrEmpty(searchTerm))
+       {   
+         LuceneSearchCriteria criteria = (LuceneSearchCriteria)(ExamineManager.Instance
+                       .SearchProviderCollection["VPSiteSearchSearcher"]
+                       .CreateSearchCriteria());
+       
+         var filter = criteria
+           .GroupedOr(new string[]{"storytags"},searchTerm) //"title","story","storyteaser","storytags"
+           .Compile();  //.And().OrderByDescending("storydate")
+   
+         var sresults = ExamineManager.Instance
+                       .SearchProviderCollection["VPSiteSearchSearcher"]
+                       .Search(filter);
+
+         if(sresults.TotalItemCount > 0)
+         {
+           int count = 0;
+       
+           <div class="article-related">
+           <h3>Related Stories</h3>
+           <ul>
+       
+           @foreach (var result in sresults)
+           {    
+             if (result.Id == Model.Id) { continue; }
+             count++;
+             if (count > 5) { break; }
+   
+             <li>
+              <a href="@umbraco.library.NiceUrl(result.Id)">@result.Fields["title"]</a>
+             </li>    
+           }    
+           </ul>
+           </div>
+         }
+       }
+     }
+    </article>
+    @RenderPage("~/macroScripts/vpStoryComments.cshtml")
+}

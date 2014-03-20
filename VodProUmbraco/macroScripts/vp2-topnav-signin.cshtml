@@ -1,0 +1,15 @@
+﻿@using VP2.businesslogic;
+@{
+   VPMember m = VPMember.GetLoggedInUser();
+   if (m != null)
+   {
+        <li><span>Welcome @m.FirstName</span></li>
+        <li><a href="/members/profile">Account Admin</a></li>
+   }
+   else 
+   {       
+        <li><a href="/login">Sign In</a></li>
+        <li><a href="/register">Register</a></li>
+   } 
+    
+}

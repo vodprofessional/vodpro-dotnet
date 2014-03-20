@@ -1,0 +1,341 @@
+﻿@using umbraco.cms.businesslogic.template
+@using umbraco.MacroEngines
+@using uComponents.Core
+@using uComponents.Core.uQueryExtensions
+@using System.Linq
+@using VP2.businesslogic
+@using System.Web
+
+@helper SignupForm() {
+    <div id="rhs-register">
+        <h2>Get New Posts Sent to Your Email Inbox</h2>
+        <div class="rhs-form-signin" role="form">
+            <input type="email" class="form-control" id="rhs-email-reg" placeholder="Email address" required>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" id="rhs-register-btn">Start Registration</button>
+        </div>
+    </div>
+}
+@helper Sponsors()
+    {
+    bool hide = false;
+    if (@Model.hideSponsors.GetType() == typeof(Boolean))
+    {
+        hide = @Model.hideSponsors;
+    }
+    if (!hide)
+    {
+        if (@Model.AncestorOrSelf().sponsors.GetType() == typeof(umbraco.MacroEngines.DynamicXml))
+        {
+            var sponsorIDs = @Model.AncestorOrSelf().sponsors.GetEnumerator();
+    
+        <div id="sponsors">
+            <h2>Site Sponsors</h2>
+            <div class="sponsor-items">
+            @foreach (var sponsorID in @sponsorIDs)
+            {
+                dynamic sponsor = @Model.NodeById(@sponsorID.InnerText);
+                string sponsorurl = "#";
+                if (sponsor.sponsorStory.GetType() == typeof(System.Int32))
+                {
+                    sponsorurl = umbraco.library.NiceUrl(sponsor.sponsorStory);
+                }
+                else if (sponsor.sponsorUrl.GetType() == typeof(System.String))
+                {
+                    sponsorurl = @sponsor.sponsorUrl;
+                }
+                <div><a href="@sponsorurl"><img src="@sponsor.sponsorImage" /></a></div>
+            }
+            </div>
+        </div>
+        }
+    }
+}
+@helper MPU()
+    {
+    <div id="mpu">
+        <script type='text/javascript'>
+            GA_googleFillSlot("VOD_PRO_MPU_ROS");
+        </script>
+    </div>
+}
+@helper NewHere()
+    {
+    var teaserIDs = @Model.AncestorOrSelf().teasers.GetEnumerator();
+    int count = 0;
+     
+    <div id="new-here">
+        <h2>New Here? Start With These</h2>
+        <ul>  
+        @foreach (var teaserID in @teaserIDs)
+        {
+            count++;
+            dynamic teaser = @Model.NodeById(@teaserID.InnerText);
+            <li><a href="@teaser.Url">@teaser.title</a></li>
+        }
+        </ul>
+    </div>
+}
+@helper MostPopular()
+    {
+    var teaserIDs = @Model.AncestorOrSelf().mostPopular.GetEnumerator();
+    int count = 0;
+    if (@Model.AncestorOrSelf().mostPopular.InnerText != "")
+    {
+        <div id="most-popular">
+            <h2>Most Popular</h2>
+            <ul>
+            @foreach (var teaserID in @teaserIDs)
+            {
+                <li>
+                @{
+                    count++;
+                    dynamic teaser = @Model.NodeById(@teaserID.InnerText);
+                    if (count == 1)
+                    {
+                      <div class="expanded-item">
+                        <a href="@teaser.Url">@teaser.title</a>
+                        <div>
+                            @if (teaser.GetProperty("storyimage").Value.Length > 0)
+                            {
+                                dynamic media = @Model.MediaById(@teaser.GetProperty("storyimage").Value);
+                                string mediaName = @media.umbracoFile;
+                                string thumbName = @mediaName.Replace(".jpg", "_thumb_195.jpg");
+                                <img src="@mediaName" />
+                            }
+                            <span>@teaser.storyteaser</span>
+                        </div>
+                      </div>
+                    }
+                    else
+                    {
+                        <a href="@teaser.Url">@teaser.title</a>
+                    }
+                }
+                </li>
+            }
+            </ul>
+        </div>
+    }
+}
+@helper Jobs()
+    {
+    <div id="jobs">  
+    
+    <div class="jobadvertise">
+    <h2 class="nobottomborder">VOD Jobs from JobServe</h2>
+      To post a job visit
+      <a target="_blank" title="Advertise on JobServe" href="http://www.jobserve.com/gb/en/Recruiter/QuickJobProductSelect.aspx">JobServe</a>
+      and see how they can help you find the right candidate.
+    </div>
+    <ul>
+    @{    
+        VPJobs jobs = new VPJobs();
+        jobs.PopulateJobList(0, 20);
+        foreach (Job j in jobs.JobList)
+        {
+          <li>
+            <div class="jobtitle"><a href="@j.Url">@j.Title</a></div>
+            <div class="joblocation">@j.Location</div>
+            <div class="jobsalary">@j.Rate</div>
+          </li>
+        }
+    }   
+    </ul> 
+    <div class="jobmore"><a href="/jobs/">More Jobs</a></div>
+  </div>
+}
+@helper VPAd()
+    {
+                    <div id="vui-service-sheet">
+                      <div class="header">  
+                        <div class="strapline">
+                          <h2>VOD Service of the Day</h2>
+                          <h3>Data from our VUI Library research tool</h3>
+                        </div>
+                        <div class="link">
+                          <a href="/vui">Subscribe today</a>
+                        </div>
+                      </div>
+                      
+                      <article>
+                        <header>
+                          <h1>4oD</h1>
+                          <div class="intro">
+                              <div class="img">
+                                <img src="//placehold.it/150x150.png" />
+                              </div>
+                              <div class="desc">
+                                <p>4oD is Channel 4's video-on-demand archive and catch-up service for its TV shows. Provided you sign in or register the extended archive of shows from Channel 4 - and its sister channels like More4 and E4 - are now available on the iPad app. </p>
+                              </div>
+                              <div class="b-info">
+                                  <table border="0">
+                                    <tbody><tr>
+                                        <th>Availability</th>
+                                        <td>UK</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Pay Model</th>
+                                        <td>Free<br>AVOD</td>
+                                    </tr>
+                                    <tr class="last">
+                                        <th>Category</th>
+                                        <td>TV / Movies</td>
+                                    </tr>
+                                  </tbody></table>
+                              </div>
+                          </div>
+                        </header>
+                        
+                        <div class="b-stats">
+                          <div class="inner">
+                            <ul>
+                              <li>
+                                <div>
+                                  <div class="count">
+                                    286<span class="fa fa-camera"></span>
+                                  </div>
+                                  <div class="title">
+                                    Screenshots from 6 devices
+                                  </div>
+                                </div>
+                              </li>
+                              <li>
+                                <div>
+                                  <div class="count">
+                                    19<i>/25</i><span class="fa fa-bar-chart-o"></span>
+                                  </div>
+                                  <div class="title">
+                                    Average benchmark score
+                                  </div>
+                                </div>
+                              </li>
+                              <li>
+                                <div>
+                                  <div class="count">
+                                    2.51<i>/5</i><span class="fa fa-star-o"></span>
+                                  </div>
+                                  <div class="title">
+                                    Average User Rating from App Stores
+                                  </div>
+                                </div>
+                              </li>
+                              <li>
+                                <div>
+                                  <div class="count">
+                                    12,332<span class="fa fa-twitter"></span>
+                                  </div>
+                                  <div class="title">
+                                    Twitter Followers
+                                  </div>
+                                </div>
+                              </li>
+                              <li>
+                                <div>
+                                  <div class="count">
+                                    174,502<span class="fa fa-thumbs-o-up"></span>
+                                  </div>
+                                  <div class="title">
+                                    Facebook likes
+                                  </div>
+                                </div>
+                              </li>
+                              <li>
+                                <div>
+                                  <div class="count">
+                                    65,791<span class="fa fa-youtube"></span>
+                                  </div>
+                                  <div class="title">
+                                    YouTube Subscribers
+                                  </div>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>                        
+                        
+                        
+                        <div class="b-store-ratings">
+                          <h2>Current AppStore Ratings</h2>
+                          <h3>Average user rating</h3>
+                          <ul>
+                            <li><img src="/_inc/images/tmp/devices/ipad.png" />
+                                <div class="rate rate25"></div>2.5 </li>
+                            <li><img src="/_inc/images/tmp/devices/iphone.png" />
+                                <div class="rate rate25"></div>2.5 </li>
+                            <li><img src="/_inc/images/tmp/devices/android-tablet.png" />
+                                <div class="rate rate25"></div>2.5 </li>
+                            <li><img src="/_inc/images/tmp/devices/android-phone.png" />
+                                <div class="rate rate25"></div>2.5 </li>                                
+                          </ul>
+                        </div>
+                        
+                        <div class="b-screenshots">
+                            <h2>Selected Screenshots</h2>
+                            <div class="carousel">
+                               <ul style="width:620px">
+                                <li>
+                                  <span class="player">Netflix UK</span><span class="name">Category homepage</span><span class="device">Tablet/iPad</span><span class="img"><img src="/vui-media/media/th/August-2012-Tablet-iPad-Netflix-UK-IMG_0711.jpg"></span>
+                                </li>
+                                <li>
+                                  <span class="player">Netflix UK</span><span class="name">Category homepage</span><span class="device">Tablet/iPad</span><span class="img"><img src="/vui-media/media/th/August-2012-Tablet-iPad-Netflix-UK-IMG_0711.jpg"></span>
+                                </li>
+                                <li>
+                                  <span class="player">Netflix UK</span><span class="name">Category homepage</span><span class="device">Tablet/iPad</span><span class="img"><img src="/vui-media/media/th/August-2012-Tablet-iPad-Netflix-UK-IMG_0711.jpg"></span>
+                                </li>
+                                <li>
+                                  <span class="player">Netflix UK</span><span class="name">Category homepage</span><span class="device">Tablet/iPad</span><span class="img"><img src="/vui-media/media/th/August-2012-Tablet-iPad-Netflix-UK-IMG_0711.jpg"></span>
+                                </li>
+                               </ul>
+                            </div>
+                        </div>
+                        
+                        
+                      </article>
+                      
+                    </div>
+                    
+
+    
+}
+
+@functions
+{    
+    string currentTemplate = "";
+    Dictionary<string, string[]> templateElementMap;
+}
+@{    
+    currentTemplate = new Template(@Model.template).Alias;
+    VPRHSManager rhsManager = new VPRHSManager(currentTemplate);
+
+    foreach (string section in rhsManager.SectionsToShow)
+    {
+        if (section.Equals("SIGNUP"))
+        {
+             @: @SignupForm()
+        }
+        if (section.Equals("SPONSORS"))
+        {
+             @: @Sponsors()
+        }
+        if (section.Equals("VPAD"))
+        {
+             @: @VPAd()
+        }
+        if (section.Equals("NEWHERE"))
+        {
+             @: @NewHere()
+        }
+        if (section.Equals("MPU"))
+        {
+             @: @MPU()
+        }
+        if (section.Equals("JOBS"))
+        {
+             @: @Jobs()
+        }
+        if (section.Equals("MOSTPOPULAR"))
+        {
+             @: @MostPopular()
+        }
+    }
+}

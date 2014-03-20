@@ -1,0 +1,25 @@
+@using VP2.businesslogic;
+@using umbraco.cms.businesslogic.macro;
+@using umbraco.MacroEngines;
+@{
+    int numItems = 10;
+    var searchTerm = Request.QueryString["search"].Replace("\"", "");
+    if (!string.IsNullOrEmpty(searchTerm))
+    {
+        ArticleList sresults = ArticleList.ListFromSearch(searchTerm, numItems, 0);
+        <p>You searched for @searchTerm.  Found @sresults.TotalResults results</p>
+        <div id="inner-search-results" data-searchterm="@searchTerm">
+        @foreach (SimpleArticle article in sresults.Articles)
+        {
+            <article class="item article-preview" data-articleid="@article.Id">
+                <img src="@article.Image"/>
+                <div class="text">
+                    <header><a href="@article.Url">@article.Headline</a></header>
+                    <p>@article.Teaser</p>
+                </div>
+                <div class="clearfix"></div>
+            </article>
+        }
+        </div>
+    }
+}

@@ -216,6 +216,7 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="App_Data\vp2014-email-reset-password.txt" />
     <Content Include="bin\amd64\Microsoft.VC90.CRT\msvcr90.dll" />
     <Content Include="bin\amd64\Microsoft.VC90.CRT\README_ENU.txt" />
     <Content Include="bin\amd64\sqlceca40.dll" />
@@ -4207,7 +4208,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="media\26770\" />
     <Folder Include="media\2845\" />
     <Folder Include="media\2973\" />
@@ -4336,6 +4336,7 @@
     <Content Include="macroScripts\vui3-story.cshtml" />
     <Content Include="macroScripts\vui3-storylisting.cshtml" />
     <Content Include="macroScripts\vui3-navigation.cshtml" />
+    <Content Include="macroScripts\vui3-notifications.cshtml" />
     <None Include="macroScripts\VUI_Benchmarking.cshtml" />
     <None Include="macroScripts\VUI_HomePageAdminBox.cshtml" />
     <None Include="macroScripts\VUI_HomePageText.cshtml" />

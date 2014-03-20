@@ -1,0 +1,83 @@
+﻿@using System.Configuration;
+@{
+  string vpmode = ConfigurationManager.AppSettings["VPMODE"].ToString();
+  if (vpmode != "dev")
+  {
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-23100336-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+        <script type="text/javascript">
+        function recordOutboundLink(link, category, action) {
+            try {
+                var pageTracker = _gat._getTracker("UA-23100336-1");
+                pageTracker._trackEvent(category, action);
+                setTimeout('document.location = "' + link.href + '"', 100)
+            } catch (err) { }
+        }
+    </script>
+   
+    <script type='text/javascript' src='https://partner.googleadservices.com/gampad/google_service.js'></script>
+    
+    <script type='text/javascript'>
+        GS_googleAddAdSenseService("ca-pub-8868631671512351");
+        GS_googleEnableAllServices();
+    </script>
+    <script type='text/javascript'>
+        GA_googleAddSlot("ca-pub-8868631671512351", "VOD_PRO_LEADERBOARD_ROS");
+        GA_googleAddSlot("ca-pub-8868631671512351", "VOD_PRO_MPU_ROS");
+    </script>
+    <script type='text/javascript'>
+        GA_googleFetchAds();
+    </script>
+
+    <script type='text/javascript'>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+        (function () {
+            var gads = document.createElement('script');
+            gads.async = true;
+            gads.type = 'text/javascript';
+            var useSSL = 'https:' == document.location.protocol;
+            gads.src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+            var node = document.getElementsByTagName('script')[0];
+            node.parentNode.insertBefore(gads, node);
+        })();
+    </script>
+    
+    <!-- 50VP-2012 -->
+    <script type='text/javascript'>
+        googletag.cmd.push(function () {
+            googletag.defineSlot('/11576661/VOD_PRO_607x30', [607, 30], 'div-gpt-ad-1339509551821-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>      
+    
+    <!-- 50VP-2013 -->
+    <script type='text/javascript'>
+        googletag.cmd.push(function () {
+            googletag.defineSlot('/11576661/VOD_Pro_50vp_607x30', [607, 30], 'div-gpt-ad-1371489131345-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+
+    <!-- 50VP-2014 -->    
+    <script type='text/javascript'>
+        googletag.cmd.push(function () {
+            googletag.defineSlot('/11576661/VOD_Pro_50vp_607x30', [607, 30], 'div-gpt-ad-1394616764592-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+  }
+}
