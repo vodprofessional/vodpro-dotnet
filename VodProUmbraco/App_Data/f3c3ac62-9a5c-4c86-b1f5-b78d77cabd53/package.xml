@@ -1,0 +1,1386 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<umbPackage>
+  <files>
+    <file>
+      <guid>vp2-article.cshtml</guid>
+      <orgPath>/macroScripts</orgPath>
+      <orgName>vp2-article.cshtml</orgName>
+    </file>
+    <file>
+      <guid>vp2-articlelist.cshtml</guid>
+      <orgPath>/macroScripts</orgPath>
+      <orgName>vp2-articlelist.cshtml</orgName>
+    </file>
+    <file>
+      <guid>vp2-ga.cshtml</guid>
+      <orgPath>/macroScripts</orgPath>
+      <orgName>vp2-ga.cshtml</orgName>
+    </file>
+    <file>
+      <guid>vp2-header.cshtml</guid>
+      <orgPath>/macroScripts</orgPath>
+      <orgName>vp2-header.cshtml</orgName>
+    </file>
+    <file>
+      <guid>vp2-joblist.cshtml</guid>
+      <orgPath>/macroScripts</orgPath>
+      <orgName>vp2-joblist.cshtml</orgName>
+    </file>
+    <file>
+      <guid>vp2-regwall.cshtml</guid>
+      <orgPath>/macroScripts</orgPath>
+      <orgName>vp2-regwall.cshtml</orgName>
+    </file>
+    <file>
+      <guid>vp2-rhs.cshtml</guid>
+      <orgPath>/macroScripts</orgPath>
+      <orgName>vp2-rhs.cshtml</orgName>
+    </file>
+    <file>
+      <guid>vp2-search.cshtml</guid>
+      <orgPath>/macroScripts</orgPath>
+      <orgName>vp2-search.cshtml</orgName>
+    </file>
+    <file>
+      <guid>vp2-topnav.cshtml</guid>
+      <orgPath>/macroScripts</orgPath>
+      <orgName>vp2-topnav.cshtml</orgName>
+    </file>
+    <file>
+      <guid>vp2-topnav-signin.cshtml</guid>
+      <orgPath>/macroScripts</orgPath>
+      <orgName>vp2-topnav-signin.cshtml</orgName>
+    </file>
+  </files>
+  <info>
+    <package>
+      <name>201403_VP2014</name>
+      <version>1</version>
+      <license url="http://www.opensource.org/licenses/mit-license.php">MIT license</license>
+      <url>vodpro.tv</url>
+      <requirements>
+        <major>3</major>
+        <minor>0</minor>
+        <patch>0</patch>
+      </requirements>
+    </package>
+    <author>
+      <name>OWOO</name>
+      <website>owoo</website>
+    </author>
+    <readme><![CDATA[]]></readme>
+  </info>
+  <DocumentTypes>
+    <DocumentType>
+      <Info>
+        <Name>Generic page</Name>
+        <Alias>vodGenericPage</Alias>
+        <Icon>.sprTreeDoc4</Icon>
+        <Thumbnail>docWithImage.png</Thumbnail>
+        <Description>
+        </Description>
+        <AllowedTemplates>
+          <Template>Story</Template>
+          <Template>Submit Job Ad Request</Template>
+          <Template>Submit Directory Listing Request</Template>
+          <Template>Submit contact request</Template>
+          <Template>PageWithCarouselTest</Template>
+          <Template>VP2014-contactrequest</Template>
+        </AllowedTemplates>
+        <DefaultTemplate>Story</DefaultTemplate>
+      </Info>
+      <Structure>
+        <DocumentType>vodGenericPage</DocumentType>
+      </Structure>
+      <GenericProperties>
+        <GenericProperty>
+          <Name>Tags</Name>
+          <Alias>storytags</Alias>
+          <Type>4023e540-92f5-11dd-ad8b-0800200c9a66</Type>
+          <Definition>b6b73142-b9c1-4bf8-a16d-e1c23320b549</Definition>
+          <Tab>Metadata</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[Associate the story with one or more Vod Pro tags to have it appear on a sub-section listing]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Meta keywords</Name>
+          <Alias>metaKeywords</Alias>
+          <Type>ec15c1e5-9d90-422a-aa52-4f7622c63bea</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Metadata</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Meta description</Name>
+          <Alias>metaDescription</Alias>
+          <Type>67db8357-ef57-493e-91ac-936d305e0f2a</Type>
+          <Definition>c6bac0dd-4ab9-45b1-8e30-e4b619ee5da3</Definition>
+          <Tab>Metadata</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Title</Name>
+          <Alias>title</Alias>
+          <Type>ec15c1e5-9d90-422a-aa52-4f7622c63bea</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Article</Tab>
+          <Mandatory>True</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>allow comments?</Name>
+          <Alias>storyallowcomments</Alias>
+          <Type>38b352c1-e9f8-4fd8-9324-9a2eab06d97a</Type>
+          <Definition>92897bc6-a5f3-4ffe-ae27-f2e7e33dda49</Definition>
+          <Tab>Article</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Teaser</Name>
+          <Alias>storyteaser</Alias>
+          <Type>67db8357-ef57-493e-91ac-936d305e0f2a</Type>
+          <Definition>c6bac0dd-4ab9-45b1-8e30-e4b619ee5da3</Definition>
+          <Tab>Teaser</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Image</Name>
+          <Alias>storyimage</Alias>
+          <Type>ead69342-f06d-4253-83ac-28000225583b</Type>
+          <Definition>93929b9a-93a2-4e2a-b239-d99334440a59</Definition>
+          <Tab>Article</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Carousel</Name>
+          <Alias>carousel</Alias>
+          <Type>158aa029-24ed-4948-939e-c3da209e5fba</Type>
+          <Definition>a6857c73-d6e9-480c-b6e6-f15f6ad11125</Definition>
+          <Tab>Metadata</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Mini-Teaser</Name>
+          <Alias>miniTeaser</Alias>
+          <Type>67db8357-ef57-493e-91ac-936d305e0f2a</Type>
+          <Definition>c6bac0dd-4ab9-45b1-8e30-e4b619ee5da3</Definition>
+          <Tab>Teaser</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>^.{0,140}$</Validation>
+          <Description><![CDATA[You have 140 characters to play with]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Author</Name>
+          <Alias>storyauthor</Alias>
+          <Type>ec15c1e5-9d90-422a-aa52-4f7622c63bea</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Article</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Date</Name>
+          <Alias>storydate</Alias>
+          <Type>23e93522-3200-44e2-9f29-e61a6fcbb79a</Type>
+          <Definition>5046194e-4237-453c-a547-15db3a07c4e1</Definition>
+          <Tab>Article</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Story</Name>
+          <Alias>story</Alias>
+          <Type>5e9b75ae-face-41c8-b47e-5f4b0fd82f83</Type>
+          <Definition>ca90c950-0aff-4e72-b976-a30b1ac57dad</Definition>
+          <Tab>Article</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+      </GenericProperties>
+      <Tabs>
+        <Tab>
+          <Id>14</Id>
+          <Caption>Metadata</Caption>
+        </Tab>
+        <Tab>
+          <Id>15</Id>
+          <Caption>Article</Caption>
+        </Tab>
+        <Tab>
+          <Id>16</Id>
+          <Caption>Teaser</Caption>
+        </Tab>
+      </Tabs>
+    </DocumentType>
+    <DocumentType>
+      <Info>
+        <Name>Home page</Name>
+        <Alias>vodProHomePage</Alias>
+        <Icon>.sprTreeSettingDomain</Icon>
+        <Thumbnail>folder.png</Thumbnail>
+        <Description>
+        </Description>
+        <AllowedTemplates>
+          <Template>Home page</Template>
+          <Template>homepage2</Template>
+          <Template>VP2014-home</Template>
+        </AllowedTemplates>
+        <DefaultTemplate>Home page</DefaultTemplate>
+      </Info>
+      <Structure>
+        <DocumentType>vodProStory</DocumentType>
+        <DocumentType>vodProSection</DocumentType>
+        <DocumentType>vodProHomePage</DocumentType>
+        <DocumentType>vodGenericPage</DocumentType>
+        <DocumentType>RSS</DocumentType>
+        <DocumentType>XmlApp</DocumentType>
+        <DocumentType>SPI_Folder</DocumentType>
+        <DocumentType>DataFolder</DocumentType>
+        <DocumentType>VUI_Folder</DocumentType>
+        <DocumentType>VUI2Home</DocumentType>
+      </Structure>
+      <GenericProperties>
+        <GenericProperty>
+          <Name>Title</Name>
+          <Alias>title</Alias>
+          <Type>ec15c1e5-9d90-422a-aa52-4f7622c63bea</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Metadata</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Carousel</Name>
+          <Alias>carousel</Alias>
+          <Type>158aa029-24ed-4948-939e-c3da209e5fba</Type>
+          <Definition>a6857c73-d6e9-480c-b6e6-f15f6ad11125</Definition>
+          <Tab>Metadata</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Meta keywords</Name>
+          <Alias>metakeywords</Alias>
+          <Type>ec15c1e5-9d90-422a-aa52-4f7622c63bea</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Metadata</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Meta description</Name>
+          <Alias>metaDescription</Alias>
+          <Type>ec15c1e5-9d90-422a-aa52-4f7622c63bea</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Metadata</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Features</Name>
+          <Alias>features</Alias>
+          <Type>454545ab-1234-4321-abcd-1234567890ab</Type>
+          <Definition>932f30f0-0dc2-4e3b-97b6-c55f7728c10f</Definition>
+          <Tab>Metadata</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>New Here</Name>
+          <Alias>teasers</Alias>
+          <Type>454545ab-1234-4321-abcd-1234567890ab</Type>
+          <Definition>932f30f0-0dc2-4e3b-97b6-c55f7728c10f</Definition>
+          <Tab>Metadata</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Most Popular</Name>
+          <Alias>mostPopular</Alias>
+          <Type>454545ab-1234-4321-abcd-1234567890ab</Type>
+          <Definition>932f30f0-0dc2-4e3b-97b6-c55f7728c10f</Definition>
+          <Tab>Metadata</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Sponsors</Name>
+          <Alias>sponsors</Alias>
+          <Type>454545ab-1234-4321-abcd-1234567890ab</Type>
+          <Definition>932f30f0-0dc2-4e3b-97b6-c55f7728c10f</Definition>
+          <Tab>Metadata</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Featured Jobs</Name>
+          <Alias>featuredJobs</Alias>
+          <Type>454545ab-1234-4321-abcd-1234567890ab</Type>
+          <Definition>932f30f0-0dc2-4e3b-97b6-c55f7728c10f</Definition>
+          <Tab>Metadata</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[Jobs that appear on the Right-hand side of every page]]></Description>
+        </GenericProperty>
+      </GenericProperties>
+      <Tabs>
+        <Tab>
+          <Id>13</Id>
+          <Caption>Metadata</Caption>
+        </Tab>
+      </Tabs>
+    </DocumentType>
+    <DocumentType>
+      <Info>
+        <Name>Section</Name>
+        <Alias>vodProSection</Alias>
+        <Icon>.sprTreeFolder_o</Icon>
+        <Thumbnail>folder.png</Thumbnail>
+        <Description>
+        </Description>
+        <AllowedTemplates>
+          <Template>Section</Template>
+          <Template>Section-NoListing</Template>
+          <Template>Section-Search</Template>
+          <Template>Login</Template>
+          <Template>Register</Template>
+          <Template>Profile</Template>
+          <Template>Confirm-registration</Template>
+          <Template>Submit Job Ad Request</Template>
+          <Template>Section-Jobs</Template>
+          <Template>Section-Events</Template>
+          <Template>VUI_Section</Template>
+          <Template>vui2.research.section</Template>
+          <Template>VP2014-section</Template>
+          <Template>VP2014-search</Template>
+          <Template>VP2014-registration</Template>
+          <Template>VP2014-signin</Template>
+          <Template>VP2014-profile</Template>
+          <Template>VP2014-jobs</Template>
+        </AllowedTemplates>
+        <DefaultTemplate>Section</DefaultTemplate>
+      </Info>
+      <Structure>
+        <DocumentType>vodProStory</DocumentType>
+        <DocumentType>vodProSection</DocumentType>
+        <DocumentType>vodGenericPage</DocumentType>
+        <DocumentType>vodproJob</DocumentType>
+        <DocumentType>Sponsor</DocumentType>
+      </Structure>
+      <GenericProperties>
+        <GenericProperty>
+          <Name>Tags to show</Name>
+          <Alias>sectiontags</Alias>
+          <Type>4023e540-92f5-11dd-ad8b-0800200c9a66</Type>
+          <Definition>b6b73142-b9c1-4bf8-a16d-e1c23320b549</Definition>
+          <Tab>Metadata</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Section Title</Name>
+          <Alias>title</Alias>
+          <Type>ec15c1e5-9d90-422a-aa52-4f7622c63bea</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Section</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Section intro</Name>
+          <Alias>sectionIntro</Alias>
+          <Type>5e9b75ae-face-41c8-b47e-5f4b0fd82f83</Type>
+          <Definition>ca90c950-0aff-4e72-b976-a30b1ac57dad</Definition>
+          <Tab>Section</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Number of items to show</Name>
+          <Alias>numberOfItemsToShow</Alias>
+          <Type>1413afcb-d19a-4173-8e9a-68288d2a73b8</Type>
+          <Definition>45653ea4-af5b-4a34-b031-fa7da982042a</Definition>
+          <Tab>Section</Tab>
+          <Mandatory>True</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Related teasers</Name>
+          <Alias>relatedTeasers</Alias>
+          <Type>158aa029-24ed-4948-939e-c3da209e5fba</Type>
+          <Definition>a6857c73-d6e9-480c-b6e6-f15f6ad11125</Definition>
+          <Tab>Section</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>navigation SortOrder</Name>
+          <Alias>navigationSortOrder</Alias>
+          <Type>1413afcb-d19a-4173-8e9a-68288d2a73b8</Type>
+          <Definition>45653ea4-af5b-4a34-b031-fa7da982042a</Definition>
+          <Tab>
+          </Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Hide From Navigation</Name>
+          <Alias>hideFromNavigation</Alias>
+          <Type>38b352c1-e9f8-4fd8-9324-9a2eab06d97a</Type>
+          <Definition>92897bc6-a5f3-4ffe-ae27-f2e7e33dda49</Definition>
+          <Tab>
+          </Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Uses VUI PayWall</Name>
+          <Alias>usesPayWall</Alias>
+          <Type>38b352c1-e9f8-4fd8-9324-9a2eab06d97a</Type>
+          <Definition>92897bc6-a5f3-4ffe-ae27-f2e7e33dda49</Definition>
+          <Tab>Section</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Meta keywords</Name>
+          <Alias>metaKeywords</Alias>
+          <Type>67db8357-ef57-493e-91ac-936d305e0f2a</Type>
+          <Definition>c6bac0dd-4ab9-45b1-8e30-e4b619ee5da3</Definition>
+          <Tab>Metadata</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Meta description</Name>
+          <Alias>metaDescription</Alias>
+          <Type>ec15c1e5-9d90-422a-aa52-4f7622c63bea</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Metadata</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+      </GenericProperties>
+      <Tabs>
+        <Tab>
+          <Id>12</Id>
+          <Caption>Section</Caption>
+        </Tab>
+        <Tab>
+          <Id>11</Id>
+          <Caption>Metadata</Caption>
+        </Tab>
+      </Tabs>
+    </DocumentType>
+    <DocumentType>
+      <Info>
+        <Name>Snippets</Name>
+        <Alias>Snippets</Alias>
+        <Icon>folder.gif</Icon>
+        <Thumbnail>folder.png</Thumbnail>
+        <Description>
+        </Description>
+        <AllowedTemplates />
+        <DefaultTemplate>
+        </DefaultTemplate>
+      </Info>
+      <Structure>
+        <DocumentType>HTMLSnippet</DocumentType>
+        <DocumentType>CodeSnippet</DocumentType>
+        <DocumentType>Sponsor</DocumentType>
+      </Structure>
+      <GenericProperties />
+      <Tabs />
+    </DocumentType>
+    <DocumentType>
+      <Info>
+        <Name>Story</Name>
+        <Alias>vodProStory</Alias>
+        <Icon>.sprTreeDoc4</Icon>
+        <Thumbnail>docWithImage.png</Thumbnail>
+        <Description>
+        </Description>
+        <AllowedTemplates>
+          <Template>Story</Template>
+          <Template>Magazine-Flash</Template>
+          <Template>VUI_Story</Template>
+          <Template>VUI_Story_WhyJoin</Template>
+          <Template>vui3-story</Template>
+          <Template>VP2014-story</Template>
+        </AllowedTemplates>
+        <DefaultTemplate>Story</DefaultTemplate>
+      </Info>
+      <Structure />
+      <GenericProperties>
+        <GenericProperty>
+          <Name>Tags</Name>
+          <Alias>storytags</Alias>
+          <Type>4023e540-92f5-11dd-ad8b-0800200c9a66</Type>
+          <Definition>b6b73142-b9c1-4bf8-a16d-e1c23320b549</Definition>
+          <Tab>Metadata</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[Associate the story with one or more Vod Pro tags to have it appear on a sub-section listing]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Meta keywords</Name>
+          <Alias>metaKeywords</Alias>
+          <Type>ec15c1e5-9d90-422a-aa52-4f7622c63bea</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Metadata</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Meta description</Name>
+          <Alias>metaDescription</Alias>
+          <Type>67db8357-ef57-493e-91ac-936d305e0f2a</Type>
+          <Definition>c6bac0dd-4ab9-45b1-8e30-e4b619ee5da3</Definition>
+          <Tab>Metadata</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Mini-Teaser</Name>
+          <Alias>miniTeaser</Alias>
+          <Type>67db8357-ef57-493e-91ac-936d305e0f2a</Type>
+          <Definition>c6bac0dd-4ab9-45b1-8e30-e4b619ee5da3</Definition>
+          <Tab>Teaser</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>^.{0,140}$</Validation>
+          <Description><![CDATA[You have 140 characters to play with]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Related story search Term</Name>
+          <Alias>relatedStorySearchTerm</Alias>
+          <Type>ec15c1e5-9d90-422a-aa52-4f7622c63bea</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Metadata</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>allow comments?</Name>
+          <Alias>storyallowcomments</Alias>
+          <Type>38b352c1-e9f8-4fd8-9324-9a2eab06d97a</Type>
+          <Definition>92897bc6-a5f3-4ffe-ae27-f2e7e33dda49</Definition>
+          <Tab>Article</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Teaser</Name>
+          <Alias>storyteaser</Alias>
+          <Type>67db8357-ef57-493e-91ac-936d305e0f2a</Type>
+          <Definition>c6bac0dd-4ab9-45b1-8e30-e4b619ee5da3</Definition>
+          <Tab>Teaser</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Hide Sponsors?</Name>
+          <Alias>hideSponsors</Alias>
+          <Type>38b352c1-e9f8-4fd8-9324-9a2eab06d97a</Type>
+          <Definition>92897bc6-a5f3-4ffe-ae27-f2e7e33dda49</Definition>
+          <Tab>Metadata</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[Check this box to hide the Sponsors from the RH column]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Image</Name>
+          <Alias>storyimage</Alias>
+          <Type>ead69342-f06d-4253-83ac-28000225583b</Type>
+          <Definition>93929b9a-93a2-4e2a-b239-d99334440a59</Definition>
+          <Tab>Article</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Title</Name>
+          <Alias>title</Alias>
+          <Type>ec15c1e5-9d90-422a-aa52-4f7622c63bea</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Article</Tab>
+          <Mandatory>True</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Author</Name>
+          <Alias>storyauthor</Alias>
+          <Type>ec15c1e5-9d90-422a-aa52-4f7622c63bea</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Article</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Date</Name>
+          <Alias>storydate</Alias>
+          <Type>23e93522-3200-44e2-9f29-e61a6fcbb79a</Type>
+          <Definition>5046194e-4237-453c-a547-15db3a07c4e1</Definition>
+          <Tab>Article</Tab>
+          <Mandatory>True</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Story</Name>
+          <Alias>story</Alias>
+          <Type>5e9b75ae-face-41c8-b47e-5f4b0fd82f83</Type>
+          <Definition>ca90c950-0aff-4e72-b976-a30b1ac57dad</Definition>
+          <Tab>Article</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Requires Login</Name>
+          <Alias>requiresLogin</Alias>
+          <Type>38b352c1-e9f8-4fd8-9324-9a2eab06d97a</Type>
+          <Definition>92897bc6-a5f3-4ffe-ae27-f2e7e33dda49</Definition>
+          <Tab>Article</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[Check this if you want the Story content below to be behind the RegWall]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Member-only Story</Name>
+          <Alias>memberStory</Alias>
+          <Type>5e9b75ae-face-41c8-b47e-5f4b0fd82f83</Type>
+          <Definition>ca90c950-0aff-4e72-b976-a30b1ac57dad</Definition>
+          <Tab>Article</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[Usually premium content, but check the Requires login box above]]></Description>
+        </GenericProperty>
+      </GenericProperties>
+      <Tabs>
+        <Tab>
+          <Id>6</Id>
+          <Caption>Metadata</Caption>
+        </Tab>
+        <Tab>
+          <Id>8</Id>
+          <Caption>Article</Caption>
+        </Tab>
+        <Tab>
+          <Id>9</Id>
+          <Caption>Teaser</Caption>
+        </Tab>
+      </Tabs>
+    </DocumentType>
+    <DocumentType>
+      <Info>
+        <Name>XmlApp</Name>
+        <Alias>XmlApp</Alias>
+        <Icon>.sprTreeDeveloperMacro</Icon>
+        <Thumbnail>developer.png</Thumbnail>
+        <Description>
+        </Description>
+        <AllowedTemplates>
+          <Template>XmlApp</Template>
+          <Template>VUI_XmlApp</Template>
+          <Template>VP2014-XmlApp</Template>
+        </AllowedTemplates>
+        <DefaultTemplate>XmlApp</DefaultTemplate>
+      </Info>
+      <Structure />
+      <GenericProperties />
+      <Tabs />
+    </DocumentType>
+  </DocumentTypes>
+  <Templates>
+    <Template>
+      <Name>VP2014</Name>
+      <Alias>VP2014</Alias>
+      <Design><![CDATA[<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="VP2014.master.cs" MasterPageFile="~/umbraco/masterpages/default.master" Inherits="VP2.masterpages.VP2014" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderDefault" runat="server">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="alternate" type="application/rss+xml" href="/rss/" title="VOD Pro RSS feed" />
+
+    <umbraco:Macro Alias="vp2-header" runat="server"></umbraco:Macro>
+
+    <link href="/_inc/VP2014/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/_inc/VP2014/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/_inc/VP2014/css/style.css" rel="stylesheet" />
+
+    <!-- GOOGLE FONT -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic|Open+Sans" />
+
+    <!-- ANALYTICS -->
+    <umbraco:Macro Alias="vp2-ga" runat="server"></umbraco:Macro>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <!-- Accessibility reasons -->
+    <a href="#content" class="sr-only">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div id="bg1">
+            <div class="container">
+                <div class="row">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a class="navbar-brand" href="/">VODProfessional</a>
+
+                    <div class="collapse navbar-collapse">
+                        <ul id="nav-secondary" class="nav navbar-nav">
+                            <umbraco:Macro Alias="vp2-topnav-signin" runat="server"></umbraco:Macro>
+                            <li class="social"><a href="https://twitter.com/vodprofessional"><i class="fa fa-twitter"></i></a></li>
+                            <li class="social"><a href="https://www.facebook.com/VodProfessional"><i class="fa fa-facebook"></i></a></li>
+                            <li class="social"><a href="http://www.linkedin.com/company/vod-professional"><i class="fa fa-linkedin"></i></a></li>
+                            <li class="social"><a href="/rss"><i class="fa fa-rss"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="bg2">
+            <div class="container">
+                <div class="row">
+                    <div class="collapse navbar-collapse">
+                        <umbraco:Macro Alias="vp2-topnav" runat="server"></umbraco:Macro>
+                        <span class="form-inline" role="form">
+                            <div class="form-group">
+                                <label class="sr-only" for="search">Search VODProfessional</label>
+                                <div class="input-group">
+                                    <input id="search" class="form-control" name="search" type="text" placeholder="Search..."/>
+                                    <span class="input-group-addon" id="search-button" data-target="/search"><i class="fa fa-search"></i></span>
+                                </div>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <asp:ContentPlaceHolder runat="server" ID="ContentMain"></asp:ContentPlaceHolder>
+
+    <footer>
+        <div class="container">
+            <div id="footer-logo" class="row">
+                <div class="container">
+                    <div id="footer-logo-placeholder"></div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div id="footer-social">
+                <ul id="footer-secondary" class="nav navbar-nav">
+                    <a href="https://twitter.com/vodprofessional"><i class="fa fa-twitter"></i></a>
+                    <a href="https://www.facebook.com/VodProfessional"><i class="fa fa-facebook"></i></a>
+                    <a href="http://www.linkedin.com/company/vod-professional"><i class="fa fa-linkedin"></i></a>
+                    <a href="/rss"><i class="fa fa-rss"></i></a>
+                </ul>
+            </div>
+            <div id="footer-links" class="row">
+                <div class="container">
+                    <a href="/about">About VOD Professional</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="/contact-us">Contact Us</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="">Terms and Conditions</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+            <div id="footer-copyright" class="row">
+                &copy; VOD Professional . All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- The deferred JavaScript -->
+    <script type="text/javascript" src="/_inc/VP2014/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/_inc/VP2014/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/_inc/VP2014/js/main.js"></script>
+    <script type="text/javascript" src="/Scripts/scripts.js"></script>
+</body>
+</asp:Content>]]></Design>
+    </Template>
+    <Template>
+      <Name>VP2014-contactrequest</Name>
+      <Alias>VP2014-contactrequest</Alias>
+      <Master>VP2014</Master>
+      <Design><![CDATA[<%@ Master Language="C#" MasterPageFile="~/masterpages/VP2014.master" AutoEventWireup="true" %>
+<%@ Register TagName="ContactRequest" TagPrefix="vp" Src="~/umbraco/plugins/vp/usercontrols/contact-request.ascx" %>
+<asp:content ContentPlaceHolderId="ContentMain" runat="server">
+	
+    <!-- Main content -->
+    <div id="content" class="container" >
+        <div id="columns" class="row">
+            <div id="main" class="articles col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                <div>
+                    <section id="column-full" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 active">
+                        <h2><umbraco:item id="umbTitle" runat="server" field="title" /></h2>
+                        <umbraco:item id="umbStory" runat="server" field="story" />
+                        <form runat="server">
+                            <vp:ContactRequest id="cr1" runat="server" />
+                        </form>
+                    </section>
+                </div>
+            </div>
+            <div id="promotion" class="col-lg-5 col-md-5 hidden-sm hidden-xs">
+                <div id="inner-promotion">
+                    <umbraco:Macro Alias="vp2-rhs" runat="server"></umbraco:Macro>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</asp:content>]]></Design>
+    </Template>
+    <Template>
+      <Name>VP2014-home</Name>
+      <Alias>VP2014-home</Alias>
+      <Master>VP2014</Master>
+      <Design><![CDATA[<%@ Master Language="C#" MasterPageFile="~/masterpages/VP2014.master" AutoEventWireup="true" %>
+
+<asp:Content runat="server" ContentPlaceHolderID="ContentMain">
+    <!-- Main content -->
+    <div id="content" class="home container" >
+        <div id="columns" class="row">
+            <div id="xs-nav">
+                <a id="tab-news" class="active" href="#">News Feed</a>
+                <a id="tab-featured" href="#">Featured Content</a>
+            </div>
+            <div id="main" class="articles col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                <div>
+                    <section id="column-left" class="col-lg-5 col-md-5 col-sm-5 col-xs-12 active">
+                        <h2>News Feed</h2>
+                        <umbraco:Macro Alias="vp2-articlelist" runat="server" divId="inner-left" articleType="NEWS" count="20" outputType="FEED"></umbraco:Macro>
+                    </section>
+                    <section id="column-center" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+                        <h2>Featured Content</h2>
+                        <umbraco:Macro Alias="vp2-articlelist" runat="server" divId="inner-center" articleType="FEATURE" count="10" outputType="FULL"></umbraco:Macro>
+                    </section>
+                </div>
+                <div id="pager-wrap">
+                    <div class="pager-loading">
+                        <img src="/_inc/VP2014/img/loading.gif" height="30"/>
+                    </div>
+                    <ul class="pager">
+                        <li class="next"><a href="/">Newer &rarr;</a></li>
+                        <li class="previous"><a href="/">&larr; Older</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="promotion" class="col-lg-5 col-md-5 hidden-sm hidden-xs">
+                <div id="inner-promotion">
+                    <umbraco:Macro Alias="vp2-rhs" runat="server"></umbraco:Macro>
+                </div>
+            </div>
+        </div>
+    </div>
+</asp:Content>]]></Design>
+    </Template>
+    <Template>
+      <Name>VP2014-jobs</Name>
+      <Alias>VP2014-jobs</Alias>
+      <Master>VP2014</Master>
+      <Design><![CDATA[<%@ Master Language="C#" MasterPageFile="~/masterpages/VP2014.master" AutoEventWireup="true" %>
+<asp:content ID="Content1" ContentPlaceHolderId="ContentMain" runat="server">
+	
+    <!-- Main content -->
+    <div id="content" class="container news" >
+        <div id="columns" class="row">
+            <div id="main" class="articles col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                <div>
+                    <section id="column-full" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 active">
+                        <h2><umbraco:item id="umbTitle" runat="server" field="title" /></h2>
+                        <umbraco:item id="umbStory" runat="server" field="sectionIntro" />
+                        <umbraco:Macro Alias="vp2-joblist" runat="server"></umbraco:Macro> 
+                    </section>
+                </div>
+            </div>
+            <div id="promotion" class="col-lg-5 col-md-5 hidden-sm hidden-xs">
+                <div id="inner-promotion">
+                    <umbraco:Macro Alias="vp2-rhs" runat="server"></umbraco:Macro>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</asp:content>]]></Design>
+    </Template>
+    <Template>
+      <Name>VP2014-profile</Name>
+      <Alias>VP2014-profile</Alias>
+      <Master>VP2014</Master>
+      <Design><![CDATA[<%@ Master Language="C#" MasterPageFile="~/masterpages/VP2014.master" AutoEventWireup="true" %>
+<%@ Register TagName="Profile" TagPrefix="vp" Src="~/umbraco/plugins/vp/usercontrols/main-profile.ascx" %>
+<asp:content ID="Content1" ContentPlaceHolderId="ContentMain" runat="server">
+	
+    <!-- Main content -->
+    <div id="content" class="container" >
+        <div id="columns" class="row">
+            <div id="main" class="articles col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                <div>
+                    <section id="column-full" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 active">
+                        <h2><umbraco:item id="umbTitle" runat="server" field="title" /></h2>
+                        <umbraco:item id="umbStory" runat="server" field="story" />
+                        <form id="Form1" runat="server">
+                            <vp:Profile id="profile1" runat="server" />
+                        </form>
+                    </section>
+                </div>
+            </div>
+            <div id="promotion" class="col-lg-5 col-md-5 hidden-sm hidden-xs">
+                <div id="inner-promotion">
+                    <umbraco:Macro Alias="vp2-rhs" runat="server"></umbraco:Macro>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</asp:content>]]></Design>
+    </Template>
+    <Template>
+      <Name>VP2014-registration</Name>
+      <Alias>VP2014-registration</Alias>
+      <Master>VP2014</Master>
+      <Design><![CDATA[<%@ Master Language="C#" MasterPageFile="~/masterpages/VP2014.master" AutoEventWireup="true" %>
+<%@ Register TagName="Registration" TagPrefix="vp" Src="~/umbraco/plugins/vp/usercontrols/main-registration.ascx" %>
+<asp:content ContentPlaceHolderId="ContentMain" runat="server">
+	
+    <!-- Main content -->
+    <div id="content" class="container" >
+        <div id="columns" class="row">
+            <div id="main" class="articles col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                <div>
+                    <section id="column-full" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 active">
+                        <h2><umbraco:item id="umbTitle" runat="server" field="title" /></h2>
+                        <umbraco:item id="umbStory" runat="server" field="story" />
+                        <form id="Form1" runat="server">
+                            <vp:Registration id="reg1" runat="server" />
+                        </form>
+                    </section>
+                </div>
+            </div>
+            <div id="promotion" class="col-lg-5 col-md-5 hidden-sm hidden-xs">
+                <div id="inner-promotion">
+                    <umbraco:Macro Alias="vp2-rhs" runat="server"></umbraco:Macro>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</asp:content>]]></Design>
+    </Template>
+    <Template>
+      <Name>VP2014-search</Name>
+      <Alias>VP2014-search</Alias>
+      <Master>VP2014</Master>
+      <Design><![CDATA[<%@ Master Language="C#" MasterPageFile="~/masterpages/VP2014.master" AutoEventWireup="true" %>
+
+<asp:content ContentPlaceHolderId="ContentMain" runat="server">
+
+    <!-- Main content -->
+    <div id="content" class="news container" >
+        <div id="columns" class="row">
+            <div id="main" class="articles col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                <div>
+                    <section id="column-full" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 active">
+                        <h2><umbraco:item id="umbTitle" runat="server" field="title" /></h2>
+                        <umbraco:Macro Alias="Vp2-search" runat="server"></umbraco:Macro>
+                    </section>
+                </div>
+                <div id="pager-wrap">
+                    <div class="pager-loading">
+                        <img src="img/loading.gif" height="30"/>
+                    </div>
+                    <ul class="pager">
+                        <li class="next"><a href="/">Newer &rarr;</a></li>
+                        <li class="previous"><a href="/">&larr; Older</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="promotion" class="col-lg-5 col-md-5 hidden-sm hidden-xs">
+                <div id="inner-promotion">
+                    <umbraco:Macro Alias="vp2-rhs" runat="server"></umbraco:Macro>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+</asp:content>]]></Design>
+    </Template>
+    <Template>
+      <Name>VP2014-section</Name>
+      <Alias>VP2014-section</Alias>
+      <Master>VP2014</Master>
+      <Design><![CDATA[<%@ Master Language="C#" MasterPageFile="~/masterpages/VP2014.master" AutoEventWireup="true" %>
+
+<asp:Content runat="server" ContentPlaceHolderID="ContentMain">
+
+    <!-- Main content -->
+    <div id="content" class="news container" >
+        <div id="columns" class="row">
+            <div id="main" class="articles col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                <div>
+                    <section id="column-full" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 active">
+                        <h2><umbraco:item id="umbTitle" runat="server" field="title" /></h2>
+                        <umbraco:Macro Alias="vp2-articlelist" runat="server" divId="inner-full" articleType="ANY" count="20" outputType="FULL"></umbraco:Macro>                     
+                    </section>
+                </div>
+                <div id="pager-wrap">
+                    <div class="pager-loading">
+                        <img src="img/loading.gif" height="30"/>
+                    </div>
+                    <ul class="pager">
+                        <li class="next"><a href="/">Newer &rarr;</a></li>
+                        <li class="previous"><a href="/">&larr; Older</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="promotion" class="col-lg-5 col-md-5 hidden-sm hidden-xs">
+                <div id="inner-promotion">
+                    <umbraco:Macro Alias="vp2-rhs" runat="server"></umbraco:Macro>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</asp:Content>]]></Design>
+    </Template>
+    <Template>
+      <Name>VP2014-signin</Name>
+      <Alias>VP2014-signin</Alias>
+      <Master>VP2014</Master>
+      <Design><![CDATA[<%@ Master Language="C#" MasterPageFile="~/masterpages/VP2014.master" AutoEventWireup="true" %>
+<%@ Register TagName="Login" TagPrefix="vp" Src="~/umbraco/plugins/vp/usercontrols/login.ascx" %>
+
+<asp:Content runat="server" ContentPlaceHolderID="ContentMain">
+
+    <!-- Main content -->
+    <div id="content" class="signuplogin container" >
+        <div id="columns" class="row">
+            <div id="main" class="articles col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                <div>
+                    <section id="column-full" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 active">
+                        <h2><umbraco:item id="umbTitle" runat="server" field="title" /></h2>
+                        <form id="Form1" runat="server">
+                            <vp:Login id="login1" runat="server" />
+                        </form>
+                                                              
+                    </section>
+                </div>
+                <div id="pager-wrap">
+                    <div class="pager-loading">
+                        <img src="img/loading.gif" height="30"/>
+                    </div>
+                    <ul class="pager">
+                        <li class="next"><a href="/">Newer &rarr;</a></li>
+                        <li class="previous"><a href="/">&larr; Older</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="promotion" class="col-lg-5 col-md-5 hidden-sm hidden-xs">
+                <div id="inner-promotion">
+                    <umbraco:Macro Alias="vp2-rhs" runat="server"></umbraco:Macro>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</asp:Content>]]></Design>
+    </Template>
+    <Template>
+      <Name>VP2014-story</Name>
+      <Alias>VP2014-story</Alias>
+      <Master>VP2014</Master>
+      <Design><![CDATA[<%@ Master Language="C#" MasterPageFile="~/masterpages/VP2014.master" AutoEventWireup="true" %>
+<asp:Content ID="Content1" runat="server" ContentPlaceHolderID="ContentMain">
+
+
+    <!-- Main content -->
+    <div id="content" class="container story" >
+        <div id="columns" class="row">
+            <div id="main" class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                <div>
+                    <section id="column-full" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 active">
+                        <umbraco:Macro Alias="vp2-article" runat="server"></umbraco:Macro> 
+                    </section>
+                </div>
+                <div id="pager-wrap">
+                    <ul class="pager">
+                        <li class="next"><a href="/">Newer &rarr;</a></li>
+                        <li class="previous"><a href="/">&larr; Older</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="promotion" class="col-lg-5 col-md-5 hidden-sm hidden-xs">
+                <div id="inner-promotion">
+                    <umbraco:Macro Alias="vp2-rhs" runat="server"></umbraco:Macro>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</asp:Content>]]></Design>
+    </Template>
+    <Template>
+      <Name>VP2014-XmlApp</Name>
+      <Alias>VP2014-XmlApp</Alias>
+      <Design><![CDATA[<%@ Master Language="C#" MasterPageFile="~/umbraco/masterpages/default.master" AutoEventWireup="true" %>
+  <%@ Register src="~/umbraco/plugins/vp/usercontrols/ajaxactions2014.ascx" tagname="AjaxActions" tagprefix="vp" %>
+
+<asp:Content ContentPlaceHolderID="ContentPlaceHolderDefault" runat="server">
+  <vp:AjaxActions ID="ajaxactions1" runat="server" />
+</asp:Content>]]></Design>
+    </Template>
+  </Templates>
+  <Stylesheets />
+  <Macros>
+    <macro>
+      <name>Vp2-article</name>
+      <alias>Vp2-article</alias>
+      <scriptType>
+      </scriptType>
+      <scriptAssembly>
+      </scriptAssembly>
+      <xslt>
+      </xslt>
+      <useInEditor>False</useInEditor>
+      <refreshRate>0</refreshRate>
+      <scriptingFile>vp2-article.cshtml</scriptingFile>
+      <properties />
+    </macro>
+    <macro>
+      <name>vp2-articlelist</name>
+      <alias>vp2-articlelist</alias>
+      <scriptType>
+      </scriptType>
+      <scriptAssembly>
+      </scriptAssembly>
+      <xslt>
+      </xslt>
+      <useInEditor>False</useInEditor>
+      <refreshRate>300</refreshRate>
+      <scriptingFile>vp2-articlelist.cshtml</scriptingFile>
+      <properties>
+        <property name="Article Type" alias="articleType" show="True" propertyType="text" />
+        <property name="Count" alias="count" show="True" propertyType="number" />
+      </properties>
+    </macro>
+    <macro>
+      <name>Vp2-ga</name>
+      <alias>Vp2-ga</alias>
+      <scriptType>
+      </scriptType>
+      <scriptAssembly>
+      </scriptAssembly>
+      <xslt>
+      </xslt>
+      <useInEditor>False</useInEditor>
+      <refreshRate>0</refreshRate>
+      <scriptingFile>vp2-ga.cshtml</scriptingFile>
+      <properties />
+    </macro>
+    <macro>
+      <name>Vp2-header</name>
+      <alias>Vp2-header</alias>
+      <scriptType>
+      </scriptType>
+      <scriptAssembly>
+      </scriptAssembly>
+      <xslt>
+      </xslt>
+      <useInEditor>False</useInEditor>
+      <refreshRate>0</refreshRate>
+      <scriptingFile>vp2-header.cshtml</scriptingFile>
+      <properties />
+    </macro>
+    <macro>
+      <name>Vp2-joblist</name>
+      <alias>Vp2-joblist</alias>
+      <scriptType>
+      </scriptType>
+      <scriptAssembly>
+      </scriptAssembly>
+      <xslt>
+      </xslt>
+      <useInEditor>False</useInEditor>
+      <refreshRate>0</refreshRate>
+      <scriptingFile>vp2-joblist.cshtml</scriptingFile>
+      <properties />
+    </macro>
+    <macro>
+      <name>Vp2-regwall</name>
+      <alias>Vp2-regwall</alias>
+      <scriptType>
+      </scriptType>
+      <scriptAssembly>
+      </scriptAssembly>
+      <xslt>
+      </xslt>
+      <useInEditor>False</useInEditor>
+      <refreshRate>0</refreshRate>
+      <scriptingFile>vp2-regwall.cshtml</scriptingFile>
+      <properties />
+    </macro>
+    <macro>
+      <name>Vp2-rhs</name>
+      <alias>Vp2-rhs</alias>
+      <scriptType>
+      </scriptType>
+      <scriptAssembly>
+      </scriptAssembly>
+      <xslt>
+      </xslt>
+      <useInEditor>False</useInEditor>
+      <refreshRate>0</refreshRate>
+      <scriptingFile>vp2-rhs.cshtml</scriptingFile>
+      <properties />
+    </macro>
+    <macro>
+      <name>Vp2-search</name>
+      <alias>Vp2-search</alias>
+      <scriptType>
+      </scriptType>
+      <scriptAssembly>
+      </scriptAssembly>
+      <xslt>
+      </xslt>
+      <useInEditor>False</useInEditor>
+      <refreshRate>0</refreshRate>
+      <scriptingFile>vp2-search.cshtml</scriptingFile>
+      <properties />
+    </macro>
+    <macro>
+      <name>Vp2-topnav</name>
+      <alias>Vp2-topnav</alias>
+      <scriptType>
+      </scriptType>
+      <scriptAssembly>
+      </scriptAssembly>
+      <xslt>
+      </xslt>
+      <useInEditor>False</useInEditor>
+      <refreshRate>0</refreshRate>
+      <scriptingFile>vp2-topnav.cshtml</scriptingFile>
+      <properties />
+    </macro>
+    <macro>
+      <name>Vp2-topnav-signin</name>
+      <alias>Vp2-topnav-signin</alias>
+      <scriptType>
+      </scriptType>
+      <scriptAssembly>
+      </scriptAssembly>
+      <xslt>
+      </xslt>
+      <useInEditor>False</useInEditor>
+      <refreshRate>0</refreshRate>
+      <scriptingFile>vp2-topnav-signin.cshtml</scriptingFile>
+      <properties />
+    </macro>
+  </Macros>
+  <DictionaryItems />
+  <Languages />
+  <DataTypes />
+</umbPackage>

@@ -19,9 +19,23 @@ $dotted-border: 1px dotted #ccc;
     margin-top: 120px;
   }
   @media (max-width: 767px) {
-    margin-top: 55px;
+    //margin-top: 55px;
+    margin-top: 0;
   }
 
+  ul.nav.nav-tabs {
+    li {
+      a { 
+        font-weight: 700;
+      }
+    }
+  }
+  .tab-content {
+    .tab-pane {
+        padding-top: 10px;
+    }
+  }
+  
   #xs-nav {
     display: none;
     @media (max-width: 767px) {

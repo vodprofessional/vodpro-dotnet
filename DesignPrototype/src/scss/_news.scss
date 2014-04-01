@@ -10,7 +10,9 @@ $header-link-color: #333;
   #inner-full, #inner-search-results {
     .article-preview {
       margin-top: 16px;
-      margin-bottom: 24px;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: $dotted-border;
       padding-right: 3em;
 
       .text {

@@ -111,6 +111,11 @@
     margin-top: 2em;
     img {
       max-width: 100%;
+      &.main-image {
+        float:right;
+        margin-left:15px;
+        margin-bottom:15px;
+      }
     }
   }
   

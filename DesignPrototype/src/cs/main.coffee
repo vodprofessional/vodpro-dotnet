@@ -344,6 +344,96 @@ class SearchLoader
 
 ###
 
+###
+class VUIDailySnapshot
+
+  register: () ->
+    _load = this.load
+    _load()
+    
+  load: ->
+    data = { "a":"dailysnap" }
+    jqXHR = $.getJSON("/vui/vui-xml-actions", data)
+    jqXHR.done (json) ->
+      snap = json.data.DailySnapshot
+      template = $('#vui-service-sheet-template').clone()
+      template
+        .find('article header h1').text(snap.ServiceName).end()
+        .find('article header .intro .b-info')
+            .find('img').attr('src',snap.IconURL).end()
+            .find('table tr td[data-name="availability"]').text(snap.Availability).end()
+            .find('table tr td[data-name="pay-model"]').text(snap.PayModel).end()
+            .find('table tr td[data-name="category"]').text(snap.Category).end()
+            .end()
+            
+      if snap.Snapshot.numScreenshots > 0
+        template.find('article .b-stats .inner li[data-name="screenshots"]')
+          .find('span.data-point').text(snap.Snapshot.numScreenshots).end()
+          .find('span.num-devices').text(snap.Snapshot.numScreenshotDevices).end()
+      else
+        template.remove('article .b-stats .inner li[data-name="screenshots"]').remove()
+        
+      if snap.Snapshot.benchmarkAverage > 0
+        template.find('article .b-stats .inner li[data-name="benchmark"]')
+            .find('span.data-point').text(snap.Snapshot.benchmarkAverage).end()
+      else
+        template.find('article .b-stats .inner li[data-name="benchmark"]').remove()
+        
+      if snap.Snapshot.ratingAverage > 0
+        template.find('article .b-stats .inner li[data-name="rating"]')
+            .find('span.data-point').text(snap.Snapshot.ratingAverage).end()
+      else
+        template.find('article .b-stats .inner li[data-name="rating"]').remove()
+        
+      if snap.Snapshot.twitterFollowers > 0
+        template.find('article .b-stats .inner li[data-name="twitter"]')
+            .find('span.data-point').text(numberWithCommas(snap.Snapshot.twitterFollowers)).end()
+      else
+        template.find('article .b-stats .inner li[data-name="twitter"]').remove()
+        
+      if snap.Snapshot.facebookLikes > 0
+        template.find('article .b-stats .inner li[data-name="facebook"]')
+            .find('span.data-point').text(numberWithCommas(snap.Snapshot.facebookLikes)).end()
+      else
+        template.find('article .b-stats .inner li[data-name="facebook"]').remove()
+        
+      if snap.Snapshot.ytSubscriberCount > 0
+        template.find('article .b-stats .inner li[data-name="youtube"]')
+            .find('span.data-point').text(numberWithCommas(snap.Snapshot.ytSubscriberCount)).end()
+      else
+        template.find('article .b-stats .inner li[data-name="youtube"]').remove()
+        
+      
+      if snap.Screenshots.resultCount > 0        
+        for screenshot in snap.Screenshots.screenshots
+          screenshotTemplate = template.find('#vui-service-screenshot-template').clone()
+          screenshotTemplate
+            .find('.name').text(screenshot.PageType).end()
+            .find('.device').text(screenshot.Device).end()
+            .find('.img a').attr('href',screenshot.ImageURL_lg).attr('data-lightbox','vui-images').end()
+            .find('.img img').attr('src',screenshot.ImageURL_th).end()
+          .end()
+          template.find('article .b-screenshots .carousel ul').append(screenshotTemplate.find('li'))
+
+      template.find('#vui-service-screenshot-template').remove()        
+      $('#vui-service-sheet .loading').hide()
+      template.find('article').appendTo('#vui-service-sheet')
+      w = $('#vui-service-sheet article .b-screenshots .carousel ul li').first().outerWidth(true)  
+      n = $('#vui-service-sheet article .b-screenshots .carousel ul li').length
+      pad = parseInt($('#vui-service-sheet article .b-screenshots .carousel ul').css('padding-left').replace('px','')) + parseInt($('#vui-service-sheet article .b-screenshots .carousel ul').css('padding-right').replace('px',''))
+      ulw = (w * n) + pad
+      $('#vui-service-sheet article .b-screenshots .carousel ul').css('width', ulw + 'px')
+      $('#vui-service-sheet article .b-screenshots .carousel').jCarouselLite({
+            circular: true,
+            auto: false,
+            timeout: 2500,
+            speed: 500,
+            btnNext: "#vui-service-sheet article .b-screenshots .lightbox-next",
+            btnPrev: "#vui-service-sheet article .b-screenshots .lightbox-prev",
+            swipe: true;
+        })
+      return true
+###
 
 ###
 bindEnter = (panel, button) ->
@@ -352,6 +442,11 @@ bindEnter = (panel, button) ->
     if code is 13
       button.trigger("click");
       event.preventDefault();
+###
+
+###
+numberWithCommas = (x) ->
+  x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 ###
 
 ###
@@ -408,21 +503,23 @@ $(document).ready () ->
         else
           $('.orgtypeother').hide()
 
-  if $('.article-main img.vp-lightbox').length > 0
-    $('.article-main img.vp-lightbox').each (index, e) ->
-      imgurl = $(e).attr('src')
-      $(e).wrap("<a href=\"#{imgurl}\" data-lightbox=\"defaultgroup\"></a>")
+  if $('.article-main img').not('.vp-nolightbox').length > 0
+    $('.article-main img').not('.vp-nolightbox').each (index, e) ->
+      if $(e).parents('a, .vp-nolightbox').length is 0
+        imgurl = $(e).attr('src')
+        $(e).wrap("<a href=\"#{imgurl}\" data-lightbox=\"defaultgroup\" title=\"Open in lightbox\"></a>")
 
-          
-#  $('#forgotten-pwd-link a').click (e) ->
-#    $('#signin-form-main').hide()
-#    $('#forgotten-pwd').show()
-#    e.preventDefault()
-#    
-#  $('#forgotten-pwd-cancel-link a').click (e) ->
-#    $('#forgotten-pwd').hide()
-#    $('#signin-form-main').show()
-#    e.preventDefault()
-
-  if jQuery().lightBox
-    $('a.lightbox').lightBox();
+  if $('#vui-service-sheet').length > 0
+    snap = new VUIDailySnapshot()
+    snap.register()
+    
+  jQuery.easing.def = 'easeOutQuart';
+  $().UItoTop({ easingType: 'easeOutQuart' });
+  
+  jQuery.event.special.swipe.settings = {
+    threshold: 0.1,
+    sensitivity: 9
+  };
+  
+  return true
+  

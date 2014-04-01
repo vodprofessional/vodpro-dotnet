@@ -1,5 +1,7 @@
 
 
+
+
 /* EDITOR PROPERTIES - PLEASE DON'T DELETE THIS LINE TO AVOID DUPLICATE PROPERTIES */
 h2 {
 font-weight:bold; font-size:1.3em;
@@ -7,5 +9,17 @@ font-weight:bold; font-size:1.3em;
 
 .indent {
 padding-left: 30px;  padding-right: 30px 
+}
+
+.img-border {
+background:transparent none
+}
+
+H3 {
+font-weight:normal;  font-size:1.3em; font-style:italic; 
+}
+
+.vp-nolightbox {
+
 }
 

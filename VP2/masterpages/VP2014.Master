@@ -14,7 +14,9 @@
 
     <link href="/_inc/VP2014/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/_inc/VP2014/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/_inc/css/ui.totop.css" rel="stylesheet" media="screen,projection" />
     <link href="/_inc/VP2014/css/style.css" rel="stylesheet" />
+    <link href="/_inc/VP2014/lightbox/css/lightbox.css" rel="stylesheet" />
 
     <!-- GOOGLE FONT -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic|Open+Sans" />
@@ -114,7 +116,12 @@
     <!-- The deferred JavaScript -->
     <script type="text/javascript" src="/_inc/VP2014/js/jquery.min.js"></script>
     <script type="text/javascript" src="/_inc/VP2014/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/_inc/VP2014/js/main.js"></script>
+    <script src="/_inc/js/easing.js" type="text/javascript"></script>
+    <script src="/_inc/js/jquery.event.move.swipe.min.js"></script>
+	<script src="/_inc/js/jquery.ui.totop.min.js" type="text/javascript"></script>
+    <script src="/_inc/js/jcarousellite.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/_inc/VP2014/js/main.min.js"></script>
     <script type="text/javascript" src="/Scripts/scripts.js"></script>
+    <script type="text/javascript" src="/_inc/VP2014/js/lightbox-2.6-ow.min.js"></script>
 </body>
 </asp:Content>

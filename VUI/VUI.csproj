@@ -287,6 +287,8 @@
     <Compile Include="VUI2.classes\Utility.cs" />
     <Compile Include="VUI2.classes\VUIDataFunctions.cs" />
     <Compile Include="VUI2.classes\Rating.cs" />
+    <Compile Include="VUI3.classes\DailySnapshot.cs" />
+    <Compile Include="VUI3.classes\DailySnapshotCache.cs" />
     <Compile Include="VUI3.classes\URLEncodeUtility.cs" />
     <Compile Include="VUI3.classes\VUI3ImageRender.cs" />
     <Compile Include="VUI3.classes\VUI3MetaData.cs" />

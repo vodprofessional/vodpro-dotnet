@@ -25,6 +25,7 @@
 
     <link href="/_inc/VP2014/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/_inc/VP2014/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/_inc/css/ui.totop.css" rel="stylesheet" media="screen,projection" />
     <link href="/_inc/VP2014/css/style.css" rel="stylesheet" />
     <link href="/_inc/VP2014/lightbox/css/lightbox.css" rel="stylesheet" />
 
@@ -136,12 +137,12 @@
 
         </div>
         <div class="article-main">
-            <img src="/media/1131146/vision247_logo.jpg"  style="float:right;margin-left:15px;margin-bottom:15px" />
+            <img src="/media/1131146/vision247_logo.jpg" class="vp-nolightbox main-image" />
             
             <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eu aliquam lorem, et posuere eros. Vestibulum id purus vitae ligula tincidunt faucibus nec ut dolor. Integer dolor nulla, congue eget quam sit amet, condimentum condimentum est. Morbi est enim, feugiat sit amet varius eu, suscipit a ante. Sed mollis augue sit amet enim interdum euismod. Nulla rhoncus sed lorem eget dictum. Morbi volutpat sem sit amet enim vulputate placerat. Mauris sagittis justo elementum, laoreet mi ut, mollis purus. Nam aliquam ac lacus sed placerat. Praesent malesuada enim sit amet viverra auctor. Fusce vitae augue eleifend, condimentum mauris quis, venenatis erat.
             </p>
-            <img src="//placehold.it/1051x400.png" class="vp-lightbox" />
+            <img src="//placehold.it/1051x400.png" />
             
             <h2>Large Heading (h2)</h2>
             <p>
@@ -157,7 +158,10 @@ Suspendisse egestas nisi sed ipsum bibendum, et rutrum sapien rhoncus. Praesent 
                 <li>Nulla placerat ultrices nulla, at condimentum nisi porta vel. Nulla facilisi. Vivamus magna lacus, tempor nec vulputate nec, rutrum eget mauris. </li>
                 <li>List item text </li>
             </ul>
-            <img src="//placehold.it/1052x400.png" class="vp-lightbox" />
+            
+            <a href="fgf"><img src="//placehold.it/1052x400.png" /></a>
+            
+            <img src="//placehold.it/1053x400.png" />
             
             <h4>Small Heading (h4)</h4>
             <p>
@@ -173,7 +177,7 @@ Morbi auctor erat sit amet lobortis pharetra. Nam dictum sapien pulvinar enim al
             </p>
             
             <h3>The table below is styled with class="table-dotted-border"</h3>
-            <table border="0" cellpadding="0" cellspacing="0" class="table-dotted-border">
+            <table border="0" cellpadding="0" cellspacing="0" class="table-dotted-border vp-nolightbox">
                 <tbody>
                 <tr>
                     <th>Icon</th>
@@ -273,93 +277,98 @@ Morbi auctor erat sit amet lobortis pharetra. Nam dictum sapien pulvinar enim al
                           <a href="/vui">Subscribe today</a>
                         </div>
                       </div>
-                      
+                      <div class="loading">
+                        <img src="/_inc/VP2014/img/loading.gif" height="30"/>
+                      </div>
+                    </div>
+                    
+
+
+                    <div id="vui-service-sheet-template">
                       <article>
                         <header>
                           <h1>4oD</h1>
                           <div class="intro">
-                              <div class="img">
-                                <img src="//placehold.it/150x150.png" />
-                              </div>
-                              <div class="desc">
-                                <p>4oD is Channel 4's video-on-demand archive and catch-up service for its TV shows. Provided you sign in or register the extended archive of shows from Channel 4 - and its sister channels like More4 and E4 - are now available on the iPad app. </p>
-                              </div>
                               <div class="b-info">
-                                  <table border="0">
-                                    <tbody><tr>
-                                        <th>Availability</th>
-                                        <td>UK</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Pay Model</th>
-                                        <td>Free<br>AVOD</td>
-                                    </tr>
-                                    <tr class="last">
-                                        <th>Category</th>
-                                        <td>TV / Movies</td>
-                                    </tr>
-                                  </tbody></table>
+                                  <div class="img">
+                                    <img src="http://a1372.phobos.apple.com/us/r30/Purple/v4/df/5e/73/df5e73c3-9e70-468b-3a73-686c48c7cca2/mzl.kalxwrke.png" />
+                                  </div>
+                                  <div class="table">
+                                      <table border="0">
+                                        <tbody><tr>
+                                            <th>Availability</th>
+                                            <td data-name="availability">UK</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Pay Model</th>
+                                            <td data-name="pay-model">Free<br>AVOD</td>
+                                        </tr>
+                                        <tr class="last">
+                                            <th>Category</th>
+                                            <td data-name="category">TV / Movies</td>
+                                        </tr>
+                                      </tbody></table>
+                                  </div>
                               </div>
                           </div>
                         </header>
-                        
                         <div class="b-stats">
                           <div class="inner">
                             <ul>
-                              <li>
+                              <li data-name="screenshots">
                                 <div>
                                   <div class="count">
-                                    286<span class="fa fa-camera"></span>
+                                    <span class="data-point">286</span><span class="fa fa-camera"></span>
                                   </div>
                                   <div class="title">
-                                    Screenshots from 6 devices
+                                    Screenshots from <span class="num-devices">6</span> devices
                                   </div>
                                 </div>
                               </li>
-                              <li>
+                              <li data-name="facebook">
                                 <div>
                                   <div class="count">
-                                    19<i>/25</i><span class="fa fa-bar-chart-o"></span>
-                                  </div>
-                                  <div class="title">
-                                    Average benchmark score
-                                  </div>
-                                </div>
-                              </li>
-                              <li>
-                                <div>
-                                  <div class="count">
-                                    2.51<i>/5</i><span class="fa fa-star-o"></span>
-                                  </div>
-                                  <div class="title">
-                                    Average User Rating from App Stores
-                                  </div>
-                                </div>
-                              </li>
-                              <li>
-                                <div>
-                                  <div class="count">
-                                    12,332<span class="fa fa-twitter"></span>
-                                  </div>
-                                  <div class="title">
-                                    Twitter Followers
-                                  </div>
-                                </div>
-                              </li>
-                              <li>
-                                <div>
-                                  <div class="count">
-                                    174,502<span class="fa fa-thumbs-o-up"></span>
+                                    <span class="data-point">174,502</span><span class="fa fa-thumbs-o-up"></span>
                                   </div>
                                   <div class="title">
                                     Facebook likes
                                   </div>
                                 </div>
                               </li>
-                              <li>
+                              <li data-name="benchmark">
                                 <div>
                                   <div class="count">
-                                    65,791<span class="fa fa-youtube"></span>
+                                    <span class="data-point">19</span><i>/25</i><span class="fa fa-bar-chart-o"></span>
+                                  </div>
+                                  <div class="title">
+                                    Average benchmark score
+                                  </div>
+                                </div>
+                              </li>
+                              <li data-name="twitter">
+                                <div>
+                                  <div class="count">
+                                    <span class="data-point">12,332</span><span class="fa fa-twitter"></span>
+                                  </div>
+                                  <div class="title">
+                                    Twitter Followers
+                                  </div>
+                                </div>
+                              </li>
+                              <li data-name="rating">
+                                <div>
+                                  <div class="count">
+                                    <span class="data-point">2.51</span><i>/5</i><span class="fa fa-star-o"></span>
+                                  </div>
+                                  <div class="title">
+                                    Average User Rating from iTunes App Store &amp; Google Play
+                                  </div>
+                                </div>
+                              </li>
+                              <li data-name="youtube">
+                                <div>
+                                  <div class="count">
+                                    <span class="data-point">65,791</span><span class="fa fa-youtube"></span>
                                   </div>
                                   <div class="title">
                                     YouTube Subscribers
@@ -368,49 +377,29 @@ Morbi auctor erat sit amet lobortis pharetra. Nam dictum sapien pulvinar enim al
                               </li>
                             </ul>
                           </div>
-                        </div>                        
-                        
-                        
-                        <div class="b-store-ratings">
-                          <h2>Current AppStore Ratings</h2>
-                          <h3>Average user rating</h3>
-                          <ul>
-                            <li><img src="/_inc/images/tmp/devices/ipad.png" />
-                                <div class="rate rate25"></div>2.5 </li>
-                            <li><img src="/_inc/images/tmp/devices/iphone.png" />
-                                <div class="rate rate25"></div>2.5 </li>
-                            <li><img src="/_inc/images/tmp/devices/android-tablet.png" />
-                                <div class="rate rate25"></div>2.5 </li>
-                            <li><img src="/_inc/images/tmp/devices/android-phone.png" />
-                                <div class="rate rate25"></div>2.5 </li>                                
-                          </ul>
-                        </div>
-                        
+                        </div>            
                         <div class="b-screenshots">
                             <h2>Selected Screenshots</h2>
+                            <span class="lightbox-ctrl lightbox-prev fa fa-angle-left"></span>
+                            <span class="lightbox-ctrl lightbox-next fa fa-angle-right"></span>
                             <div class="carousel">
-                               <ul style="width:620px">
-                                <li>
-                                  <span class="player">Netflix UK</span><span class="name">Category homepage</span><span class="device">Tablet/iPad</span><span class="img"><img src="/vui-media/media/th/August-2012-Tablet-iPad-Netflix-UK-IMG_0711.jpg"></span>
-                                </li>
-                                <li>
-                                  <span class="player">Netflix UK</span><span class="name">Category homepage</span><span class="device">Tablet/iPad</span><span class="img"><img src="/vui-media/media/th/August-2012-Tablet-iPad-Netflix-UK-IMG_0711.jpg"></span>
-                                </li>
-                                <li>
-                                  <span class="player">Netflix UK</span><span class="name">Category homepage</span><span class="device">Tablet/iPad</span><span class="img"><img src="/vui-media/media/th/August-2012-Tablet-iPad-Netflix-UK-IMG_0711.jpg"></span>
-                                </li>
-                                <li>
-                                  <span class="player">Netflix UK</span><span class="name">Category homepage</span><span class="device">Tablet/iPad</span><span class="img"><img src="/vui-media/media/th/August-2012-Tablet-iPad-Netflix-UK-IMG_0711.jpg"></span>
-                                </li>
+                               <ul>
                                </ul>
                             </div>
+                            <span id="vui-service-screenshot-template">
+                              <li>
+                                  <span class="name"></span>
+                                  <span class="device"></span>
+                                  <span class="img">
+                                    <a href="" data-lightbox="vui-images" ><img src=""></a></span>
+                                </li>
+                            </span>
                         </div>
-                        
-                        
                       </article>
                       
                     </div>
                     
+
                 </div>
             </div>
         </div>
@@ -451,6 +440,11 @@ Morbi auctor erat sit amet lobortis pharetra. Nam dictum sapien pulvinar enim al
     <!-- The deferred JavaScript -->
     <script type="text/javascript" src="/_inc/VP2014/js/jquery.min.js"></script>
     <script type="text/javascript" src="/_inc/VP2014/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/_inc/VP2014/js/main.js"></script>
-    <script type="text/javascript" src="/_inc/VP2014/lightbox/js/lightbox-2.6.min.js"></script>
+    <script src="/_inc/js/easing.js" type="text/javascript"></script>
+    <script src="/_inc/js/jquery.event.move.swipe.min.js"></script>
+	<script src="/_inc/js/jquery.ui.totop.min.js" type="text/javascript"></script>
+    <script src="/_inc/js/jcarousellite.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/_inc/VP2014/js/main.min.js"></script>
+    <script type="text/javascript" src="/Scripts/scripts.js"></script>
+    <script type="text/javascript" src="/_inc/VP2014/js/lightbox-2.6-ow.min.js"></script>
 </body>

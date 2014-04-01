@@ -166,6 +166,17 @@ namespace VUI.usercontrols
             {
                 DeleteImage();
             }
+
+            if (_action.Equals(ACTION_DAILY_SNAPSHOT))
+            {
+                DailySnapshot();
+            }
+
+            if (_action.Equals(ACTION_CLEAR_DAILY_SNAPSHOT))
+            {
+                ClearDailySnapshot();
+            }
+
         }
 
 
@@ -913,6 +924,19 @@ namespace VUI.usercontrols
                 Response.Write(VUIfunctions.ServiceListByNameAndPlatformToJson(serviceName, platformId));
             }
         }
+
+        private void DailySnapshot()
+        {
+            string json = new DailySnapshotCache().DailySnapshotJSON;
+            Response.Write(@"{ ""response"":""valid"",""data"": { ""DailySnapshot"":" + json + @" } }");
+        }
+
+        private void ClearDailySnapshot()
+        {
+            HttpContext.Current.Cache.Remove("DailySnapshotJSON");
+        }
+
+
         
         const string ACTION_SEARCH_IMAGES = "ss";
         const string ACTION_GET_IMAGES_FOR_SERVICE = "si";
@@ -949,5 +973,8 @@ namespace VUI.usercontrols
         const string ACTION_GET_STORE_COMMENTS_META = "scmt";
         const string ACTION_GET_APP_VERSIONS = "vers";
         const string ACTION_DELETE_IMAGE = "deli";
+
+        const string ACTION_DAILY_SNAPSHOT = "dailysnap";
+        const string ACTION_CLEAR_DAILY_SNAPSHOT = "cleardailysnap";
     }
 }

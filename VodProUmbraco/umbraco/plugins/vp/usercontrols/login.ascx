@@ -8,6 +8,9 @@
 <!-- Tab panes -->
 <div class="tab-content">
     <div class="tab-pane active" id="signin">
+
+    <p>Please sign in to get access to website resources, special reports or to change your account settings.</p>
+
       <asp:PlaceHolder runat="server" ID="plcFormLogin">
         <div class="form-signin form" role="form" id="signin-form-main">
           <div class="entry">
@@ -47,6 +50,9 @@
       </asp:PlaceHolder>
     </div>
     <div class="tab-pane" id="register">
+        
+        <p>Register with VOD Professional to receive newsletters, get access to website resources and special reports.</p>
+
         <div class="form-signin form" role="form" action="/register" method="post">
             <div class="entry">
                 <asp:TextBox runat="server" ID="txtRegEmail" CssClass="form-control" />

@@ -58,7 +58,7 @@
         <div class="article-main">
             @if (!String.IsNullOrEmpty(imageUrl))
             {
-                <img src="@imageUrl"  style="float:right;margin-left:15px;margin-bottom:15px" />
+                <img src="@imageUrl" class="vp-nolightbox main-image" />
             }
             @Html.Raw(umbraco.library.RenderMacroContent(Model.story.ToString(), Model.Id))
 

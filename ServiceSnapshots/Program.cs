@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using VUI.VUI2.classes;
+using VUI.VUI3.classes;
 
 namespace ServiceSnapshots
 {

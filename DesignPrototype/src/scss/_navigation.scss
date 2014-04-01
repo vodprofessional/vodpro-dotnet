@@ -4,6 +4,11 @@
   border: 0;
 
   @media (max-width: 767px) {
+    margin-bottom: 0;
+    
+    &.navbar-fixed-top {
+        position: relative;
+    }  
     .navbar-collapse {
       width: 100%;
       clear: both;
@@ -151,10 +156,15 @@
     }
     #nav-primary {
       margin: 0;
-
+      font-size:0.9em;
+      
+      @media (min-width: 768px) and (max-width: 991px) {
+        font-size:0.8em;
+      }
+      
       li {
         @media(max-width: 767px) {
-          margint-left: -5px !important;
+          margin-left: -5px !important;
         }
         a {
           text-transform: uppercase;
@@ -195,6 +205,10 @@
         margin-top: 5px;
         width:16.5em;
 
+        @media (min-width: 768px) and (max-width: 991px) {
+            width: 12em;
+        }
+        
         .form-control {
           -webkit-appearance: none;
           height: 30px;
