@@ -2,3 +2,4 @@ SanitiseDatabase/Program.cs
 SanitiseDatabase/Properties/AssemblyInfo.cs
 SanitiseDatabase/SanitiseDatabase.csproj
 VodProUmbraco/App_Data/packages/created/createdPackages.config
+VodProUmbraco/media
