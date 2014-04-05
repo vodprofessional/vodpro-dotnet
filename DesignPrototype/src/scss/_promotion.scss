@@ -253,6 +253,10 @@
                 margin: 0;
                 text-align:left;
                 font-weight:700;
+                a {
+                  color: #fff;
+                  text-decoration: underline;
+                }
             }
           }
           .link {
@@ -480,7 +484,7 @@
           .b-screenshots {
             background-color: #fff;
             padding: 8px 0 0;
-            overflow-x: hidden;
+            overflow: hidden;
             position:relative;
             h2 {
                 text-align: left;
@@ -492,23 +496,25 @@
                 font-weight: 700;
                 position: absolute;
                 z-index: 10;
-                opacity: 0.3;
+                bottom: 0px;
+                height: 135px;
+                background-color: #fff;
+                line-height:120px;
+                color: #aaa;
             }
             .lightbox-next {
-                bottom: 40px;
-                right: 5px;
-            } 
+                right: 0px;
+            }
             .lightbox-prev {
-                bottom: 40px;
-                left: 5px;
-            }            
+                left: 0px;
+            }
             &:hover .lightbox-ctrl {
-                opacity: 0.8;
+                color: #000;
             }
             .carousel {
               // box-shadow: 0 0 5px #CCCCCC inset;
               // border-radius: 4px;
-              // margin: 0 auto;
+              margin: 0 30px;
               ul {
                 background: transparent;
                 border-radius: 0;

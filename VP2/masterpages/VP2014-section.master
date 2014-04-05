@@ -16,10 +16,12 @@
                     <div class="pager-loading">
                         <img src="/_inc/VP2014/img/loading.gif" height="30"/>
                     </div>
+                    <%--
                     <ul class="pager">
                         <li class="next"><a href="/">Newer &rarr;</a></li>
                         <li class="previous"><a href="/">&larr; Older</a></li>
                     </ul>
+                    --%>
                 </div>
             </div>
             <div id="promotion" class="col-lg-5 col-md-5 hidden-sm hidden-xs">

@@ -90,8 +90,8 @@ class NewsFeedLoader
     _load = this.load
     $(window).scroll () ->
       _load() if $('#column-left').height() - $(window).height() - $(window).scrollTop() < _delta and not isFeedLoading
-    $(document).bind 'touchmove', () ->
-      _load() if $('#column-left').height() - $(window).height() - $(window).scrollTop() < _delta and not isFeedLoading
+#    $(document).bind 'touchmove', () ->
+#      _load() if $('#column-left').height() - $(window).height() - $(window).scrollTop() < _delta and not isFeedLoading
     _load()
 
   load: ->
@@ -128,8 +128,8 @@ class NewsLoader
     _load = this.load
     $(window).scroll () ->
       _load() if $('#column-full').height() - $(window).height() - $(window).scrollTop() < _delta and not isNewsLoading
-    $(document).bind 'touchmove', () ->
-      _load() if $('#column-full').height() - $(window).height() - $(window).scrollTop() < _delta and not isNewsLoading
+#    $(document).bind 'touchmove', () ->
+#      _load() if $('#column-full').height() - $(window).height() - $(window).scrollTop() < _delta and not isNewsLoading
     _load()
 
   load: ->
@@ -167,8 +167,8 @@ class NewsArticleLoader
     _load = this.load
     $(window).scroll () ->
       _load() if $('#column-center').height() - $(window).height() - $(window).scrollTop() < _delta and not isArticleLoading
-    $(document).bind 'touchmove', () ->
-      _load() if $('#column-center').height() - $(window).height() - $(window).scrollTop() < _delta and not isArticleLoading
+#    $(document).bind 'touchmove', () ->
+#      _load() if $('#column-center').height() - $(window).height() - $(window).scrollTop() < _delta and not isArticleLoading
     _load()
 
   load: ->
@@ -205,8 +205,8 @@ class JobsLoader
     _load = this.load
     $(window).scroll () ->
       _load() if $('#column-full').height() - $(window).height() - $(window).scrollTop() < _delta and not isJobsLoading
-    $(document).bind 'touchmove', () ->
-      _load() if $('#column-full').height() - $(window).height() - $(window).scrollTop() < _delta and not isJobsLoading
+#    $(document).bind 'touchmove', () ->
+#      _load() if $('#column-full').height() - $(window).height() - $(window).scrollTop() < _delta and not isJobsLoading
     _load()
 
   load: ->
@@ -315,8 +315,8 @@ class SearchLoader
     _load = this.load
     $(window).scroll () ->
       _load() if $('#column-full').height() - $(window).height() - $(window).scrollTop() < _delta and not isNewsLoading
-    $(document).bind 'touchmove', () ->
-      _load() if $('#column-full').height() - $(window).height() - $(window).scrollTop() < _delta and not isNewsLoading
+#    $(document).bind 'touchmove', () ->
+#      _load() if $('#column-full').height() - $(window).height() - $(window).scrollTop() < _delta and not isNewsLoading
     _load()
 
   load: ->
@@ -456,15 +456,15 @@ $(document).ready () ->
     regwall = new RegWall()
     regwall.register() 
 
-  if $("#inner-left").length > 0
-    newsFeedLoader = new NewsFeedLoader(500)
-    newsFeedLoader.register()
   if $("#inner-full").length > 0
     newsLoader = new NewsLoader(300)
     newsLoader.register()
-  if $("#inner-center").length > 0
-    newsArticleLoader = new NewsArticleLoader(300)
-    newsArticleLoader.register()
+#  if $("#inner-left").length > 0
+#    newsFeedLoader = new NewsFeedLoader(500)
+#    newsFeedLoader.register()
+#  if $("#inner-center").length > 0
+#    newsArticleLoader = new NewsArticleLoader(300)
+#    newsArticleLoader.register()
   if $('#search-button').length > 0
     bindEnter($('nav .form-inline .form-group'), $("#search-button"));
     search = new Search()

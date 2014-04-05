@@ -136,11 +136,6 @@
           return _load();
         }
       });
-      $(document).bind('touchmove', function() {
-        if ($('#column-left').height() - $(window).height() - $(window).scrollTop() < _delta && !isFeedLoading) {
-          return _load();
-        }
-      });
       return _load();
     };
 
@@ -200,11 +195,6 @@
       _delta = this.delta;
       _load = this.load;
       $(window).scroll(function() {
-        if ($('#column-full').height() - $(window).height() - $(window).scrollTop() < _delta && !isNewsLoading) {
-          return _load();
-        }
-      });
-      $(document).bind('touchmove', function() {
         if ($('#column-full').height() - $(window).height() - $(window).scrollTop() < _delta && !isNewsLoading) {
           return _load();
         }
@@ -274,11 +264,6 @@
           return _load();
         }
       });
-      $(document).bind('touchmove', function() {
-        if ($('#column-center').height() - $(window).height() - $(window).scrollTop() < _delta && !isArticleLoading) {
-          return _load();
-        }
-      });
       return _load();
     };
 
@@ -338,11 +323,6 @@
       _delta = this.delta;
       _load = this.load;
       $(window).scroll(function() {
-        if ($('#column-full').height() - $(window).height() - $(window).scrollTop() < _delta && !isJobsLoading) {
-          return _load();
-        }
-      });
-      $(document).bind('touchmove', function() {
         if ($('#column-full').height() - $(window).height() - $(window).scrollTop() < _delta && !isJobsLoading) {
           return _load();
         }
@@ -527,11 +507,6 @@
           return _load();
         }
       });
-      $(document).bind('touchmove', function() {
-        if ($('#column-full').height() - $(window).height() - $(window).scrollTop() < _delta && !isNewsLoading) {
-          return _load();
-        }
-      });
       return _load();
     };
 
@@ -695,22 +670,14 @@
 
 
   $(document).ready(function() {
-    var jobsLoader, newsArticleLoader, newsFeedLoader, newsLoader, regwall, rhsReg, search, searchLoader, snap;
+    var jobsLoader, newsLoader, regwall, rhsReg, search, searchLoader, snap;
     if ($('#vp2-regwall').length > 0) {
       regwall = new RegWall();
       regwall.register();
     }
-    if ($("#inner-left").length > 0) {
-      newsFeedLoader = new NewsFeedLoader(500);
-      newsFeedLoader.register();
-    }
     if ($("#inner-full").length > 0) {
       newsLoader = new NewsLoader(300);
       newsLoader.register();
-    }
-    if ($("#inner-center").length > 0) {
-      newsArticleLoader = new NewsArticleLoader(300);
-      newsArticleLoader.register();
     }
     if ($('#search-button').length > 0) {
       bindEnter($('nav .form-inline .form-group'), $("#search-button"));

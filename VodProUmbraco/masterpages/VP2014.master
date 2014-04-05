@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.png" />
     <link rel="alternate" type="application/rss+xml" href="/rss/" title="VOD Pro RSS feed" />
 
@@ -101,10 +101,10 @@
             </div>
             <div id="footer-links" class="row">
                 <div class="container">
-                    <a href="/about">About VOD Professional</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="/about-us">About VOD Professional</a>&nbsp;&nbsp;|&nbsp;&nbsp;
                     <a href="/contact-us">Contact Us</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                    <a href="">Terms and Conditions</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                    <a href="#">Privacy Policy</a>
+                    <a href="/about-us/terms-conditions">Terms and Conditions</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="/about-us/privacy-policy">Privacy Policy</a>
                 </div>
             </div>
             <div id="footer-copyright" class="row">

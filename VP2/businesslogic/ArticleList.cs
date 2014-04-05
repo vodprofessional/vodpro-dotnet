@@ -65,7 +65,7 @@ namespace VP2.businesslogic
                 DynamicNode rootNode = new DynamicNode(_rootNodeId);
                 List<DynamicNode> stories = rootNode.DescendantsOrSelf("vodProStory").Items
                                                     .Where(n => !String.IsNullOrEmpty(n.GetProperty("storydate").Value))
-                                                    .OrderByDescending(n => DateTime.Parse(n.GetProperty("storydate").Value)).ToList();
+                                                    .OrderByDescending(n => n.CreateDate).ToList();
 
                 if (startnum + count > _maxArticles)
                 {

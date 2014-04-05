@@ -13,20 +13,21 @@
                     <section id="column-left" class="col-lg-5 col-md-5 col-sm-5 col-xs-12 active">
                         <h2>News Feed</h2>
                         <umbraco:Macro Alias="vp2-articlelist" runat="server" divId="inner-left" articleType="NEWS" count="20" outputType="FEED"></umbraco:Macro>
+                        <div class="pager-wrap">
+                            <ul class="pager home">
+                                <li><a href="/news">More News &rarr;</a></li>
+                            </ul>
+                        </div>
                     </section>
                     <section id="column-center" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                         <h2>Featured Content</h2>
-                        <umbraco:Macro Alias="vp2-articlelist" runat="server" divId="inner-center" articleType="FEATURE" count="10" outputType="FULL"></umbraco:Macro>
+                        <umbraco:Macro Alias="vp2-featurelist" runat="server" divId="inner-center"></umbraco:Macro>
+                        <div class="pager-wrap">
+                            <ul class="pager home">
+                                <li><a href="/features">More Features &rarr;</a></li>
+                            </ul>
+                        </div>
                     </section>
-                </div>
-                <div id="pager-wrap">
-                    <div class="pager-loading">
-                        <img src="/_inc/VP2014/img/loading.gif" height="30"/>
-                    </div>
-                    <ul class="pager">
-                        <li class="next"><a href="/">Newer &rarr;</a></li>
-                        <li class="previous"><a href="/">&larr; Older</a></li>
-                    </ul>
                 </div>
             </div>
             <div id="promotion" class="col-lg-5 col-md-5 hidden-sm hidden-xs">

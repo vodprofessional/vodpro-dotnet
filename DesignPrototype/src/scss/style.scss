@@ -99,10 +99,13 @@ $dotted-border: 1px dotted #ccc;
       padding: 1.4em;
     }
 
-    #pager-wrap {
+    #pager-wrap, .pager-wrap {
       clear: both;
       width: 100%;
       padding: 15px;
+    }
+    .pager-wrap {
+      text-align: center;
     }
     .pager-loading {
       display: none;
@@ -115,6 +118,9 @@ $dotted-border: 1px dotted #ccc;
     }
     .pager {
       display: none;
+      &.home {
+        display: inline-block;
+      }
     }
   }
 

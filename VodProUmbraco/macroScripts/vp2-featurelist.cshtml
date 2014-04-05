@@ -1,0 +1,31 @@
+﻿@using VP2.businesslogic;
+@using umbraco.cms.businesslogic.macro;
+@using umbraco.MacroEngines;
+@{
+        
+    string divId = @Parameter.divId;
+    
+    var featureIDs = @Model.AncestorOrSelf().features.GetEnumerator();
+    int count = 0;
+     
+    <div id="@divId" data-root="@Model.Id">
+    @foreach (var featureID in @featureIDs)
+    {
+        dynamic article = @Model.NodeById(@featureID.InnerText);
+            
+        <article class="item article-preview" data-articleid="@article.Id">
+            @if (article.GetProperty("storyimage").Value.Length > 0)
+            {
+                dynamic media = @Model.MediaById(@article.GetProperty("storyimage").Value);
+                string mediaName = @media.umbracoFile;
+                <a href="@article.Url"><img src="@mediaName" /></a>
+            }
+            <div class="text">
+                <header><a href="@article.Url">@article.title</a></header>
+                <p>@article.miniTeaser</p>
+            </div>
+            <div class="clearfix"></div>
+        </article>
+            }
+     </div>
+    }
