@@ -121,13 +121,9 @@ $(document).ready(function () {
         scroll: 3
     });
 
-    $('.loggedin .iphone-gallery').jCarouselLite({
-        circular: true,
-        visible: 1,
-        auto: true,
-        timeout: 4000,
-        speed: 500
-    })
+
+    
+
 
     $(".b-bencmarking img.device-coming-soon, .b-screenshots img.device-coming-soon, .b-matrix-nav img.device-coming-soon, .benchmarking img.device-coming-soon").after("<span class=\"device-coming-soon-sash\"></span>");
 

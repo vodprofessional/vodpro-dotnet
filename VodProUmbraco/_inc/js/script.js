@@ -16,6 +16,10 @@ $(document).ready(function () {
         }
     }
 
+
+
+
+
     if ($('.b-tabs').length > 0) {
         /*
         if ($('body').hasClass('service')) {
@@ -52,6 +56,23 @@ $(document).ready(function () {
 
         });
     }
+
+    $('.benchmarking .b-tabs .tabs .uber-tab .scroll-ctrl').each(function () {
+        var home = $(this).parent().find('img.platform-image');
+        $(this).ScrollCtrl({ linktomatrix: false, startDevice: hashdevice, linkubertabs: true, numtoshow: 3, homelink: home });
+    });
+
+    $('.service .b-tabs .tabs .uber-tab .scroll-ctrl').each(function () {
+        var home = $(this).parent().find('img.platform-image');
+        $(this).ScrollCtrl({ linktomatrix: false, startDevice: hashdevice, linkubertabs: true, numtoshow: 4, homelink: home });
+    });
+
+    $('.b-matrix-nav .uber-tab .scroll-ctrl').each(function () {
+        $(this).ScrollCtrl({ linktomatrix: true });
+    });
+
+
+
     $("select").selecter({
         cover: true
     });

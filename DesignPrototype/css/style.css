@@ -32,9 +32,9 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover, header a
 .navbar-default #bg2 .row { padding: 0 15px 0 10px; }
 .navbar-default #bg2 a { font-weight: normal !important; color: #FFF !important; }
 .navbar-default #bg2 #search:focus { box-shadow: none; border-top: 1px solid #DDD; border-left: 1px solid #DDD; border-bottom: 1px solid #DDD; }
-.navbar-default .navbar-brand { margin-left: 5px; height: 70px; width: 420px; background-color: transparent; background-repeat: no-repeat; background-image: url(../img/logo.png); background-image: url(../img/logo.svg), none; margin-top: 15px; text-indent: -9999px; }
-@media (max-width: 991px) { .navbar-default .navbar-brand { background-image: url(../img/logo-half.png); background-image: url(../img/logo.svg), none; height: 46px; width: 240px; } }
-@media (max-width: 768px) { .navbar-default .navbar-brand { background-image: url(../img/logo-half.png); background-image: url(../img/logo.svg), none; height: 46px; width: 240px; } }
+.navbar-default .navbar-brand { margin-left: 5px; height: 70px; width: 420px; background-color: transparent; background-repeat: no-repeat; background-image: url(../img/logo.png); margin-top: 15px; text-indent: -9999px; }
+@media (max-width: 991px) { .navbar-default .navbar-brand { background-image: url(../img/logo-half.png); height: 46px; width: 240px; } }
+@media (max-width: 768px) { .navbar-default .navbar-brand { background-image: url(../img/logo-half.png); height: 46px; width: 240px; } }
 @media (max-width: 767px) { .navbar-default .navbar-collapse { background-color: #181829; } }
 .navbar-default .navbar-collapse #nav-secondary { float: right; }
 .navbar-default .navbar-collapse #nav-secondary li a { padding-left: 10px; padding-right: 10px; }
@@ -64,7 +64,7 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover, header a
 /* NEWS */
 #columns { margin-top: 150px; /* PROMOTION */ }
 @media (max-width: 991px) { #columns { margin-top: 120px; } }
-@media (max-width: 767px) { #columns { margin-top: 0; } }
+@media (max-width: 767px) { #columns { margin-top: 55px; } }
 #columns ul.nav.nav-tabs li a { font-weight: 700; }
 #columns .tab-content .tab-pane { padding-top: 10px; }
 #columns #xs-nav { display: none; padding-top: 1em; height: 50px; width: 100%; }

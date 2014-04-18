@@ -148,7 +148,41 @@ h1, h2, .main-top h1 { font-weight:normal; }
 }
 .b-tabs-devices .tabs li a.current {
     background-color: #FFFFFF;
+    margin: 0;
 }
+
+/* Scrolling */
+/* Scrolling */
+.b-tabs-devices .tabs .uber-tab li:first-child { width: 93px; }
+.b-tabs-devices .tabs .uber-tab .devices.scrolling  
+{
+        overflow:hidden; max-width: 100px; display:none;
+}
+.b-tabs-devices .tabs .uber-tab.active .devices.scrolling { display:inline-block; overflow:hidden; max-width: 315px; vertical-align:bottom; height:89px; }
+.benchmarking .b-tabs-devices .tabs .uber-tab.active .devices.scrolling { max-width: 230px; }
+.b-tabs-devices .tabs .uber-tab .devices .scroller { /* white-space:nowrap; */ position:relative; }
+.b-tabs-devices .tabs .uber-tab .devices .scroller li { float:left; }
+.b-tabs-devices .tabs .uber-tab .move-next {
+    font-size: 2.3em;
+    opacity: 0.5;
+    position: absolute;
+    right: -11px;
+    top: 33px;
+    z-index: 10;
+    display: none;
+}
+.b-tabs-devices .tabs .uber-tab .move-prev {
+    font-size: 2.3em;
+    opacity: 0.5;
+    position: absolute;
+    left: 0;
+    top: 33px;
+    z-index: 10;
+    display: none;
+}
+.b-tabs-devices .tabs .uber-tab.active .move-next, .b-tabs-devices .tabs .uber-tab.active .move-prev { display:block; }
+..b-tabs-devices .tabs .uber-tab.active .scroller li h3 { font-size:15px; letter-spacing: -0.1em; }
+
 
 .b-logged-service .panes 
 {
@@ -524,12 +558,39 @@ a._device-disabled { cursor:default; }
 .b-matrix-nav ul .uber-tab.active .title { display:block; vertical-align:top; text-align:center; padding: 0 10px 0; }
 .b-matrix-nav ul .uber-tab.active .title h3{ display:block; margin-bottom: 10px;}
 .b-matrix-nav ul .uber-tab.active .title img { display:none; margin-top:0; margin-bottom: 10px; }
-.b-matrix-nav ul .uber-tab.active li { display:inline-block; padding-top:10px; vertical-align:bottom; width:90px; }
+.b-matrix-nav ul .uber-tab.active li { display:inline-block; padding-top:10px; vertical-align:bottom; width:93px; }
 .b-matrix-nav ul .uber-tab.active li h3 { display: block; font-size: 16px; margin-top:-5px; padding: 0 6px;}
 .b-matrix-nav ul .uber-tab.active li img { margin:0 6px; }
 .b-matrix-nav ul .uber-tab.active li a { height:80px; color: #000;}
 .b-matrix-nav ul .uber-tab.active li a._device-disabled { height:80px; color: #999;}
 .b-matrix-nav ul .uber-tab.active .platform-image { height:32px; }
+
+/* Scrolling */
+.b-matrix-nav ul .uber-tab li:first-child { width: 93px; }
+.b-matrix-nav ul .uber-tab .devices.scrolling { overflow:hidden; max-width: 70px;  }
+.b-matrix-nav ul .uber-tab.active .devices.scrolling { overflow:hidden; max-width: 279px; }
+.b-matrix-nav ul .uber-tab .devices .scroller { /* white-space:nowrap; */ position:relative; }
+.b-matrix-nav ul .uber-tab .devices .scroller li { float:left; }
+.b-matrix-nav ul .uber-tab .move-next {
+    font-size: 2em;
+    opacity: 0.33;
+    position: absolute;
+    margin-left: 272px;
+    top: 31px;
+    z-index: 10;
+    display: none;
+}
+.b-matrix-nav ul .uber-tab .move-prev {
+    font-size: 2em;
+    opacity: 0.33;
+    position: absolute;
+    margin-left: -10px;
+    top: 31px;
+    z-index: 10;
+    display: none;
+}
+ul .uber-tab.active .move-next, ul .uber-tab.active .move-prev { display:block; }
+.b-matrix-nav ul .uber-tab.active .scroller li h3 { font-size:15px; letter-spacing: -0.1em; }
 
 .b-matrix-nav.fixed { top: 67px; }
 
@@ -541,7 +602,16 @@ a._device-disabled { cursor:default; }
 .b-matrix-files .inner .matrix-block ul li.device.visible { display:inline-block;width:90px;}
 .b-matrix-files .inner .matrix-block ul li a { text-decoration: none; display:block; }
 .b-matrix-files .inner .matrix-block ul li .-comp { cursor:pointer; }
-.b-matrix-files .inner .matrix-block ul li:first-child { width: 200px; }
+.b-matrix-files .inner .matrix-block ul>li:first-child { width: 200px; }
+
+/* scrolling */
+.b-matrix-files .inner .matrix-block ul .matrix-scroll-group { max-width: 278px; overflow: hidden; display:inline-block; height:39px; }
+.b-matrix-files .inner .matrix-block ul .matrix-scroll-group li { width:71px; }
+.b-matrix-files .inner .matrix-block ul .matrix-scroll-group .scroller { position: relative; white-space:nowrap; }
+/*.b-matrix-files .inner .matrix-block ul .matrix-scroll-group .connectedtv-group { width:555px;  }   Set in JS? */
+
+
+
 
 
 /* The above screws up app-store-ratings */

@@ -850,46 +850,60 @@
                     <h3>TV</h3>
                       <img src="/_inc/images/new-platform/platform-tv@(uberDisabled).png" class="platform-image" />
                   </span>
-                     @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Samsung"))
-                     {
-                         strDisabled = "_device-disabled";
-                     }
-                     else { strDisabled = ""; }
-                    <li title="Samsung">
-                      <a href="#" class="@strDisabled" data-device="connectedtv-samsung"><img src="/_inc/images/new-platform/device-smart@(strDisabled).png" alt=""><h3>Samsung</h3></a>
-                    </li> 
+                  
+                  
+                  <!--<span class="devices scrolling scroll-ctrl" data-group="connectedtv-group">
+                    <div class="scroller">-->
+                         
+                         @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Samsung"))
+                         {
+                             strDisabled = "_device-disabled";
+                         }
+                         else { strDisabled = ""; }
+                        <li title="Samsung">
+                          <a href="#" class="@strDisabled" data-device="connectedtv-samsung"><img src="/_inc/images/new-platform/device-smart@(strDisabled).png" alt=""><h3>Samsung</h3></a>
+                        </li> 
 
-                    @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Sony"))
-                    {
-                        strDisabled = "_device-disabled";
-                    }
-                    else { strDisabled = ""; }
-                    <li title="Sony">
-                      <a href="#" class="@strDisabled" data-device="connectedtv-sony"><img src="/_inc/images/new-platform/device-sony@(strDisabled).png" alt=""><h3>Sony</h3></a>
-                    </li>
+                        @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Sony"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                        <li title="Sony">
+                          <a href="#" class="@strDisabled" data-device="connectedtv-sony"><img src="/_inc/images/new-platform/device-sony@(strDisabled).png" alt=""><h3>Sony</h3></a>
+                        </li>
                     
-                    @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "LG"))
-                    {
-                        strDisabled = "_device-disabled";
-                    }
-                    else { strDisabled = ""; }
-                    <li title="LG">
-                      <a href="#" class="@strDisabled" data-device="connectedtv-sony"><img src="/_inc/images/new-platform/device-lg@(strDisabled).png" alt=""><h3>LG</h3></a>
-                    </li>
+                        @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "LG"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                        <li title="LG">
+                          <a href="#" class="@strDisabled" data-device="connectedtv-lg"><img src="/_inc/images/new-platform/device-lg@(strDisabled).png" alt=""><h3>LG</h3></a>
+                        </li>
 
-                    @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Panasonic"))
-                    {
-                        strDisabled = "_device-disabled";
-                    }
-                    else { strDisabled = ""; }
-                    <!-- <li title="Panasonic">
-                      <a href="#" class="@strDisabled" data-device="connectedtv-sony"><img src="/_inc/images/new-platform/device-panasonic@(strDisabled).png" alt=""><h3>LG</h3></a>
-                    </li> -->
+                        @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Panasonic"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                        <!-- <li title="Panasonic">
+                          <a href="#" class="@strDisabled" data-device="connectedtv-sony"><img src="/_inc/images/new-platform/device-panasonic@(strDisabled).png" alt=""><h3>LG</h3></a>
+                        </li> -->
+                    <!--</div>
+                  </span>-->
                 </span>   
                   
-      
-                    if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Apple TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Now TV") 
-                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Roku"))
+        if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Apple TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Now TV")
+             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Roku") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Freesat")
+                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Sky") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Virgin")
+                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "YouView") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "AT&T U-Verse")
+                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Charter") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Cox")
+                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Direct TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Dish")
+                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Optimum") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Sudden Link")
+                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Verizon FiOS") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Xfinity")
+                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "TiVo")
+                        )
                     {
                         uberDisabled = "_platform-disabled";
                     }
@@ -899,38 +913,178 @@
                     <h3>STBs</h3>
                       <img src="/_inc/images/new-platform/platform-stb@(uberDisabled).png" class="platform-image" />
                   </span>
-                     @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Apple TV"))
-                     {
-                         strDisabled = "_device-disabled";
-                     }
-                     else { strDisabled = ""; }
-                    <li title="Apple TV">
-                      <a href="#" class="@strDisabled" data-device="stb-appletv"><img src="/_inc/images/new-platform/device-apple@(strDisabled).png" alt=""><h3>Apple TV</h3></a>
-                    </li> 
-                    @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Freesat"))
-                     {
-                         strDisabled = "_device-disabled";
-                     }
-                     else { strDisabled = ""; }
-                    <li title="Freesat">
-                      <a href="#" class="@strDisabled" data-device="stb-freesat"><img src="/_inc/images/new-platform/device-freesat@(strDisabled).png" alt=""><h3>Freesat</h3></a>
-                    </li> 
-                    @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Now TV"))
-                     {
-                         strDisabled = "_device-disabled";
-                     }
-                     else { strDisabled = ""; }
-                    <li title="Now TV">
-                      <a href="#" class="@strDisabled" data-device="stb-nowtv"><img src="/_inc/images/new-platform/device-nowtv@(strDisabled).png" alt=""><h3>Now TV</h3></a>
-                    </li> 
-                    @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Roku"))
-                    {
-                        strDisabled = "_device-disabled";
-                    }
-                    else { strDisabled = ""; }
-                  <li title="Roku">
-                    <a href="#" class="@strDisabled" data-device="stb-roku"><img src="/_inc/images/new-platform/device-roku@(strDisabled).png" alt=""><h3>Roku</h3></a>
-                  </li>
+                  
+                  <span class="devices scrolling scroll-ctrl" data-group="stb-group">
+                    <div class="scroller">
+                         @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Apple TV"))
+                         {
+                             strDisabled = "_device-disabled";
+                         }
+                         else { strDisabled = ""; }
+                        <li title="Apple TV">
+                          <a href="#" class="@strDisabled" data-device="stb-appletv"><img src="/_inc/images/new-platform/device-apple@(strDisabled).png" alt=""><h3>Apple TV</h3></a>
+                        </li> 
+
+                        @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Freesat"))
+                         {
+                             strDisabled = "_device-disabled";
+                         }
+                         else { strDisabled = ""; }
+                        <li title="Freesat">
+                          <a href="#" class="@strDisabled" data-device="stb-freesat"><img src="/_inc/images/new-platform/device-freesat@(strDisabled).png" alt=""><h3>Freesat</h3></a>
+                        </li> 
+
+                        @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Now TV"))
+                         {
+                             strDisabled = "_device-disabled";
+                         }
+                         else { strDisabled = ""; }
+                        <li title="Now TV">
+                          <a href="#" class="@strDisabled" data-device="stb-nowtv"><img src="/_inc/images/new-platform/device-nowtv@(strDisabled).png" alt=""><h3>Now TV</h3></a>
+                        </li> 
+
+                        @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Roku"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Roku">
+                        <a href="#" class="@strDisabled" data-device="stb-roku"><img src="/_inc/images/new-platform/device-roku@(strDisabled).png" alt=""><h3>Roku</h3></a>
+                      </li>
+
+
+                        @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Sky"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Sky">
+                        <a href="#" class="@strDisabled" data-device="stb-sky"><img src="/_inc/images/new-platform/device-sky@(strDisabled).png" alt=""><h3>Sky</h3></a>
+                      </li>
+
+
+                        @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Virgin"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Virgin">
+                        <a href="#" class="@strDisabled" data-device="stb-virgin"><img src="/_inc/images/new-platform/device-virgin@(strDisabled).png" alt=""><h3>Virgin</h3></a>
+                      </li>
+
+
+                        @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "YouView"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="YouView">
+                        <a href="#" class="@strDisabled" data-device="stb-youview"><img src="/_inc/images/new-platform/device-youview@(strDisabled).png" alt=""><h3>YouView</h3></a>
+                      </li>
+
+
+                        @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "AT&T U-Verse"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="AT&T U-Verse">
+                        <a href="#" class="@strDisabled" data-device="stb-attu-verse"><img src="/_inc/images/new-platform/device-att@(strDisabled).png" alt=""><h3>AT&amp;T U-Verse</h3></a>
+                      </li>
+
+
+                        @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Charter"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Charter">
+                        <a href="#" class="@strDisabled" data-device="stb-charter"><img src="/_inc/images/new-platform/device-charter@(strDisabled).png" alt=""><h3>Charter</h3></a>
+                      </li>
+
+
+                        @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Cox"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Cox">
+                        <a href="#" class="@strDisabled" data-device="stb-cox"><img src="/_inc/images/new-platform/device-cox@(strDisabled).png" alt=""><h3>Cox</h3></a>
+                      </li>
+
+
+                        @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Direct TV"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Direct TV">
+                        <a href="#" class="@strDisabled" data-device="stb-directtv"><img src="/_inc/images/new-platform/device-directtv@(strDisabled).png" alt=""><h3>Direct TV</h3></a>
+                      </li>
+
+
+                        @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Dish"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Dish">
+                        <a href="#" class="@strDisabled" data-device="stb-dish"><img src="/_inc/images/new-platform/device-dish@(strDisabled).png" alt=""><h3>Dish</h3></a>
+                      </li>
+
+
+                        @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Optimum"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Optimum">
+                        <a href="#" class="@strDisabled" data-device="stb-optimum"><img src="/_inc/images/new-platform/device-optimum@(strDisabled).png" alt=""><h3>Optimum</h3></a>
+                      </li>
+
+
+                        @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Sudden Link"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Sudden Link">
+                        <a href="#" class="@strDisabled" data-device="stb-suddenlink"><img src="/_inc/images/new-platform/device-suddenlink@(strDisabled).png" alt=""><h3>Sudden Link</h3></a>
+                      </li>
+                      
+
+                        @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "TiVo"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="TiVo">
+                        <a href="#" class="@strDisabled" data-device="stb-tivo"><img src="/_inc/images/new-platform/device-tivo@(strDisabled).png" alt=""><h3>TiVo</h3></a>
+                      </li>
+
+                        @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Verizon FiOS"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Verizon FiOS">
+                        <a href="#" class="@strDisabled" data-device="stb-verizonfios"><img src="/_inc/images/new-platform/device-verizon@(strDisabled).png" alt=""><h3>Verizon FiOS</h3></a>
+                      </li>
+
+
+                        @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Xfinity"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Xfinity">
+                        <a href="#" class="@strDisabled" data-device="stb-xfinity"><img src="/_inc/images/new-platform/device-xfinity@(strDisabled).png" alt=""><h3>Xfinity</h3></a>
+                      </li>
+
+
+                    </div>
+                  </span>
+
                 </span>
                              
                     if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Games Consoles", "Playstation") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Games Consoles", "XBox"))
@@ -978,6 +1132,20 @@
                 @WriteAnalysis(@Service, "STB", "Freesat")
                 @WriteAnalysis(@Service, "STB", "Now TV")
                 @WriteAnalysis(@Service, "STB", "Roku")
+                @WriteAnalysis(@Service, "STB", "Sky")
+                @WriteAnalysis(@Service, "STB", "Virgin")
+                @WriteAnalysis(@Service, "STB", "YouView")
+                @WriteAnalysis(@Service, "STB", "AT&T U-Verse")
+                @WriteAnalysis(@Service, "STB", "Charter")
+                @WriteAnalysis(@Service, "STB", "Cox")
+                @WriteAnalysis(@Service, "STB", "Direct TV")
+                @WriteAnalysis(@Service, "STB", "Dish")
+                @WriteAnalysis(@Service, "STB", "Optimum")
+                @WriteAnalysis(@Service, "STB", "Sudden Link")
+                @WriteAnalysis(@Service, "STB", "TiVo")
+                @WriteAnalysis(@Service, "STB", "Verizon FiOS")
+                @WriteAnalysis(@Service, "STB", "Xfinity")
+
                 @WriteAnalysis(@Service, "Games Consoles", "Playstation")
                 @WriteAnalysis(@Service, "Games Consoles", "XBox")
               </div>
@@ -1100,35 +1268,48 @@
                     <h3>TV</h3>
                       <img src="/_inc/images/new-platform/platform-tv@(uberDisabled).png" class="platform-image" />
                   </span>
-                     @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "Samsung"))
-                     {
-                         strDisabled = "_device-disabled";
-                     }
-                    else { strDisabled = ""; }
-                    <li title="Samsung">
-                      <a href="#" class="@strDisabled" data-device="connectedtv-samsung"><img src="/_inc/images/new-platform/device-smart@(strDisabled).png" alt=""><h3>Samsung</h3></a>
-                    </li> 
-                    @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "Sony"))
-                    {
-                        strDisabled = "_device-disabled";
-                    }
-                    else { strDisabled = ""; }
-                    <li title="Sony">
-                      <a href="#" class="@strDisabled" data-device="connectedtv-sony"><img src="/_inc/images/new-platform/device-sony@(strDisabled).png" alt=""><h3>Sony</h3></a>
-                    </li>
-                    @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "LG"))
-                    {
-                        strDisabled = "_device-disabled";
-                    }
-                    else { strDisabled = ""; }
-                    <li title="LG">
-                      <a href="#" class="@strDisabled" data-device="connectedtv-lg"><img src="/_inc/images/new-platform/device-lg@(strDisabled).png" alt=""><h3>LG</h3></a>
-                    </li>
+                  
+                  <!--<span class="devices scrolling scroll-ctrl" data-group="connectedtv-group">
+                    <div class="scroller"> --> 
+                        @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "Samsung"))
+                         {
+                             strDisabled = "_device-disabled";
+                         }
+                        else { strDisabled = ""; }
+                        <li title="Samsung">
+                          <a href="#" class="@strDisabled" data-device="connectedtv-samsung"><img src="/_inc/images/new-platform/device-smart@(strDisabled).png" alt=""><h3>Samsung</h3></a>
+                        </li> 
+                        @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "Sony"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                        <li title="Sony">
+                          <a href="#" class="@strDisabled" data-device="connectedtv-sony"><img src="/_inc/images/new-platform/device-sony@(strDisabled).png" alt=""><h3>Sony</h3></a>
+                        </li>
+                        @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "LG"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                        <li title="LG">
+                          <a href="#" class="@strDisabled" data-device="connectedtv-lg"><img src="/_inc/images/new-platform/device-lg@(strDisabled).png" alt=""><h3>LG</h3></a>
+                        </li>
+                     <!--</div>
+                   </span>-->
+
                 </span>   
                   
       
-                    if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Apple TV") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Freesat") &&
-                        !Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Now TV") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Roku"))
+                if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Apple TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Now TV")
+                     && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Roku") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Freesat")
+                     && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Sky") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Virgin")
+                     && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "YouView") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "ATT U-Verse")
+                     && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Charter") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Cox")
+                     && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Direct TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Dish")
+                     && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Optimum") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Sudden Link")
+                     && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Verizon FiOS") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Xfinity")
+                     && !Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "TiVo"))
                     {
                         uberDisabled = "_platform-disabled";
                     }
@@ -1138,38 +1319,178 @@
                     <h3>STBs</h3>
                       <img src="/_inc/images/new-platform/platform-stb@(uberDisabled).png" class="platform-image" />
                   </span>
-                     @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Apple TV"))
-                     {
-                         strDisabled = "_device-disabled";
-                     }
-                     else { strDisabled = ""; }
-                    <li title="Apple TV">
-                      <a href="#" class="@strDisabled" data-device="stb-appletv"><img src="/_inc/images/new-platform/device-apple@(strDisabled).png" alt=""><h3>Apple TV</h3></a>
-                    </li> 
-                    @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Freesat"))
-                     {
-                         strDisabled = "_device-disabled";
-                     }
-                     else { strDisabled = ""; }
-                    <li title="Freesat">
-                      <a href="#" class="@strDisabled" data-device="stb-freesat"><img src="/_inc/images/new-platform/device-freesat@(strDisabled).png" alt=""><h3>Freesat</h3></a>
-                    </li> 
-                    @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Now TV"))
-                     {
-                         strDisabled = "_device-disabled";
-                     }
-                     else { strDisabled = ""; }
-                    <li title="Now TV">
-                      <a href="#" class="@strDisabled" data-device="stb-nowtv"><img src="/_inc/images/new-platform/device-nowtv@(strDisabled).png" alt=""><h3>Now TV</h3></a>
-                    </li> 
-                    @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Roku"))
-                    {
-                        strDisabled = "_device-disabled";
-                    }
-                    else { strDisabled = ""; }
-                  <li title="Roku">
-                    <a href="#" class="@strDisabled" data-device="stb-roku"><img src="/_inc/images/new-platform/device-roku@(strDisabled).png" alt=""><h3>Roku</h3></a>
-                  </li>
+
+                  <span class="devices scrolling scroll-ctrl" data-group="stb-group">
+                    <div class="scroller"> 
+
+                         @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Apple TV"))
+                         {
+                             strDisabled = "_device-disabled";
+                         }
+                         else { strDisabled = ""; }
+                        <li title="Apple TV">
+                          <a href="#" class="@strDisabled" data-device="stb-appletv"><img src="/_inc/images/new-platform/device-apple@(strDisabled).png" alt=""><h3>Apple TV</h3></a>
+                        </li> 
+                        @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Freesat"))
+                         {
+                             strDisabled = "_device-disabled";
+                         }
+                         else { strDisabled = ""; }
+                        <li title="Freesat">
+                          <a href="#" class="@strDisabled" data-device="stb-freesat"><img src="/_inc/images/new-platform/device-freesat@(strDisabled).png" alt=""><h3>Freesat</h3></a>
+                        </li> 
+                        @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Now TV"))
+                         {
+                             strDisabled = "_device-disabled";
+                         }
+                         else { strDisabled = ""; }
+                        <li title="Now TV">
+                          <a href="#" class="@strDisabled" data-device="stb-nowtv"><img src="/_inc/images/new-platform/device-nowtv@(strDisabled).png" alt=""><h3>Now TV</h3></a>
+                        </li> 
+                        @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Roku"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Roku">
+                        <a href="#" class="@strDisabled" data-device="stb-roku"><img src="/_inc/images/new-platform/device-roku@(strDisabled).png" alt=""><h3>Roku</h3></a>
+                      </li>
+
+
+
+
+                        @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Sky"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Sky">
+                        <a href="#" class="@strDisabled" data-device="stb-sky"><img src="/_inc/images/new-platform/device-sky@(strDisabled).png" alt=""><h3>Sky</h3></a>
+                      </li>
+
+
+                        @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Virgin"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Virgin">
+                        <a href="#" class="@strDisabled" data-device="stb-virgin"><img src="/_inc/images/new-platform/device-virgin@(strDisabled).png" alt=""><h3>Virgin</h3></a>
+                      </li>
+
+
+                        @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "YouView"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="YouView">
+                        <a href="#" class="@strDisabled" data-device="stb-youview"><img src="/_inc/images/new-platform/device-youview@(strDisabled).png" alt=""><h3>YouView</h3></a>
+                      </li>
+
+
+                        @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "ATT U-Verse"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="AT&T U-Verse">
+                        <a href="#" class="@strDisabled" data-device="stb-attu-verse"><img src="/_inc/images/new-platform/device-att@(strDisabled).png" alt=""><h3>AT&amp;T U-Verse</h3></a>
+                      </li>
+
+
+                        @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Charter"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Charter">
+                        <a href="#" class="@strDisabled" data-device="stb-charter"><img src="/_inc/images/new-platform/device-charter@(strDisabled).png" alt=""><h3>Charter</h3></a>
+                      </li>
+
+
+                        @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Cox"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Cox">
+                        <a href="#" class="@strDisabled" data-device="stb-cox"><img src="/_inc/images/new-platform/device-cox@(strDisabled).png" alt=""><h3>Cox</h3></a>
+                      </li>
+
+
+                        @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Direct TV"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Direct TV">
+                        <a href="#" class="@strDisabled" data-device="stb-directtv"><img src="/_inc/images/new-platform/device-directtv@(strDisabled).png" alt=""><h3>Direct TV</h3></a>
+                      </li>
+
+
+                        @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Dish"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Dish">
+                        <a href="#" class="@strDisabled" data-device="stb-dish"><img src="/_inc/images/new-platform/device-dish@(strDisabled).png" alt=""><h3>Dish</h3></a>
+                      </li>
+
+
+                        @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Optimum"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Optimum">
+                        <a href="#" class="@strDisabled" data-device="stb-optimum"><img src="/_inc/images/new-platform/device-optimum@(strDisabled).png" alt=""><h3>Optimum</h3></a>
+                      </li>
+
+
+                        @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Sudden Link"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Sudden Link">
+                        <a href="#" class="@strDisabled" data-device="stb-suddenlink"><img src="/_inc/images/new-platform/device-suddenlink@(strDisabled).png" alt=""><h3>Sudden Link</h3></a>
+                      </li>
+                      
+
+                        @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "TiVo"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="TiVo">
+                        <a href="#" class="@strDisabled" data-device="stb-tivo"><img src="/_inc/images/new-platform/device-tivo@(strDisabled).png" alt=""><h3>TiVo</h3></a>
+                      </li>
+
+                        @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Verizon FiOS"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Verizon FiOS">
+                        <a href="#" class="@strDisabled" data-device="stb-verizonfios"><img src="/_inc/images/new-platform/device-verizon@(strDisabled).png" alt=""><h3>Verizon FiOS</h3></a>
+                      </li>
+
+
+                        @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Xfinity"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Xfinity">
+                        <a href="#" class="@strDisabled" data-device="stb-xfinity"><img src="/_inc/images/new-platform/device-xfinity@(strDisabled).png" alt=""><h3>Xfinity</h3></a>
+                      </li>
+
+
+                      </div>
+                    </span>
+
                 </span>
                              
                     if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Games Consoles", "Playstation") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Games Consoles", "XBox"))
@@ -1217,6 +1538,20 @@
                 @WriteBenchmark(@Service, "STB", "Freesat")
                 @WriteBenchmark(@Service, "STB", "Now TV")
                 @WriteBenchmark(@Service, "STB", "Roku")
+                @WriteBenchmark(@Service, "STB", "Sky")
+                @WriteBenchmark(@Service, "STB", "Virgin")
+                @WriteBenchmark(@Service, "STB", "YouView")
+                @WriteBenchmark(@Service, "STB", "ATT U-Verse")
+                @WriteBenchmark(@Service, "STB", "Charter")
+                @WriteBenchmark(@Service, "STB", "Cox")
+                @WriteBenchmark(@Service, "STB", "Direct TV")
+                @WriteBenchmark(@Service, "STB", "Dish")
+                @WriteBenchmark(@Service, "STB", "Optimum")
+                @WriteBenchmark(@Service, "STB", "Sudden Link")
+                @WriteBenchmark(@Service, "STB", "TiVo")
+                @WriteBenchmark(@Service, "STB", "Verizon FiOS")
+                @WriteBenchmark(@Service, "STB", "Xfinity")
+
                 @WriteBenchmark(@Service, "Games Consoles", "Playstation")
                 @WriteBenchmark(@Service, "Games Consoles", "XBox")
               </div>

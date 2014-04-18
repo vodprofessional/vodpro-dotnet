@@ -9,7 +9,7 @@
     static VUI3PageFunctionDescriptions PageDescriptions;
 }
 @helper DrawBenchmarkingPane(VUI3BenchmarkMatrix matrix, string platformDevice, int deviceId, int platformId)
-{
+    {
                 <div class="item-block">
                   <h3>
                     Content Discovery & Recommendation
@@ -294,32 +294,32 @@
                     </ul>
                   </div>
                 </div>
-    if(!IsFullMode)
-    {
+        if (!IsFullMode)
+        {
         <div class="b-carousel small">
         <h3>
                       Best in Class
                       </h3>
                       <p>When you subscribe, you’ll be able to see the breakdown for individual platforms (like Web, Tablet, Smartphone etc.) and find out which existing video services display the greatest range of functionality.</p>
               </div>           
-    }
-    if (IsFullMode && !platformDevice.Equals("Overall"))
-    {
-
-        List<VUI3ServiceMasterMatrixItem> serviceList;
-        if (deviceId != -1)
-        {
-            serviceList = VUI3Utility.GetBestServicesForDevice(deviceId);
         }
-        else
+        if (IsFullMode && !platformDevice.Equals("Overall"))
         {
-            serviceList = VUI3Utility.GetBestServicesForPlatform(platformId);
-        }
 
-        if (serviceList != null && serviceList.Count > 0)
-        {
-            int counter = 0;
-            int maxtoshow = 50;
+            List<VUI3ServiceMasterMatrixItem> serviceList;
+            if (deviceId != -1)
+            {
+                serviceList = VUI3Utility.GetBestServicesForDevice(deviceId);
+            }
+            else
+            {
+                serviceList = VUI3Utility.GetBestServicesForPlatform(platformId);
+            }
+
+            if (serviceList != null && serviceList.Count > 0)
+            {
+                int counter = 0;
+                int maxtoshow = 50;
             
                     <div class="b-carousel small">
                       <h3>
@@ -347,21 +347,21 @@
                       </div>
                       <a class="arrow prev" href="#"><span class="icon-chevron-left"></span></a><a class="arrow next" href="#"><span class="icon-chevron-right"></span></a>
                     </div>
+            }
         }
-    }
 
 }
 @helper WriteScore(VUI3BenchmarkMatrix matrix, string feature, string platformDevice)
     {
-    int maxwidth = 430;
-    int score = matrix.GetScores(feature, platformDevice).Score;
-    int width = (maxwidth * score) / 100;
-    string style = "width:" + width + "px;";
+        int maxwidth = 430;
+        int score = matrix.GetScores(feature, platformDevice).Score;
+        int width = (maxwidth * score) / 100;
+        string style = "width:" + width + "px;";
     <li style="@style">@score%</li>    
 }
 @{
     PageDescriptions = new VUI3PageFunctionDescriptions();
-    
+
     VUIUser u = VUI3Utility.GetUser(); // This inadvertently makes the page work by overriding the static variable. Otherwise caching kills it.
     string strDisabled = "";
     string serviceclass = "";
@@ -449,11 +449,11 @@
                 </span>
                   
                 
-                if (!matrix.HasBenchmarksForPlatform("TabletiPad") && !matrix.HasBenchmarksForPlatform("TabletAndroid") && !matrix.HasBenchmarksForPlatform("TabletWindows"))
-                {
-                    uberDisabled = "_platform-disabled";
-                }
-                else { uberDisabled = ""; }
+                  if (!matrix.HasBenchmarksForPlatform("TabletiPad") && !matrix.HasBenchmarksForPlatform("TabletAndroid") && !matrix.HasBenchmarksForPlatform("TabletWindows"))
+                  {
+                      uberDisabled = "_platform-disabled";
+                  }
+                  else { uberDisabled = ""; }
                 <span class="uber-tab @(uberDisabled)" data-devicegroup="tablets" title="Tablets">
                     <span class="title">
                       <h3>Tablet</h3>
@@ -576,6 +576,10 @@
                     <h3>STBs</h3>
                       <img src="/_inc/images/new-platform/platform-stb@(uberDisabled).png" class="platform-image" />
                   </span>
+                  
+                  <span class="devices scrolling scroll-ctrl" data-group="stb-group">
+                    <div class="scroller"> 
+
                      @if (!matrix.HasBenchmarksForPlatform("STB-Apple TV"))
                      {
                          strDisabled = "_device-disabled";
@@ -608,6 +612,139 @@
                   <li title="Roku">
                     <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-roku@(strDisabled).png" alt=""><h3>Roku</h3></a>
                   </li>
+
+                        @if (!matrix.HasBenchmarksForPlatform("STB-Sky"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Sky">
+                        <a href="#" class="@strDisabled" data-device="stb-sky"><img src="/_inc/images/new-platform/device-sky@(strDisabled).png" alt=""><h3>Sky</h3></a>
+                      </li>
+
+
+                        @if (!matrix.HasBenchmarksForPlatform("STB-Virgin"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Virgin">
+                        <a href="#" class="@strDisabled" data-device="stb-virgin"><img src="/_inc/images/new-platform/device-virgin@(strDisabled).png" alt=""><h3>Virgin</h3></a>
+                      </li>
+
+
+                        @if (!matrix.HasBenchmarksForPlatform("STB-YouView"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="YouView">
+                        <a href="#" class="@strDisabled" data-device="stb-youview"><img src="/_inc/images/new-platform/device-youview@(strDisabled).png" alt=""><h3>YouView</h3></a>
+                      </li>
+
+
+                        @if (!matrix.HasBenchmarksForPlatform("STB-AT&T U-Verse"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="AT&T U-Verse">
+                        <a href="#" class="@strDisabled" data-device="stb-attu-verse"><img src="/_inc/images/new-platform/device-att@(strDisabled).png" alt=""><h3>AT&amp;T U-Verse</h3></a>
+                      </li>
+
+
+                        @if (!matrix.HasBenchmarksForPlatform("STB-Charter"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Charter">
+                        <a href="#" class="@strDisabled" data-device="stb-charter"><img src="/_inc/images/new-platform/device-charter@(strDisabled).png" alt=""><h3>Charter</h3></a>
+                      </li>
+
+
+                        @if (!matrix.HasBenchmarksForPlatform("STB-Cox"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Cox">
+                        <a href="#" class="@strDisabled" data-device="stb-cox"><img src="/_inc/images/new-platform/device-cox@(strDisabled).png" alt=""><h3>Cox</h3></a>
+                      </li>
+
+
+                        @if (!matrix.HasBenchmarksForPlatform("STB-Direct TV"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Direct TV">
+                        <a href="#" class="@strDisabled" data-device="stb-directtv"><img src="/_inc/images/new-platform/device-directtv@(strDisabled).png" alt=""><h3>Direct TV</h3></a>
+                      </li>
+
+
+                        @if (!matrix.HasBenchmarksForPlatform("STB-Dish"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Dish">
+                        <a href="#" class="@strDisabled" data-device="stb-dish"><img src="/_inc/images/new-platform/device-dish@(strDisabled).png" alt=""><h3>Dish</h3></a>
+                      </li>
+
+
+                        @if (!matrix.HasBenchmarksForPlatform("STB-Optimum"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Optimum">
+                        <a href="#" class="@strDisabled" data-device="stb-optimum"><img src="/_inc/images/new-platform/device-optimum@(strDisabled).png" alt=""><h3>Optimum</h3></a>
+                      </li>
+
+
+                        @if (!matrix.HasBenchmarksForPlatform("STB-Sudden Link"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Sudden Link">
+                        <a href="#" class="@strDisabled" data-device="stb-suddenlink"><img src="/_inc/images/new-platform/device-suddenlink@(strDisabled).png" alt=""><h3>Sudden Link</h3></a>
+                      </li>
+                      
+
+                        @if (!matrix.HasBenchmarksForPlatform("STB-TiVo"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="TiVo">
+                        <a href="#" class="@strDisabled" data-device="stb-tivo"><img src="/_inc/images/new-platform/device-tivo@(strDisabled).png" alt=""><h3>TiVo</h3></a>
+                      </li>
+
+                        @if (!matrix.HasBenchmarksForPlatform("STB-Verizon FiOS"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Verizon FiOS">
+                        <a href="#" class="@strDisabled" data-device="stb-verizonfios"><img src="/_inc/images/new-platform/device-verizon@(strDisabled).png" alt=""><h3>Verizon FiOS</h3></a>
+                      </li>
+
+
+                        @if (!matrix.HasBenchmarksForPlatform("STB-Xfinity"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                      <li title="Xfinity">
+                        <a href="#" class="@strDisabled" data-device="stb-xfinity"><img src="/_inc/images/new-platform/device-xfinity@(strDisabled).png" alt=""><h3>Xfinity</h3></a>
+                      </li>
+
+                      </div>
+                    </span>
+
+
                 </span>
                              
                   if (!matrix.HasBenchmarksForPlatform("Games Consoles-Playstation") && !matrix.HasBenchmarksForPlatform("Games Consoles-XBox"))
@@ -766,7 +903,7 @@
             <div class="pane">
                 <div class="inner">
                 <p>
-                    Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Freesat").Max services on Fressat
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Freesat").Max services on Freesat
                 </p>
                 @DrawBenchmarkingPane(matrix, "STB-Freesat", 24775, 19798)
                 </div>
@@ -787,6 +924,137 @@
                 @DrawBenchmarkingPane(matrix, "STB-Roku", 19800, 19798)
                 </div>
             </div>
+                
+                <!-- -->
+                
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Sky").Max services on Sky
+                </p>
+                @DrawBenchmarkingPane(matrix, "STB-Sky", 19801, 19798)
+                </div>
+            </div>
+                
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Virgin").Max services on Virgin
+                </p>
+                @DrawBenchmarkingPane(matrix, "STB-Virgin", 26463, 19798)
+                </div>
+            </div>
+                
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "STB-YouView").Max services on YouView
+                </p>
+                @DrawBenchmarkingPane(matrix, "STB-YouView", 19802, 19798)
+                </div>
+            </div>
+                                
+                
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "STB-AT&T U-Verse").Max services on AT&amp;T U-Verse
+                </p>
+                @DrawBenchmarkingPane(matrix, "STB-AT&T U-Verse", 26464, 19798)
+                </div>
+            </div>
+                
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Charter").Max services on Charter
+                </p>
+                @DrawBenchmarkingPane(matrix, "STB-Charter", 26465, 19798)
+                </div>
+            </div>
+                                               
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Sky").Max services on Cox
+                </p>
+                @DrawBenchmarkingPane(matrix, "STB-Cox", 26466, 19798)
+                </div>
+            </div>
+                
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Direct TV").Max services on Direct TV
+                </p>
+                @DrawBenchmarkingPane(matrix, "STB-Direct TV", 26467, 19798)
+                </div>
+            </div>
+                
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Dish").Max services on Dish
+                </p>
+                @DrawBenchmarkingPane(matrix, "STB-Dish", 26468, 19798)
+                </div>
+            </div>
+                                               
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Optimum").Max services on Optimum
+                </p>
+                @DrawBenchmarkingPane(matrix, "STB-Optimum", 26469, 19798)
+                </div>
+            </div>
+                
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Sudden Link").Max services on Sudden Link
+                </p>
+                @DrawBenchmarkingPane(matrix, "STB-Sudden Link", 26470, 19798)
+                </div>
+            </div>
+                
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "STB-TiVo").Max services on TiVo
+                </p>
+                @DrawBenchmarkingPane(matrix, "STB-TiVo", 26473, 19798)
+                </div>
+            </div>
+                                               
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Verizon FiOS").Max services on Verizon FiOS
+                </p>
+                @DrawBenchmarkingPane(matrix, "STB-Verizon FiOS", 26471, 19798)
+                </div>
+            </div>
+                
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Xfinity").Max services on Xfinity
+                </p>
+                @DrawBenchmarkingPane(matrix, "STB-Xfinity", 26478, 19798)
+                </div>
+            </div>
+                                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
             <div class="pane">
                 <div class="inner">
                 <p>

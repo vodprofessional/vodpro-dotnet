@@ -194,7 +194,8 @@
                     <h3>TV</h3>
                       <img src="/_inc/images/new-platform/platform-tv.png" class="platform-image" />
                   </span>
-                  <span class="devices">
+                  <span class="devices scrolling no-scroll-ctrl" data-group="connectedtv-group">
+                   <div class="scroller">
                     <li title="Samsung">
                       <a href="#" class=""><img src="/_inc/images/new-platform/device-smart.png" alt=""><h3>Samsung</h3></a>
                     </li> 
@@ -208,6 +209,7 @@
                     <li title="Panasonic">
                       <a href="#" class=""><img src="/_inc/images/new-platform/device-panasonic.png" alt=""><h3>Panasonic</h3></a>
                     </li>-->
+                  </div>
                  </span>
                 </span>   
                   
@@ -216,7 +218,8 @@
                     <h3>STBs</h3>
                       <img src="/_inc/images/new-platform/platform-stb.png" class="platform-image" />
                   </span>
-                  <span class="devices">
+                  <span class="devices scrolling scroll-ctrl" data-group="stb-group">
+                   <div class="scroller">
                     <li title="Apple TV">
                       <a href="#" class=""><img src="/_inc/images/new-platform/device-apple.png" alt=""><h3>Apple TV</h3></a>
                     </li> 
@@ -229,6 +232,46 @@
                     <li title="Roku">
                       <a href="#" class=""><img src="/_inc/images/new-platform/device-roku.png" alt=""><h3>Roku</h3></a>
                     </li>
+                    <li title="Sky">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-sky.png" alt=""><h3>Sky</h3></a>
+                    </li>
+                    <li title="Virgin Media">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-virgin.png" alt=""><h3>Virgin</h3></a>
+                    </li>
+                    <li title="YouView">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-youview.png" alt=""><h3>YouView</h3></a>
+                    </li>
+                    <li title="AT&amp;T U-Verse">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-att.png" alt=""><h3 class="compact">AT&amp;T U-Verse</h3></a>
+                    </li>
+                    <li title="Charter">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-charter.png" alt=""><h3>Charter</h3></a>
+                    </li>
+                    <li title="Cox">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-cox.png" alt=""><h3>Cox</h3></a>
+                    </li>
+                    <li title="Direct TV">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-directtv.png" alt=""><h3>Direct TV</h3></a>
+                    </li>
+                    <li title="Dish">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-dish.png" alt=""><h3>Dish</h3></a>
+                    </li>
+                    <li title="Optimum">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-optimum.png" alt=""><h3>Optimum</h3></a>
+                    </li>
+                    <li title="Sudden Link">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-suddenlink.png" alt=""><h3>Sudden Link</h3></a>
+                    </li>
+                    <li title="TiVo">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-tivo.png" alt=""><h3>TiVo</h3></a>
+                    </li>
+                    <li title="Verizon FiOS">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-verizon.png" alt=""><h3>Verizon FiOS</h3></a>
+                    </li>
+                    <li title="Xfinity">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-xfinity.png" alt=""><h3>Xfinity</h3></a>
+                    </li>
+                   </div>
                   </span>
                 </span>
                              
@@ -293,16 +336,42 @@
                         <li data-devicegroup="smartphone" class="device">@DrawMatrixLink(service, new string[] { "SmartphoneiPhone" }, IsFullMode)</li>
                         <li data-devicegroup="smartphone" class="device">@DrawMatrixLink(service, new string[] { "SmartphoneAndroid" }, IsFullMode)</li>
                         <li data-devicegroup="smartphone" class="device">@DrawMatrixLink(service, new string[] { "SmartphoneWindows" }, IsFullMode)</li>
-                        <li data-devicegroup="connectedtv" class="overall">@DrawMatrixLink(service, new string[] { "Connected TV-Samsung", "Connected TV-Sony" }, IsFullMode, true)</li>
-                        <li data-devicegroup="connectedtv" class="device">@DrawMatrixLink(service, new string[] { "Connected TV-Samsung" }, IsFullMode)</li>
-                        <li data-devicegroup="connectedtv" class="device">@DrawMatrixLink(service, new string[] { "Connected TV-Sony" }, IsFullMode)</li>
-                        <li data-devicegroup="connectedtv" class="device">@DrawMatrixLink(service, new string[] { "Connected TV-LG" }, IsFullMode)</li>
-                        <!-- <li data-devicegroup="connectedtv" class="device">@@DrawMatrixLink(service, new string[] { "Connected TV-Panasonic" }, IsFullMode)</li> -->
-                        <li data-devicegroup="stb" class="overall">@DrawMatrixLink(service, new string[] { "STB-Apple TV", "STB-Freesat", "STB-Now TV", "STB-Roku" }, IsFullMode, true)</li>
-                        <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Apple TV" }, IsFullMode)</li>
-                        <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Freesat" }, IsFullMode)</li>
-                        <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Now TV" }, IsFullMode)</li>
-                        <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Roku" }, IsFullMode)</li>
+                        <div class="matrix-scroll-group">
+                          <div class="connectedtv-group scroller" data-group="connectedtv-group">
+                            <li data-devicegroup="connectedtv" class="overall">@DrawMatrixLink(service, new string[] { "Connected TV-Samsung", "Connected TV-Sony" }, IsFullMode, true)</li>
+                            <li data-devicegroup="connectedtv" class="device">@DrawMatrixLink(service, new string[] { "Connected TV-Samsung" }, IsFullMode)</li>
+                            <li data-devicegroup="connectedtv" class="device">@DrawMatrixLink(service, new string[] { "Connected TV-Sony" }, IsFullMode)</li>
+                            <li data-devicegroup="connectedtv" class="device">@DrawMatrixLink(service, new string[] { "Connected TV-LG" }, IsFullMode)</li>
+                            <!-- <li data-devicegroup="connectedtv" class="device">@@DrawMatrixLink(service, new string[] { "Connected TV-Panasonic" }, IsFullMode)</li> -->
+                          </div>
+                        </div>
+                        
+                        <div class="matrix-scroll-group ">
+                          <div class="stb-group scroller" data-group="stb-group">
+                            <li data-devicegroup="stb" class="overall">@DrawMatrixLink(service, new string[] { 
+                                                                      "STB-Apple TV", "STB-Freesat", "STB-Now TV", "STB-Roku", "STB-Virgin", "STB-Sky",
+                                                                      "STB-YouView", "STB-AT&T U-Verse", "STB-Charter", "STB-Cox", "STB-Direct TV",
+                                                                      "STB-Dish", "STB-Optimum", "STB-TiVo", "STB-Verizon FiOS", "STB-Xfinity"}, IsFullMode, true)</li>
+                            <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Apple TV" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Freesat" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Now TV" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Roku" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Sky" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Virgin" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-YouView" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-AT&T U-Verse" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Charter" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Cox" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Direct TV" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Dish" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Optimum" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Sudden Link" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-TiVo" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Verizon FiOS" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Xfinity" }, IsFullMode)</li>
+
+                          </div>
+                        </div>
                         <li data-devicegroup="gamesconsole" class="overall">@DrawMatrixLink(service, new string[] { "Games Console-Playstation", "Games Console-XBox" }, IsFullMode, true)</li>
                         <li data-devicegroup="gamesconsole" class="device">@DrawMatrixLink(service, new string[] { "Games Console-Playstation" }, IsFullMode)</li>
                         <li data-devicegroup="gamesconsole" class="device">@DrawMatrixLink(service, new string[] { "Games Console-XBox" }, IsFullMode)</li>

@@ -9,6 +9,195 @@ jQuery.fn.extend({
 });
 
 
+/* THis is for the scolling in UberTabs */
+jQuery.fn.extend({
+    ScrollCtrl: function (options) {
+        var settings = $.extend({
+            linktomatrix: false,
+            linkubertabs: false,
+            numtoshow: 3,
+            startIndex: 0,
+            startDevice: null,
+            homelink: null
+        }, options);
+
+
+        $(this).each(function () {
+
+            var currentItem = 0;
+            var numitems = $(this).find("li").size();
+            var group = $(this).attr("data-group");
+            var groupItems = $('.b-matrix-files .inner ul li.matrix-block .matrix-scroll-group .scroller[data-group="' + group + '"]');
+            var scroller = $(this).find(".scroller")
+            var owner = $(this);
+
+
+            // Set the inner scrolling span width
+            $(scroller).width($(this).find("li").size() * 200 + 'px');
+
+            // Add left and right arrows and bind click events
+            $(this)
+                .append('<a href="#" class="move-prev"><span class="icon-chevron-left"></span></a>');
+            $(this)
+                .append('<a href="#" class="move-next"><span class="icon-chevron-right"></span></a>');
+            $(this)
+                .append('<a href="#" class="move-prev-hidden" style="display:none"></a>');
+            $(this)
+                .append('<a href="#" class="move-next-hidden" style="display:none"></a>');
+            $(this)
+                .append('<a href="#" class="move-home-hidden" style="display:none"></a>');
+
+            $(this).find("a.move-prev").on('click', function (event) {
+                event.preventDefault();
+                move($(scroller), 'l');
+
+                if (settings.linkubertabs) {
+                    $('.scroll-ctrl[data-group="' + group + '"]').not(owner).parent().find('.move-prev-hidden').trigger('click');
+                }
+            });
+            $(this).find("a.move-next").on('click', function (event) {
+                event.preventDefault();
+                move($(scroller), 'r');
+
+                if (settings.linkubertabs) {
+                    $('.scroll-ctrl[data-group="' + group + '"]').not(owner).parent().find('.move-next-hidden').trigger('click');
+                }
+            });
+            $(this).find("a.move-prev-hidden").on('click', function (event) {
+                event.preventDefault();
+                move($(scroller), 'l');
+            });
+            $(this).find("a.move-next-hidden").on('click', function (event) {
+                event.preventDefault();
+                move($(scroller), 'r');
+            });
+
+            $(this).find("a.move-home-hidden").on('click', function (event) {
+                event.preventDefault();
+                moveToIndex($(scroller), 0);
+            });
+
+            if (settings.homelink) {
+                if ($(settings.homelink).length > 0) {
+
+                    $(this).find("a.move-prev").css("margin-left", function () { return $(settings.homelink).parent().outerWidth(true) - 13 + 'px'; });
+
+                    $(settings.homelink).on('click', function (event) {
+                        moveToIndex($(scroller), 0);
+                        if (settings.linkubertabs) {
+                            $('.scroll-ctrl[data-group="' + group + '"]').not(owner).parent().find('.move-home-hidden').trigger('click');
+                        }
+                    });
+                }
+            }
+
+
+            // Hide the prev arrow by default
+            $(this).find("a.move-prev").hide();
+
+            if (settings.startDevice !== null) {
+                moveToDevice($(scroller), settings.startDevice);
+            }
+
+
+            function moveToIndex(el, index) {
+                var l = $(el).offset().left - $(el).parent().offset().left;
+
+                if (index + 1 + settings.numtoshow > numitems) {
+                    index = numitems - settings.numtoshow;
+                }
+                var s = l + ($($(el).children('li')[currentItem]).offset().left - $($(el).children('li')[index]).offset().left);
+
+                currentItem = index;
+                $(el).animate({
+                    left: s
+                }, 250, function () {
+                    hideNextPrev(el);
+                });
+            }
+
+            function moveToDevice(el, device) {
+                if ($(el).find('a[data-device="' + device + '"]').length > 0) {
+                    var l = $(el).offset().left - $(el).parent().offset().left;
+                    var l2 = $(el).find('a[data-device="' + device + '"]');
+                    moveToIndex($(el), $(el).find('a').index(l2));
+                }
+            }
+
+            // Move function
+            var move = function (el, direction) {
+                var n = 0; // $(el).children('li').first().outerWidth(true);
+                var l = $(el).offset().left - $(el).parent().offset().left;
+
+                if (direction === 'r') {
+                    if (numitems + 1 > currentItem + settings.numtoshow) {
+
+                        n = $($(el).children('li')[currentItem]).outerWidth(true);
+                        currentItem++;
+
+                        $(el).animate({
+                            left: l - n
+                        }, 100, function () {
+                            hideNextPrev(el);
+                        });
+
+                        if (settings.linktomatrix) {
+                            groupItems.each(function () {
+                                $(this).animate({
+                                    left: l - n
+                                }, 100)
+                            });
+                        }
+                    }
+                }
+                if (direction === 'l') {
+                    if (currentItem > 0) {
+                        currentItem--;
+                        n = $($(el).children('li')[currentItem]).outerWidth(true);
+                        $(el).animate({
+                            left: l + n
+                        }, 100, function () {
+                            hideNextPrev(el);
+                        });
+
+                        if (settings.linktomatrix) {
+                            groupItems.each(function () {
+                                $(this).animate({
+                                    left: l + n
+                                }, 100)
+                            });
+                        }
+                    }
+                }
+            }
+
+            // Hide the L/R arrows
+            function hideNextPrev(el) {
+                var lastIsVisible = (($(el).children('li').last().offset().left + $(el).children('li').last().outerWidth(true) - $(el).parent().offset().left) <= $(el).parent().outerWidth(true));
+                if (lastIsVisible) {
+                    $(el).parent().find("a.move-next").hide();
+                }
+                else {
+                    $(el).parent().find("a.move-next").show();
+                }
+
+                var firstIsVisible = (($(el).children('li').first().offset().left - $(el).parent().offset().left) >= 0);
+                if (firstIsVisible) {
+                    $(el).parent().find("a.move-prev").hide();
+                }
+                else {
+                    $(el).parent().find("a.move-prev").show();
+                }
+            }
+
+            return {
+                move: move
+            }
+        });
+    }
+});
+
+
 jQuery.fn.extend({
     ActionPanel: function () {
         this.on("click", function (event) {

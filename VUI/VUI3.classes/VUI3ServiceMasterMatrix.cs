@@ -18,8 +18,11 @@ namespace VUI.VUI3.classes
 
             string sql = @"    SELECT M.ServiceName, M.TabletAndroid  ,M.SmartphoneAndroid ,M.SmartphoneiPhone  ,M.TabletiPad  ,M.SmartphoneWindows   , M.Web, 
                                 [Connected TV-Samsung], [Connected TV-Sony],[Connected TV-LG], [Connected TV-Panasonic],[Games Consoles-XBox],[Games Consoles-Playstation],
-                                [STB-Apple TV], [STB-Freesat], [STB-Roku], [STB-Now TV]
-                                ,M.Total ,SM.Id, ISNULL(SM.IconURL,'') as IconURL
+                                [STB-Apple TV], [STB-Freesat], [STB-Roku], [STB-Now TV], 
+                                [STB-Sky],[STB-Virgin],[STB-YouView],[STB-AT&T U-Verse],
+                                [STB-Cox],[STB-Charter],[STB-Direct TV],[STB-Dish],[STB-Optimum],
+                                [STB-Sudden Link],[STB-Verizon FiOS],[STB-Xfinity],[STB-TiVo],
+                                M.Total ,SM.Id, ISNULL(SM.IconURL,'') as IconURL
                                 FROM vui_ScreenshotMatrix M
                                 inner join vui_ServiceMasters SM on M.ServiceName = SM.ServiceName 
                                 where Total > 0
@@ -51,14 +54,27 @@ namespace VUI.VUI3.classes
                         i.ConnectedTVPanasonicCount = (int)sr["Connected TV-Panasonic"];
                         i.GamesConsolesXBoxCount = (int)sr["Games Consoles-XBox"];
                         i.GamesConsolesPlaystationCount = (int)sr["Games Consoles-Playstation"];
+
                         i.STBAppleTVCount = (int)sr["STB-Apple TV"];
                         i.STBFreesatCount = (int)sr["STB-Freesat"];
                         i.STBRokuCount = (int)sr["STB-Roku"];
                         i.STBNowTVCount = (int)sr["STB-Now TV"];
+                        i.STBSkyCount = (int)sr["STB-Sky"];
+                        i.STBVirginCount = (int)sr["STB-Virgin"];
+                        i.STBYouViewCount = (int)sr["STB-YouView"];
+                        i.STBATTUVerseCount = (int)sr["STB-AT&T U-Verse"];
+                        i.STBCoxCount = (int)sr["STB-Cox"];
+                        i.STBCharterCount = (int)sr["STB-Charter"];
+                        i.STBDirectTVCount = (int)sr["STB-Direct TV"];
+                        i.STBDishCount = (int)sr["STB-Dish"];
+                        i.STBOptimumCount = (int)sr["STB-Optimum"];
+                        i.STBSuddenLinkCount = (int)sr["STB-Sudden Link"];
+                        i.STBVerizonFiOSCount = (int)sr["STB-Verizon FiOS"];
+                        i.STBXfinityCount = (int)sr["STB-Xfinity"];
+                        i.STBTiVoCount = (int)sr["STB-TiVo"];
 
                         i.TotalCount = (int)sr["Total"];
                         i.IconURL = (string)sr["IconURL"];
-
 
                         Services.Add(i);
                     }
@@ -124,6 +140,20 @@ namespace VUI.VUI3.classes
         public int STBFreesatCount { get; set; }
         public int STBNowTVCount{ get; set; }
         public int STBAppleTVCount { get; set; }
+        public int STBSkyCount { get; set; }
+        public int STBVirginCount { get; set; }
+        public int STBYouViewCount { get; set; }
+        public int STBATTUVerseCount { get; set; }
+        public int STBCoxCount { get; set; }
+        public int STBCharterCount { get; set; }
+        public int STBDirectTVCount { get; set; }
+        public int STBDishCount { get; set; }
+        public int STBOptimumCount { get; set; }
+        public int STBSuddenLinkCount { get; set; }
+        public int STBVerizonFiOSCount { get; set; }
+        public int STBXfinityCount { get; set; }
+        public int STBTiVoCount { get; set; }
+
         public int TotalCount { get; set; }
         public string IconURL { get; set; }
         public string URL { 
@@ -193,13 +223,69 @@ namespace VUI.VUI3.classes
                 {
                     return STBAppleTVCount;
                 }
+                case "STB-Freesat":
+                {
+                    return STBFreesatCount;
+                }
                 case "STB-Roku":
                 {
                     return STBRokuCount;
                 }
                 case "STB-Now TV":
-                { 
+                {
                     return STBNowTVCount;
+                }
+                case "STB-Virgin":
+                {
+                    return STBVirginCount;
+                }
+                case "STB-Sky":
+                {
+                    return STBSkyCount ;
+                }
+                case "STB-YouView":
+                {
+                    return STBYouViewCount;
+                }
+                case "STB-AT&T U-Verse":
+                {
+                    return STBATTUVerseCount;
+                }
+                case "STB-Charter":
+                {
+                    return STBCharterCount;
+                }
+                case "STB-Cox":
+                {
+                    return STBCoxCount;
+                }
+                case "STB-Direct TV":
+                {
+                    return STBDirectTVCount;
+                }
+                case "STB-Dish":
+                {
+                    return STBDishCount;
+                }
+                case "STB-Optimum":
+                {
+                    return STBOptimumCount;
+                }
+                case "STB-Sudden Link":
+                {
+                    return STBSuddenLinkCount;
+                }
+                case "STB-Verizon FiOS":
+                {
+                    return STBVerizonFiOSCount;
+                }
+                case "STB-Xfinity":
+                {
+                    return STBXfinityCount;
+                }
+                case "STB-TiVo":
+                {
+                    return STBTiVoCount;
                 }
                 default:
                 {

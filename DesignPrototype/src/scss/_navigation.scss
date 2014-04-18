@@ -100,16 +100,16 @@
     background-color: transparent;
     background-repeat: no-repeat;
     background-image: url(../img/logo.png);
-    background-image: url(../img/logo.svg), none;
+    //background-image: url(../img/logo.svg), none;
     @media (max-width: 991px) {
       background-image: url(../img/logo-half.png);
-      background-image: url(../img/logo.svg), none;
+    //  background-image: url(../img/logo.svg), none;
       height: 46px;
       width: 240px;
     }
     @media (max-width: 768px) {
       background-image: url(../img/logo-half.png);
-      background-image: url(../img/logo.svg), none;
+    //  background-image: url(../img/logo.svg), none;
       height: 46px;
       width: 240px;
     }

@@ -30,7 +30,14 @@ namespace VUI.VUI3.classes
         {
             _MatrixItems = new List<VUI3BenchmarkMatrixItem>();
 
-            string[] deviceTypes = { "TabletAndroid", "SmartphoneAndroid", "TabletiPad", "SmartphoneiPhone", "SmartphoneWindows", "TabletWindows", "Web", "Connected TV-Samsung", "Connected TV-Sony", "Connected TV-LG", "Connected TV-Panasonic", "Games Consoles-XBox", "Games Consoles-Playstation", "STB-Apple TV", "STB-Freesat", "STB-Roku", "STB-Now TV", "Overall" };
+            string[] deviceTypes = { "TabletAndroid", "SmartphoneAndroid", "TabletiPad", "SmartphoneiPhone", "SmartphoneWindows", "TabletWindows", "Web", 
+                                       "Connected TV-Samsung", "Connected TV-Sony", "Connected TV-LG", "Connected TV-Panasonic", "Games Consoles-XBox", 
+                                       "Games Consoles-Playstation", 
+                                       "STB-Apple TV", "STB-Freesat", "STB-Roku", "STB-Now TV", 
+                                       "STB-Sky", "STB-Virgin", "STB-YouView",
+                                       "STB-AT&T U-Verse", "STB-Cox", "STB-Charter", "STB-Direct TV", "STB-Dish",
+                                       "STB-Optimum", "STB-Sudden Link", "STB-Verizon FiOS", "STB-Xfinity", "STB-TiVo",                                       
+                                       "Overall" };
 
             string sql = @"vui_BenchmarkFeatureScores";
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.AppSettings["umbracoDbDSN"].ToString()))
@@ -83,12 +90,19 @@ namespace VUI.VUI3.classes
             try
             {
                 VUI3BenchmarkMatrixItem pditem = MatrixItems.First(m => m.PlatformDevice.Equals(PlatformDevice));
-                if(pditem.Count > 0)
+                if(pditem.Max > 0)
                 {
                     retval = true;
                 }
+                if(PlatformDevice.Equals("STB-Sky")) 
+                {
+                //    log.Debug("Found " + pditem.ToString());
+                }
             }
-            catch(Exception ex){;}
+            catch(Exception ex)
+            {
+                log.Error(ex);   
+            }
             return retval;
         }
 
