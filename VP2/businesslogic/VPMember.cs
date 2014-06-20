@@ -16,6 +16,7 @@ using System.Net.Mail;
 using System.IO;
 using System.Web.UI;
 using umbraco.BusinessLogic;
+using VPCommon;
 
 namespace VP2.businesslogic
 {
@@ -94,8 +95,99 @@ namespace VP2.businesslogic
             throw new Exception("Username or password");
         }
 
+        public static bool MemberLogout(Member m)
+        {
+            if (m != null)
+            {
+                Member.RemoveMemberFromCache(m.Id);
+                Member.ClearMemberFromClient(m.Id);
+            }
+            HttpContext.Current.Session.RemoveAll();
+            HttpContext.Current.Session.Abandon();
+            FormsAuthentication.SignOut();
 
-        private static string MemberVUIStatus(Member m)
+            if (HttpContext.Current.Request.Cookies["uid"] != null)
+            {
+                HttpCookie myCookie = new HttpCookie("uid");
+                myCookie.Expires = DateTime.Now.AddDays(-1d);
+                HttpContext.Current.Response.Cookies.Add(myCookie);
+            }
+            bool rememberUserId = false;
+            if (HttpContext.Current.Request.Cookies["vrl"] != null)
+            {
+                if (HttpContext.Current.Request.Cookies["vrl"].Value.Equals("Y"))
+                {
+                    rememberUserId = true;
+                }
+            }
+            if (!rememberUserId)
+            {
+                if (HttpContext.Current.Request.Cookies["vid"] != null)
+                {
+                    HttpCookie myCookie = new HttpCookie("vid");
+                    myCookie.Expires = DateTime.Now.AddDays(-1d);
+                    HttpContext.Current.Response.Cookies.Add(myCookie);
+                }
+            }
+            return true;
+        }
+
+
+
+        public static string GetCompany(Member m)
+        {
+            string orgName = "";
+
+            if (m != null)
+            {
+                string username = m.LoginName;
+                string[] roles = Roles.GetRolesForUser(username);
+                if (roles.Contains("vui_user"))
+                {
+                    int adminId = -1;
+                    if (Int32.TryParse(m.getProperty("vuiAdministrator").Value.ToString(), out adminId))
+                    {
+                        Member admin = new Member(adminId);
+                        if (admin.getProperty("companyName") != null)
+                        {
+                            orgName = admin.getProperty("companyName").Value.ToString();
+                        }
+                        else
+                        {
+                            orgName = "Not Set - admin [" + admin.Id + "]";
+                        }
+                    }
+                }
+                else if (roles.Contains("vui_administrator"))
+                {
+                    if (m.getProperty("companyName") != null)
+                    {
+                        orgName = m.getProperty("companyName").Value.ToString();
+                    }
+                    else
+                    {
+                        orgName = "Not Set - admin [" + m.Id + "]";
+                    }
+                }
+            }
+            return orgName;
+        }
+
+
+        public string[] UserRoles
+        {
+            get
+            {
+                string[] roles = null;
+                if (User != null)
+                {
+                    roles = Roles.GetRolesForUser(User.LoginName);
+                }
+                return roles;
+            }
+        }
+
+        public static string MemberVUIStatus(Member m)
         {
             string vuiViewerType = VUI_USERTYPE_NONE;
 
@@ -165,10 +257,12 @@ namespace VP2.businesslogic
             else return null;
         }
 
+        
 
         public static bool RecoverPassword(string email)
         {
             string pwd = Membership.GeneratePassword(8, 1);
+            pwd = Regex.Replace(pwd, @"[^a-zA-Z0-9\?\!\$\&]", m => "9");
 
             if (Membership.FindUsersByName(email).Count > 0)
             {
@@ -177,6 +271,13 @@ namespace VP2.businesslogic
                 m.Password = pwd;
                 m.Save();
 
+                Emailer em = new Emailer("EMAIL_RESET_PWD");
+                em.ReplaceMemberElements(m);
+                em.ReplaceElement("#PWD#", pwd);
+                em.Send(m);
+
+
+                /*
                 string template;
                 string templateFullPath = HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["VUI_password_reset_email_template_path"]);
 
@@ -204,6 +305,7 @@ namespace VP2.businesslogic
 
                 msg.Body = emailBody;
                 smtp.Send(msg);
+                */
                 return true;
             }
             else

@@ -68,10 +68,9 @@
 @{
     VUIUser u = VUI3Utility.GetUser();
     Member c = u.Member;
-
-  
+    
   @* NOT LOGGED IN STATE *@
-    if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_NONE))
+    if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_NONE) || u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_REGISTRANT))
     {
       
     <div class="gridContainer clearfix marketing-home">

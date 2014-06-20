@@ -19,6 +19,7 @@ using System.Xml;
 using System.Xml.XPath;
 using System.Net.Mail;
 using System.Globalization;
+using VPCommon;
 
 
 namespace VUI.classes
@@ -446,6 +447,8 @@ namespace VUI.classes
         {
             // Generate Password
             string pwd = Membership.GeneratePassword(8, 1);
+            pwd = Regex.Replace(pwd, @"[^a-zA-Z0-9\?\!\$\&]", m => "9");
+
             // Create user
             try
             {
@@ -472,7 +475,15 @@ namespace VUI.classes
                 log.Debug("Created new VUI User: " + m.LoginName + " / " + pwd); 
 
                 //Send Confirmation Email
+                Emailer em = new Emailer("EMAIL_VUI_NEW_MEMBER");
+                em.ReplaceMemberElements(m);
+                em.ReplaceElement("#PWD#", pwd);
+                em.ReplaceElement("#ADMINNAME#", admin.getProperty("fullName").Value.ToString());
+                em.ReplaceElement("#CONFLINK#", VUIfunctions.VUI_login_page + "?" + HttpUtility.UrlEncode(email));
+                em.ReplaceElement("#LOGINLINK#", VUIfunctions.VUI_login_page + "!" + HttpUtility.UrlEncode(email));
+                em.Send(m);
 
+                /*
                 string emailBody = GetEmailTemplate(HttpContext.Current.Server.MapPath(VUI_confirm_email_template_path));
                 emailBody = emailBody
                                 .Replace("#ADMINNAME#", admin.getProperty("fullName").Value.ToString())
@@ -494,6 +505,7 @@ namespace VUI.classes
 
                 msg.Body = emailBody;
                 smtp.Send(msg);
+                */
 
                 return VUI_USERADMIN_STATUS_SUCCESS;
             }

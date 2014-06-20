@@ -68,10 +68,13 @@
                         <umbraco:Macro Alias="vp2-topnav" runat="server"></umbraco:Macro>
                         <span class="form-inline" role="form">
                             <div class="form-group">
-                                <label class="sr-only" for="search">Search VODProfessional</label>
+                                <label class="sr-only" for="q">Search VODProfessional</label>
                                 <div class="input-group">
+                                    <gcse:searchbox-only resultsUrl="/search" enableAutoComplete="true"></gcse:searchbox-only>
+                                    <!--
                                     <input id="search" class="form-control" name="search" type="text" placeholder="Search..."/>
                                     <span class="input-group-addon" id="search-button" data-target="/search"><i class="fa fa-search"></i></span>
+                                    -->
                                 </div>
                             </div>
                         </span>

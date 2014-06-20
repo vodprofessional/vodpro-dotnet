@@ -560,7 +560,10 @@
 
         VUI3ServiceRatingsList Ratings = Service.GetRatings();
         
-        
+     @* 
+     // Used by the comments jQuery
+     *@
+     <span id="servicemasterid" data-id="@Service.Id"></span>   
         
      <div id="main">
       <div class="main-top">
@@ -596,8 +599,15 @@
           <div class="introduction clr">
     @{
             string availability = @Model.availability.Replace(",", "<br/>");
-            string subscriptionType = @Model.subscriptionType.Replace(",", "<br/>");
-            string serviceCategory = @Model.serviceCategory.Replace(",", "<br/>");
+            string subscriptionType = @Model.subscriptionType.Replace(",", ", ");
+            string serviceCategory = @Model.serviceCategory.Replace(",", ", ");
+            string price = @Model.price;
+            string users = @Model.users;
+            string views = @Model.views;
+
+            bool hideExtendedIfEmpty = false;
+            
+            
             <div class="b-info">
               <table border="0">
                 <tr>
@@ -608,10 +618,31 @@
                     <th>Pay Model</th>
                     <td>@Html.Raw(subscriptionType)</td>
                 </tr>
-                <tr class="last">
+                <tr>
                     <th>Category</th>
                     <td>@Html.Raw(serviceCategory)</td>
                 </tr>
+                @if (!hideExtendedIfEmpty || !String.IsNullOrEmpty(price))
+                {
+                <tr>
+                    <th>Price</th>
+                    <td>@Html.Raw(price)</td>
+                </tr>
+                }
+                @if (!hideExtendedIfEmpty || !String.IsNullOrEmpty(users))
+                {
+                <tr>
+                    <th>Users/Subscribers</th>
+                    <td>@Html.Raw(users)</td>               
+                </tr>
+                }
+                @if (!hideExtendedIfEmpty || !String.IsNullOrEmpty(views))
+                {
+                <tr>                
+                    <th>VOD Views</th>
+                    <td>@Html.Raw(views)</td>
+                </tr>
+                }
               </table>
               <!--
               <dl>
@@ -630,7 +661,7 @@
             </div>
             <div class="desc">
               <p>
-                @Model.description <!-- @Model.deviceAvailability -->
+                @Model.description
               </p>
             </div>
           </div>
@@ -761,7 +792,8 @@
                 </span>
                   
                 
-      if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Tablet", "iPad") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Tablet", "Android") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Tablet", "Windows"))
+        if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Tablet", "iPad") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Tablet", "Android") 
+            && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Tablet", "Windows"))
       {
           uberDisabled = "_platform-disabled";
       }
@@ -797,6 +829,7 @@
                     <li title="Windows 8 Tablet">
                       <a href="#" class="@strDisabled" data-device="tabletwindows"><img src="/_inc/images/new-platform/device-win@(strDisabled).png" alt=""><h3>Windows</h3></a>
                     </li>
+
                 </span>
                   
                   
@@ -839,8 +872,8 @@
                   </li>
                 </span>
       
-                if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Samsung") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Sony")
-                    && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "LG") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Panasonic"))
+                    if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Samsung") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Sony")
+                        && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "LG") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Panasonic"))
                     {
                         uberDisabled = "_platform-disabled";
                     }
@@ -894,20 +927,20 @@
                   </span>-->
                 </span>   
                   
-        if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Apple TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Now TV")
-             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Roku") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Freesat")
-                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Sky") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Virgin")
-                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "YouView") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "AT&T U-Verse")
-                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Charter") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Cox")
-                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Direct TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Dish")
-                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Optimum") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Sudden Link")
-                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Verizon FiOS") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Xfinity")
-                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "TiVo")
-                        )
-                    {
-                        uberDisabled = "_platform-disabled";
-                    }
-                    else { uberDisabled = ""; }
+                        if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Apple TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Now TV")
+                             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Roku") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Freesat")
+                                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Sky") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Virgin")
+                                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "YouView") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "AT&T U-Verse")
+                                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Charter") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Cox")
+                                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Direct TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Dish")
+                                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Optimum") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Sudden Link")
+                                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Verizon FiOS") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Xfinity")
+                                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "TiVo")
+                                        )
+                        {
+                            uberDisabled = "_platform-disabled";
+                        }
+                        else { uberDisabled = ""; }
                 <span class="uber-tab @(uberDisabled)" data-devicegroup="stb" title="Set-Top Boxes">
                   <span class="title">
                     <h3>STBs</h3>
@@ -916,6 +949,15 @@
                   
                   <span class="devices scrolling scroll-ctrl" data-group="stb-group">
                     <div class="scroller">
+                         @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "AMazon Fire TV"))
+                         {
+                             strDisabled = "_device-disabled";
+                         }
+                         else { strDisabled = ""; }
+                        <li title="Amazon Fire TV">
+                          <a href="#" class="@strDisabled" data-device="stb-appletv"><img src="/_inc/images/new-platform/device-amazonfire@(strDisabled).png" alt=""><h3>Amazon Fire TV</h3></a>
+                        </li>
+                        
                          @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Apple TV"))
                          {
                              strDisabled = "_device-disabled";
@@ -926,19 +968,19 @@
                         </li> 
 
                         @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Freesat"))
-                         {
-                             strDisabled = "_device-disabled";
-                         }
-                         else { strDisabled = ""; }
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
                         <li title="Freesat">
                           <a href="#" class="@strDisabled" data-device="stb-freesat"><img src="/_inc/images/new-platform/device-freesat@(strDisabled).png" alt=""><h3>Freesat</h3></a>
                         </li> 
 
                         @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Now TV"))
-                         {
-                             strDisabled = "_device-disabled";
-                         }
-                         else { strDisabled = ""; }
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
                         <li title="Now TV">
                           <a href="#" class="@strDisabled" data-device="stb-nowtv"><img src="/_inc/images/new-platform/device-nowtv@(strDisabled).png" alt=""><h3>Now TV</h3></a>
                         </li> 
@@ -1087,11 +1129,11 @@
 
                 </span>
                              
-                    if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Games Consoles", "Playstation") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Games Consoles", "XBox"))
-                    {
-                        uberDisabled = "_platform-disabled";
-                    }
-                    else { uberDisabled = ""; }
+                        if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Games Consoles", "Playstation") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Games Consoles", "XBox"))
+                        {
+                            uberDisabled = "_platform-disabled";
+                        }
+                        else { uberDisabled = ""; }
                 <span class="uber-tab @(uberDisabled)" data-devicegroup="gamesconsoles" title="Games Consoles">
                   <span class="title">
                     <h3>Consoles</h3>
@@ -1128,6 +1170,7 @@
                 @WriteAnalysis(@Service, "Connected TV", "Sony")
                 @WriteAnalysis(@Service, "Connected TV", "LG")
                 <!--WriteAnalysis(@Service, "Connected TV", "Panasonic")-->
+                @WriteAnalysis(@Service, "STB", "Amazon Fire TV")
                 @WriteAnalysis(@Service, "STB", "Apple TV")
                 @WriteAnalysis(@Service, "STB", "Freesat")
                 @WriteAnalysis(@Service, "STB", "Now TV")
@@ -1180,7 +1223,8 @@
                 </span>
                   
                 
-                    if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Tablet", "iPad") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Tablet", "Android") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Tablet", "Windows"))
+                    if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Tablet", "iPad") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Tablet", "Android")
+                        && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Tablet", "Windows"))
                     {
                         uberDisabled = "_platform-disabled";
                     }
@@ -1214,16 +1258,16 @@
                       }
                       else { strDisabled = ""; }
                     <li title="Windows 8 Tablet">
-                      <a href="#" class="@strDisabled" data-device="tabletiphone"><img src="/_inc/images/new-platform/device-win@(strDisabled).png" alt=""><h3>Windows</h3></a>
+                      <a href="#" class="@strDisabled" data-device="tabletwindows"><img src="/_inc/images/new-platform/device-win@(strDisabled).png" alt=""><h3>Windows</h3></a>
                     </li>
                 </span>
                   
                   
-                      if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "iPhone") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "Android") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "Windows"))
-                      {
-                          uberDisabled = "_platform-disabled";
-                      }
-                      else { uberDisabled = ""; }
+                           if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "iPhone") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "Android") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "Windows"))
+                           {
+                               uberDisabled = "_platform-disabled";
+                           }
+                           else { uberDisabled = ""; }
                 <span class="uber-tab @(uberDisabled)" data-devicegroup="smartphone" title="Smartphones">   
                   
                   <span class="title">
@@ -1272,9 +1316,9 @@
                   <!--<span class="devices scrolling scroll-ctrl" data-group="connectedtv-group">
                     <div class="scroller"> --> 
                         @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "Samsung"))
-                         {
-                             strDisabled = "_device-disabled";
-                         }
+                        {
+                            strDisabled = "_device-disabled";
+                        }
                         else { strDisabled = ""; }
                         <li title="Samsung">
                           <a href="#" class="@strDisabled" data-device="connectedtv-samsung"><img src="/_inc/images/new-platform/device-smart@(strDisabled).png" alt=""><h3>Samsung</h3></a>
@@ -1301,19 +1345,19 @@
                 </span>   
                   
       
-                if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Apple TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Now TV")
-                     && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Roku") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Freesat")
-                     && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Sky") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Virgin")
-                     && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "YouView") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "ATT U-Verse")
-                     && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Charter") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Cox")
-                     && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Direct TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Dish")
-                     && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Optimum") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Sudden Link")
-                     && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Verizon FiOS") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Xfinity")
-                     && !Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "TiVo"))
-                    {
-                        uberDisabled = "_platform-disabled";
-                    }
-                    else { uberDisabled = ""; }
+        if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Amazon Fire TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Apple TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Now TV")
+                             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Roku") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Freesat")
+                             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Sky") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Virgin")
+                             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "YouView") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "ATT U-Verse")
+                             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Charter") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Cox")
+                             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Direct TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Dish")
+                             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Optimum") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Sudden Link")
+                             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Verizon FiOS") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Xfinity")
+                             && !Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "TiVo"))
+                        {
+                            uberDisabled = "_platform-disabled";
+                        }
+                        else { uberDisabled = ""; }
                 <span class="uber-tab @(uberDisabled)" data-devicegroup="stb" title="Set-Top Boxes">
                   <span class="title">
                     <h3>STBs</h3>
@@ -1323,7 +1367,16 @@
                   <span class="devices scrolling scroll-ctrl" data-group="stb-group">
                     <div class="scroller"> 
 
-                         @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Apple TV"))
+                         @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Amazon Fire TV"))
+                         {
+                             strDisabled = "_device-disabled";
+                         }
+                         else { strDisabled = ""; }
+                        <li title="Amazon Fire TV">
+                          <a href="#" class="@strDisabled" data-device="stb-appletv"><img src="/_inc/images/new-platform/device-amazonfire@(strDisabled).png" alt=""><h3>Amazon Fire TV</h3></a>
+                        </li> 
+
+                        @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Apple TV"))
                          {
                              strDisabled = "_device-disabled";
                          }
@@ -1332,18 +1385,18 @@
                           <a href="#" class="@strDisabled" data-device="stb-appletv"><img src="/_inc/images/new-platform/device-apple@(strDisabled).png" alt=""><h3>Apple TV</h3></a>
                         </li> 
                         @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Freesat"))
-                         {
-                             strDisabled = "_device-disabled";
-                         }
-                         else { strDisabled = ""; }
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
                         <li title="Freesat">
                           <a href="#" class="@strDisabled" data-device="stb-freesat"><img src="/_inc/images/new-platform/device-freesat@(strDisabled).png" alt=""><h3>Freesat</h3></a>
                         </li> 
                         @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Now TV"))
-                         {
-                             strDisabled = "_device-disabled";
-                         }
-                         else { strDisabled = ""; }
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
                         <li title="Now TV">
                           <a href="#" class="@strDisabled" data-device="stb-nowtv"><img src="/_inc/images/new-platform/device-nowtv@(strDisabled).png" alt=""><h3>Now TV</h3></a>
                         </li> 
@@ -1493,11 +1546,11 @@
 
                 </span>
                              
-                    if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Games Consoles", "Playstation") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Games Consoles", "XBox"))
-                    {
-                        uberDisabled = "_platform-disabled";
-                    }
-                    else { uberDisabled = ""; }
+                        if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Games Consoles", "Playstation") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Games Consoles", "XBox"))
+                        {
+                            uberDisabled = "_platform-disabled";
+                        }
+                        else { uberDisabled = ""; }
                 <span class="uber-tab @(uberDisabled)" data-devicegroup="gamesconsoles" title="Games Consoles">
                   <span class="title">
                     <h3>Consoles</h3>
@@ -1534,6 +1587,7 @@
                 @WriteBenchmark(@Service, "Connected TV", "Sony")
                 @WriteBenchmark(@Service, "Connected TV", "LG")
                 <!-- WriteBenchmark(@@Service, "Connected TV", "Panasonic") -->
+                @WriteBenchmark(@Service, "STB", "Amazon Fire TV")
                 @WriteBenchmark(@Service, "STB", "Apple TV")
                 @WriteBenchmark(@Service, "STB", "Freesat")
                 @WriteBenchmark(@Service, "STB", "Now TV")
@@ -1596,6 +1650,77 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <tr class="bordered">
+                    <td colspan="5"><h3>Current Ratings</h3></td>
+                  </tr>
+                  
+                  <tr>
+                    <td>
+                      Average user rating
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Tablet/iPad"))
+                    {
+                      @WriteStar(Ratings.Get("Tablet/iPad").AverageUserRatingForCurrentVersion)
+                      @: @Ratings.Get("Tablet/iPad").AverageUserRatingForCurrentVersion
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Smartphone/iPhone"))
+                    {
+                      @WriteStar(Ratings.Get("Smartphone/iPhone").AverageUserRatingForCurrentVersion)
+                      @: @Ratings.Get("Smartphone/iPhone").AverageUserRatingForCurrentVersion
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td>
+                      &nbsp;
+                    </td>
+                    <td>
+                      &nbsp;
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Number of ratings
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Tablet/iPad"))
+                    {
+                      @: @Ratings.Get("Tablet/iPad").UserRatingCountForCurrentVersion.ToString("#,#")
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td>
+                    @if (@Ratings.Has("Smartphone/iPhone"))
+                    {
+                      @: @Ratings.Get("Smartphone/iPhone").UserRatingCountForCurrentVersion.ToString("#,#")
+                    }
+                    else
+                    {
+                      @: &nbsp;
+                    }
+                    </td>
+                    <td>
+                    &nbsp;
+                    </td>
+                    <td> 
+                    &nbsp;
+                    </td>
+                  </tr>
+                  <tr class="bordered">
+                    <td colspan="5"><h3>All-time Ratings</h3></td>
+                  </tr>
                   <tr>
                     <td>
                       Average user rating
@@ -1693,70 +1818,9 @@
                     }
                     </td>
                   </tr>
-                  
-                  <tr>
-                    <td>
-                      Average user rating (Current Version)
-                    </td>
-                    <td>
-                    @if (@Ratings.Has("Tablet/iPad"))
-                    {
-                      @WriteStar(Ratings.Get("Tablet/iPad").AverageUserRatingForCurrentVersion)
-                      @: @Ratings.Get("Tablet/iPad").AverageUserRatingForCurrentVersion
-                    }
-                    else
-                    {
-                      @: &nbsp;
-                    }
-                    </td>
-                    <td>
-                    @if (@Ratings.Has("Smartphone/iPhone"))
-                    {
-                      @WriteStar(Ratings.Get("Smartphone/iPhone").AverageUserRatingForCurrentVersion)
-                      @: @Ratings.Get("Smartphone/iPhone").AverageUserRatingForCurrentVersion
-                    }
-                    else
-                    {
-                      @: &nbsp;
-                    }
-                    </td>
-                    <td>
-                      &nbsp;
-                    </td>
-                    <td>
-                      &nbsp;
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      Number of ratings
-                    </td>
-                    <td>
-                    @if (@Ratings.Has("Tablet/iPad"))
-                    {
-                      @: @Ratings.Get("Tablet/iPad").UserRatingCountForCurrentVersion.ToString("#,#")
-                    }
-                    else
-                    {
-                      @: &nbsp;
-                    }
-                    </td>
-                    <td>
-                    @if (@Ratings.Has("Smartphone/iPhone"))
-                    {
-                      @: @Ratings.Get("Smartphone/iPhone").UserRatingCountForCurrentVersion.ToString("#,#")
-                    }
-                    else
-                    {
-                      @: &nbsp;
-                    }
-                    </td>
-                    <td>
-                    &nbsp;
-                    </td>
-                    <td> 
-                    &nbsp;
-                    </td>
+
+                  <tr class="bordered">
+                    <td colspan="5"><h3>About the App</h3></td>
                   </tr>
                   <tr>
                     <td>
@@ -1879,6 +1943,9 @@
                     }
                     </td>
                   </tr>
+
+                  @*
+                   <!-- Removed June 2014 -->
                   <tr>
                     <td>Figures last updated</td>
                     
@@ -1923,8 +1990,56 @@
                     }
                     </td>
                   </tr>
+                  *@
+
+
+
+                  <tr class="bordered store-comments-row">
+                    <td colspan="5">
+                        <span id="store-comment-container">
+                          <div class="b-tabs store-comments">
+                            <h3>AppStore Comments</h3>
+                            <ul class="tabs">
+                                <li><a href="#" data-devicetype="Tablet/iPad"><img src="/_inc/images/tmp/devices/ipad.png" alt=""><span class="stat"></span></a></li>
+                                <li><a href="#" data-devicetype="Smartphone/iPhone"><img src="/_inc/images/tmp/devices/iphone.png" alt=""><span class="stat"></span></a></li>
+                                <li><a href="#" data-devicetype="Tablet/Android"><img src="/_inc/images/tmp/devices/android-tablet.png" alt=""><span class="stat"></span></a></li>
+                                <li><a href="#" data-devicetype="Smartphone/Android"><img src="/_inc/images/tmp/devices/android-phone.png" alt=""><span class="stat"></span></a></li>
+                            </ul>
+                            <div class="panes">
+                                <div class="pane">
+                                    <div data-devicetype="Tablet/iPad" data-store="iTunes" data-startpos="0">
+                                        <span class="comments-list"></span>
+                                        <input type="button" class="btn-comments" value="More" />
+                                    </div>
+                                </div>
+                                <div class="pane">
+                                    <div data-devicetype="Smartphone/iPhone" data-store="iTunes" data-startpos="0">
+                                        <span class="comments-list"></span>
+                                        <input type="button" class="btn-comments" value="More" />
+                                    </div>
+                                </div>
+                                <div class="pane">
+                                    <div data-devicetype="Tablet/Android" data-store="Google Play" data-startpos="0">
+                                        <span class="comments-list"></span>
+                                        <input type="button" class="btn-comments" value="More" />
+                                    </div>
+                                </div>
+                                <div class="pane">
+                                    <div data-devicetype="Smartphone/Android" data-store="Google Play" data-startpos="0">
+                                        <span class="comments-list"></span>
+                                        <input type="button" class="btn-comments" value="More" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </span>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
+
+                
+
             </div>
           </div>
         </div>
@@ -1934,5 +2049,32 @@
       </div>
     </div>
 
+    
+    
+    <div id="templates" style="display:none">
+        <div id="VUI-Comment-template">
+            <div class="comment">
+             <div class="inner">
+              <div class="intro">
+                <span class="daterecorded"></span>
+                <span class="rate"></span>
+              </div>
+              <div class="version"></div>
+              <div class="text">
+                <strong class="title"></strong>
+                <span class="desc"></span> 
+              </div>
+             </div>
+            </div>
+        </div>
+
+        <div id="VUI-Versions-template">
+            <div class="version">
+                <span class="number"></span>
+                <span class="date"></span>
+            </div>
+        </div>
+    </div>
+    
     }
 }

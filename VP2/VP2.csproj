@@ -118,6 +118,7 @@
     <Content Include="admin-pages\ResetTemplates.aspx" />
     <Content Include="usercontrols\ajaxactions2014.ascx" />
     <Content Include="usercontrols\contact-request.ascx" />
+    <Content Include="usercontrols\forbidden-access.ascx" />
     <Content Include="usercontrols\login.ascx" />
     <Content Include="usercontrols\main-profile.ascx" />
     <Content Include="usercontrols\main-registration.ascx" />
@@ -146,6 +147,7 @@
     <Compile Include="businesslogic\VPRHSManager.cs" />
     <Compile Include="masterpages\VP2014-404.Master.cs">
       <DependentUpon>VP2014-404.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="masterpages\VP2014-404.Master.designer.cs">
       <DependentUpon>VP2014-404.Master</DependentUpon>
@@ -171,6 +173,13 @@
     </Compile>
     <Compile Include="usercontrols\contact-request.ascx.designer.cs">
       <DependentUpon>contact-request.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrols\forbidden-access.ascx.cs">
+      <DependentUpon>forbidden-access.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="usercontrols\forbidden-access.ascx.designer.cs">
+      <DependentUpon>forbidden-access.ascx</DependentUpon>
     </Compile>
     <Compile Include="usercontrols\login.ascx.cs">
       <DependentUpon>login.ascx</DependentUpon>
@@ -259,6 +268,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="masterpages\VP2014-404.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="macroScripts\vp2-email-formattedtext.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VPCommon\VPCommon.csproj">
+      <Project>{768121AA-C363-4308-8D1F-3A586A96E116}</Project>
+      <Name>VPCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="masterpages\VP2014-registrationconfirm.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="masterpages\VP2014-forbidden.Master" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -1,0 +1,51 @@
+  // Google Search Overrides
+  .gsc-search-box-tools {
+    .gsc-search-box {
+      td.gsc-input {
+        vertical-align: top;
+        padding-right:0px;
+        .gsc-input-box {
+          border: 0px none;
+          border-top-left-radius: 4px;
+          border-bottom-left-radius: 4px;
+          height:30px;
+          &.gsc-input-box-focus, &.gsc-input-box-hover {
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+          }
+          .gsst_b {
+            line-height: 14px;
+            .gscb_a {
+              margin-top: 5px;
+            }
+          }
+        }
+      }
+      td.gsc-search-button {
+        vertical-align: top;
+
+          input.gsc-search-button.gsc-search-button-v2, input.gsc-search-button.gsc-search-button-v2:hover, input.gsc-search-button.gsc-search-button-v2:focus {
+            height: 30px;
+            margin: 0;
+            border: 0px none;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            text-align:-10000px;
+            background: url(/_inc/VP2014/img/search-btn.png) no-repeat center center #fff;
+            padding-left: 18px;
+            padding-right:18px;
+          }
+      }
+    }
+  }
+  
+  #inner-search-results-google {
+   .gsc-control-searchbox-only {
+     margin-bottom: 12px;
+     .gsc-input-box, .gsc-input-box.gsc-input-box-focus, .gsc-input-box.gsc-input-box-hover {
+       box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2) inset;
+       border-radius: 4px;
+     }
+   }
+  }

@@ -3,21 +3,67 @@
 @using umbraco.cms.businesslogic.member;
 @using System.Web;
 
-@helper DrawMatrixLink(VUI3ServiceMasterRatingMatrixItem s, string context, bool IsFullMode)
+@helper DrawRatingsMatrixLink(VUI3ServiceMasterRatingMatrixItem s, string context, bool IsFullMode)
+    {
+        string url = "";
+        string modeClass = "matrix-tick";
+        string score = @"";
+
+        if (s.GetScore(context) > 0)
+        {
+            string cls = "/_inc/images/tmp/gold-star.png";
+            string text = "";
+            if (IsFullMode || VUI3Utility.ServiceIsPreviewable(s.ServiceName))
+            {
+                url = @s.Url;
+                score = String.Format("{0:0.0}", s.GetScore(context));
+
+            }
+            else
+            {
+                url = "#";
+                modeClass += " ui-preview-disabled";
+                cls = "/_inc/images/tmp/grey-star.png";
+                text = "Subscribe to see more ratings";
+            }
+        <!-- @Parameter.cachebust  == @IsFullMode  -->
+        <div class="score">
+            @score <img src="@cls" title="@text" /> <span class="gold-star"></span>
+        </div>
+        @*<a href="@url" class="@modeClass">@s.ServiceName screenshots</a>*@
+        }
+}
+
+@helper DrawBenchmarkMatrixLink(VUI3ServiceMasterMatrixItem s, string[] contexts, bool IsFullMode, bool isComp=false)
     {
     string url = "";
     string modeClass = "matrix-tick";
     string score = @"";
+    string serviceclass = "";
 
-    if (s.GetScore(context) > 0)
+    int cnt = 0;
+    int devcnt = 0;
+
+
+    foreach (string c in contexts)
     {
+
+        if (s.GetCount(c) > 0)
+        {
+            devcnt += 1;
+        }
+        cnt += s.GetCount(c);
+    }
+    if (cnt > 0)
+    {
+
         string cls = "/_inc/images/tmp/gold-star.png";
         string text = "";
         if (IsFullMode || VUI3Utility.ServiceIsPreviewable(s.ServiceName))
         {
-            url = @s.Url;
-            score = String.Format("{0:0.0}", s.GetScore(context));
-
+            url = @s.URL;
+            string hash = contexts[0].Replace(" ", String.Empty).ToLower();
+            url = @s.URL + "#slide-benchmarking!" + hash;
         }
         else
         {
@@ -25,14 +71,25 @@
             modeClass += " ui-preview-disabled";
             cls = "/_inc/images/tmp/grey-star.png";
             text = "Subscribe to see more ratings";
+            url = "#";
+            serviceclass = "preview-link";
         }
-        <!-- @Parameter.cachebust  == @IsFullMode  -->
-        <div class="score">
+        
+        if (isComp)
+        {
+            <div class="checkmark -comp" title="@(cnt) screenshots on @devcnt devices - click to expand"><img src="/_inc/images/checkmark-comp.png"></div>   
+        }
+        else
+        {
+            <a href="@(url)" title="@(cnt)">@cnt</a>
+        }
+        @*<div class="score">
             @score <img src="@cls" title="@text" /> <span class="gold-star"></span>
         </div>
-        @*<a href="@url" class="@modeClass">@s.ServiceName screenshots</a>*@
+        *@
     }
 }
+
 @{    
     
     bool IsFullMode = false;
@@ -40,6 +97,7 @@
     Member c = u.Member;
 
     VUI3ServiceMasterRatingMatrix matrix = new VUI3ServiceMasterRatingMatrix();
+    VUI3ServiceBenchmarkMatrix bmatrix = new VUI3ServiceBenchmarkMatrix();
 
     if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_NONE))
     {
@@ -65,7 +123,19 @@
         <div class="b-tabs">
           <ul class="tabs inner">
             <li class="matrix">
-              <a href="#">Ratings Matrix<span class="icon-table"></span></a>
+              <a href="#">AppStore Ratings</a>
+            </li>
+            <li class="matrix">
+                <a href="#">Payment Model</a>
+            </li>
+            <li class="matrix">
+                <a href="#">Country</a>
+            </li>
+            <li class="matrix">
+                <a href="#">Benchmark Score</a>
+            </li>
+            <li class="matrix">
+                <a href="#">Content Type</a>
             </li>
           </ul>
     
@@ -167,10 +237,10 @@
                               </div>
                               @service.ServiceName
                             </li>
-                            <li>@DrawMatrixLink(service, "TabletiPad", IsFullMode)</li>
-                            <li>@DrawMatrixLink(service, "SmartphoneiPhone", IsFullMode)</li>
-                            <li>@DrawMatrixLink(service, "TabletAndroid", IsFullMode)</li>
-                            <li>@DrawMatrixLink(service, "SmartphoneAndroid", IsFullMode)</li>
+                            <li>@DrawRatingsMatrixLink(service, "TabletiPad", IsFullMode)</li>
+                            <li>@DrawRatingsMatrixLink(service, "SmartphoneiPhone", IsFullMode)</li>
+                            <li>@DrawRatingsMatrixLink(service, "TabletAndroid", IsFullMode)</li>
+                            <li>@DrawRatingsMatrixLink(service, "SmartphoneAndroid", IsFullMode)</li>
                           </ul>
                          </a>
                         </li>
@@ -180,6 +250,155 @@
                 </div>
               </div>
             </div>
+
+            
+            <div class="pane">
+              <div class="b-matrix-nav nav-line">
+                <div class="inner">
+                  <ul>
+                    Payment Models
+                  </ul>
+                </div>
+              </div>
+              <div class="b-matrix-files">
+                <div class="inner">
+
+                </div>
+              </div>
+            </div>
+
+            <div class="pane">
+              <div class="b-matrix-nav nav-line">
+                <div class="inner">
+                  <ul>
+                    Country
+                  </ul>
+                </div>
+              </div>
+              <div class="b-matrix-files">
+                <div class="inner">
+
+                </div>
+              </div>
+            </div>
+            <div class="pane">
+              <div class="b-matrix-nav nav-line">
+                <div class="inner">
+                  <ul>
+                    Benchmark Score
+                  </ul>
+                </div>
+              </div>
+              <div class="b-matrix-files">
+                <div class="inner">
+                @{
+                    List<VUI3ServiceMasterMatrixItem> benchmarks = bmatrix.MatrixItems;
+                }
+                <ul>
+                  @{
+                      bool isPreview = false;
+                      if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_NONE))
+                      {
+                          isPreview = true;
+                      }
+                      foreach (VUI3ServiceMasterMatrixItem service in benchmarks)
+                      {
+                          string serviceclass = String.Empty;
+                          string url = service.URL;
+                          if (isPreview && !service.IsPreviewable)
+                          {
+                              serviceclass = "preview-link";
+                              url = "#";
+                          }
+                          
+                    <li class="matrix-block">
+                     
+                      <ul>
+                        <li>
+                          <a href="@url" class="@serviceclass">
+                          <div class="img">
+                            <img alt="@service.ServiceName" data-original="@service.IconURL" class="lazy service-icon" src="/vui-media/media/vui-loaderb64.gif">
+                          </div>
+                          @service.ServiceName
+                          </a>
+                        </li>
+                        <li data-devicegroup="web" class="overall">@DrawBenchmarkMatrixLink(service, new string[] { "Web" }, IsFullMode, true)</li>
+                        <li data-devicegroup="web" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "Web" }, IsFullMode)</li>
+                        <li data-devicegroup="tablet" class="overall">@DrawBenchmarkMatrixLink(service, new string[] { "TabletiPad", "TabletAndroid", "TabletWindows" }, IsFullMode, true)</li>
+                        <li data-devicegroup="tablet" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "TabletiPad" }, IsFullMode)</li>
+                        <li data-devicegroup="tablet" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "TabletAndroid" }, IsFullMode)</li>
+                        <li data-devicegroup="tablet" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "TabletWindows" }, IsFullMode)</li>
+
+                        <li data-devicegroup="smartphone" class="overall">@DrawBenchmarkMatrixLink(service, new string[] { "SmartphoneiPhone", "SmartphoneAndroid", "SmartphoneWindows" }, IsFullMode, true)</li>
+                        <li data-devicegroup="smartphone" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "SmartphoneiPhone" }, IsFullMode)</li>
+                        <li data-devicegroup="smartphone" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "SmartphoneAndroid" }, IsFullMode)</li>
+                        <li data-devicegroup="smartphone" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "SmartphoneWindows" }, IsFullMode)</li>
+                        <div class="matrix-scroll-group">
+                          <div class="connectedtv-group scroller" data-group="connectedtv-group">
+                            <li data-devicegroup="connectedtv" class="overall">@DrawBenchmarkMatrixLink(service, new string[] { "Connected TV-Samsung", "Connected TV-Sony", "Connected TV-LG" }, IsFullMode, true)</li>
+                            <li data-devicegroup="connectedtv" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "Connected TV-Samsung" }, IsFullMode)</li>
+                            <li data-devicegroup="connectedtv" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "Connected TV-Sony" }, IsFullMode)</li>
+                            <li data-devicegroup="connectedtv" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "Connected TV-LG" }, IsFullMode)</li>
+                            <!-- <li data-devicegroup="connectedtv" class="device">@@DrawMatrixLink(service, new string[] { "Connected TV-Panasonic" }, IsFullMode)</li> -->
+                          </div>
+                        </div>
+                        
+                        <div class="matrix-scroll-group ">
+                          <div class="stb-group scroller" data-group="stb-group">
+                            <li data-devicegroup="stb" class="overall">@DrawBenchmarkMatrixLink(service, new string[] { 
+                                                                      "STB-Amazon Fire TV", "STB-Apple TV", "STB-Freesat", "STB-Now TV", "STB-Roku", "STB-Virgin", "STB-Sky",
+                                                                      "STB-YouView", "STB-AT&T U-Verse", "STB-Charter", "STB-Cox", "STB-Direct TV",
+                                                                      "STB-Dish", "STB-Optimum", "STB-TiVo", "STB-Verizon FiOS", "STB-Xfinity"}, IsFullMode, true)</li>
+                            <li data-devicegroup="stb" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "STB-Amazon Fire TV" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "STB-Apple TV" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "STB-Freesat" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "STB-Now TV" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "STB-Roku" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "STB-Sky" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "STB-Virgin" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "STB-YouView" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "STB-AT&T U-Verse" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "STB-Charter" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "STB-Cox" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "STB-Direct TV" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "STB-Dish" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "STB-Optimum" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "STB-Sudden Link" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "STB-TiVo" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "STB-Verizon FiOS" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "STB-Xfinity" }, IsFullMode)</li>
+
+                          </div>
+                        </div>
+                        <li data-devicegroup="gamesconsole" class="overall">@DrawBenchmarkMatrixLink(service, new string[] { "Games Console-Playstation", "Games Console-XBox" }, IsFullMode, true)</li>
+                        <li data-devicegroup="gamesconsole" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "Games Console-Playstation" }, IsFullMode)</li>
+                        <li data-devicegroup="gamesconsole" class="device">@DrawBenchmarkMatrixLink(service, new string[] { "Games Console-XBox" }, IsFullMode)</li>
+
+                      </ul>
+                    </li>
+                      }
+                      }
+                  </ul>
+
+
+                </div>
+              </div>
+            </div>
+            <div class="pane">
+              <div class="b-matrix-nav nav-line">
+                <div class="inner">
+                  <ul>
+                    Content Type
+                  </ul>
+                </div>
+              </div>
+              <div class="b-matrix-files">
+                <div class="inner">
+
+                </div>
+              </div>
+            </div>
+
 
           </div>
         </div>

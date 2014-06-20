@@ -1,9 +1,10 @@
+@*
 @using VP2.businesslogic;
 @using umbraco.cms.businesslogic.macro;
 @using umbraco.MacroEngines;
 @{
     int numItems = 10;
-    var searchTerm = Request.QueryString["search"].Replace("\"", "");
+    var searchTerm = Request.QueryString["q"].Replace("\"", "");
     if (!string.IsNullOrEmpty(searchTerm))
     {
         ArticleList sresults = ArticleList.ListFromSearch(searchTerm, numItems, 0);
@@ -23,3 +24,10 @@
         </div>
     }
 }
+*@
+<div id="inner-search-results-google">
+  
+  <gcse:searchbox-only resultsUrl="/search" enableAutoComplete="true"></gcse:searchbox-only>
+
+  <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+</div>

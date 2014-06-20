@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text.RegularExpressions;
 using System.Web.Security;
+using VP2.businesslogic;
 
 namespace VP2.usercontrols
 {
@@ -141,6 +142,12 @@ namespace VP2.usercontrols
         protected void BtnLogOut(object sender, EventArgs e)
         {
             umbraco.cms.businesslogic.member.Member m = umbraco.cms.businesslogic.member.Member.GetCurrentMember();
+
+            if (m != null)
+            {
+                VPMember.MemberLogout(m);
+            }
+            /*
             if (m != null)
             {
                 umbraco.cms.businesslogic.member.Member.RemoveMemberFromCache(m.Id);
@@ -173,6 +180,7 @@ namespace VP2.usercontrols
                     HttpContext.Current.Response.Cookies.Add(myCookie);
                 }
             }
+            */
             Response.Redirect("/");
             Response.End();
         }

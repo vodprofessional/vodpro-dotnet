@@ -193,7 +193,7 @@
 </span>
     
   @* NOT LOGGED IN STATE *@
-    if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_NONE))
+    if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_NONE) || u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_REGISTRANT))
     {
   <nav class="b-right-nav">
     <ul>
@@ -203,9 +203,12 @@
       <li>
         <a class="subscribe" href="#" data-panelregion="action-contact-form" data-panel="true">Get a Demo<span class="icon-comment"></span></a>
       </li>
+      @if (!u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_REGISTRANT))
+      {
       <li>
         <a class="login" href="#" data-panelregion="action-login-form" data-panel="true">Login<span class="icon-search"></span></a>
       </li>
+      }
     </ul>
   </nav>
     }

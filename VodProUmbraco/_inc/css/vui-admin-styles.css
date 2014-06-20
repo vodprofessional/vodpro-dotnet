@@ -122,3 +122,7 @@ h2 .app-link
     width:100px;
 }
 
+table.vui-users {  }
+table.vui-users tr:nth-child(2n+1) { background-color: #f0f0f0; }
+table.vui-users tr.admin { background-color: #e0e0ff; }
+table.vui-users tr * { padding:4px; }

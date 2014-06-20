@@ -20,7 +20,11 @@
             background: url('/css/images/50VP_Lightbox-2014-sash.png') top right no-repeat;  
         }
     }
-  
+    &.vp-2014 {
+        #sash {
+            background: url('/css/images/50VP_Lightbox-2014-sash.png') top right no-repeat;  
+        }
+    }
     &.vp-2013 {
         #sash {
             background: url('/css/images/50VP_Lightbox-2013-sash.png') top right no-repeat;  
@@ -33,7 +37,7 @@
       padding: 12px;
       border-radius: 5px 5px 5px 5px;
       height: 325px;
-      width:  561px;
+      width:  583px;
       
       .rhside {
           float: right;
@@ -42,7 +46,7 @@
         }
         h2 {
           float: left;
-          width: 325px;
+          width: 335px;
           margin: 0;
           padding: 0;
           font-weight: bold;
@@ -51,7 +55,7 @@
         }
         h3 { 
           float: left;
-          width: 325px;
+          width: 335px;
           margin: 0;
           padding: 0;
           margin: 6px 0;
@@ -60,7 +64,7 @@
         }
         p {
           float: left; 
-          width: 325px;
+          width: 335px;
         }
         .brief {
           font-size: 0.9em;
@@ -142,13 +146,13 @@
       float: left;
       width: 607px;
       height: 30px;
-      margin-top: 10px;
+      margin-top: 18px;
     }
 
     #VP50roller_cont {
       float: left;
       width: 609px;
-      height: 60px;
+      height: 64px;
       border-top: 2px solid #000;
       border-bottom: 2px solid #000;
       background-color: #000;
@@ -169,7 +173,7 @@
     #VP50roller {
       float: left;
       width: 576px;
-      height: 60px;
+      height: 64px;
       overflow-x: hidden;
       overflow-y: hidden;
 
@@ -178,8 +182,9 @@
           float: left;
           position: relative;
           left: 0px;
-          width: 3200px; /* 50 * (60+4) */
+          width: 3400px; /* 50 * (60+4) */
           left: 0;
+          padding-left: 0px;
           
             li {
               list-style-type: none;
@@ -187,20 +192,19 @@
               margin: 0;
               display: inline;
               float: left;
-              width: 60px;
+              width: 64px;
               cursor: pointer;
                 img {
                   z-index: 99;
                 }
                 .overlay {
                   background: url("/css/images/overlay.png") ;
-                  width:60px;
-                  height:60px;
+                  width:64px;
+                  height:62px;
                   z-index: 101;
                   position:absolute;
                   visibility: hidden;
                   text-align: center;
-                  padding-top: 22px;
                   font-family: "Arial","Helvetica";
                   font-weight: bold;
                   font-style: italic;

@@ -118,7 +118,6 @@ namespace VUI.usercontrols
 
         protected void GetUsers(object sender, EventArgs e)
         {
-
             List<Member> admins = VUIfunctions.GetVUIAdmins();
 
             StringBuilder sb = new StringBuilder();
@@ -129,7 +128,7 @@ namespace VUI.usercontrols
                 string endDate = String.Empty;
                 try
                 {
-                    endDate = ((DateTime)admin.getProperty("vuiJoinDate").Value).ToString("dd MMM yyyy");
+                    endDate = ((DateTime)admin.getProperty("vuiEndDate").Value).ToString("dd MMM yyyy");
                 }
                 catch (Exception ex)
                 {

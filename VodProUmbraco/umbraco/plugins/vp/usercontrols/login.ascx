@@ -38,6 +38,9 @@
                 <asp:PlaceHolder runat="server" ID="plcForgotError">
                     <div class="form-error">Please enter your email</div>
                 </asp:PlaceHolder>
+                <asp:PlaceHolder runat="server" ID="plcForgotProblem">
+                    <div class="form-error">We don't recognise your email address! Are you sure you've registered?</div>
+                </asp:PlaceHolder>
             </div>
             <asp:Button runat="server" ID="btnForgotPwd" OnClick="btnForgotPwd_Click" CssClass="btn btn-lg btn-primary btn-block" Text="Send me a new password!" />
             <asp:PlaceHolder runat="server" ID="plcPwdSent">

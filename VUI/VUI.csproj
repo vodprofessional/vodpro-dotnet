@@ -295,6 +295,7 @@
     <Compile Include="VUI3.classes\VUI3PageFunctionDescriptions.cs" />
     <Compile Include="VUI3.classes\VUI3Screenshot.cs" />
     <Compile Include="VUI3.classes\VUI3ScreenshotAnalysis.cs" />
+    <Compile Include="VUI3.classes\VUI3ServiceBenchmarkMatrix.cs" />
     <Compile Include="VUI3.classes\VUI3ServiceMasterMatrix.cs" />
     <Compile Include="VUI3.classes\VUI3ServiceMasterRatingMatrix.cs" />
     <Compile Include="VUI3.classes\VUI3ServiceRating.cs" />
@@ -320,6 +321,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="handlers\vui-image.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VPCommon\VPCommon.csproj">
+      <Project>{768121AA-C363-4308-8D1F-3A586A96E116}</Project>
+      <Name>VPCommon</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

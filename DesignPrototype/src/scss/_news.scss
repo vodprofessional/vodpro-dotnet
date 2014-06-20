@@ -40,6 +40,76 @@ $header-link-color: #333;
     }
   }
   
+  #inner-search-results-google {
+    .gsc-control-cse {
+        padding: 0;
+        font-family: Lato, Helvetica, Arial, sans-serif;
+        
+        .gsc-above-wrapper-area {
+           border-bottom-style: dotted;
+           .gsc-above-wrapper-area-container {
+             .gsc-result-info {
+               padding-left: 0;
+             }
+             .gsc-orderby-container {
+               .gsc-orderby {
+                 .gsc-option-menu-container {
+                   .gsc-selected-option-container {
+                     min-width: 65px;
+                   }
+                 }
+               }
+             }
+           }
+           
+        }
+        .gsc-wrapper {
+          .gsc-webResult {
+            .gsc-table-result, .gsc-thumbnail-inside, .gsc-url-top { padding-left: 0px; }
+            
+            .gsc-result {
+              padding: 15px 0px;
+              border-bottom: $dotted-border;
+            }
+             .gsc-table-result {
+               padding-left:0;
+               margin-left: 0px;
+               font-size: 16px;
+               font-family: Lato, Helvetica, Arial, sans-serif;
+               .gs-image-box {
+                 width:100px;
+                 &.gs-web-image-box {
+                   //padding-left: 8px;
+                   padding-right: 10px;                   
+                   width:100px;
+                 }
+                 &.gs-web-image-box-landscape {                 
+                    width: 100px;
+                    img.gs-image {
+                        max-width:100px;       
+                    }
+                 }
+                 &.gs-web-image-box-portrait { 
+                    width: 100px;
+                    img.gs-image {
+                        max-width:100px;       
+                    }
+                 }
+               }
+             }
+             .gs-title, .gs-title * {
+                 font-size: 1.3em;
+                 font-weight: 700;
+                 height: inherit;
+                 text-decoration: none;
+             }
+          }
+        }
+    }
+  }
+  // 'Open Sans', 'Helvetica Neue', Helvetica, Helvetica, Arial, sans-serif;
+  // Lato, Helvetica, Arial, sans-serif;
+  
   #inner-job-listing {
   
     margin-top: 10px;

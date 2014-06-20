@@ -695,6 +695,43 @@ namespace VUI.VUI3.classes
             }
         }
 
+        /// <summary>
+        /// Better method which gets rid of need for ids
+        /// </summary>
+        /// <param name="platformdevice"></param>
+        /// <returns></returns>
+        public static List<VUI3ServiceMasterMatrixItem> GetBestServicesForPlatformDevice(string platformdevice)
+        {
+            List<VUI3ServiceMasterMatrixItem> services = new List<VUI3ServiceMasterMatrixItem>();
+
+            string sql = String.Format(@"select Id, ServiceName, BenchmarkScore, IsPreviewable, IconURL
+		                                from vui_ServiceDeviceBenchmarks
+		                                where PlatformDevice = '{0}' and BenchmarkScore > 0
+		                                order by BenchmarkScore desc;", platformdevice);
+
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.AppSettings["umbracoDbDSN"].ToString()))
+            {
+                conn.Open();
+                SqlCommand comm = new SqlCommand(sql, conn);
+
+                SqlDataReader sr = comm.ExecuteReader();
+
+                // Work through the results set
+                // For each result, get the default image from the 
+                while (sr.Read())
+                {
+                    VUI3ServiceMasterMatrixItem s = new VUI3ServiceMasterMatrixItem();
+                    s.Id = (int)sr["Id"];
+                    s.ServiceName = (string)sr["ServiceName"];
+                    s.BestBenchmarkScore = (int)sr["BenchmarkScore"];
+                    s.IconURL = (string)sr["IconURL"];
+                    services.Add(s);
+                }
+                conn.Close();
+            }
+            return services;
+        }
+
 
         /// <summary>
         /// Highest Benchmarking scores by platform

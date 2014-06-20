@@ -480,7 +480,7 @@
         target = $(this).attr("data-target");
         if (term != null ? term.length : void 0) {
           term = encodeURIComponent(term);
-          return document.location.href = "" + target + "?search=" + term;
+          return document.location.href = "" + target + "?q=" + term;
         }
       });
     };

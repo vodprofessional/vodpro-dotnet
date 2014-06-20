@@ -1,6 +1,7 @@
 ﻿@using VP2.businesslogic;
 @{
    VPMember m = VPMember.GetLoggedInUser();
+  
    if (m != null)
    {
         <li><span>Welcome @m.FirstName</span></li>

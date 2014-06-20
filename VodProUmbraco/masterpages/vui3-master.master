@@ -52,6 +52,11 @@
 
   <script src="/_inc/js/bjqs-1.3.js"></script>
   <script src="/_inc/js/respond.min.js"></script>
+
+  
+    <!-- ANALYTICS -->
+    <umbraco:Macro ID="Macro3" Alias="vp2-ga" runat="server"></umbraco:Macro>
+
 </head>
 
 

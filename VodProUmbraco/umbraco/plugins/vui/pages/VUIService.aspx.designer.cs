@@ -94,6 +94,33 @@ namespace VUI.pages {
         protected global::System.Web.UI.WebControls.Literal litServiceCategory;
         
         /// <summary>
+        /// litServicePrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litServicePrice;
+        
+        /// <summary>
+        /// litServiceUsers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litServiceUsers;
+        
+        /// <summary>
+        /// litServiceViews control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litServiceViews;
+        
+        /// <summary>
         /// litTwitterURL control.
         /// </summary>
         /// <remarks>

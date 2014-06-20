@@ -2,6 +2,12 @@
 @{
   var content50VPID = @Parameter.content50VP;
   string extraClass = @Parameter.extraClass;
+  string adString = @Parameter.adString;
+  
+  if(String.IsNullOrEmpty(adString)) {
+      adString = "div-gpt-ad-1339509551821-0";   
+  }
+  
   string content50VPUrl = "";
   //var hideResults;  
   if(content50VPID != null)
@@ -37,8 +43,8 @@
     </div>
     <div class="scrubright"></div>
   </div>
-  <div id="VP50ad"><!-- VOD_PRO_607x30 --><div id='div-gpt-ad-1339509551821-0' style='width:607px; height:30px;'>
-  <script type='text/javascript'>googletag.cmd.push(function() { googletag.display('div-gpt-ad-1339509551821-0'); });</script></div></div>
+  <div id="VP50ad"><!-- VOD_PRO_607x30 --><div id="@adString" style='width:607px; height:30px;'>
+  <script type='text/javascript'>      googletag.cmd.push(function () { googletag.display('@adString'); });</script></div></div>
  </div>
  <div class="clearfix"></div>
 </div>

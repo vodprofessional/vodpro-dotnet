@@ -60,6 +60,11 @@ namespace VUI.pages
             }
             serviceCategory = String.Join(", ", scats);
 
+            string price = sm.getProperty("price").Value.ToString();
+            string users = sm.getProperty("users").Value.ToString();
+            string views = sm.getProperty("views").Value.ToString();
+
+
             string urlIPhone = sm.getProperty("iPhoneAppURL").Value.ToString();
             string urlIPad = sm.getProperty("iPadAppURL").Value.ToString();
             string urlDroidPhone = sm.getProperty("phonePlayAppURL").Value.ToString();
@@ -74,6 +79,9 @@ namespace VUI.pages
             litAvailability.Text = availability;
             litSubscriptionType.Text = subscriptionType;
             litServiceCategory.Text = serviceCategory;
+            litServicePrice.Text = price;
+            litServiceUsers.Text = users;
+            litServiceViews.Text = views;
 
             litStatus.Text = sm.Published ? "Published" : "Not Published";
 

@@ -94,6 +94,15 @@ namespace VP2.usercontrols {
         protected global::System.Web.UI.WebControls.PlaceHolder plcForgotError;
         
         /// <summary>
+        /// plcForgotProblem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder plcForgotProblem;
+        
+        /// <summary>
         /// btnForgotPwd control.
         /// </summary>
         /// <remarks>

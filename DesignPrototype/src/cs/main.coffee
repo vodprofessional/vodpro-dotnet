@@ -300,7 +300,7 @@ class Search
       target = $(this).attr("data-target")
       if term?.length
         term = encodeURIComponent(term)
-        document.location.href = "#{target}?search=#{term}" 
+        document.location.href = "#{target}?q=#{term}" 
 
 ###
 

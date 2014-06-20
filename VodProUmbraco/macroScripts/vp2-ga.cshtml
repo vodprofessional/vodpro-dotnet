@@ -1,8 +1,30 @@
 ﻿@using System.Configuration;
+@using VP2.businesslogic;
 @{
-  string vpmode = ConfigurationManager.AppSettings["VPMODE"].ToString();
-  if (vpmode != "dev")
-  {
+ 
+    <!-- Google Custom Search -->
+    <script>
+        (function () {
+            var cx = '005593546552363860211:z-pb91jtfdg';
+            var gcse = document.createElement('script');
+            gcse.type = 'text/javascript';
+            gcse.async = true;
+            gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+            '//www.google.com/cse/cse.js?cx=' + cx;
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(gcse, s);
+        })();
+    </script>
+  
+    
+
+    string vpmode = ConfigurationManager.AppSettings["VPMODE"].ToString();
+    if (vpmode != "dev")
+    {
+        
+      
+    @*    
+    <!-- Google Analytics -->
     <script type="text/javascript">
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-23100336-1']);
@@ -14,7 +36,39 @@
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         })();
     </script>
-        <script type="text/javascript">
+    *@
+    
+    <!-- Universal Analytics -->    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o), m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-23100336-1', 'vodprofessional.com');
+        @{
+            VPMember m = VPMember.GetLoggedInUser();
+            if (m != null)
+            {
+                string userStatus = VPMember.MemberVUIStatus(m.User);
+
+                string gauser = @"ga('set', '&uid', 'VP-" + m.User.Id + @"'); // Set the user ID using signed-in user_id.";
+                string vpuser = @"ga('set', 'dimension1', 'VP-" + m.User.Id + @"');";
+                @: @Html.Raw(gauser)
+			    @: @Html.Raw(vpuser)
+                
+                if (userStatus.Equals(VPMember.VUI_USERTYPE_ADMIN) || userStatus.Equals(VPMember.VUI_USERTYPE_USER))
+                {
+                    string vuicompany = @"ga('set', 'dimension2', '" + VPMember.GetCompany(m.User).Replace("'","") + @"');";
+                    @: @Html.Raw(vuicompany)
+                }
+            }
+        }
+        ga('send', 'pageview');
+    </script>
+    
+    
+    <script type="text/javascript">
         function recordOutboundLink(link, category, action) {
             try {
                 var pageTracker = _gat._getTracker("UA-23100336-1");
@@ -71,7 +125,7 @@
         });
     </script>
 
-    <!-- 50VP-2014 -->    
+    <!-- 50VP-2014 Nordic -->    
     <script type='text/javascript'>
         googletag.cmd.push(function () {
             googletag.defineSlot('/11576661/VOD_Pro_50vp_607x30', [607, 30], 'div-gpt-ad-1394616764592-0').addService(googletag.pubads());
@@ -79,5 +133,14 @@
             googletag.enableServices();
         });
     </script>
-  }
+    
+    <!-- 50VP-2014 -->
+    <script type='text/javascript'>
+        googletag.cmd.push(function () {
+            googletag.defineSlot('/11576661/VOD_PRO_50_2014', [607, 30], 'div-gpt-ad-1402922029080-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    }
 }

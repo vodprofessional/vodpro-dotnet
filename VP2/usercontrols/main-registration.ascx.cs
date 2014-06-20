@@ -6,11 +6,16 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text.RegularExpressions;
 using System.Web.Security;
+using VPCommon;
 
 namespace VP2.usercontrols
 {
     public partial class main_registration : System.Web.UI.UserControl
     {
+
+        umbraco.cms.businesslogic.member.Member thisMember;
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack && Request["email"] != null)
@@ -26,6 +31,17 @@ namespace VP2.usercontrols
                 EmailAddress.Text = Server.UrlDecode(Request["email"].ToString());
             }
         }
+
+        protected void CreateUserWizard_SendingMail(object sender, MailMessageEventArgs e)
+        {
+            Emailer em = new Emailer("EMAIL_CONFIRM_SIGNUP");
+            em.ReplaceMemberElements(thisMember);
+            e.Message.IsBodyHtml = em.IsHTML;
+            e.Message.Subject = em.Subject;
+            e.Message.Body = em.Body;
+            // Gets sent automatically.
+        }
+
 
         protected void CreatedUser(Object sender, EventArgs e)
         {
@@ -102,6 +118,8 @@ namespace VP2.usercontrols
             /* Add member to registrant group */
             member.AddGroup(2869);  // Group ID 2869 = registrant
             member.Save();
+
+            thisMember = member;
         }
 
         protected void NextButtonClick(Object sender, WizardNavigationEventArgs e)

@@ -219,19 +219,26 @@ namespace VUI.usercontrols
 
         private void GetStoreCommentsMeta()
         {
-            int servicemasterid = 0;
-
-            if (umbraco.BasePages.UmbracoEnsuredPage.CurrentUser != null)
+            int sid = 0;
+            if (Int32.TryParse(Request["servicemasterid"], out sid))
             {
-                string tmp = Request["servicemasterid"];
-                Int32.TryParse(tmp, out servicemasterid);
-                VUI3StoreCommentsMetaList comments = new VUI3StoreCommentsMetaList(servicemasterid);
-                Response.Write(@"{ ""response"":""valid"",""data"":" + comments.AsJson() + " }");
+                VUI3ServiceMaster sm = new VUI3ServiceMaster(sid);
+                if (IsVUIUser() || sm.IsPreviewable || umbraco.BasePages.UmbracoEnsuredPage.CurrentUser != null)
+                {
+                    
+                    VUI3StoreCommentsMetaList comments = new VUI3StoreCommentsMetaList(sid);
+                    Response.Write(@"{ ""response"":""valid"",""data"":" + comments.AsJson() + " }");
+                }
+                else
+                {
+                    Response.Write(@"{ ""response"":""invalid"",""data"":""Not logged in"" }");
+                }
             }
             else
             {
-                Response.Write(@"{ ""response"":""invalid"",""data"":""Not logged in"" }");
+                Response.Write(@"{ ""response"":""invalid"",""data"":""Not logged in or Invalid service master"" }");
             }
+
         }
         
         /// <summary>
@@ -239,34 +246,40 @@ namespace VUI.usercontrols
         /// </summary>
         private void GetStoreComments()
         {
-            int servicemasterid = 0;
             string store = "";
             string deviceType = "";
             int startpos = 0;
             int numrows = 20;
+            int sid;
 
-            if (umbraco.BasePages.UmbracoEnsuredPage.CurrentUser != null)
+            if (Int32.TryParse(Request["servicemasterid"], out sid))
             {
-                deviceType = Request["deviceType"];
-                store = Request["store"];
+                VUI3ServiceMaster sm = new VUI3ServiceMaster(sid);
+                if (IsVUIUser() || sm.IsPreviewable || umbraco.BasePages.UmbracoEnsuredPage.CurrentUser != null)
+                {
+                    deviceType = Request["deviceType"];
+                    store = Request["store"];
 
-                string tmp;
+                    string tmp;
 
-                tmp = Request["servicemasterid"];
-                Int32.TryParse(tmp, out servicemasterid);
 
-                tmp = Request["startpos"];
-                Int32.TryParse(tmp, out startpos);
+                    tmp = Request["startpos"];
+                    Int32.TryParse(tmp, out startpos);
 
-                tmp = Request["numrows"];
-                Int32.TryParse(tmp, out numrows);
+                    tmp = Request["numrows"];
+                    Int32.TryParse(tmp, out numrows);
 
-                VUI3StoreCommentList comments = new VUI3StoreCommentList(servicemasterid, store, deviceType, startpos, numrows);
-                Response.Write(@"{ ""response"":""valid"",""data"":" + comments.AsJson() + " }");
+                    VUI3StoreCommentList comments = new VUI3StoreCommentList(sid, store, deviceType, startpos, numrows);
+                    Response.Write(@"{ ""response"":""valid"",""data"":" + comments.AsJson() + " }");
+                }
+                else
+                {
+                    Response.Write(@"{ ""response"":""invalid"",""data"":""Not logged in"" }");
+                }
             }
             else
             {
-                Response.Write(@"{ ""response"":""invalid"",""data"":""Not logged in"" }");
+                Response.Write(@"{ ""response"":""invalid"",""data"":""Not logged in or Invalid service master"" }");
             }
         }
 

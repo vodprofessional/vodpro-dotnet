@@ -8,7 +8,7 @@
     static Member c = u.Member;
     static VUI3PageFunctionDescriptions PageDescriptions;
 }
-@helper DrawBenchmarkingPane(VUI3BenchmarkMatrix matrix, string platformDevice, int deviceId, int platformId)
+@helper DrawBenchmarkingPane(VUI3BenchmarkMatrix matrix, string platformDevice)
     {
                 <div class="item-block">
                   <h3>
@@ -307,6 +307,7 @@
         {
 
             List<VUI3ServiceMasterMatrixItem> serviceList;
+            @*
             if (deviceId != -1)
             {
                 serviceList = VUI3Utility.GetBestServicesForDevice(deviceId);
@@ -315,6 +316,8 @@
             {
                 serviceList = VUI3Utility.GetBestServicesForPlatform(platformId);
             }
+            *@
+            serviceList = VUI3Utility.GetBestServicesForPlatformDevice(platformDevice);
 
             if (serviceList != null && serviceList.Count > 0)
             {
@@ -465,26 +468,28 @@
                           strDisabled = "_device-disabled";
                       }
                       else { strDisabled = ""; }
-                    <li title="iPad">
+                     <li title="iPad">
                       <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-apple@(strDisabled).png" alt=""><h3>iPad</h3></a>
-                    </li> 
+                     </li> 
 
                       @if (!matrix.HasBenchmarksForPlatform("TabletAndroid"))
                       {
                           strDisabled = "_device-disabled";
                       }
                       else { strDisabled = ""; }
-                    <li title="Android Tablet">
+                     <li title="Android Tablet">
                       <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-droid@(strDisabled).png" alt=""><h3>Android</h3></a>
-                    </li> 
+                     </li> 
+
                       @if (!matrix.HasBenchmarksForPlatform("TabletWindows"))
                       {
                           strDisabled = "_device-disabled";
                       }
                       else { strDisabled = ""; }
-                    <li title="Windows 8 Tablet">
+                     <li title="Windows 8 Tablet">
                       <a href="#" class="@strDisabled"><img src="/_inc/images/new-platform/device-win@(strDisabled).png" alt=""><h3>Windows</h3></a>
-                    </li>
+                     </li>
+
                 </span>
                   
                   
@@ -579,7 +584,15 @@
                   
                   <span class="devices scrolling scroll-ctrl" data-group="stb-group">
                     <div class="scroller"> 
-
+                    
+                     @if (!matrix.HasBenchmarksForPlatform("STB-Amazon Fire TV"))
+                     {
+                         strDisabled = "_device-disabled";
+                     }
+                     else { strDisabled = ""; }
+                    <li title="Amazon Fire TV">
+                      <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-amazonfire@(strDisabled).png" alt=""><h3>Amazon Fire</h3></a>
+                    </li> 
                      @if (!matrix.HasBenchmarksForPlatform("STB-Apple TV"))
                      {
                          strDisabled = "_device-disabled";
@@ -783,7 +796,7 @@
                 <p>
                   Based on the most recent benchmarks of all services in @matrix.GetScores("About", "Overall").Max combinations across platforms
                 </p>
-                @DrawBenchmarkingPane(matrix, "Overall", -1, -1)
+                @DrawBenchmarkingPane(matrix, "Overall")
               </div>
             </div>
             
@@ -807,7 +820,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "Web").Max services on Web
                 </p>
-                @DrawBenchmarkingPane(matrix, "Web", -1, 10306)
+                @DrawBenchmarkingPane(matrix, "Web")
                 </div>
             </div>    
             <div class="pane">
@@ -815,7 +828,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "TabletiPad").Max services on iPad
                 </p>
-                @DrawBenchmarkingPane(matrix, "TabletiPad", 10115, 10114)
+                @DrawBenchmarkingPane(matrix, "TabletiPad")
                 </div>
             </div>
             <div class="pane">
@@ -823,7 +836,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "TabletAndroid").Max services on Android Tablets
                 </p>
-                @DrawBenchmarkingPane(matrix, "TabletAndroid", 10209, 10114)
+                @DrawBenchmarkingPane(matrix, "TabletAndroid")
                 </div>
             </div>
             <div class="pane">
@@ -831,7 +844,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "TabletWindows").Max services on Windows Tablet
                 </p>
-                @DrawBenchmarkingPane(matrix, "TabletWindows", 10209, 10114)
+                @DrawBenchmarkingPane(matrix, "TabletWindows")
                 </div>
             </div>
             <div class="pane">
@@ -839,7 +852,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "SmartphoneiPhone").Max services on iPhone
                 </p>
-                @DrawBenchmarkingPane(matrix, "SmartphoneiPhone", 10799, 10798)
+                @DrawBenchmarkingPane(matrix, "SmartphoneiPhone")
                 </div>
             </div>
             <div class="pane">
@@ -847,7 +860,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "SmartphoneAndroid").Max services on Android Smartphones
                 </p>
-                @DrawBenchmarkingPane(matrix, "SmartphoneAndroid", 10892, 10798)
+                @DrawBenchmarkingPane(matrix, "SmartphoneAndroid")
                 </div>
             </div>
             <div class="pane">
@@ -855,7 +868,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "SmartphoneWindows").Max services on Windows Phone
                 </p>
-                @DrawBenchmarkingPane(matrix, "SmartphoneWindows", 10985, 10798)
+                @DrawBenchmarkingPane(matrix, "SmartphoneWindows")
                 </div>
             </div>
             <div class="pane">
@@ -863,7 +876,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "Connected TV-Samsung").Max services on Samsung Smart TV
                 </p>
-                @DrawBenchmarkingPane(matrix, "Connected TV-Samsung", 10406, 10405)
+                @DrawBenchmarkingPane(matrix, "Connected TV-Samsung")
                 </div>
             </div>
             <div class="pane">
@@ -871,7 +884,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "Connected TV-Sony").Max services on Sony Connected TV
                 </p>
-                @DrawBenchmarkingPane(matrix, "Connected TV-Sony", 10513, 10405)
+                @DrawBenchmarkingPane(matrix, "Connected TV-Sony")
                 </div>
             </div>
             <div class="pane">
@@ -879,7 +892,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "Connected TV-LG").Max services on LG Connected TV
                 </p>
-                @DrawBenchmarkingPane(matrix, "Connected TV-LG", 22774, 10405)
+                @DrawBenchmarkingPane(matrix, "Connected TV-LG")
                 </div>
             </div>
             <!--
@@ -888,16 +901,24 @@
                 <p>
                     Based on the most recent benchmarks of @@matrix.GetScores("About", "Connected TV-Panasonic").Max services on Sony Connected TV
                 </p>
-                @@DrawBenchmarkingPane(matrix, "Connected TV-Panasonic", 10985, 10798)
+                @* @DrawBenchmarkingPane(matrix, "Connected TV-Panasonic", 10985, 10798) *@
                 </div>
             </div>
             -->
             <div class="pane">
                 <div class="inner">
                 <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Amazon Fire TV").Max services on Amazon Fire TV
+                </p>
+                @DrawBenchmarkingPane(matrix, "STB-Amazon Fire TV")
+                </div>
+            </div>
+            <div class="pane">
+                <div class="inner">
+                <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Apple TV").Max services on Apple TV
                 </p>
-                @DrawBenchmarkingPane(matrix, "STB-Apple TV", 22885, 19798)
+                @DrawBenchmarkingPane(matrix, "STB-Apple TV")
                 </div>
             </div>
             <div class="pane">
@@ -905,7 +926,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Freesat").Max services on Freesat
                 </p>
-                @DrawBenchmarkingPane(matrix, "STB-Freesat", 24775, 19798)
+                @DrawBenchmarkingPane(matrix, "STB-Freesat")
                 </div>
             </div>
             <div class="pane">
@@ -913,7 +934,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Now TV").Max services on Now TV
                 </p>
-                @DrawBenchmarkingPane(matrix, "STB-Now TV", 19799, 19798)
+                @DrawBenchmarkingPane(matrix, "STB-Now TV")
                 </div>
             </div>
             <div class="pane">
@@ -921,7 +942,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Roku").Max services on Roku
                 </p>
-                @DrawBenchmarkingPane(matrix, "STB-Roku", 19800, 19798)
+                @DrawBenchmarkingPane(matrix, "STB-Roku")
                 </div>
             </div>
                 
@@ -932,7 +953,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Sky").Max services on Sky
                 </p>
-                @DrawBenchmarkingPane(matrix, "STB-Sky", 19801, 19798)
+                @DrawBenchmarkingPane(matrix, "STB-Sky")
                 </div>
             </div>
                 
@@ -941,7 +962,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Virgin").Max services on Virgin
                 </p>
-                @DrawBenchmarkingPane(matrix, "STB-Virgin", 26463, 19798)
+                @DrawBenchmarkingPane(matrix, "STB-Virgin")
                 </div>
             </div>
                 
@@ -950,7 +971,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "STB-YouView").Max services on YouView
                 </p>
-                @DrawBenchmarkingPane(matrix, "STB-YouView", 19802, 19798)
+                @DrawBenchmarkingPane(matrix, "STB-YouView")
                 </div>
             </div>
                                 
@@ -960,7 +981,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "STB-AT&T U-Verse").Max services on AT&amp;T U-Verse
                 </p>
-                @DrawBenchmarkingPane(matrix, "STB-AT&T U-Verse", 26464, 19798)
+                @DrawBenchmarkingPane(matrix, "STB-AT&T U-Verse")
                 </div>
             </div>
                 
@@ -969,7 +990,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Charter").Max services on Charter
                 </p>
-                @DrawBenchmarkingPane(matrix, "STB-Charter", 26465, 19798)
+                @DrawBenchmarkingPane(matrix, "STB-Charter")
                 </div>
             </div>
                                                
@@ -978,7 +999,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Sky").Max services on Cox
                 </p>
-                @DrawBenchmarkingPane(matrix, "STB-Cox", 26466, 19798)
+                @DrawBenchmarkingPane(matrix, "STB-Cox")
                 </div>
             </div>
                 
@@ -987,7 +1008,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Direct TV").Max services on Direct TV
                 </p>
-                @DrawBenchmarkingPane(matrix, "STB-Direct TV", 26467, 19798)
+                @DrawBenchmarkingPane(matrix, "STB-Direct TV")
                 </div>
             </div>
                 
@@ -996,7 +1017,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Dish").Max services on Dish
                 </p>
-                @DrawBenchmarkingPane(matrix, "STB-Dish", 26468, 19798)
+                @DrawBenchmarkingPane(matrix, "STB-Dish")
                 </div>
             </div>
                                                
@@ -1005,7 +1026,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Optimum").Max services on Optimum
                 </p>
-                @DrawBenchmarkingPane(matrix, "STB-Optimum", 26469, 19798)
+                @DrawBenchmarkingPane(matrix, "STB-Optimum")
                 </div>
             </div>
                 
@@ -1014,7 +1035,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Sudden Link").Max services on Sudden Link
                 </p>
-                @DrawBenchmarkingPane(matrix, "STB-Sudden Link", 26470, 19798)
+                @DrawBenchmarkingPane(matrix, "STB-Sudden Link")
                 </div>
             </div>
                 
@@ -1023,7 +1044,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "STB-TiVo").Max services on TiVo
                 </p>
-                @DrawBenchmarkingPane(matrix, "STB-TiVo", 26473, 19798)
+                @DrawBenchmarkingPane(matrix, "STB-TiVo")
                 </div>
             </div>
                                                
@@ -1032,7 +1053,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Verizon FiOS").Max services on Verizon FiOS
                 </p>
-                @DrawBenchmarkingPane(matrix, "STB-Verizon FiOS", 26471, 19798)
+                @DrawBenchmarkingPane(matrix, "STB-Verizon FiOS")
                 </div>
             </div>
                 
@@ -1041,26 +1062,16 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Xfinity").Max services on Xfinity
                 </p>
-                @DrawBenchmarkingPane(matrix, "STB-Xfinity", 26478, 19798)
+                @DrawBenchmarkingPane(matrix, "STB-Xfinity")
                 </div>
             </div>
-                                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
+                     
             <div class="pane">
                 <div class="inner">
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "Games Consoles-Playstation").Max services on Sony Playstation
                 </p>
-                @DrawBenchmarkingPane(matrix, "Games Consoles-Playstation", 10985, 10798)
+                @DrawBenchmarkingPane(matrix, "Games Consoles-Playstation")
                 </div>
             </div>
             <div class="pane">
@@ -1068,7 +1079,7 @@
                 <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "Games Consoles-XBox").Max services on XBox
                 </p>
-                @DrawBenchmarkingPane(matrix, "Games Consoles-XBox", 10985, 10798)
+                @DrawBenchmarkingPane(matrix, "Games Consoles-XBox")
                 </div>
             </div>
             }

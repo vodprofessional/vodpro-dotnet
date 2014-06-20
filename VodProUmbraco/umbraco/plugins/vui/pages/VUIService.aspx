@@ -30,10 +30,23 @@
                 <th>Pay Model</th>
                 <td><asp:Literal ID="litSubscriptionType" runat="server"></asp:Literal></td>
             </tr>
-            <tr class="last">
+            <tr>
                 <th>Category</th>
                 <td><asp:Literal ID="litServiceCategory" runat="server"></asp:Literal></td>
             </tr>
+            <tr>
+                <th>Price</th>
+                <td><asp:Literal ID="litServicePrice" runat="server"></asp:Literal></td>
+            </tr>
+            <tr>
+                <th>Users/Subscribers</th>
+                <td><asp:Literal ID="litServiceUsers" runat="server"></asp:Literal></td>
+            </tr>
+            <tr class="last">
+                <th>VOD Views</th>
+                <td><asp:Literal ID="litServiceViews" runat="server"></asp:Literal></td>
+            </tr>
+
             <tr>
                 <th>Twitter URL</th>
                 <td><asp:Literal ID="litTwitterURL" runat="server"></asp:Literal></td>

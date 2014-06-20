@@ -16,6 +16,7 @@ namespace VP2.usercontrols
         {
             plcErrLogin.Visible = false;
             plcForgotError.Visible = false;
+            plcForgotProblem.Visible = false;
             plcPwdSent.Visible = false;
 
             if (!IsPostBack)
@@ -54,7 +55,8 @@ namespace VP2.usercontrols
         {
             try
             {
-                if (VPMember.MemberLogin(txtLoginEmail.Text, txtPassword.Text))
+                bool completedLogin = VPMember.MemberLogin(txtLoginEmail.Text, txtPassword.Text);
+                if (completedLogin)
                 {
                     Response.Redirect("/members/profile", true);
                 }
@@ -65,6 +67,12 @@ namespace VP2.usercontrols
             }
             catch (Exception ex)
             {
+                VPMember currentUser = VPMember.GetLoggedInUser();
+                // In the case below, it means that the username and password were valid, but that the user has some other defect.
+                if (currentUser != null)
+                {
+
+                }
                 plcErrLogin.Visible = true;
             }
         }
@@ -78,6 +86,10 @@ namespace VP2.usercontrols
                 if (VPMember.RecoverPassword(email))
                 {
                     plcPwdSent.Visible = true;
+                }
+                else
+                {
+                    plcForgotProblem.Visible = true;
                 }
             }
             else

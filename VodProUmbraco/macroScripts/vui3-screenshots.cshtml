@@ -152,19 +152,21 @@
                       <h3>Tablet</h3>
                       <img src="/_inc/images/new-platform/platform-tablet.png" class="platform-image" />
                     </span>
-
-                    <span class="devices">
+                    
+                  <span class="devices">
                     <li title="iPad">
-                      <a href="#" class=""><img src="/_inc/images/new-platform/device-apple.png" alt=""><h3>iPad</h3></a>
+                        <a href="#" class=""><img src="/_inc/images/new-platform/device-apple.png" alt=""><h3>iPad</h3></a>
                     </li> 
 
                     <li title="Android Tablet">
-                      <a href="#" class=""><img src="/_inc/images/new-platform/device-droid.png" alt=""><h3>Android</h3></a>
+                        <a href="#" class=""><img src="/_inc/images/new-platform/device-droid.png" alt=""><h3>Android</h3></a>
                     </li> 
+
                     <li title="Windows 8 Tablet">
-                      <a href="#" class=""><img src="/_inc/images/new-platform/device-win.png" alt=""><h3>Windows</h3></a>
+                        <a href="#" class=""><img src="/_inc/images/new-platform/device-win.png" alt=""><h3>Windows</h3></a>
                     </li>
-                    </span>
+                  </span>
+
                 </span>
                   
                   
@@ -179,7 +181,7 @@
                       <a href="#" class=""><img src="/_inc/images/new-platform/device-apple.png" alt=""><h3>iPhone</h3></a>
                     </li> 
       
-                    <li title="Andoird Smartphone">
+                    <li title="Android Smartphone">
                       <a href="#" class=""><img src="/_inc/images/new-platform/device-droid.png" alt=""><h3>Android</h3></a>
                     </li> 
                     
@@ -220,6 +222,9 @@
                   </span>
                   <span class="devices scrolling scroll-ctrl" data-group="stb-group">
                    <div class="scroller">
+                    <li title="Amazon Fire TV">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-amazonfire.png" alt=""><h3>Amazon Fire</h3></a>
+                    </li> 
                     <li title="Apple TV">
                       <a href="#" class=""><img src="/_inc/images/new-platform/device-apple.png" alt=""><h3>Apple TV</h3></a>
                     </li> 
@@ -332,13 +337,14 @@
                         <li data-devicegroup="tablet" class="device">@DrawMatrixLink(service, new string[] { "TabletiPad" }, IsFullMode)</li>
                         <li data-devicegroup="tablet" class="device">@DrawMatrixLink(service, new string[] { "TabletAndroid" }, IsFullMode)</li>
                         <li data-devicegroup="tablet" class="device">@DrawMatrixLink(service, new string[] { "TabletWindows" }, IsFullMode)</li>
+
                         <li data-devicegroup="smartphone" class="overall">@DrawMatrixLink(service, new string[] { "SmartphoneiPhone", "SmartphoneAndroid", "SmartphoneWindows" }, IsFullMode, true)</li>
                         <li data-devicegroup="smartphone" class="device">@DrawMatrixLink(service, new string[] { "SmartphoneiPhone" }, IsFullMode)</li>
                         <li data-devicegroup="smartphone" class="device">@DrawMatrixLink(service, new string[] { "SmartphoneAndroid" }, IsFullMode)</li>
                         <li data-devicegroup="smartphone" class="device">@DrawMatrixLink(service, new string[] { "SmartphoneWindows" }, IsFullMode)</li>
                         <div class="matrix-scroll-group">
                           <div class="connectedtv-group scroller" data-group="connectedtv-group">
-                            <li data-devicegroup="connectedtv" class="overall">@DrawMatrixLink(service, new string[] { "Connected TV-Samsung", "Connected TV-Sony" }, IsFullMode, true)</li>
+                            <li data-devicegroup="connectedtv" class="overall">@DrawMatrixLink(service, new string[] { "Connected TV-Samsung", "Connected TV-Sony", "Connected TV-LG" }, IsFullMode, true)</li>
                             <li data-devicegroup="connectedtv" class="device">@DrawMatrixLink(service, new string[] { "Connected TV-Samsung" }, IsFullMode)</li>
                             <li data-devicegroup="connectedtv" class="device">@DrawMatrixLink(service, new string[] { "Connected TV-Sony" }, IsFullMode)</li>
                             <li data-devicegroup="connectedtv" class="device">@DrawMatrixLink(service, new string[] { "Connected TV-LG" }, IsFullMode)</li>
@@ -349,9 +355,10 @@
                         <div class="matrix-scroll-group ">
                           <div class="stb-group scroller" data-group="stb-group">
                             <li data-devicegroup="stb" class="overall">@DrawMatrixLink(service, new string[] { 
-                                                                      "STB-Apple TV", "STB-Freesat", "STB-Now TV", "STB-Roku", "STB-Virgin", "STB-Sky",
+                                                                      "STB-Amazon Fire TV", "STB-Apple TV", "STB-Freesat", "STB-Now TV", "STB-Roku", "STB-Virgin", "STB-Sky",
                                                                       "STB-YouView", "STB-AT&T U-Verse", "STB-Charter", "STB-Cox", "STB-Direct TV",
                                                                       "STB-Dish", "STB-Optimum", "STB-TiVo", "STB-Verizon FiOS", "STB-Xfinity"}, IsFullMode, true)</li>
+                            <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Amazon Fire TV" }, IsFullMode)</li>
                             <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Apple TV" }, IsFullMode)</li>
                             <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Freesat" }, IsFullMode)</li>
                             <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Now TV" }, IsFullMode)</li>
@@ -412,7 +419,7 @@
                 <div class="inner">
                   <ul>
                     <a name="0"></a>
-                    bool isPreview = false;
+                    <!--bool isPreview = false;
                       if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_NONE))
                       {
                           isPreview = true;
@@ -425,17 +432,13 @@
                           {
                               serviceclass = "preview-link";
                               url = "#";
-                          }
+                          }-->
 
                   @{ 
                       string firstLetter = "";
                       foreach (VUI3ServiceMasterMatrixItem service in matrix.Services)
                       {
-                          if (!@service.ServiceName.Substring(0, 1).ToUpper().Equals(firstLetter))
-                          {
-                              firstLetter = @service.ServiceName.Substring(0, 1).ToUpper();
-                            <a name="@firstLetter"></a>
-                          }
+                          
                           string serviceclass = String.Empty;
                           string url = service.URL;
                           if (isPreview && !service.IsPreviewable)
@@ -444,6 +447,11 @@
                               url = "#";
                           }
                         <li class="service-item">
+                          @if (!@service.ServiceName.Substring(0, 1).ToUpper().Equals(firstLetter))
+                          {
+                              firstLetter = @service.ServiceName.Substring(0, 1).ToUpper();
+                            <a name="@firstLetter"></a>
+                          }
                           <a href="@url" class="@serviceclass">
                             <div class="service-title">
                               @service.ServiceName

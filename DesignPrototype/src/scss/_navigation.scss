@@ -171,7 +171,6 @@
           @media(max-width: 767px) {
             text-transform: none;
             font-family: $headline-font-family;
-            letter-spacing: 0px;
             border: 0;
             margin-left: -5px !important;
           }
@@ -182,6 +181,10 @@
           font-family: Lato;
           border-right: 2px solid #FFF;
           margin: 10px 0;
+          
+          @media(max-width: 991px) {
+            letter-spacing: 0px;
+          }
         }
         a:hover {
           color: #181829 !important;

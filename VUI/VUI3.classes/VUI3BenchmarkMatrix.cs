@@ -33,7 +33,7 @@ namespace VUI.VUI3.classes
             string[] deviceTypes = { "TabletAndroid", "SmartphoneAndroid", "TabletiPad", "SmartphoneiPhone", "SmartphoneWindows", "TabletWindows", "Web", 
                                        "Connected TV-Samsung", "Connected TV-Sony", "Connected TV-LG", "Connected TV-Panasonic", "Games Consoles-XBox", 
                                        "Games Consoles-Playstation", 
-                                       "STB-Apple TV", "STB-Freesat", "STB-Roku", "STB-Now TV", 
+                                       "STB-Amazon Fire TV", "STB-Apple TV", "STB-Freesat", "STB-Roku", "STB-Now TV", 
                                        "STB-Sky", "STB-Virgin", "STB-YouView",
                                        "STB-AT&T U-Verse", "STB-Cox", "STB-Charter", "STB-Direct TV", "STB-Dish",
                                        "STB-Optimum", "STB-Sudden Link", "STB-Verizon FiOS", "STB-Xfinity", "STB-TiVo",                                       
@@ -93,10 +93,6 @@ namespace VUI.VUI3.classes
                 if(pditem.Max > 0)
                 {
                     retval = true;
-                }
-                if(PlatformDevice.Equals("STB-Sky")) 
-                {
-                //    log.Debug("Found " + pditem.ToString());
                 }
             }
             catch(Exception ex)

@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="main-registration.ascx.cs" Inherits="VP2.usercontrols.main_registration" %>
 <div class="form form-registration">
 <asp:CreateUserWizard ID="CreateUserWizard1" Runat="server" 
-  OnNextButtonClick="NextButtonClick" OnCreatedUser="CreatedUser" StepNextButtonText="Next" 
+  OnNextButtonClick="NextButtonClick" OnCreatedUser="CreatedUser" StepNextButtonText="Next" OnSendingMail="CreateUserWizard_SendingMail" 
   CreateUserButtonText="Register me"> 
     
   <MailDefinition BodyFileName="~/App_Data/reg-email-confirm.txt" Subject="Registration Confirmation" From="VOD Professional <admin@vodprofessional.com>" />

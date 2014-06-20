@@ -122,7 +122,7 @@ $(document).ready(function () {
     });
 
 
-    
+
 
 
     $(".b-bencmarking img.device-coming-soon, .b-screenshots img.device-coming-soon, .b-matrix-nav img.device-coming-soon, .benchmarking img.device-coming-soon").after("<span class=\"device-coming-soon-sash\"></span>");
@@ -165,6 +165,35 @@ $(document).ready(function () {
             $(this).find('.description').fadeOut(200);
         }
     );
+
+
+    // Service Page Comments Handlers
+    if ($('.b-tabs.store-comments').length > 0) {
+        var servicemasterid = $('#servicemasterid').attr('data-id');
+        LoadCommentsMeta($('.b-tabs.store-comments'), servicemasterid);
+    }
+    $('.b-tabs.store-comments .pane').on('scroll', function () {
+        if ($(this).find('[data-store]').height() - ($(this).scrollTop() + $(this).height()) < 60) {
+            var target = $(this).find('[data-store]');
+            if (!target.is('[data-loading]')) {
+                var servicemasterid = $('#servicemasterid').attr('data-id');
+                var store = target.attr('data-store');
+                var deviceType = target.attr('data-devicetype');
+                var startpos = target.attr('data-startpos');
+                LoadComments(target, servicemasterid, store, deviceType, startpos);
+            }
+        }
+    });
+
+
+    $(".btn-comments").on('click', function () {
+        var target = $(this).parent();
+        var servicemasterid = $('#servicemasterid').attr('data-id');
+        var store = target.attr('data-store');
+        var deviceType = target.attr('data-devicetype');
+        var startpos = target.attr('data-startpos');
+        LoadComments(target, servicemasterid, store, deviceType, startpos);
+    });
 
 
 
@@ -576,3 +605,136 @@ function drawLightbox(data, lbid, options) {
     }
     $("#" + lbid + " .lightbox-next").removeClass("disabled");
 }
+
+
+// Function that loads the Comments MetaData and makes the comments available. 
+function LoadCommentsMeta(target, servicemasterid) {
+    var xmlActionsURL = '/vui/vui-xml-actions/';
+    var DataObject = { "servicemasterid": servicemasterid };
+    $.ajax({
+        url: xmlActionsURL + "?a=scmt",
+        type: "POST",
+        dataType: 'json',
+        data: DataObject,
+        success: function (data) {
+            if (data.response === 'valid') {
+                if (data.data.CommentsMeta.length > 0) {
+                    for (i = 0; i < data.data.CommentsMeta.length; i++) {
+                        var link = target.find('ul li a[data-devicetype="' + data.data.CommentsMeta[i].DeviceType + '"]');
+                        // var pane = target.find('.panes .pane>div[data-devicetype="' + data.data.CommentsMeta[i].DeviceType + '"]');
+                        if (data.data.CommentsMeta[i].Count == 0) {
+                            link.parent().addClass("_device-disabled");
+                            var src = link.find("img").attr("src");
+                            src = src.replace('.', '_device-disabled.');
+                            link.find("img").attr("src", src);
+                        }
+                        else {
+                            link.find('.stat').text('(' + data.data.CommentsMeta[i].Count + ')');
+                        }
+                    }
+                }
+
+                /*
+                target.find('.panes .pane>div').each(function () {
+                LoadVersionHistory($(this), servicemasterid, $(this).attr("data-devicetype"));
+                });
+                */
+
+                $('.b-tabs.store-comments').find(".tabs").tabs("div.panes > div", {
+                    initialIndex: 0,
+                    onClick: function () {
+                        var pane = this.getCurrentPane();
+                        if ($(pane).find('.comment').length == 0) {
+                            pane.find('.btn-comments').trigger('click');
+                        }
+                    }
+                });
+
+                $('.b-tabs.store-comments .tabs ._device-disabled a')
+                    .unbind("click")
+                    .on("click", function (e) {
+                        e.preventDefault();
+                    });
+            }
+        }
+    });
+}
+
+// Load a batch of comments and draw to screen.
+function LoadComments(target, servicemasterid, store, deviceType, startpos) {
+    $(target).attr("data-loading", "yes");
+    var numrows = 30;
+    var xmlActionsURL = '/vui/vui-xml-actions/';
+    var pagetype = '';
+    var DataObject = { "startpos": startpos, "numrows": numrows, "servicemasterid": servicemasterid, "store": store, "deviceType": deviceType };
+    $.ajax({
+        url: xmlActionsURL + "?a=scom",
+        type: "POST",
+        dataType: 'json',
+        data: DataObject,
+        success: function (data) {
+            if (data.response === 'valid') {
+                if (data.data.Comments.length > 0) {
+                    for (i = 0; i < data.data.Comments.length; i++) {
+                        var result = $("#VUI-Comment-template div.comment").clone();
+                        var pos = (i % 3) + 1;
+                        result
+                                .addClass("position" + pos)
+                                .find('.title').html(data.data.Comments[i].Title).end()
+                                .find('.desc').html(data.data.Comments[i].Comment).end()
+                                .find('.rate').addClass('rate' + data.data.Comments[i].NormalisedRating).end()
+                        //                                .find('div.reviewdate').html(data.data.Comments[i].ReviewDateString).end()
+                                .find('.daterecorded').html(data.data.Comments[i].DateRecordedString).end()
+                            ;
+                        if (data.data.Comments[i].Version != null) {
+                            result.find('div.version').html('Version: ' + data.data.Comments[i].Version).end();
+                        }
+                        else {
+                            result.find('div.version').html('');
+                        }
+
+                        target.find('.comments-list').append(result);
+                    }
+                    var n = parseInt(numrows) + parseInt(startpos)
+                    target.attr('data-startpos', n);
+                }
+                else {
+                    target.find('.btn-comments').attr('disabled', 'disabled');
+                }
+            }
+            else {
+                target.find('.btn-comments').attr('disabled', 'disabled');
+            }
+        },
+        complete: function () {
+            $(target).removeAttr("data-loading");
+        }
+    });
+}
+
+
+
+// Not used yet - loads version history for an app in an app store
+function LoadVersionHistory(target, servicemasterid, deviceType) {
+    var xmlActionsURL = '/vui/vui-xml-actions/';
+    var DataObject = { "servicemasterid": servicemasterid, "deviceType": deviceType };
+    $.ajax({
+        url: xmlActionsURL + "?a=vers",
+        type: "POST",
+        dataType: 'json',
+        data: DataObject,
+        success: function (data) {
+            if (data.data.Versions.length > 0) {
+                for (i = 0; i < data.data.Versions.length; i++) {
+                    var result = $("#VUI-Versions-template div").clone();
+                    result
+                                .find('span.number').html(data.data.Versions[i].Version).end()
+                                .find('span.date').html(data.data.Versions[i].DateRecordedString).end();
+                    target.find('.version-history').append(result);
+                }
+            }
+        }
+    });
+}
+
+
