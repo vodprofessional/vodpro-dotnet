@@ -5,8 +5,6 @@
 
 <asp:PlaceHolder runat="server" ID="plcConfirmation">
 
-
-    
     <p>
         We haven't been able to confirm your email address (<asp:Literal ID="litEmail" runat="server" />).  
         You should have received an email to complete the registration process with a confirmation link.

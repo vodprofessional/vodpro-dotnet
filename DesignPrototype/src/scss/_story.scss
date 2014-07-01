@@ -45,11 +45,26 @@
         padding: 8px;
         text-align: left;
       }
+      td.width30, th.width30 {
+        width:30%;
+      }
+      td.width25, th.width25 {
+        width:25%;
+      }
+      tr td:last-child {
+        padding-right:2em;
+      }
   }
   p.indent {
     margin-left: 25px;
   }
- 
+  
+  p.embedded-comment { margin: 15px;
+    border-radius: 8px;
+    border: 1px solid #eaeaea;
+    padding: 8px;
+    box-shadow: 0 0 7px #CCCCCC;
+  }
   #vp2-regwall {
     background: #f0f0f0;
     border: 1px solid #ddd;
@@ -114,6 +129,7 @@
     margin-top: 2em;
     img {
       max-width: 100%;
+      height: inherit;
       &.main-image {
         float:right;
         margin-left:15px;

@@ -17,6 +17,8 @@ namespace VUI.VUI2.classes
         private static log4net.ILog log = log4net.LogManager.GetLogger(typeof(MetaData));
         private static List<int> _analysisIDs;
 
+        private static Dictionary<string, int> _candidates;
+
         public static void RegenerateMetaData()
         {
             
@@ -47,9 +49,11 @@ namespace VUI.VUI2.classes
             
             foreach (DynamicNode platform in platforms)
             {
+                _candidates = new Dictionary<string, int>();
+
                 log.Debug(" - Platform: " + platform.Id + " [" + platform.Name + "]");
-                sbSQL.AppendLine(String.Format(@"insert into vui_Platform (ID,Name) values ({0}, '{1}'); ", new Object[]{ platform.Id, platform.Name }));
-                
+                sbSQL.AppendLine(String.Format(@"insert into vui_Platform (ID,Name) values ({0}, '{1}'); ", new Object[] { platform.Id, platform.Name }));
+
                 // Find Devices, Or Services, Children
                 List<DynamicNode> devicesOrServices = platform.GetChildrenAsList.Items.ToList();
 
@@ -57,7 +61,7 @@ namespace VUI.VUI2.classes
                 foreach (DynamicNode deviceOrService in devicesOrServices)
                 {
                     log.Debug(" -- " + deviceOrService.NodeTypeAlias + " - : " + deviceOrService.Id + " [" + deviceOrService.Name + "]");
-                
+
                     if (deviceOrService.NodeTypeAlias.Equals(Utility.GetConst("VUi2_devicetype")))
                     {
                         sbSQL.AppendLine(String.Format(@"insert into vui_Device (ID,Name,PlatformId) values ({0}, '{1}', {2}); ", new Object[] { deviceOrService.Id, deviceOrService.Name, platform.Id }));
@@ -87,6 +91,13 @@ namespace VUI.VUI2.classes
                     }
                     _analysisIDs = new List<int>();
                 }
+
+                // Handy Debug to output all Analyses that are to be meta-data'd
+                foreach (string k in _candidates.Keys)
+                {
+                    log.Debug("****** Analysis: " + k + " [" + _candidates[k] + "] ");
+                }
+
             }
 
             // This stored Proc generates the Screenshot MetaData that is used by the top-level screenshot library pages.
@@ -189,11 +200,6 @@ namespace VUI.VUI2.classes
         private static string CreateServiceMetaSQL(DynamicNode service, int platformId, int deviceId)
         {
             log.Debug(" --- Service:" + service.Id + " [" + service.Name + "]");
-
-            if (service.Name.Equals("4seven"))
-            {
-                string zzz = "zzz";
-            }
 
             string serviceScore = "0";
             string tempServiceScore = "0";
@@ -396,6 +402,7 @@ namespace VUI.VUI2.classes
                 {
                     Analysis a = new Analysis(id);
                     a.SetBenchmark();
+                    _candidates.Add(a.Node.Parent.Name + "/" + a.Node.Name, id);
 
                     if (a.Capabilities != null)
                     {

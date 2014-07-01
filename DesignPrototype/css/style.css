@@ -253,7 +253,11 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover, header a
 .story #column-full table.table-dotted-border { border-top: 1px dotted #cccccc; }
 .story #column-full table.table-dotted-border tr { border-bottom: 1px dotted #cccccc; }
 .story #column-full table.table-dotted-border td, .story #column-full table.table-dotted-border th { padding: 8px; text-align: left; }
+.story #column-full table.table-dotted-border td.width30, .story #column-full table.table-dotted-border th.width30 { width: 30%; }
+.story #column-full table.table-dotted-border td.width25, .story #column-full table.table-dotted-border th.width25 { width: 25%; }
+.story #column-full table.table-dotted-border tr td:last-child { padding-right: 2em; }
 .story #column-full p.indent { margin-left: 25px; }
+.story #column-full p.embedded-comment { margin: 15px; border-radius: 8px; border: 1px solid #eaeaea; padding: 8px; box-shadow: 0 0 7px #CCCCCC; }
 .story #column-full #vp2-regwall { background: #f0f0f0; border: 1px solid #ddd; padding: 15px; border-radius: 10px; }
 .story #column-full #vp2-regwall h2 { margin-top: 0; color: #f00; }
 .story #column-full #vp2-regwall .nav-tabs ul li { background: #f9f9f9; }
@@ -268,7 +272,7 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover, header a
 .story #column-full .article-meta .article-social { float: left; width: 240px; }
 @media (max-width: 400px) { .story #column-full .article-meta .article-social { float: none; margin-top: 1em; width: 100%; } }
 .story #column-full .article-main { margin-top: 2em; }
-.story #column-full .article-main img { max-width: 100%; }
+.story #column-full .article-main img { max-width: 100%; height: inherit; }
 .story #column-full .article-main img.main-image { float: right; margin-left: 15px; margin-bottom: 15px; }
 
 .error #columns #main { background-color: transparent; box-shadow: none; }

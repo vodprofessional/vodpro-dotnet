@@ -23,3 +23,11 @@ font-weight:normal;  font-size:1.3em; font-style:italic;
 
 }
 
+.table-dotted-border {
+
+}
+
+.embedded-comment {
+margin: 10px; border-radius: 8px; border: 1px solid #eaeaea; padding: 8px; box-shadow: 0 0 7px #CCCCCC;
+}
+

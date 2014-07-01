@@ -10,9 +10,29 @@
 <body>
     <form id="form1" runat="server">
     <div id="serviceContainer" style="overflow:auto;">
-        <h1>VUI Functions Coming Soon</h1>
+        <h1>VUI Functions</h1>
 
+        <h2>MetaData Processing Queue</h2>
 
+        <p>
+            <asp:ListBox ID="lstServices" runat="server" Rows="1" />
+            <asp:Button runat="server" ID="btnRegenerateServiceMetadata" Text="Add to Queue" OnClick="RegenerateService" />
+            &nbsp;
+            <asp:Button runat="server" ID="btnRegenerateAll" Text="Add ALL Services to Queue" OnClick="RegenerateAll" />
+        </p>
+
+        <p>
+            <asp:Button runat="server" ID="btnClearAndRegenerateAll" Text="Clear ALL and Add ALL to Queue (WARNING, only use out-of-hours" OnClick="ClearAndRegenerateAll" />
+            <br />
+            <asp:Literal runat="server" ID="litMessage" />
+        </p>
+        <p>
+            <asp:Button runat="server" ID="btnStartProcessing" Text="Start / Refresh Queue Processor" OnClick="StartQueue" />
+            <asp:Button runat="server" ID="btnEndProcessing" Text="Abort Thread (are you sure?)" OnClick="EndQueue" />
+            <br />
+            <asp:Literal runat="server" ID="litQueueRunningCounter" />
+        </p>
+        <hr />
         <h2>VUI Users</h2>
         <asp:Literal ID="litVUIUsers" runat="server" />
 

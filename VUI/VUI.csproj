@@ -292,6 +292,7 @@
     <Compile Include="VUI3.classes\URLEncodeUtility.cs" />
     <Compile Include="VUI3.classes\VUI3ImageRender.cs" />
     <Compile Include="VUI3.classes\VUI3MetaData.cs" />
+    <Compile Include="VUI3.classes\VUI3MetaDataThread.cs" />
     <Compile Include="VUI3.classes\VUI3PageFunctionDescriptions.cs" />
     <Compile Include="VUI3.classes\VUI3Screenshot.cs" />
     <Compile Include="VUI3.classes\VUI3ScreenshotAnalysis.cs" />
