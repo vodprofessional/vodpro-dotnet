@@ -356,14 +356,21 @@ class VUIDailySnapshot
     jqXHR = $.getJSON("/vui/vui-xml-actions", data)
     jqXHR.done (json) ->
       snap = json.data.DailySnapshot
+      payModel = snap.PayModel
+      if payModel != ''
+        payModel = payModel.replace(/,/g,', ')
+      category = snap.Category
+      if category != ''
+        category = category.replace(/,/g,', ')
+      
       template = $('#vui-service-sheet-template').clone()
       template
         .find('article header h1').text(snap.ServiceName).end()
         .find('article header .intro .b-info')
             .find('img').attr('src',snap.IconURL).end()
             .find('table tr td[data-name="availability"]').text(snap.Availability).end()
-            .find('table tr td[data-name="pay-model"]').text(snap.PayModel).end()
-            .find('table tr td[data-name="category"]').text(snap.Category).end()
+            .find('table tr td[data-name="pay-model"]').text(payModel).end()
+            .find('table tr td[data-name="category"]').text(category).end()
             .end()
             
       if snap.Snapshot.numScreenshots > 0

@@ -15,27 +15,10 @@ namespace VUI.pages
     public partial class VUIFunctions : umbraco.BasePages.UmbracoEnsuredPage
     {
 
-        VUI3MetaDataThread runner = null;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             VUIAdminsAndUsers();
 
-            runner = VUI3MetaDataThread.Instance;
-
-            litQueueRunningCounter.Text = runner.Status;
-            litMessage.Text = String.Empty;
-
-            DynamicNode smRoot = new DynamicNode(ConfigurationManager.AppSettings["VUI2_ServiceMastersRoot"]);
-            List<DynamicNode> serviceMasters = smRoot.Descendants("VUI2ServiceMaster").Items.OrderBy(n => n.Name).ToList();
-
-            if(!Page.IsPostBack)
-            {
-                lstServices.DataSource = serviceMasters;
-                lstServices.DataTextField = "Name";
-                lstServices.DataValueField = "Name";
-                lstServices.DataBind();
-            }
         }
 
 
@@ -122,37 +105,7 @@ namespace VUI.pages
         }
 
 
-        protected void RegenerateService(object sender, EventArgs e)
-        {
-            string serviceName = lstServices.SelectedValue;
-            VUI3MetaData.AddToQueue(serviceName);
-            litMessage.Text = "Added " + serviceName + " to queue";
-        }
 
-        protected void RegenerateAll(object sender, EventArgs e)
-        {
-            VUI3MetaData.AddToQueue(VUI3MetaData.ALL_METADATA);
-            litMessage.Text = "Added ALL to queue";
-        }
-
-        protected void ClearAndRegenerateAll(object sender, EventArgs e)
-        {
-            VUI3MetaData.AddToQueue(VUI3MetaData.CLEAR_METADATA);
-            VUI3MetaData.AddToQueue(VUI3MetaData.ALL_METADATA);
-            litMessage.Text = "Added CLEAR ALL and REGENERATE to queue";
-        }
-
-        protected void StartQueue(object sender, EventArgs e)
-        {
-            runner.StartProcessQueue();
-            litQueueRunningCounter.Text = runner.Status;
-        }
-
-        protected void EndQueue(object sender, EventArgs e)
-        {
-            runner.KillProcessQueue();
-            litQueueRunningCounter.Text = runner.Status;
-        }
 
     }
 }

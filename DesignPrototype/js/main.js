@@ -574,10 +574,18 @@
       };
       jqXHR = $.getJSON("/vui/vui-xml-actions", data);
       return jqXHR.done(function(json) {
-        var n, pad, screenshot, screenshotTemplate, snap, template, ulw, w, _i, _len, _ref3;
+        var category, n, pad, payModel, screenshot, screenshotTemplate, snap, template, ulw, w, _i, _len, _ref3;
         snap = json.data.DailySnapshot;
+        payModel = snap.PayModel;
+        if (payModel !== '') {
+          payModel = payModel.replace(/,/g, ', ');
+        }
+        category = snap.Category;
+        if (category !== '') {
+          category = category.replace(/,/g, ', ');
+        }
         template = $('#vui-service-sheet-template').clone();
-        template.find('article header h1').text(snap.ServiceName).end().find('article header .intro .b-info').find('img').attr('src', snap.IconURL).end().find('table tr td[data-name="availability"]').text(snap.Availability).end().find('table tr td[data-name="pay-model"]').text(snap.PayModel).end().find('table tr td[data-name="category"]').text(snap.Category).end().end();
+        template.find('article header h1').text(snap.ServiceName).end().find('article header .intro .b-info').find('img').attr('src', snap.IconURL).end().find('table tr td[data-name="availability"]').text(snap.Availability).end().find('table tr td[data-name="pay-model"]').text(payModel).end().find('table tr td[data-name="category"]').text(category).end().end();
         if (snap.Snapshot.numScreenshots > 0) {
           template.find('article .b-stats .inner li[data-name="screenshots"]').find('span.data-point').text(snap.Snapshot.numScreenshots).end().find('span.num-devices').text(snap.Snapshot.numScreenshotDevices).end();
         } else {

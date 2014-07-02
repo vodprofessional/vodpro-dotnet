@@ -5,6 +5,7 @@ using System.Web;
 using System.Threading;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Data;
 
 namespace VUI.VUI3.classes
 {
@@ -24,6 +25,7 @@ namespace VUI.VUI3.classes
         private string status = String.Empty;
         private int sleepTime = 60000;
 
+        private bool _isrunning = false;
 
         VUI3MetaDataThread() 
         {
@@ -38,6 +40,16 @@ namespace VUI.VUI3.classes
         {
             get;
             set;
+        }
+
+        public int LastQueueItem
+        {
+            get 
+            { 
+                int item = lastQueueItem;
+                lastQueueItem = -1;
+                return item;
+            }
         }
 
         public static VUI3MetaDataThread Instance
@@ -99,7 +111,155 @@ namespace VUI.VUI3.classes
             }
         }
 
+
+        public void ProcessQueueItem(out bool keepRunning)
+        {
+            keepRunning = true;
+            try
+            {
+                // read the oldest item from the Queue
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.AppSettings["umbracoDbDSN"].ToString()))
+                {
+                    conn.Open();
+                    SqlCommand comm = new SqlCommand();
+                    comm.CommandType = System.Data.CommandType.StoredProcedure;
+                    comm.CommandText = @"vui_GetNextMetaDataQueueItem";
+                    comm.Connection = conn;
+
+                    SqlDataReader sdr = comm.ExecuteReader();
+                    // Null returned (therefore no results). Close the DB and iterate the counter
+                    if (!sdr.HasRows)
+                    {
+                        log.Info("***** MetaData Queue Empty *****");
+                        conn.Close();
+                        keepRunning = false;
+                    }
+                    // Otherwise, Do stuff and reset the counter
+                    else
+                    {
+                        DataTable dt = new DataTable();
+                        dt.Load(sdr);
+
+                        sdr.Close();
+                        sdr = null;
+
+                        foreach (DataRow sr in dt.Rows)
+                        {
+                            if (sr["Id"].GetType() == typeof(DBNull) || sr["ServiceMasterName"].GetType() == typeof(DBNull))
+                            {
+                                log.Info("***** MetaData Queue Empty *****");
+                                keepRunning = false;
+                            }
+                            else
+                            {
+
+                                int currentQueueId = (Int32)sr["Id"];
+                                string currentServiceName = (String)sr["ServiceMasterName"];
+
+                                log.Info("***** Popped From Queue: [" + currentQueueId + "] " + currentServiceName + " *****");
+
+                                string status = "";
+                                string message = "";
+                                // Publish the MetaData
+
+                                try
+                                {
+                                    if (currentServiceName.Equals(VUI3MetaData.ALL_METADATA))
+                                    {
+                                        VUI3MetaData.PublishAllServiceMetadata();
+                                        status = "X";
+                                        message = "OK";
+                                        log.Info("***** Completed metadata publish for: [" + currentQueueId + "] ALL Services!!! *****");
+                                    }
+
+                                    else if (currentServiceName.Equals(VUI3MetaData.CLEAR_METADATA))
+                                    {
+                                        VUI3MetaData.ClearAllMetadata();
+                                        status = "X";
+                                        message = "OK";
+                                        log.Info("***** Completed metadata clearout for: [" + currentQueueId + "] *****");
+                                    }
+
+                                    else
+                                    {
+                                        VUI3MetaData.PublishServiceMetadata(currentServiceName, true);
+                                        status = "X";
+                                        message = "OK";
+                                        log.Info("***** Completed metadata publish for: [" + currentQueueId + "] " + currentServiceName + " *****");
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    status = "E";
+                                    message = ex.StackTrace;
+                                    log.Error("***** Error in metadata publish for: [" + currentQueueId + "] " + currentServiceName + " *****", ex);
+                                }
+                                finally
+                                {
+                                    lastQueueItem = currentQueueId;
+                                    lastServiceMaster = currentServiceName;
+                                    lastOperation = DateTime.Now;
+
+                                    string sql = @"update vui_MetaDataQueue set Status=@status, Message=@message, ProcessDate=GetDate() where Id=@id";
+                                    comm.CommandType = System.Data.CommandType.Text;
+                                    comm.CommandText = sql;
+                                    comm.Parameters.AddWithValue("@status", status);
+                                    comm.Parameters.AddWithValue("@message", message);
+                                    comm.Parameters.AddWithValue("@id", currentQueueId);
+                                    comm.ExecuteNonQuery();
+                                }
+
+                                // Reset the counter
+                                localCounter = 0;
+                            }
+                        }
+                    }
+                    conn.Close();
+                }
+            }
+            catch (Exception innerex)
+            {
+                log.Error("***** Error in metadata publish - stopping loops *****", innerex);
+                keepRunning = false;
+                throw innerex;
+            }
+        }
+
         public void ProcessQueue()
+        {
+            if (_isrunning)
+            {
+                log.Info("***** MetaData Queue Processor Already Running *****");
+            }
+            else
+            {
+                try
+                {
+                    _isrunning = true;
+                    bool keepRunning = true;
+
+                    while (keepRunning)
+                    {
+                        log.Info("***** MetaData Queue Processor Iterating... *****");
+                        ProcessQueueItem(out keepRunning);
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    log.Error("***** Error in metadata publish *****", e);
+                }
+                finally
+                {
+                    _isrunning = false;
+                    log.Info("***** MetaData Processor Ended *****");
+                }
+            }
+        }
+
+
+
+        private void ProcessQueueThreaded()
         {
             try
             {
@@ -213,12 +373,12 @@ namespace VUI.VUI3.classes
             }
         }
 
-        public void StartProcessQueue()
+        private void StartProcessQueueThreaded()
         {
             if (runner == null)
             {
                 HttpContext ctx = HttpContext.Current;
-                runner = new Thread(new ThreadStart(() => { HttpContext.Current = ctx; ProcessQueue(); }));
+                runner = new Thread(new ThreadStart(() => { HttpContext.Current = ctx; ProcessQueueThreaded(); }));
                 runner.Priority = ThreadPriority.BelowNormal;
             }
             if (!runner.IsAlive)
@@ -229,7 +389,8 @@ namespace VUI.VUI3.classes
 
         public void KillProcessQueue()
         {
-            runner.Abort();
+            runner.Abort(); 
+            runner = null;
         }
 
     }

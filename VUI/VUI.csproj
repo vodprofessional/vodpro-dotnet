@@ -112,6 +112,7 @@
     <Content Include="email-templates\vui-email-contact-request.txt" />
     <Content Include="pages\SanitiseDB.aspx" />
     <Content Include="pages\VUIFunctions.aspx" />
+    <Content Include="pages\VUIMetaDataPopup.aspx" />
     <Content Include="pages\VUIService.aspx" />
     <Content Include="usercontrols\ajaxactions.ascx" />
     <Content Include="usercontrols\CrowdJob.ascx" />
@@ -150,6 +151,13 @@
     </Compile>
     <Compile Include="pages\VUIFunctions.aspx.designer.cs">
       <DependentUpon>VUIFunctions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\VUIMetaDataPopup.aspx.cs">
+      <DependentUpon>VUIMetaDataPopup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\VUIMetaDataPopup.aspx.designer.cs">
+      <DependentUpon>VUIMetaDataPopup.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\VUIService.aspx.cs">
       <DependentUpon>VUIService.aspx</DependentUpon>

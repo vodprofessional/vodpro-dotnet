@@ -177,6 +177,11 @@ namespace VUI.usercontrols
                 ClearDailySnapshot();
             }
 
+            if (_action.Equals(ACTION_PROCESS_QUEUE_ITEM))
+            {
+                ProcessMetaDataQueueItem();
+            }
+
         }
 
 
@@ -900,6 +905,32 @@ namespace VUI.usercontrols
         }
 
 
+        private void ProcessMetaDataQueueItem()
+        {
+            if (umbraco.BasePages.UmbracoEnsuredPage.CurrentUser != null)
+            {
+                try
+                {
+                    VUI3MetaDataThread runner = VUI3MetaDataThread.Instance;
+                    bool keeprunning = true;
+                    runner.ProcessQueueItem(out keeprunning);
+                    int lastitem = runner.LastQueueItem;
+                    Response.Write(@"{ ""response"":""valid"",""data"": { ""keeprunning"":""" + keeprunning + @""", ""lastitem"":""" + lastitem + @""" } }");
+                }
+                catch (Exception ex)
+                {
+                    Response.Write(@"{ ""response"":""invalid"",""data"":""error"" }");
+                } 
+            
+            }
+            else
+            {
+                Response.Write(@"{ ""response"":""invalid"",""data"":""Not logged in"" }");
+            }
+        }
+
+
+
         private void GetServiceListByName()
         {
             string serviceName = Request["service"];
@@ -989,5 +1020,6 @@ namespace VUI.usercontrols
 
         const string ACTION_DAILY_SNAPSHOT = "dailysnap";
         const string ACTION_CLEAR_DAILY_SNAPSHOT = "cleardailysnap";
+        const string ACTION_PROCESS_QUEUE_ITEM = "processq";
     }
 }

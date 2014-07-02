@@ -9,6 +9,8 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.XPath;
+using umbraco.cms.businesslogic.web;
+using umbraco.NodeFactory;
 
 namespace VUI.VUI3.classes
 {
@@ -234,16 +236,18 @@ namespace VUI.VUI3.classes
         {
             _currentService = ServiceMasterName;
 
-            DynamicNode root = new DynamicNode(Utility.GetConst("VUI2_rootnodeid"));
-
+            DynamicNode root = new DynamicNode(ConfigurationManager.AppSettings["VUI2_rootnodeid"]);
+            log.Debug("****** Got dynamic root node");
             // First regenerate the Device and Platform Metadata
             
 
             DynamicNode smRoot = new DynamicNode(ConfigurationManager.AppSettings["VUI2_ServiceMastersRoot"]);
+            log.Debug("****** Got ServiceMaster root node");
 
             #region Platform/Device MetaData
 
             List<DynamicNode> platforms = root.Descendants(Utility.GetConst("VUi2_platformtype")).Items.ToList();
+            log.Debug("****** Got Platforms root node");
 
             List<DynamicNode> services = new List<DynamicNode>(); 
 
