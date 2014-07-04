@@ -741,6 +741,11 @@
         }
       });
     }
+    if ($('.article-main a.lightbox').not('.vp-nolightbox').length > 0) {
+      $('.article-main a.lightbox').not('.vp-nolightbox').each(function(index, e) {
+        return $(e).removeClass('lightbox').attr('data-lightbox', 'defaultgroup').attr('title', 'Open in lightbox');
+      });
+    }
     if ($('#vui-service-sheet').length > 0) {
       snap = new VUIDailySnapshot();
       snap.register();

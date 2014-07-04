@@ -515,7 +515,11 @@ $(document).ready () ->
       if $(e).parents('a, .vp-nolightbox').length is 0
         imgurl = $(e).attr('src')
         $(e).wrap("<a href=\"#{imgurl}\" data-lightbox=\"defaultgroup\" title=\"Open in lightbox\"></a>")
-
+        
+  if $('.article-main a.lightbox').not('.vp-nolightbox').length > 0
+    $('.article-main a.lightbox').not('.vp-nolightbox').each (index, e) ->    
+      $(e).removeClass('lightbox').attr('data-lightbox','defaultgroup').attr('title','Open in lightbox')
+        
   if $('#vui-service-sheet').length > 0
     snap = new VUIDailySnapshot()
     snap.register()
