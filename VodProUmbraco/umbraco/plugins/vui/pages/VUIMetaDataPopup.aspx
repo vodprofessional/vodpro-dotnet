@@ -40,7 +40,6 @@
     </p>
     
     <asp:Literal runat="server" ID="litQueuePast" />
-    
 
     </div>
     </form>  
@@ -114,7 +113,6 @@
                     window.location = window.location.href.replace(window.location.hash, '').split('?')[0] + '?r=' + Math.random() + window.location.hash;
                 }
             }
-
         });
     </script>
 </body>
