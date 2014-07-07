@@ -532,7 +532,8 @@
                   </li>
                 </span>
       
-                  if (!matrix.HasBenchmarksForPlatform("Connected TV-Samsung") && !matrix.HasBenchmarksForPlatform("Connected TV-Sony") && !matrix.HasBenchmarksForPlatform("Connected TV-LG"))
+                  if (!matrix.HasBenchmarksForPlatform("Connected TV-Samsung") && !matrix.HasBenchmarksForPlatform("Connected TV-Sony")
+                      && !matrix.HasBenchmarksForPlatform("Connected TV-LG") && !matrix.HasBenchmarksForPlatform("Connected TV-Panasonic") && !matrix.HasBenchmarksForPlatform("Connected TV-Philips"))
                   {
                       uberDisabled = "_platform-disabled";
                   }
@@ -542,6 +543,9 @@
                     <h3>TV</h3>
                       <img src="/_inc/images/new-platform/platform-tv@(uberDisabled).png" class="platform-image" />
                   </span>
+                  
+                  <span class="devices scrolling scroll-ctrl" data-group="connectedtv-group">
+                    <div class="scroller"> 
                      @if (!matrix.HasBenchmarksForPlatform("Connected TV-Samsung"))
                      {
                          strDisabled = "_device-disabled";
@@ -568,10 +572,34 @@
                     <li title="LG">
                       <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-lg@(strDisabled).png" alt=""><h3>LG</h3></a>
                     </li>
+                    @if (!matrix.HasBenchmarksForPlatform("Connected TV-Panasonic"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                    <li title="Panasonic">
+                      <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-panasonic@(strDisabled).png" alt=""><h3>Panasonic</h3></a>
+                    </li>
+                    @if (!matrix.HasBenchmarksForPlatform("Connected TV-LG"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                    <li title="Philips">
+                      <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-philipstv@(strDisabled).png" alt=""><h3>Philips</h3></a>
+                    </li>
+                    </div>
+                  </span>
                 </span>   
                   
       
-                  if (!matrix.HasBenchmarksForPlatform("STB-Apple TV") && !matrix.HasBenchmarksForPlatform("STB-Now TV") && !matrix.HasBenchmarksForPlatform("STB-Freesat") && !matrix.HasBenchmarksForPlatform("STB-Roku"))
+                  if (!matrix.HasBenchmarksForPlatform("STB-Now TV") && !matrix.HasBenchmarksForPlatform("STB-Freesat") && !matrix.HasBenchmarksForPlatform("STB-Roku")
+                      && !matrix.HasBenchmarksForPlatform("STB-Google TV") && !matrix.HasBenchmarksForPlatform("STB-Apple TV") && !matrix.HasBenchmarksForPlatform("STB-Amazon Fire TV") 
+                      && !matrix.HasBenchmarksForPlatform("STB-Sky") && !matrix.HasBenchmarksForPlatform("STB-Virgin") && !matrix.HasBenchmarksForPlatform("STB-YouView")
+                      && !matrix.HasBenchmarksForPlatform("STB-AT&T U-Verse") && !matrix.HasBenchmarksForPlatform("STB-Charter") && !matrix.HasBenchmarksForPlatform("STB-Cox")
+                      && !matrix.HasBenchmarksForPlatform("STB-Direct TV") && !matrix.HasBenchmarksForPlatform("STB-Dish") && !matrix.HasBenchmarksForPlatform("STB-Optimum")
+                      && !matrix.HasBenchmarksForPlatform("STB-Sudden Link") && !matrix.HasBenchmarksForPlatform("STB-TiVo") && !matrix.HasBenchmarksForPlatform("STB-Verizon FiOS")
+                      && !matrix.HasBenchmarksForPlatform("STB-Xfinity") )
                   {
                       uberDisabled = "_platform-disabled";
                   }
@@ -601,6 +629,16 @@
                     <li title="Apple TV">
                       <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-apple@(strDisabled).png" alt=""><h3>Apple TV</h3></a>
                     </li> 
+                    
+                     @if (!matrix.HasBenchmarksForPlatform("STB-Google TV"))
+                     {
+                         strDisabled = "_device-disabled";
+                     }
+                     else { strDisabled = ""; }
+                    <li title="Google TV">
+                      <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-googletv@(strDisabled).png" alt=""><h3>Google TV</h3></a>
+                    </li> 
+
                      @if (!matrix.HasBenchmarksForPlatform("STB-Freesat"))
                      {
                          strDisabled = "_device-disabled";
@@ -895,16 +933,24 @@
                 @DrawBenchmarkingPane(matrix, "Connected TV-LG")
                 </div>
             </div>
-            <!--
+            
             <div class="pane">
                 <div class="inner">
                 <p>
-                    Based on the most recent benchmarks of @@matrix.GetScores("About", "Connected TV-Panasonic").Max services on Sony Connected TV
+                    Based on the most recent benchmarks of @@matrix.GetScores("About", "Connected TV-Panasonic").Max services on Panasonic SmartViera TV
                 </p>
-                @* @DrawBenchmarkingPane(matrix, "Connected TV-Panasonic", 10985, 10798) *@
+                @DrawBenchmarkingPane(matrix, "Connected TV-Panasonic")
                 </div>
             </div>
-            -->
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @@matrix.GetScores("About", "Connected TV-Philips").Max services on Philips SmartTV
+                </p>
+                @DrawBenchmarkingPane(matrix, "Connected TV-Philips")
+                </div>
+            </div>
+            
             <div class="pane">
                 <div class="inner">
                 <p>
@@ -919,6 +965,14 @@
                     Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Apple TV").Max services on Apple TV
                 </p>
                 @DrawBenchmarkingPane(matrix, "STB-Apple TV")
+                </div>
+            </div>
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "STB-Google TV").Max services on Google TV
+                </p>
+                @DrawBenchmarkingPane(matrix, "STB-Google TV")
                 </div>
             </div>
             <div class="pane">

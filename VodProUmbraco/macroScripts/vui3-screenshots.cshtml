@@ -196,7 +196,7 @@
                     <h3>TV</h3>
                       <img src="/_inc/images/new-platform/platform-tv.png" class="platform-image" />
                   </span>
-                  <span class="devices scrolling no-scroll-ctrl" data-group="connectedtv-group">
+                  <span class="devices scrolling scroll-ctrl" data-group="connectedtv-group">
                    <div class="scroller">
                     <li title="Samsung">
                       <a href="#" class=""><img src="/_inc/images/new-platform/device-smart.png" alt=""><h3>Samsung</h3></a>
@@ -207,10 +207,13 @@
                     <li title="LG">
                       <a href="#" class=""><img src="/_inc/images/new-platform/device-lg.png" alt=""><h3>LG</h3></a>
                     </li>
-                    <!--
                     <li title="Panasonic">
                       <a href="#" class=""><img src="/_inc/images/new-platform/device-panasonic.png" alt=""><h3>Panasonic</h3></a>
-                    </li>-->
+                    </li>
+                    <li title="Philips">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-philipstv.png" alt=""><h3>Philips</h3></a>
+                    </li>
+
                   </div>
                  </span>
                 </span>   
@@ -227,6 +230,9 @@
                     </li> 
                     <li title="Apple TV">
                       <a href="#" class=""><img src="/_inc/images/new-platform/device-apple.png" alt=""><h3>Apple TV</h3></a>
+                    </li> 
+                    <li title="Google TV">
+                      <a href="#" class=""><img src="/_inc/images/new-platform/device-googletv.png" alt=""><h3>Google TV</h3></a>
                     </li> 
                     <li title="Freesat">
                       <a href="#" class=""><img src="/_inc/images/new-platform/device-freesat.png" alt=""><h3>Freesat</h3></a>
@@ -348,18 +354,20 @@
                             <li data-devicegroup="connectedtv" class="device">@DrawMatrixLink(service, new string[] { "Connected TV-Samsung" }, IsFullMode)</li>
                             <li data-devicegroup="connectedtv" class="device">@DrawMatrixLink(service, new string[] { "Connected TV-Sony" }, IsFullMode)</li>
                             <li data-devicegroup="connectedtv" class="device">@DrawMatrixLink(service, new string[] { "Connected TV-LG" }, IsFullMode)</li>
-                            <!-- <li data-devicegroup="connectedtv" class="device">@@DrawMatrixLink(service, new string[] { "Connected TV-Panasonic" }, IsFullMode)</li> -->
+                            <li data-devicegroup="connectedtv" class="device">@DrawMatrixLink(service, new string[] { "Connected TV-Panasonic" }, IsFullMode)</li>
+                            <li data-devicegroup="connectedtv" class="device">@DrawMatrixLink(service, new string[] { "Connected TV-Philips" }, IsFullMode)</li>
                           </div>
                         </div>
                         
                         <div class="matrix-scroll-group ">
                           <div class="stb-group scroller" data-group="stb-group">
                             <li data-devicegroup="stb" class="overall">@DrawMatrixLink(service, new string[] { 
-                                                                      "STB-Amazon Fire TV", "STB-Apple TV", "STB-Freesat", "STB-Now TV", "STB-Roku", "STB-Virgin", "STB-Sky",
+                                                                      "STB-Amazon Fire TV", "STB-Apple TV", "STB-Google TV", "STB-Freesat", "STB-Now TV", "STB-Roku", "STB-Virgin", "STB-Sky",
                                                                       "STB-YouView", "STB-AT&T U-Verse", "STB-Charter", "STB-Cox", "STB-Direct TV",
                                                                       "STB-Dish", "STB-Optimum", "STB-TiVo", "STB-Verizon FiOS", "STB-Xfinity"}, IsFullMode, true)</li>
                             <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Amazon Fire TV" }, IsFullMode)</li>
                             <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Apple TV" }, IsFullMode)</li>
+                            <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Google TV" }, IsFullMode)</li>
                             <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Freesat" }, IsFullMode)</li>
                             <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Now TV" }, IsFullMode)</li>
                             <li data-devicegroup="stb" class="device">@DrawMatrixLink(service, new string[] { "STB-Roku" }, IsFullMode)</li>

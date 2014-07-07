@@ -873,7 +873,8 @@
                 </span>
       
                     if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Samsung") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Sony")
-                        && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "LG") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Panasonic"))
+                        && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "LG") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Panasonic")
+                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Philips"))
                     {
                         uberDisabled = "_platform-disabled";
                     }
@@ -885,8 +886,8 @@
                   </span>
                   
                   
-                  <!--<span class="devices scrolling scroll-ctrl" data-group="connectedtv-group">
-                    <div class="scroller">-->
+                <span class="devices scrolling scroll-ctrl" data-group="connectedtv-group">
+                    <div class="scroller">
                          
                          @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Samsung"))
                          {
@@ -914,20 +915,29 @@
                         <li title="LG">
                           <a href="#" class="@strDisabled" data-device="connectedtv-lg"><img src="/_inc/images/new-platform/device-lg@(strDisabled).png" alt=""><h3>LG</h3></a>
                         </li>
-
+                        
                         @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Panasonic"))
                         {
                             strDisabled = "_device-disabled";
                         }
                         else { strDisabled = ""; }
-                        <!-- <li title="Panasonic">
-                          <a href="#" class="@strDisabled" data-device="connectedtv-sony"><img src="/_inc/images/new-platform/device-panasonic@(strDisabled).png" alt=""><h3>LG</h3></a>
-                        </li> -->
-                    <!--</div>
-                  </span>-->
+
+                        <li title="Panasonic">
+                          <a href="#" class="@strDisabled" data-device="connectedtv-panasonic"><img src="/_inc/images/new-platform/device-panasonic@(strDisabled).png" alt=""><h3>Panasonic</h3></a>
+                        </li>
+                        @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Panasonic"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                        <li title="Panasonic">
+                          <a href="#" class="@strDisabled" data-device="connectedtv-philips"><img src="/_inc/images/new-platform/device-philipstv@(strDisabled).png" alt=""><h3>Philips</h3></a>
+                        </li>
+                    </div>
+                  </span>
                 </span>   
                   
-                        if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Apple TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Now TV")
+        if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Apple TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Now TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Google TV")
                              && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Roku") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Freesat")
                                          && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Sky") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Virgin")
                                          && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "YouView") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "AT&T U-Verse")
@@ -949,7 +959,7 @@
                   
                   <span class="devices scrolling scroll-ctrl" data-group="stb-group">
                     <div class="scroller">
-                         @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "AMazon Fire TV"))
+                         @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Amazon Fire TV"))
                          {
                              strDisabled = "_device-disabled";
                          }
@@ -965,6 +975,15 @@
                          else { strDisabled = ""; }
                         <li title="Apple TV">
                           <a href="#" class="@strDisabled" data-device="stb-appletv"><img src="/_inc/images/new-platform/device-apple@(strDisabled).png" alt=""><h3>Apple TV</h3></a>
+                        </li> 
+
+                         @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Google TV"))
+                         {
+                             strDisabled = "_device-disabled";
+                         }
+                         else { strDisabled = ""; }
+                        <li title="Google TV">
+                          <a href="#" class="@strDisabled" data-device="stb-googletv"><img src="/_inc/images/new-platform/device-googletv@(strDisabled).png" alt=""><h3>Google TV</h3></a>
                         </li> 
 
                         @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Freesat"))
@@ -1169,9 +1188,11 @@
                 @WriteAnalysis(@Service, "Connected TV", "Samsung")
                 @WriteAnalysis(@Service, "Connected TV", "Sony")
                 @WriteAnalysis(@Service, "Connected TV", "LG")
-                <!--WriteAnalysis(@Service, "Connected TV", "Panasonic")-->
+                @WriteAnalysis(@Service, "Connected TV", "Panasonic")
+                @WriteAnalysis(@Service, "Connected TV", "Philips")
                 @WriteAnalysis(@Service, "STB", "Amazon Fire TV")
                 @WriteAnalysis(@Service, "STB", "Apple TV")
+                @WriteAnalysis(@Service, "STB", "Google TV")
                 @WriteAnalysis(@Service, "STB", "Freesat")
                 @WriteAnalysis(@Service, "STB", "Now TV")
                 @WriteAnalysis(@Service, "STB", "Roku")
@@ -1263,11 +1284,11 @@
                 </span>
                   
                   
-                           if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "iPhone") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "Android") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "Windows"))
-                           {
-                               uberDisabled = "_platform-disabled";
-                           }
-                           else { uberDisabled = ""; }
+                      if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "iPhone") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "Android") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "Windows"))
+                      {
+                          uberDisabled = "_platform-disabled";
+                      }
+                      else { uberDisabled = ""; }
                 <span class="uber-tab @(uberDisabled)" data-devicegroup="smartphone" title="Smartphones">   
                   
                   <span class="title">
@@ -1302,7 +1323,9 @@
                   </li>
                 </span>
       
-                    if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "Samsung") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "Sony"))
+                    if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "Samsung") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "Sony")
+                         && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "LG") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "Panasonic")
+                         && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "Philips"))
                     {
                         uberDisabled = "_platform-disabled";
                     }
@@ -1313,8 +1336,8 @@
                       <img src="/_inc/images/new-platform/platform-tv@(uberDisabled).png" class="platform-image" />
                   </span>
                   
-                  <!--<span class="devices scrolling scroll-ctrl" data-group="connectedtv-group">
-                    <div class="scroller"> --> 
+                  <span class="devices scrolling scroll-ctrl" data-group="connectedtv-group">
+                    <div class="scroller"> 
                         @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "Samsung"))
                         {
                             strDisabled = "_device-disabled";
@@ -1339,21 +1362,37 @@
                         <li title="LG">
                           <a href="#" class="@strDisabled" data-device="connectedtv-lg"><img src="/_inc/images/new-platform/device-lg@(strDisabled).png" alt=""><h3>LG</h3></a>
                         </li>
-                     <!--</div>
-                   </span>-->
+                        @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "LG"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                        <li title="LG">
+                          <a href="#" class="@strDisabled" data-device="connectedtv-panasonic"><img src="/_inc/images/new-platform/device-panasonic@(strDisabled).png" alt=""><h3>Panasonic</h3></a>
+                        </li>
+                        @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "LG"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                        <li title="Philips">
+                          <a href="#" class="@strDisabled" data-device="connectedtv-philips"><img src="/_inc/images/new-platform/device-philipstv@(strDisabled).png" alt=""><h3>Philips</h3></a>
+                        </li>
+                     </div>
+                   </span>
 
                 </span>   
                   
       
-        if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Amazon Fire TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Apple TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Now TV")
-                             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Roku") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Freesat")
-                             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Sky") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Virgin")
-                             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "YouView") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "ATT U-Verse")
-                             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Charter") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Cox")
-                             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Direct TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Dish")
-                             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Optimum") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Sudden Link")
-                             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Verizon FiOS") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Xfinity")
-                             && !Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "TiVo"))
+                        if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Amazon Fire TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Apple TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Now TV")
+                                             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Roku") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Freesat")
+                                             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Sky") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Virgin")
+                                             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "YouView") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "ATT U-Verse")
+                                             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Charter") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Cox")
+                                             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Direct TV") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Dish")
+                                             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Optimum") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Sudden Link")
+                                             && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Verizon FiOS") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("STB", "Xfinity")
+                                             && !Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "TiVo") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Google TV"))
                         {
                             uberDisabled = "_platform-disabled";
                         }
@@ -1375,14 +1414,22 @@
                         <li title="Amazon Fire TV">
                           <a href="#" class="@strDisabled" data-device="stb-appletv"><img src="/_inc/images/new-platform/device-amazonfire@(strDisabled).png" alt=""><h3>Amazon Fire TV</h3></a>
                         </li> 
-
+                        
                         @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Apple TV"))
-                         {
-                             strDisabled = "_device-disabled";
-                         }
-                         else { strDisabled = ""; }
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
                         <li title="Apple TV">
                           <a href="#" class="@strDisabled" data-device="stb-appletv"><img src="/_inc/images/new-platform/device-apple@(strDisabled).png" alt=""><h3>Apple TV</h3></a>
+                        </li> 
+                        @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Google TV"))
+                        {
+                            strDisabled = "_device-disabled";
+                        }
+                        else { strDisabled = ""; }
+                        <li title="Google TV">
+                          <a href="#" class="@strDisabled" data-device="stb-googletv"><img src="/_inc/images/new-platform/device-googletv@(strDisabled).png" alt=""><h3>Google TV</h3></a>
                         </li> 
                         @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("STB", "Freesat"))
                         {
@@ -1586,9 +1633,11 @@
                 @WriteBenchmark(@Service, "Connected TV", "Samsung")
                 @WriteBenchmark(@Service, "Connected TV", "Sony")
                 @WriteBenchmark(@Service, "Connected TV", "LG")
-                <!-- WriteBenchmark(@@Service, "Connected TV", "Panasonic") -->
+                @WriteBenchmark(@Service, "Connected TV", "Panasonic")
+                @WriteBenchmark(@Service, "Connected TV", "Philips")
                 @WriteBenchmark(@Service, "STB", "Amazon Fire TV")
                 @WriteBenchmark(@Service, "STB", "Apple TV")
+                @WriteBenchmark(@Service, "STB", "Google TV")
                 @WriteBenchmark(@Service, "STB", "Freesat")
                 @WriteBenchmark(@Service, "STB", "Now TV")
                 @WriteBenchmark(@Service, "STB", "Roku")

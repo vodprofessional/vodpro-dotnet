@@ -31,10 +31,10 @@ namespace VUI.VUI3.classes
             _MatrixItems = new List<VUI3BenchmarkMatrixItem>();
 
             string[] deviceTypes = { "TabletAndroid", "SmartphoneAndroid", "TabletiPad", "SmartphoneiPhone", "SmartphoneWindows", "TabletWindows", "Web", 
-                                       "Connected TV-Samsung", "Connected TV-Sony", "Connected TV-LG", "Connected TV-Panasonic", "Games Consoles-XBox", 
+                                       "Connected TV-Samsung", "Connected TV-Sony", "Connected TV-LG", "Connected TV-Philips", "Connected TV-Panasonic", "Games Consoles-XBox", 
                                        "Games Consoles-Playstation", 
                                        "STB-Amazon Fire TV", "STB-Apple TV", "STB-Freesat", "STB-Roku", "STB-Now TV", 
-                                       "STB-Sky", "STB-Virgin", "STB-YouView",
+                                       "STB-Sky", "STB-Virgin", "STB-YouView", "STB-Google TV",
                                        "STB-AT&T U-Verse", "STB-Cox", "STB-Charter", "STB-Direct TV", "STB-Dish",
                                        "STB-Optimum", "STB-Sudden Link", "STB-Verizon FiOS", "STB-Xfinity", "STB-TiVo",                                       
                                        "Overall" };
