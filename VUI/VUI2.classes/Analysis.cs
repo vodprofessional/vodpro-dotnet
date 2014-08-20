@@ -10,6 +10,8 @@ namespace VUI.VUI2.classes
 {
     public class Analysis
     {
+        private static log4net.ILog log = log4net.LogManager.GetLogger(typeof(Analysis));
+        
         private int _nodeId;
         private DynamicNode _node;
         private Boolean _imagesSet = false;
@@ -32,7 +34,15 @@ namespace VUI.VUI2.classes
 
         private void Init()
         {
-            Date = DateTime.Parse(Node.GetProperty("analysisDate").Value);
+            try
+            {
+                Date = DateTime.Parse(Node.GetProperty("analysisDate").Value);
+            }
+            catch (Exception ex)
+            {
+                log.Error("No analysisDate set for [" + _nodeId + "], using create date");
+                Date = Node.CreateDate;
+            }
             Screenshots = new List<VUIImage>();
         }
 

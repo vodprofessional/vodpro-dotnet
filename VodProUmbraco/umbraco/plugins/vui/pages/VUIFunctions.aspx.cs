@@ -9,18 +9,103 @@ using System.Configuration;
 using System.Data;
 using VUI.VUI3.classes;
 using umbraco.MacroEngines;
+using umbraco.cms.businesslogic.web;
 
 namespace VUI.pages
 {
     public partial class VUIFunctions : umbraco.BasePages.UmbracoEnsuredPage
     {
+        private static log4net.ILog log = log4net.LogManager.GetLogger(typeof(VUIFunctions));
 
         protected void Page_Load(object sender, EventArgs e)
         {
             VUIAdminsAndUsers();
 
+
+            
+            if (!Page.IsPostBack)
+            {
+                RefreshServiceMasterList();
+            }
         }
 
+        protected void RefreshServiceMasterList()
+        {
+            try
+            {
+
+                DynamicNode smRoot = new DynamicNode(ConfigurationManager.AppSettings["VUI2_ServiceMastersRoot"]);
+                List<DynamicNode> serviceMasters = smRoot.Descendants("VUI2ServiceMaster").Items.OrderBy(n => n.Name).ToList();
+
+                foreach (DynamicNode n in serviceMasters)
+                {
+                    lstServices.Items.Add(new ListItem(n.Name, n.Name));
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error making service list", ex);
+            }
+        }
+
+        protected void UpdateServiceMasterName(object sender, EventArgs e)
+        {
+            string existingName = lstServices.SelectedValue;
+            string newName = txtNewServiceName.Text;
+
+            // Update Services
+            DynamicNode vui_root = new DynamicNode(ConfigurationManager.AppSettings["VUI2_rootnodeid"]);
+            List<DynamicNode> services = vui_root.Descendants("VUI2Service").Items.Where(n => n.Name.Equals(existingName)).ToList();
+
+            foreach (DynamicNode svc in services)
+            {
+                Document svcDoc = new Document(svc.Id);
+                svcDoc.Text = newName;
+                svcDoc.Save();
+                if (svcDoc.Published)
+                {
+                    svcDoc.Publish(umbraco.BasePages.UmbracoEnsuredPage.CurrentUser);
+                }
+            }
+
+            // Update ServiceMaster
+            DynamicNode smRoot = new DynamicNode(ConfigurationManager.AppSettings["VUI2_ServiceMastersRoot"]);
+            List<DynamicNode> serviceMasters = smRoot.Descendants("VUI2ServiceMaster").Items.Where(n => n.Name.Equals(existingName)).ToList();
+
+            foreach (DynamicNode svc in serviceMasters)
+            {
+                Document svcDoc = new Document(svc.Id);
+                svcDoc.Text = newName;
+                svcDoc.getProperty("serviceName").Value = newName;
+                svcDoc.Save();
+                if (svcDoc.Published)
+                {
+                    svcDoc.Publish(umbraco.BasePages.UmbracoEnsuredPage.CurrentUser);
+                    string s = umbraco.library.NiceUrl(svc.Id);
+                    umbraco.library.UpdateDocumentCache(svc.Id);
+                    s = umbraco.library.NiceUrl(svc.Id);
+                }
+            }
+
+            umbraco.library.RefreshContent();
+
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.AppSettings["umbracoDbDSN"].ToString()))
+            {
+                conn.Open();
+                SqlCommand comm = new SqlCommand();
+                comm.Connection = conn;
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.CommandText = "vui_ChangeServiceMasterName";
+                comm.Parameters.AddWithValue("@ServiceMasterName", existingName);
+                comm.Parameters.AddWithValue("@ServiceMasterNameNew", newName);
+                comm.ExecuteNonQuery();
+                conn.Close();
+            }
+
+            txtNewServiceName.Text = String.Empty;
+            RefreshServiceMasterList();
+
+        }
 
         protected void VUIAdminsAndUsers()
         {

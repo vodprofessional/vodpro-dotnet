@@ -14,6 +14,11 @@
 
         <input type="button" id="openMetaDataWindow" value="Open Metadata Publishing Window" />
 
+        <h2>Update Service Master Name</h2>
+        Service: <asp:ListBox ID="lstServices" runat="server" Rows="1" /> 
+        New Service Name:<asp:TextBox ID="txtNewServiceName" runat="server" />
+        <asp:Button runat="server" ID="btnUpdateServiceMasterName" OnClick="UpdateServiceMasterName" Text="Commit Changes" />
+
         <h2>VUI Users</h2>
         <asp:Literal ID="litVUIUsers" runat="server" />
 
