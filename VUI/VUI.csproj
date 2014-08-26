@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -37,19 +37,19 @@
       <HintPath>..\lib\AreYouAHuman.dll</HintPath>
     </Reference>
     <Reference Include="businesslogic">
-      <HintPath>..\VodProUmbraco\bin\businesslogic.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\businesslogic.dll</HintPath>
     </Reference>
     <Reference Include="cms">
-      <HintPath>..\VodProUmbraco\bin\cms.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\cms.dll</HintPath>
     </Reference>
     <Reference Include="controls">
-      <HintPath>..\VodProUmbraco\bin\controls.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\controls.dll</HintPath>
     </Reference>
     <Reference Include="Examine">
-      <HintPath>..\VodProUmbraco\bin\Examine.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\Examine.dll</HintPath>
     </Reference>
     <Reference Include="interfaces">
-      <HintPath>..\VodProUmbraco\bin\interfaces.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\interfaces.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\lib\log4net.dll</HintPath>
@@ -80,31 +80,31 @@
       <HintPath>..\VodProUmbraco\lib\uComponents.Core.dll</HintPath>
     </Reference>
     <Reference Include="umbraco">
-      <HintPath>..\VodProUmbraco\bin\umbraco.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\umbraco.dll</HintPath>
     </Reference>
     <Reference Include="umbraco.DataLayer">
-      <HintPath>..\VodProUmbraco\bin\umbraco.DataLayer.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\umbraco.DataLayer.dll</HintPath>
     </Reference>
     <Reference Include="umbraco.editorControls">
-      <HintPath>..\VodProUmbraco\bin\umbraco.editorControls.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\umbraco.editorControls.dll</HintPath>
     </Reference>
     <Reference Include="umbraco.Linq.Core">
-      <HintPath>..\VodProUmbraco\bin\umbraco.Linq.Core.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\umbraco.Linq.Core.dll</HintPath>
     </Reference>
     <Reference Include="umbraco.MacroEngines">
-      <HintPath>..\VodProUmbraco\bin\umbraco.MacroEngines.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\umbraco.MacroEngines.dll</HintPath>
     </Reference>
     <Reference Include="umbraco.macroRenderings">
-      <HintPath>..\VodProUmbraco\bin\umbraco.macroRenderings.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\umbraco.macroRenderings.dll</HintPath>
     </Reference>
     <Reference Include="umbraco.providers">
-      <HintPath>..\VodProUmbraco\bin\umbraco.providers.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\umbraco.providers.dll</HintPath>
     </Reference>
     <Reference Include="umbraco.XmlSerializers">
-      <HintPath>..\VodProUmbraco\bin\umbraco.XmlSerializers.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\umbraco.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="UmbracoExamine">
-      <HintPath>..\VodProUmbraco\bin\UmbracoExamine.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\UmbracoExamine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -361,6 +361,7 @@
   <PropertyGroup>
     <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)Tests\bin"
 copy "$(TargetPath)" "$(SolutionDir)VodProUmbraco\bin"
+xcopy "$(TargetDir)Newtonsoft.*" "$(SolutionDir)VodProUmbraco\bin" /s /i /y
 xcopy "$(ProjectDir)usercontrols" "$(SolutionDir)VodProUmbraco\umbraco\plugins\vui\usercontrols\" /s /i /y
 xcopy "$(ProjectDir)pages" "$(SolutionDir)VodProUmbraco\umbraco\plugins\vui\pages\" /s /i /y
 xcopy "$(ProjectDir)handlers" "$(SolutionDir)VodProUmbraco\handlers\" /s /i /y
