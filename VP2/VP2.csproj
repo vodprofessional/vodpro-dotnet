@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -35,30 +35,30 @@
   <ItemGroup>
     <Reference Include="businesslogic, Version=1.0.4086.28097, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\VodProUmbraco\bin\businesslogic.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\businesslogic.dll</HintPath>
     </Reference>
     <Reference Include="cms, Version=1.0.4089.21636, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\VodProUmbraco\bin\cms.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\cms.dll</HintPath>
     </Reference>
     <Reference Include="Examine, Version=0.10.0.292, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\VodProUmbraco\bin\Examine.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\Examine.dll</HintPath>
     </Reference>
     <Reference Include="interfaces, Version=1.0.4085.20549, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\VodProUmbraco\bin\interfaces.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\interfaces.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\lib\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net, Version=2.9.2.2, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\VodProUmbraco\bin\Lucene.Net.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\Lucene.Net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\VodProUmbraco\bin\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -73,11 +73,11 @@
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\VodProUmbraco\bin\System.Web.WebPages.Deployment.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\System.Web.WebPages.Deployment.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\VodProUmbraco\bin\System.Web.WebPages.Razor.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -87,31 +87,31 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="uComponents.Core">
-      <HintPath>..\VodProUmbraco\bin\uComponents.Core.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\uComponents.Core.dll</HintPath>
     </Reference>
     <Reference Include="umbraco">
-      <HintPath>..\VodProUmbraco\bin\umbraco.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\umbraco.dll</HintPath>
     </Reference>
     <Reference Include="umbraco.editorControls">
-      <HintPath>..\VodProUmbraco\bin\umbraco.editorControls.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\umbraco.editorControls.dll</HintPath>
     </Reference>
     <Reference Include="umbraco.Linq.Core">
-      <HintPath>..\VodProUmbraco\bin\umbraco.Linq.Core.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\umbraco.Linq.Core.dll</HintPath>
     </Reference>
     <Reference Include="umbraco.MacroEngines">
-      <HintPath>..\VodProUmbraco\bin\umbraco.MacroEngines.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\umbraco.MacroEngines.dll</HintPath>
     </Reference>
     <Reference Include="umbraco.macroRenderings">
-      <HintPath>..\VodProUmbraco\bin\umbraco.macroRenderings.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\umbraco.macroRenderings.dll</HintPath>
     </Reference>
     <Reference Include="umbraco.providers">
-      <HintPath>..\VodProUmbraco\bin\umbraco.providers.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\umbraco.providers.dll</HintPath>
     </Reference>
     <Reference Include="umbraco.XmlSerializers">
-      <HintPath>..\VodProUmbraco\bin\umbraco.XmlSerializers.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\umbraco.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="UmbracoExamine">
-      <HintPath>..\VodProUmbraco\bin\UmbracoExamine.dll</HintPath>
+      <HintPath>..\VodProUmbraco\lib\UmbracoExamine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
