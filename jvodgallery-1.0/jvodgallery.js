@@ -87,7 +87,7 @@
     JVODGallery.prototype.init = function () {
         this.domElement = $(
             '<div id="jvodgallery-' + this.id + '" data-id="' + this.id + '" class="jvodgallery-main">' +
-            '   <div class="jvodgallery-dim"></div>' +
+            '   <div class="jvodgallery-dim"><div id="jvodgallery-no-image">We found no images for those filters</div></div>' +
             '</div>').appendTo('body');
         Utility.addClickHandler(this.element, this.showGallery, this);
 
@@ -487,12 +487,15 @@
 
     //
     PreviewContainer.prototype.scrollActiveImageToView = function ( ) {
-        var p = this.previewImages[this.container.imageContainer.actualImage].getPosition();
-        if (p.left <= this.displacement) {
-            this.previewLeftPager.moveLeft( this.displacement - p.left );
-        }
-        if (p.right > this.displacement + this.imageContainer.width()) {
-            this.previewRightPager.moveRight( p.right - (this.displacement + this.imageContainer.width()) );
+        var img = this.previewImages[this.container.imageContainer.actualImage];
+        if ('undefined' != typeof img) {
+            var p = img.getPosition();
+            if (p.left <= this.displacement) {
+                this.previewLeftPager.moveLeft( this.displacement - p.left );
+            }
+            if (p.right > this.displacement + this.imageContainer.width()) {
+                this.previewRightPager.moveRight( p.right - (this.displacement + this.imageContainer.width()) );
+            }
         }
     };
 
@@ -791,6 +794,7 @@
 
                 if ('function' == typeof $()['ddslick']) {
                     this.filterDomElements[filter].ddslick({
+                        width: '190px',
                         onSelected: $.proxy(function (selectedItem) {
                                         var fi = selectedItem.original[0].id.substring(14);
                                         this.filterDomElements[fi].val = function() {
@@ -838,9 +842,6 @@
         var value = this.filterDomElements[filter].val();
 
         this.activeFilters[filter] = this.filterSettings[filter][value];
-        //console.log(filter);
-        //console.log(value);
-        //console.log(this.filterSettings[filter]);
         this.hiddenImages = {};
         for (var imgId in this.imageCache) {
             if (this.imageCache.hasOwnProperty(imgId)) {
@@ -866,11 +867,14 @@
 
     //
     FilterPanel.prototype.updateImageContainer = function ( ) {
+        var imgContainerEmpty = true;
+
         for (var imgId in this.hiddenImages) {
             if (this.hiddenImages.hasOwnProperty(imgId)) {
                 if (this.hiddenImages[imgId] > -1) {
                     this.container.imageContainer.images[imgId] = this.imageCache[imgId];
                     this.imageCache[imgId].show();
+                    imgContainerEmpty = false;
                 }
                 else {
                     this.imageCache[imgId].hide();
@@ -879,6 +883,10 @@
             }
         }
 
+        if (imgContainerEmpty)
+            $('#jvodgallery-no-image').show();
+        else
+            $('#jvodgallery-no-image').hide();
         this.container.imageContainer.actualImage = 0;
         this.container.imageContainer.resize(Utility.getViewportDimensions().width);
         this.container.leftPager.movedRight();
@@ -970,7 +978,7 @@
     };
 
     //
-    FilterPanelSwitch.prototype.toggleFilterPanel = function ( ) {console.log(this.isFilterElementClosed);
+    FilterPanelSwitch.prototype.toggleFilterPanel = function ( ) {
         if (this.isFilterElementClosed) {
             this.container.domElement.animate({
                 'margin-top': '+=' + this.container.domElement.outerHeight()
@@ -1010,7 +1018,7 @@
     };
 
     //
-    PreviewTitlebar.prototype.updateTitlebar = function ( ) {console.log('<!>');
+    PreviewTitlebar.prototype.updateTitlebar = function ( ) {
         var imageIdxs = Object.keys(this.container.container.imageContainer.images);
         var titleText = this.titles[imageIdxs[this.container.container.imageContainer.actualImage]];
         if (typeof imageIdxs[this.container.container.imageContainer.actualImage] != 'undefined' &&
@@ -1077,8 +1085,8 @@
 
     // Return the current viewport dimensions
     Utility.getViewportDimensions = function () {
-        var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-        var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        var w = Math.min(document.documentElement.clientWidth, window.innerWidth || 100);
+        var h = Math.min(document.documentElement.clientHeight, window.innerHeight || 100);
 
         return { width: w, height: h };
     };

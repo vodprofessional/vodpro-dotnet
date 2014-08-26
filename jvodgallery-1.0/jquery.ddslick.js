@@ -148,8 +148,12 @@
 
                 //EVENTS
                 //Displaying options
+                var lastTimestamp = 0;
                 obj.find('.dd-select').on('click.ddslick', function () {
-                    open(obj);
+                    if (Date.now() - lastTimestamp > 100) {
+                        open(obj);
+                    }
+                    lastTimestamp = Date.now();
                 });
 
                 //Selecting an option
