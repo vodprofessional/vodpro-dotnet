@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VodProUmbraco", "VodProUmbr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VUI", "VUI\VUI.csproj", "{39CD8F58-BC90-40FA-967C-DBC2785B3229}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VODPro", "..\..\Projects\VODPro\VODPro\VODPro.csproj", "{5B7B9862-12D0-495B-8FA8-D1807BAAC705}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Log4NetUmbraco", "Log4NetUmbraco\Log4NetUmbraco.csproj", "{014053D1-7A35-4F6D-922F-B255E6D32257}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{3FFF9F62-41ED-4014-8E58-4ED042AD93C4}"
@@ -22,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VP2", "VP2\VP2.csproj", "{3B8DF094-DFD0-449F-9930-93975E6E26DB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VPCommon", "VPCommon\VPCommon.csproj", "{768121AA-C363-4308-8D1F-3A586A96E116}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VODPro", "VODPro\VODPro.csproj", "{5B7B9862-12D0-495B-8FA8-D1807BAAC705}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,16 +53,6 @@ Global
 		{39CD8F58-BC90-40FA-967C-DBC2785B3229}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{39CD8F58-BC90-40FA-967C-DBC2785B3229}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{39CD8F58-BC90-40FA-967C-DBC2785B3229}.Release|x86.ActiveCfg = Release|Any CPU
-		{5B7B9862-12D0-495B-8FA8-D1807BAAC705}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5B7B9862-12D0-495B-8FA8-D1807BAAC705}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5B7B9862-12D0-495B-8FA8-D1807BAAC705}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{5B7B9862-12D0-495B-8FA8-D1807BAAC705}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{5B7B9862-12D0-495B-8FA8-D1807BAAC705}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{5B7B9862-12D0-495B-8FA8-D1807BAAC705}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5B7B9862-12D0-495B-8FA8-D1807BAAC705}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5B7B9862-12D0-495B-8FA8-D1807BAAC705}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{5B7B9862-12D0-495B-8FA8-D1807BAAC705}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{5B7B9862-12D0-495B-8FA8-D1807BAAC705}.Release|x86.ActiveCfg = Release|Any CPU
 		{014053D1-7A35-4F6D-922F-B255E6D32257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{014053D1-7A35-4F6D-922F-B255E6D32257}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{014053D1-7A35-4F6D-922F-B255E6D32257}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -143,6 +133,16 @@ Global
 		{768121AA-C363-4308-8D1F-3A586A96E116}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{768121AA-C363-4308-8D1F-3A586A96E116}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{768121AA-C363-4308-8D1F-3A586A96E116}.Release|x86.ActiveCfg = Release|Any CPU
+		{5B7B9862-12D0-495B-8FA8-D1807BAAC705}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B7B9862-12D0-495B-8FA8-D1807BAAC705}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B7B9862-12D0-495B-8FA8-D1807BAAC705}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5B7B9862-12D0-495B-8FA8-D1807BAAC705}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5B7B9862-12D0-495B-8FA8-D1807BAAC705}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5B7B9862-12D0-495B-8FA8-D1807BAAC705}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B7B9862-12D0-495B-8FA8-D1807BAAC705}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B7B9862-12D0-495B-8FA8-D1807BAAC705}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5B7B9862-12D0-495B-8FA8-D1807BAAC705}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5B7B9862-12D0-495B-8FA8-D1807BAAC705}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
