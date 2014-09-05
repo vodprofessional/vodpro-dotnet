@@ -1,0 +1,77 @@
+@using umbraco;
+
+@helper RenderSearchPaging(VODPro.code.Paging paging, int currentId, string searchTerm) {
+  if (paging.TotalPages > 1)
+  {
+	 if (paging.CurrentPage > 1)
+	 {
+	   <a href="@library.NiceUrl(currentId)?page=@paging.PreviousPage&search=@searchTerm">< Previous</a>
+	 }
+	 for (var i = 1; i <= paging.TotalPages; i++)
+	 {
+	   if (paging.CurrentPage == i)
+	   {
+		 @i<text>&nbsp;</text>
+	   }
+	   else
+	   {
+		 <a href="@library.NiceUrl(currentId)?page=@i&search=@searchTerm">@i</a><text>&nbsp;</text>
+	   }
+	 }
+ 
+	 if (paging.CurrentPage < paging.TotalPages)
+	 {
+	   <a href="@library.NiceUrl(currentId)?page=@paging.NextPage&search=@searchTerm">Next ></a>
+	 }
+  }
+}
+
+@helper RenderPaging(VODPro.code.Paging paging, int currentId) {
+  if (paging.TotalPages > 1)
+  {
+	 if (paging.CurrentPage > 1)
+	 {
+	   <a href="@library.NiceUrl(currentId)?page=@paging.PreviousPage">< Previous</a>
+	 }
+ 
+     var startPage = 1;
+	 var endPage  = paging.TotalPages;
+
+
+	 if (paging.TotalPages > 10)
+	 {
+	    startPage = paging.CurrentPage - 5;
+		endPage = paging.CurrentPage + 4;
+		if (startPage < 1) { startPage = 1; }
+		if (endPage < 10) {endPage = 10;}
+		if (endPage > paging.TotalPages) { endPage = paging.TotalPages;}
+	 }
+
+	 if (startPage != 1)
+	 {
+		 <a href="@library.NiceUrl(currentId)?page=1">1</a><text>&nbsp;...&nbsp;</text>
+     }
+	 for (var i = startPage; i <= endPage; i++)
+	 {
+	   if (paging.CurrentPage == i)
+	   {
+		 @i<text>&nbsp;</text>
+	   }
+	   else
+	   {
+		 <a href="@library.NiceUrl(currentId)?page=@i">@i</a><text>&nbsp;</text>
+	   }
+	 }
+     
+	 if (endPage != paging.TotalPages)
+	 {
+		 <text>...&nbsp;</text><a href="@library.NiceUrl(currentId)?page=@paging.TotalPages">@paging.TotalPages</a><text>&nbsp;</text>
+     }
+
+	 if (paging.CurrentPage < paging.TotalPages)
+	 {
+	   <a href="@library.NiceUrl(currentId)?page=@paging.NextPage">Next ></a>
+	 }
+  }
+}
+
