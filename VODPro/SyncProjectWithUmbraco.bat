@@ -1,0 +1,5 @@
+robocopy "C:\inetpub\platoscarriage\css" "css" *.css /E /XO /XD ".svn"
+robocopy "C:\inetpub\platoscarriage\scripts" "scripts" *.js /E /XO /XD ".svn"
+robocopy "C:\inetpub\platoscarriage\xslt" "xslt" *.xslt /E /XO /XD ".svn"
+robocopy "C:\inetpub\platoscarriage\masterpages" "masterpages" *.master /E /XO /XD ".svn"
+robocopy "C:\inetpub\platoscarriage\images" "images" /E /XO /XD ".svn"
