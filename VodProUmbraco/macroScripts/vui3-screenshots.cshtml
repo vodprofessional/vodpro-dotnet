@@ -153,7 +153,8 @@
                       <img src="/_inc/images/new-platform/platform-tablet.png" class="platform-image" />
                     </span>
                     
-                  <span class="devices">
+                  <span class="devices scrolling scroll-ctrl" data-group="tablet-group">
+                   <div class="scroller">
                     <li title="iPad">
                         <a href="#" class=""><img src="/_inc/images/new-platform/device-apple.png" alt=""><h3>iPad</h3></a>
                     </li> 
@@ -161,22 +162,28 @@
                     <li title="Android Tablet">
                         <a href="#" class=""><img src="/_inc/images/new-platform/device-droid.png" alt=""><h3>Android</h3></a>
                     </li> 
+                    
+                    <li title="Amazon Fire HD Tablet">
+                        <a href="#" class=""><img src="/_inc/images/new-platform/device-amazonfire.png" alt=""><h3>Amazon Fire HD</h3></a>
+                    </li>
 
                     <li title="Windows 8 Tablet">
                         <a href="#" class=""><img src="/_inc/images/new-platform/device-win.png" alt=""><h3>Windows</h3></a>
                     </li>
+
+                   </div>
                   </span>
 
                 </span>
                   
                   
                 <span class="uber-tab" data-devicegroup="smartphone" title="Smartphones">   
-                  
                   <span class="title">
                     <h3>Smartphone</h3>
                       <img src="/_inc/images/new-platform/platform-smartphone.png" class="platform-image" />
                   </span>
-                  <span class="devices">
+                  <span class="devices scrolling scroll-ctrl" data-group="smartphone-group">
+                   <div class="scroller">
                     <li title="iPhone">
                       <a href="#" class=""><img src="/_inc/images/new-platform/device-apple.png" alt=""><h3>iPhone</h3></a>
                     </li> 
@@ -185,9 +192,15 @@
                       <a href="#" class=""><img src="/_inc/images/new-platform/device-droid.png" alt=""><h3>Android</h3></a>
                     </li> 
                     
-                  <li title="Windows 8 Smartphone">
-                    <a href="#" class=""><img src="/_inc/images/new-platform/device-win.png" alt=""><h3>Windows</h3></a>
-                  </li>
+                    <li title="Amazon Fire Smartphone">
+                        <a href="#" class=""><img src="/_inc/images/new-platform/device-amazonfire.png" alt=""><h3>Amazon Fire</h3></a>
+                    </li>
+
+                    <li title="Windows 8 Smartphone">
+                        <a href="#" class=""><img src="/_inc/images/new-platform/device-win.png" alt=""><h3>Windows</h3></a>
+                    </li>
+
+                   </div>
                   </span>
                 </span>
       
@@ -339,15 +352,25 @@
                         </li>
                         <li data-devicegroup="web" class="overall">@DrawMatrixLink(service, new string[] { "Web" }, IsFullMode, true)</li>
                         <li data-devicegroup="web" class="device">@DrawMatrixLink(service, new string[] { "Web" }, IsFullMode)</li>
-                        <li data-devicegroup="tablet" class="overall">@DrawMatrixLink(service, new string[] { "TabletiPad", "TabletAndroid", "TabletWindows" }, IsFullMode, true)</li>
-                        <li data-devicegroup="tablet" class="device">@DrawMatrixLink(service, new string[] { "TabletiPad" }, IsFullMode)</li>
-                        <li data-devicegroup="tablet" class="device">@DrawMatrixLink(service, new string[] { "TabletAndroid" }, IsFullMode)</li>
-                        <li data-devicegroup="tablet" class="device">@DrawMatrixLink(service, new string[] { "TabletWindows" }, IsFullMode)</li>
-
-                        <li data-devicegroup="smartphone" class="overall">@DrawMatrixLink(service, new string[] { "SmartphoneiPhone", "SmartphoneAndroid", "SmartphoneWindows" }, IsFullMode, true)</li>
-                        <li data-devicegroup="smartphone" class="device">@DrawMatrixLink(service, new string[] { "SmartphoneiPhone" }, IsFullMode)</li>
-                        <li data-devicegroup="smartphone" class="device">@DrawMatrixLink(service, new string[] { "SmartphoneAndroid" }, IsFullMode)</li>
-                        <li data-devicegroup="smartphone" class="device">@DrawMatrixLink(service, new string[] { "SmartphoneWindows" }, IsFullMode)</li>
+                        
+                        <div class="matrix-scroll-group">
+                          <div class="tablet-group scroller" data-group="tablet-group">
+                            <li data-devicegroup="tablet" class="overall">@DrawMatrixLink(service, new string[] { "TabletiPad", "TabletAndroid", "TabletWindows" }, IsFullMode, true)</li>
+                            <li data-devicegroup="tablet" class="device">@DrawMatrixLink(service, new string[] { "TabletiPad" }, IsFullMode)</li>
+                            <li data-devicegroup="tablet" class="device">@DrawMatrixLink(service, new string[] { "TabletAndroid" }, IsFullMode)</li>
+                            <li data-devicegroup="tablet" class="device">@DrawMatrixLink(service, new string[] { "TabletAmazonFireHD" }, IsFullMode)</li>
+                            <li data-devicegroup="tablet" class="device">@DrawMatrixLink(service, new string[] { "TabletWindows" }, IsFullMode)</li>
+                          </div>
+                        </div>
+                        <div class="matrix-scroll-group">
+                          <div class="smartphone-group scroller" data-group="smartphone-group">
+                            <li data-devicegroup="smartphone" class="overall">@DrawMatrixLink(service, new string[] { "SmartphoneiPhone", "SmartphoneAndroid", "SmartphoneWindows" }, IsFullMode, true)</li>
+                            <li data-devicegroup="smartphone" class="device">@DrawMatrixLink(service, new string[] { "SmartphoneiPhone" }, IsFullMode)</li>
+                            <li data-devicegroup="smartphone" class="device">@DrawMatrixLink(service, new string[] { "SmartphoneAndroid" }, IsFullMode)</li>
+                            <li data-devicegroup="smartphone" class="device">@DrawMatrixLink(service, new string[] { "SmartphoneAmazonFire" }, IsFullMode)</li>
+                            <li data-devicegroup="smartphone" class="device">@DrawMatrixLink(service, new string[] { "SmartphoneWindows" }, IsFullMode)</li>
+                          </div>
+                        </div>
                         <div class="matrix-scroll-group">
                           <div class="connectedtv-group scroller" data-group="connectedtv-group">
                             <li data-devicegroup="connectedtv" class="overall">@DrawMatrixLink(service, new string[] { "Connected TV-Samsung", "Connected TV-Sony", "Connected TV-LG" }, IsFullMode, true)</li>

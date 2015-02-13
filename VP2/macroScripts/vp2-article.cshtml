@@ -10,8 +10,23 @@
         dateStr = String.Format("{0:d MMM yyyy}", Model.storydate);
     }
 
+    string imageClass = "";
     string imageUrl = "";
-    if (Model.GetProperty("storyimage").Value.Length > 0)
+    if (Model.GetProperty("largeimage") != null && Model.GetProperty("largeimage").Value.Length > 0)
+    {
+        try
+        {
+            int mid;
+            if (Int32.TryParse(Model.GetProperty("largeimage").Value, out mid))
+            {
+                dynamic media = Model.MediaById(mid);
+                imageUrl = media.umbracoFile;
+                imageClass = " large-image";
+            }
+        }
+        catch (Exception ex) { ; }
+    }
+    if (String.IsNullOrEmpty(imageUrl) && Model.GetProperty("storyimage").Value.Length > 0)
     {
         try
         {
@@ -20,6 +35,7 @@
             {
                 dynamic media = Model.MediaById(mid);
                 imageUrl = media.umbracoFile;
+                imageClass = " main-image";
                 //sa.Image = story.GetProperty("storyimage").Value;
             }
         }
@@ -58,7 +74,7 @@
         <div class="article-main">
             @if (!String.IsNullOrEmpty(imageUrl))
             {
-                <img src="@imageUrl" class="vp-nolightbox main-image" />
+                <img src="@imageUrl" class="vp-nolightbox @(imageClass)" />
             }
             @Html.Raw(umbraco.library.RenderMacroContent(Model.story.ToString(), Model.Id))
 

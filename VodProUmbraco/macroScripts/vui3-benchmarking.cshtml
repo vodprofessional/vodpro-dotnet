@@ -452,7 +452,8 @@
                 </span>
                   
                 
-                  if (!matrix.HasBenchmarksForPlatform("TabletiPad") && !matrix.HasBenchmarksForPlatform("TabletAndroid") && !matrix.HasBenchmarksForPlatform("TabletWindows"))
+                  if (!matrix.HasBenchmarksForPlatform("TabletiPad") && !matrix.HasBenchmarksForPlatform("TabletAndroid") 
+                      && !matrix.HasBenchmarksForPlatform("TabletWindows") && !matrix.HasBenchmarksForPlatform("TabletAmazonFireHD"))
                   {
                       uberDisabled = "_platform-disabled";
                   }
@@ -462,7 +463,8 @@
                       <h3>Tablet</h3>
                       <img src="/_inc/images/new-platform/platform-tablet@(uberDisabled).png" class="platform-image" />
                     </span>
-
+                    <span class="devices scrolling scroll-ctrl" data-group="smartphone-group">
+                    <div class="scroller"> 
                       @if (!matrix.HasBenchmarksForPlatform("TabletiPad"))
                       {
                           strDisabled = "_device-disabled";
@@ -480,6 +482,15 @@
                      <li title="Android Tablet">
                       <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-droid@(strDisabled).png" alt=""><h3>Android</h3></a>
                      </li> 
+                     
+                      @if (!matrix.HasBenchmarksForPlatform("TabletAmazonFireHD"))
+                      {
+                          strDisabled = "_device-disabled";
+                      }
+                      else { strDisabled = ""; }
+                     <li title="Amazon Fire HD Tablet">
+                      <a href="#" class="@strDisabled"><img src="/_inc/images/new-platform/device-amazonfire@(strDisabled).png" alt=""><h3>Amazon Fire HD</h3></a>
+                     </li>
 
                       @if (!matrix.HasBenchmarksForPlatform("TabletWindows"))
                       {
@@ -490,10 +501,13 @@
                       <a href="#" class="@strDisabled"><img src="/_inc/images/new-platform/device-win@(strDisabled).png" alt=""><h3>Windows</h3></a>
                      </li>
 
+                     </div>
+                </span>
                 </span>
                   
                   
-                  if (!matrix.HasBenchmarksForPlatform("SmartphoneiPhone") && !matrix.HasBenchmarksForPlatform("SmartphoneAndroid") && !matrix.HasBenchmarksForPlatform("SmartphoneWindows"))
+                  if (!matrix.HasBenchmarksForPlatform("SmartphoneiPhone") && !matrix.HasBenchmarksForPlatform("SmartphoneAndroid")
+                      && !matrix.HasBenchmarksForPlatform("SmartphoneWindows") && !matrix.HasBenchmarksForPlatform("SmartphoneAmazonFire"))
                   {
                       uberDisabled = "_platform-disabled";
                   }
@@ -504,7 +518,8 @@
                     <h3>Smartphone</h3>
                       <img src="/_inc/images/new-platform/platform-smartphone@(uberDisabled).png" class="platform-image" />
                   </span>
-
+                  <span class="devices scrolling scroll-ctrl" data-group="smartphone-group">
+                    <div class="scroller"> 
                     @if (!matrix.HasBenchmarksForPlatform("SmartphoneiPhone"))
                     {
                         strDisabled = "_device-disabled";
@@ -522,6 +537,17 @@
                     <li title="Andoird Smartphone">
                       <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-droid@(strDisabled).png" alt=""><h3>Android</h3></a>
                     </li> 
+
+                    
+                  @if (!matrix.HasBenchmarksForPlatform("SmartphoneAmazonFire"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                  <li title="Amazon Fire Smartphone">
+                    <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-amazonfire@(strDisabled).png" alt=""><h3>Amazon Fire</h3></a>
+                  </li>
+
                     @if (!matrix.HasBenchmarksForPlatform("SmartphoneWindows"))
                     {
                         strDisabled = "_device-disabled";
@@ -530,8 +556,15 @@
                   <li title="Windows 8 Smartphone">
                     <a href="#" class="@strDisabled @serviceclass"><img src="/_inc/images/new-platform/device-win@(strDisabled).png" alt=""><h3>Windows</h3></a>
                   </li>
+                  
+                  </div>
                 </span>
+              </span>
       
+                  
+                  
+                  
+                  
                   if (!matrix.HasBenchmarksForPlatform("Connected TV-Samsung") && !matrix.HasBenchmarksForPlatform("Connected TV-Sony")
                       && !matrix.HasBenchmarksForPlatform("Connected TV-LG") && !matrix.HasBenchmarksForPlatform("Connected TV-Panasonic") && !matrix.HasBenchmarksForPlatform("Connected TV-Philips"))
                   {
@@ -880,6 +913,14 @@
             <div class="pane">
                 <div class="inner">
                 <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "TabletAmazonFireHD").Max services on Amazon Fire HD Tablet
+                </p>
+                @DrawBenchmarkingPane(matrix, "TabletAmazonFireHD")
+                </div>
+            </div>
+            <div class="pane">
+                <div class="inner">
+                <p>
                     Based on the most recent benchmarks of @matrix.GetScores("About", "TabletWindows").Max services on Windows Tablet
                 </p>
                 @DrawBenchmarkingPane(matrix, "TabletWindows")
@@ -899,6 +940,14 @@
                     Based on the most recent benchmarks of @matrix.GetScores("About", "SmartphoneAndroid").Max services on Android Smartphones
                 </p>
                 @DrawBenchmarkingPane(matrix, "SmartphoneAndroid")
+                </div>
+            </div>
+            <div class="pane">
+                <div class="inner">
+                <p>
+                    Based on the most recent benchmarks of @matrix.GetScores("About", "SmartphoneAmazonFire").Max services on Amazon Fire Phone
+                </p>
+                @DrawBenchmarkingPane(matrix, "SmartphoneAmazonFire")
                 </div>
             </div>
             <div class="pane">

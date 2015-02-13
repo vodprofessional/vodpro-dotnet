@@ -20,7 +20,7 @@
             </div>
             <div id="promotion" class="col-lg-5 col-md-5 hidden-sm hidden-xs">
                 <div id="inner-promotion">
-                    <umbraco:Macro Alias="vp2-rhs" runat="server"></umbraco:Macro>
+                    <umbraco:Macro runat="server" ID="vp2RHS" filelocation="~/macroscripts/vp2-rhs.cshtml"></umbraco:Macro> <!-- Alias="vp2-rhs"  -->
                 </div>
             </div>
         </div>

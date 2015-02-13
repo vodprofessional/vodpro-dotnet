@@ -792,8 +792,8 @@
                 </span>
                   
                 
-        if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Tablet", "iPad") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Tablet", "Android") 
-            && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Tablet", "Windows"))
+        if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Tablet", "iPad") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Tablet", "Android")
+            && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Tablet", "Windows") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Tablet", "Amazon Fire HD"))
       {
           uberDisabled = "_platform-disabled";
       }
@@ -803,7 +803,9 @@
                       <h3>Tablet</h3>
                       <img src="/_inc/images/new-platform/platform-tablet@(uberDisabled).png" class="platform-image" />
                     </span>
-
+                    
+                  <span class="devices scrolling scroll-ctrl" data-group="tablet-group">
+                    <div class="scroller"> 
                       @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Tablet", "iPad"))
                       {
                           strDisabled = "_device-disabled";
@@ -821,6 +823,16 @@
                     <li title="Android Tablet">
                       <a href="#" class="@strDisabled" data-device="tabletandroid"><img src="/_inc/images/new-platform/device-droid@(strDisabled).png" alt=""><h3>Android</h3></a>
                     </li> 
+                    
+                      @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Tablet", "Amazon Fire HD"))
+                      {
+                          strDisabled = "_device-disabled";
+                      }
+                      else { strDisabled = ""; }
+                    <li title="Amazon Fire HD Tablet">
+                      <a href="#" class="@strDisabled" data-device="tabletamazonfirehd"><img src="/_inc/images/new-platform/device-amazonfire@(strDisabled).png" alt=""><h3>Amazon Fire HD</h3></a>
+                    </li>
+
                       @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Tablet", "Windows"))
                       {
                           strDisabled = "_device-disabled";
@@ -830,10 +842,13 @@
                       <a href="#" class="@strDisabled" data-device="tabletwindows"><img src="/_inc/images/new-platform/device-win@(strDisabled).png" alt=""><h3>Windows</h3></a>
                     </li>
 
+                   </div>
+                 </span>
                 </span>
                   
                   
-                      if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Smartphone", "iPhone") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Smartphone", "Android") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Smartphone", "Windows"))
+                      if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Smartphone", "iPhone") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Smartphone", "Android")
+                          && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Smartphone", "Windows") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Smartphone", "Amazon Fire"))
                       {
                           uberDisabled = "_platform-disabled";
                       }
@@ -841,10 +856,11 @@
                 <span class="uber-tab @(uberDisabled)" data-devicegroup="smartphone" title="Smartphones">   
                   
                   <span class="title">
-                    <h3>Smartphone</h3>
+                    <h3 style="font-size:18px">Smartphone</h3>
                       <img src="/_inc/images/new-platform/platform-smartphone@(uberDisabled).png" class="platform-image" />
                   </span>
-
+                  <span class="devices scrolling scroll-ctrl" data-group="smartphone-group">
+                    <div class="scroller"> 
                     @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Smartphone", "iPhone"))
                     {
                         strDisabled = "_device-disabled";
@@ -862,6 +878,14 @@
                     <li title="Andoird Smartphone">
                       <a href="#" class="@strDisabled" data-device="smartphoneandroid"><img src="/_inc/images/new-platform/device-droid@(strDisabled).png" alt=""><h3>Android</h3></a>
                     </li> 
+                    @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Smartphone", "Amazon Fire"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                  <li title="Amazon Fire Smartphone">
+                    <a href="#" class="@strDisabled" data-device="smartphoneamazonfire"><img src="/_inc/images/new-platform/device-amazonfire@(strDisabled).png" alt=""><h3>Amazon Fire</h3></a>
+                  </li>
                     @if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Smartphone", "Windows"))
                     {
                         strDisabled = "_device-disabled";
@@ -870,7 +894,9 @@
                   <li title="Windows 8 Smartphone">
                     <a href="#" class="@strDisabled" data-device="smartphonewindows"><img src="/_inc/images/new-platform/device-win@(strDisabled).png" alt=""><h3>Windows</h3></a>
                   </li>
+                 </div>
                 </span>
+               </span>
       
                     if (!Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Samsung") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Sony")
                         && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "LG") && !Service.ScreenshotPackages.HasScreenshotsForPlatform("Connected TV", "Panasonic")
@@ -1181,9 +1207,11 @@
                 @WriteAnalysis(@Service, "Web", String.Empty)
                 @WriteAnalysis(@Service, "Tablet", "iPad")
                 @WriteAnalysis(@Service, "Tablet", "Android")
+                @WriteAnalysis(@Service, "Tablet", "Amazon Fire HD")
                 @WriteAnalysis(@Service, "Tablet", "Windows")
                 @WriteAnalysis(@Service, "Smartphone", "iPhone")
                 @WriteAnalysis(@Service, "Smartphone", "Android")
+                @WriteAnalysis(@Service, "Smartphone", "Amazon Fire")
                 @WriteAnalysis(@Service, "Smartphone", "Windows")
                 @WriteAnalysis(@Service, "Connected TV", "Samsung")
                 @WriteAnalysis(@Service, "Connected TV", "Sony")
@@ -1245,7 +1273,7 @@
                   
                 
                     if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Tablet", "iPad") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Tablet", "Android")
-                        && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Tablet", "Windows"))
+                        && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Tablet", "Windows") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Tablet", "Amazon Fire HD"))
                     {
                         uberDisabled = "_platform-disabled";
                     }
@@ -1255,7 +1283,9 @@
                       <h3>Tablet</h3>
                       <img src="/_inc/images/new-platform/platform-tablet@(uberDisabled).png" class="platform-image" />
                     </span>
-
+                    
+                  <span class="devices scrolling scroll-ctrl" data-group="tablet-group">
+                    <div class="scroller"> 
                       @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Tablet", "iPad"))
                       {
                           strDisabled = "_device-disabled";
@@ -1273,6 +1303,14 @@
                     <li title="Android Tablet">
                       <a href="#" class="@strDisabled" data-device="tabletandroid"><img src="/_inc/images/new-platform/device-droid@(strDisabled).png" alt=""><h3>Android</h3></a>
                     </li> 
+                      @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Tablet", "Amazon Fire HD"))
+                      {
+                          strDisabled = "_device-disabled";
+                      }
+                      else { strDisabled = ""; }
+                    <li title="Amazon Fire HD Tablet">
+                      <a href="#" class="@strDisabled" data-device="tabletamazonfirehd"><img src="/_inc/images/new-platform/device-amazonfire@(strDisabled).png" alt=""><h3>Amazon Fire HD</h3></a>
+                    </li>
                       @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Tablet", "Windows"))
                       {
                           strDisabled = "_device-disabled";
@@ -1281,10 +1319,13 @@
                     <li title="Windows 8 Tablet">
                       <a href="#" class="@strDisabled" data-device="tabletwindows"><img src="/_inc/images/new-platform/device-win@(strDisabled).png" alt=""><h3>Windows</h3></a>
                     </li>
+                  </div>
+                 </span>
                 </span>
                   
                   
-                      if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "iPhone") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "Android") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "Windows"))
+                      if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "iPhone") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "Android")
+                          && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "Windows") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "Amazon Fire"))
                       {
                           uberDisabled = "_platform-disabled";
                       }
@@ -1292,10 +1333,12 @@
                 <span class="uber-tab @(uberDisabled)" data-devicegroup="smartphone" title="Smartphones">   
                   
                   <span class="title">
-                    <h3>Smartphone</h3>
+                    <h3 style="font-size:18px">Smartphone</h3>
                       <img src="/_inc/images/new-platform/platform-smartphone@(uberDisabled).png" class="platform-image" />
                   </span>
-
+                  
+                  <span class="devices scrolling scroll-ctrl" data-group="smartphone-group">
+                    <div class="scroller"> 
                     @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "iPhone"))
                     {
                         strDisabled = "_device-disabled";
@@ -1313,6 +1356,14 @@
                     <li title="Andoird Smartphone">
                       <a href="#" class="@strDisabled" data-device="smartphoneandroid"><img src="/_inc/images/new-platform/device-droid@(strDisabled).png" alt=""><h3>Android</h3></a>
                     </li> 
+                    @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "Amazon Fire"))
+                    {
+                        strDisabled = "_device-disabled";
+                    }
+                    else { strDisabled = ""; }
+                  <li title="Amazon Fire Smartphone">
+                    <a href="#" class="@strDisabled" data-device="smartphoneamazonfire"><img src="/_inc/images/new-platform/device-amazonfire@(strDisabled).png" alt=""><h3>Amazon Fire</h3></a>
+                  </li>
                     @if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Smartphone", "Windows"))
                     {
                         strDisabled = "_device-disabled";
@@ -1321,6 +1372,8 @@
                   <li title="Windows 8 Smartphone">
                     <a href="#" class="@strDisabled" data-device="smartphonewindows"><img src="/_inc/images/new-platform/device-win@(strDisabled).png" alt=""><h3>Windows</h3></a>
                   </li>
+                  </div>
+                 </span>
                 </span>
       
                     if (!Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "Samsung") && !Service.ScreenshotPackages.HasBenchmarksForPlatform("Connected TV", "Sony")
@@ -1626,9 +1679,11 @@
                 @WriteBenchmark(@Service, "Web", String.Empty)
                 @WriteBenchmark(@Service, "Tablet", "iPad")
                 @WriteBenchmark(@Service, "Tablet", "Android")
+                @WriteBenchmark(@Service, "Tablet", "Amazon Fire HD")
                 @WriteBenchmark(@Service, "Tablet", "Windows")
                 @WriteBenchmark(@Service, "Smartphone", "iPhone")
                 @WriteBenchmark(@Service, "Smartphone", "Android")
+                @WriteBenchmark(@Service, "Smartphone", "Amazon Fire")
                 @WriteBenchmark(@Service, "Smartphone", "Windows")
                 @WriteBenchmark(@Service, "Connected TV", "Samsung")
                 @WriteBenchmark(@Service, "Connected TV", "Sony")

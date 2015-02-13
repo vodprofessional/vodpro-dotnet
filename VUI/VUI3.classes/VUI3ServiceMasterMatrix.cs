@@ -16,7 +16,7 @@ namespace VUI.VUI3.classes
         {
             Services = new List<VUI3ServiceMasterMatrixItem>();
 
-            string sql = @"    SELECT M.ServiceName, M.TabletAndroid  ,M.SmartphoneAndroid ,M.SmartphoneiPhone  ,M.TabletiPad  ,M.SmartphoneWindows   , M.Web, 
+            string sql = @"    SELECT M.ServiceName, M.TabletAndroid  ,M.SmartphoneAndroid ,M.SmartphoneiPhone  ,M.TabletiPad  ,M.SmartphoneWindows, M.TabletAmazonFireHD, M.SmartphoneAmazonFire   , M.Web, 
                                 [Connected TV-Samsung], [Connected TV-Sony],[Connected TV-LG], [Connected TV-Panasonic],[Games Consoles-XBox],[Games Consoles-Playstation],
                                 [STB-Amazon Fire TV],[STB-Apple TV], [STB-Freesat], [STB-Roku], [STB-Now TV], 
                                 [STB-Sky],[STB-Virgin],[STB-YouView],[STB-AT&T U-Verse],
@@ -46,6 +46,8 @@ namespace VUI.VUI3.classes
                         i.SmartphoneAndroidCount = (int)sr["SmartphoneAndroid"];
                         i.SmartphoneiPhoneCount = (int)sr["SmartphoneiPhone"];
                         i.TabletiPadCount = (int)sr["TabletiPad"];
+                        i.TabletAmazonFireHDCount = (int)sr["TabletAmazonFireHD"];
+                        i.SmartphoneAmazonFireCount = (int)sr["SmartphoneAmazonFire"];
                         i.SmartphoneWindowsCount = (int)sr["SmartphoneWindows"];
                         i.WebCount = (int)sr["Web"];
                         i.ConnectedTVSamsungCount = (int)sr["Connected TV-Samsung"];
@@ -129,6 +131,8 @@ namespace VUI.VUI3.classes
         public int SmartphoneAndroidCount { get; set; }
         public int SmartphoneiPhoneCount { get; set; }
         public int TabletiPadCount { get; set; }
+        public int TabletAmazonFireHDCount { get; set; }
+        public int SmartphoneAmazonFireCount { get; set; }
         public int SmartphoneWindowsCount {get; set; }
         public int WebCount { get; set; }
         public int ConnectedTVSamsungCount { get; set; }
@@ -188,6 +192,14 @@ namespace VUI.VUI3.classes
                 case "SmartphoneiPhone":
                 {
                     return SmartphoneiPhoneCount;
+                }
+                case "TabletAmazonFireHD":
+                {
+                    return TabletAmazonFireHDCount;
+                }
+                case "SmartphoneAmazonFire":
+                {
+                    return SmartphoneAmazonFireCount;
                 }
                 case "Web":
                 {

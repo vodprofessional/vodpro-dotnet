@@ -274,6 +274,7 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover, header a
 .story #column-full .article-main { margin-top: 2em; }
 .story #column-full .article-main img { max-width: 100%; height: inherit; }
 .story #column-full .article-main img.main-image { float: right; margin-left: 15px; margin-bottom: 15px; }
+.story #column-full .article-main img.large-image { margin-bottom: 1.3em; }
 
 .error #columns #main { background-color: transparent; box-shadow: none; }
 .error h3 { font-size: 20em; text-shadow: 10px 10px 15px #888; }

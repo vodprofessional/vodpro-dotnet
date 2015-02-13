@@ -155,6 +155,9 @@ namespace VUI.pages
 
                     int mid = (Int32)r["Member"];
                     string loginname = (String)r["LoginName"];
+
+                    log.Debug(loginname);
+
                     string companyname = (String)r["CompanyName"];
                     string enddate = String.Empty;
                     if (r["EndDate"].GetType() != typeof(DBNull))

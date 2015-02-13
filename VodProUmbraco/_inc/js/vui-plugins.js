@@ -528,7 +528,8 @@ jQuery.fn.extend({
 
         //fld.find("#username").ValidateEmail();
 
-        this.on("click", function () {
+        this.on("click", function (e) {
+            e.preventDefault();
             if ($("#username").val() != "" && $("#password").val() != "" && fld.find(".invalid").length == 0) {
                 var xmlActionsURL = '/vui/vui-xml-actions/';
                 var remname = "N";
@@ -541,6 +542,7 @@ jQuery.fn.extend({
                     type: "POST",
                     dataType: 'json',
                     data: DataObject,
+                    cache: false,
                     success: function (data) {
                         //// console.log("Logging in: " + data.response + "; " + data.data)
                         if (data.response == "valid") {
