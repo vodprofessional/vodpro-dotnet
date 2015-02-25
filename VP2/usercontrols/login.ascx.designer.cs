@@ -13,6 +13,15 @@ namespace VP2.usercontrols {
     public partial class login {
         
         /// <summary>
+        /// ReturnPage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField ReturnPage;
+        
+        /// <summary>
         /// plcFormLogin control.
         /// </summary>
         /// <remarks>
@@ -119,6 +128,24 @@ namespace VP2.usercontrols {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder plcPwdSent;
+        
+        /// <summary>
+        /// plcBackToPage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder plcBackToPage;
+        
+        /// <summary>
+        /// lnkBackToArticle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink lnkBackToArticle;
         
         /// <summary>
         /// lnkBackToLogin control.

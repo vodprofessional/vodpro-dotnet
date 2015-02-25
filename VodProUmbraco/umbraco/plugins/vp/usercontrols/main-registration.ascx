@@ -18,6 +18,10 @@
       
      <div class="vodform">
        
+        <div class="alert-warning hidden" id="form-error">
+            <strong>Error!</strong> Please check below and complete any fields you might have missed.
+        </div>
+  
        
        <asp:HiddenField runat="server" ID="ReturnPage" />      
 
@@ -32,31 +36,31 @@
     </asp:DropDownList><asp:Label runat="server" ID="MsgTitle" Visible="False" CssClass="error"/>
   </div>
   <div class="entry">
-    <asp:Label ID="Label2" runat="server" AssociatedControlID="txtFirstName">First Name</asp:Label>
+    <asp:Label ID="Label2" runat="server" AssociatedControlID="txtFirstName">First Name *</asp:Label>
     <asp:TextBox runat="server" iD="txtFirstName"  CssClass="form-control"/><asp:Label runat="server" ID="MsgFirstName" Visible="False" CssClass="error"/>
   </div>
   <div class="entry">
-    <asp:Label ID="Label3" runat="server" AssociatedControlID="txtLastName">Last Name</asp:Label>
+    <asp:Label ID="Label3" runat="server" AssociatedControlID="txtLastName">Last Name *</asp:Label>
     <asp:TextBox runat="server" ID="txtLastName"  CssClass="form-control"/><asp:Label runat="server" ID="MsgLastName" Visible="False" CssClass="error"/>
   </div>
   <div class="entry">
-    <asp:Label ID="Label4" runat="server" AssociatedControlID="txtJobTitle">Job Title</asp:Label>
+    <asp:Label ID="Label4" runat="server" AssociatedControlID="txtJobTitle">Job Title *</asp:Label>
     <asp:TextBox runat="server" ID="txtJobTitle"  CssClass="form-control"/><asp:Label runat="server" ID="MsgJobTitle" Visible="False" CssClass="error"/>
   </div>
   <div class="entry">
-    <asp:Label ID="Label5" runat="server" AssociatedControlID="txtCompanyName">Company Name</asp:Label>
+    <asp:Label ID="Label5" runat="server" AssociatedControlID="txtCompanyName">Company Name *</asp:Label>
     <asp:TextBox runat="server" ID="txtCompanyName"  CssClass="form-control"/><asp:Label runat="server" ID="MsgCompanyName" Visible="False" CssClass="error"/>
   </div>
   <div class="entry">
-    <asp:Label ID="Label6" runat="server" AssociatedControlID="EmailAddress">Email (also used as your login)</asp:Label>
+    <asp:Label ID="Label6" runat="server" AssociatedControlID="EmailAddress">Email (also used as your login) *</asp:Label>
     <asp:TextBox runat="server" ID="EmailAddress"  CssClass="form-control"/><asp:Label runat="server" ID="MsgEmail" Visible="False" CssClass="error"/>
   </div>
   <div class="entry">
-    <asp:Label ID="Label7" runat="server" AssociatedControlID="PasswordText" Columns="9">Password</asp:Label>
+    <asp:Label ID="Label7" runat="server" AssociatedControlID="PasswordText" Columns="9">Password *</asp:Label>
     <asp:TextBox runat="server" ID="PasswordText" TextMode="Password" autocomplete="off"  CssClass="form-control smaller"/><asp:Label runat="server" ID="MsgPassword" Visible="False" CssClass="error" />
   </div>
   <div class="entry">
-    <asp:Label ID="Label8" runat="server" AssociatedControlID="PasswordConfirm" Columns="9">Confirm Password</asp:Label>
+    <asp:Label ID="Label8" runat="server" AssociatedControlID="PasswordConfirm" Columns="9">Confirm Password *</asp:Label>
     <asp:TextBox runat="server" ID="PasswordConfirm" TextMode="Password" autocomplete="off" CssClass="form-control smaller" /><asp:Label runat="server" ID="MsgPasswordConfirm" Visible="False" CssClass="error" />
   </div>
 
@@ -114,14 +118,16 @@ and is necessary if you want to submit jobs or directory listings.
 
 <div class="vodform">
   
-<asp:Literal runat="server" EnableViewState="false" ID="ErrorMessage"></asp:Literal>
+<div class="alert-warning hidden" id="form-error">
+    <strong>Error!</strong> Please check below and complete any fields you might have missed.
+</div>
   
   
 <div class="entry">
 <asp:Label ID="Label10" runat="server" AssociatedControlID="txtCompanyAddress1">Company Address 1 *</asp:Label>
 <asp:TextBox runat="server" ID="txtCompanyAddress1"  CssClass="form-control"/>
   <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtCompanyAddress1"
-    ErrorMessage="Company address is a mandatory field." ValidationGroup="CreateUserWizard1" CssClass="error" />
+    ErrorMessage="Company address is a mandatory field." ValidationGroup="CreateUserWizard1" CssClass="error" EnableClientScript="false" />
 </div>
 <div class="entry">
 <asp:Label ID="Label11" runat="server" AssociatedControlID="txtCompanyAddress2">Company Address 2</asp:Label>
@@ -135,7 +141,7 @@ and is necessary if you want to submit jobs or directory listings.
 <asp:Label ID="Label13" runat="server" AssociatedControlID="txtCompanyTown">Town *</asp:Label>
 <asp:TextBox runat="server" ID="txtCompanyTown" CssClass="form-control" />
   <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="txtCompanyTown"
-    ErrorMessage="Town is a mandatory field." ValidationGroup="CreateUserWizard1" CssClass="error" />
+    ErrorMessage="Town is a mandatory field." ValidationGroup="CreateUserWizard1" CssClass="error" EnableClientScript="false" />
 </div>
 <div class="entry">
 <asp:Label ID="Label14" runat="server" AssociatedControlID="txtCounty">County / State</asp:Label>
@@ -145,7 +151,7 @@ and is necessary if you want to submit jobs or directory listings.
 <asp:Label ID="Label15" runat="server" AssociatedControlID="txtPostcode">Postcode /ZIP *</asp:Label>
 <asp:TextBox runat="server" ID="txtPostcode" Columns="8" CssClass="form-control smaller" />
   <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ControlToValidate="txtPostcode"
-  ErrorMessage="Postcode/Zip is a mandatory field." ValidationGroup="CreateUserWizard1" CssClass="error" />
+  ErrorMessage="Postcode/Zip is a mandatory field." ValidationGroup="CreateUserWizard1" CssClass="error" EnableClientScript="false" />
 </div>
 <div class="entry">
 <asp:Label ID="Label16" runat="server" AssociatedControlID="Country">Country *</asp:Label>
@@ -353,7 +359,7 @@ and is necessary if you want to submit jobs or directory listings.
 <asp:Label ID="Label17" runat="server" AssociatedControlID="txtPhone">Business phone *</asp:Label>
 <asp:TextBox runat="server" ID="txtPhone" CssClass="form-control smaller" />
   <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="txtPhone"
-    ErrorMessage="Phone is a mandatory field." ValidationGroup="CreateUserWizard1" CssClass="error" />
+    ErrorMessage="Phone is a mandatory field." ValidationGroup="CreateUserWizard1" CssClass="error" EnableClientScript="false" />
 </div>
 <div class="entry">
 <asp:Label ID="Label18" runat="server" AssociatedControlID="txtMobile">Mobile</asp:Label>
@@ -395,7 +401,7 @@ and is necessary if you want to submit jobs or directory listings.
     <asp:ListItem value="100+">1000+</asp:ListItem>
   </asp:DropDownList>
  <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator5" ControlToValidate="txtEmployees"
-    ErrorMessage="Number of employees is a mandatory field." ValidationGroup="CreateUserWizard1" />
+    ErrorMessage="Number of employees is a mandatory field." ValidationGroup="CreateUserWizard1" EnableClientScript="false" />
 </div> 
         </div>
         
@@ -404,12 +410,28 @@ and is necessary if you want to submit jobs or directory listings.
 
     <asp:CompleteWizardStep ID="CompleteWizardStep1" runat="server" Title="Complete">
       <ContentTemplate>
-        <h2>Thanks for Joining VOD Professional</h2>
+        <h3>Thanks for Joining VOD Professional</h3>
         <div class="formendtext">
-        <p>
-          We just sent a verification email to the address you provided (you may need 
-          to check your Junk mail folder). Please click on the link in the email to complete your registration. 
-        </p>
+            <p>
+              You now have access to exclusive website resources, research and reports for (and from) the online video industry.
+            </p>
+            <p>
+              For reference, your username is <em>always</em> your registered email address. You can change your password and other details
+              through <a href="/members/profile">account admin</a>.
+
+          
+              <!--
+              We just sent a verification email to the address you provided (you may need 
+              to check your Junk mail folder). Please click on the link in the email to complete your registration. 
+              -->
+            </p>
+
+            <asp:PlaceHolder runat="server" ID="plcBackToPage" Visible="false">
+                <p>
+                    <asp:HyperLink runat="server" ID="lnkBackToArticle">Back to article</asp:HyperLink>
+                </p>
+            </asp:PlaceHolder>
+
         </div>
       </ContentTemplate>
     </asp:CompleteWizardStep>

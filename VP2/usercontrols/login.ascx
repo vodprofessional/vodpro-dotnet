@@ -1,5 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="login.ascx.cs" Inherits="VP2.usercontrols.login" %>
 
+<asp:HiddenField runat="server" ID="ReturnPage" />
+
 <ul class="nav nav-tabs">
     <li class="active"><a href="#signin" data-toggle="tab">Sign In</a></li>
     <li><a href="#register" data-toggle="tab">Register</a></li>
@@ -46,6 +48,13 @@
             <asp:PlaceHolder runat="server" ID="plcPwdSent">
                 <div class="form-error">Your new password has been sent</div>
             </asp:PlaceHolder>
+
+            <asp:PlaceHolder runat="server" ID="plcBackToPage" Visible="false">
+                <p>
+                    <asp:HyperLink runat="server" ID="lnkBackToArticle">Back to article</asp:HyperLink>
+                </p>
+            </asp:PlaceHolder>
+
             <div id="forgotten-pwd-cancel-link">
                 <asp:LinkButton runat="server" ID="lnkBackToLogin" OnClick="lnkBackToLogin_Click" Text="Back to login form" />
             </div>

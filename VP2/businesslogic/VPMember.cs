@@ -132,7 +132,23 @@ namespace VP2.businesslogic
             return true;
         }
 
-
+        public static bool MemberExists(string username)
+        {
+            bool exists = false;
+            try
+            {
+                MembershipUser mu = Membership.GetUser(username);
+                if (mu != null)
+                {
+                    exists = true;
+                }
+            }
+            catch (Exception ex)
+            {
+//
+            }
+            return exists;
+        }
 
         public static string GetCompany(Member m)
         {

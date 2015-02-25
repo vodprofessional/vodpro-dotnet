@@ -18,8 +18,15 @@ namespace VP2.usercontrols
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack && Request["email"] != null)
+            if (!IsPostBack)
             {
+
+                if (Request["email"] != null)
+                {
+                    EmailAddress.Text = Server.UrlDecode(Request["email"].ToString());
+                }
+
+
                 if (Request["page"] != null)
                 {
                     ReturnPage.Value = Request["page"].ToString();
@@ -28,7 +35,6 @@ namespace VP2.usercontrols
                 {
                     ReturnPage.Value = "1058";
                 }
-                EmailAddress.Text = Server.UrlDecode(Request["email"].ToString());
             }
         }
 
@@ -40,6 +46,33 @@ namespace VP2.usercontrols
             e.Message.Subject = em.Subject;
             e.Message.Body = em.Body;
             // Gets sent automatically.
+
+            // Now log in directly to the web site.
+            thisMember.getProperty("confirmedFromEmail").Value = true;
+            thisMember.AddGroup(1095);  // Group ID
+            thisMember.Save();
+            FormsAuthentication.SetAuthCookie(thisMember.LoginName, true);
+
+            if (!String.IsNullOrEmpty(ReturnPage.Value))
+            {
+
+                PlaceHolder plcplcBackToPage = CompleteWizardStep1.ContentTemplateContainer.FindControl("plcBackToPage") as PlaceHolder;
+                HyperLink lnk = plcplcBackToPage.FindControl("lnkBackToArticle") as HyperLink;
+                
+                plcplcBackToPage.Visible = true;
+
+                if (ReturnPage.Value.Equals("1058"))
+                {
+                    lnk.NavigateUrl = "/";
+                    lnk.Text = "Continue browsing";
+                }
+                else
+                {
+                    lnk.NavigateUrl = ReturnPage.Value;
+                }
+
+            }
+
         }
 
 

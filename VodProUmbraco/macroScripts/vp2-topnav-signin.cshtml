@@ -1,8 +1,8 @@
 ﻿@using VP2.businesslogic;
 @{
    VPMember m = VPMember.GetLoggedInUser();
-  
-   if (m != null)
+
+   if (HttpContext.Current.User.Identity.IsAuthenticated && m != null)
    {
         <li><span>Welcome @m.FirstName</span></li>
         <li><a href="/members/profile">Account Admin</a></li>
@@ -10,6 +10,5 @@
    else 
    {       
         <li><a href="/login">Sign In&nbsp;|&nbsp;Register</a></li>
-   } 
-    
+   }
 }

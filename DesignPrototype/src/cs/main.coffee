@@ -2,6 +2,7 @@ isArticleLoading = false
 isFeedLoading = false
 isNewsLoading = false
 isJobsLoading = false
+vpgrid = null
 
 ###
 
@@ -243,8 +244,16 @@ class RegWall
     _login() 
     _reg()
     
+    
+    
   login: () ->
-    bindEnter($('#signin'), $('#signin button[type="submit"]'));  
+
+  $('#signin .form-signin').keyup (event) ->
+      code = event.which;
+      if code is 13
+        $('#regwall-signin').trigger("click");
+        event.preventDefault();
+    
     $('#regwall-signin').click (e) ->
       e.preventDefault() 
       u = document.location + '?loggedin#premium';
@@ -266,10 +275,33 @@ class RegWall
         alert(error)
 
   reg: () ->
-    bindEnter($('#register'), $('#register button[type="submit"]'));  
+    $('#register .form-signin').keyup (event) ->
+      code = event.which;
+      if code is 13
+        $('#regwall-register').trigger("click");
+        event.preventDefault();
+    
     $('#regwall-register').click (e) ->
       e.preventDefault()
-      document.location = '/register?email=' + $('#regwall-email-reg').val() 
+      $('#regwall-signin-error').addClass("hidden")
+      u = '/register?email=' + $('#regwall-email-reg').val() + '&page=' + $('#regwall-page').val()
+      user = $('#regwall-email-reg').val(); 
+      data = { "a":"uc", "user":user} 
+      jqXHR = $.ajax( {
+        type: 'POST'
+        url:'/ajax-actions',
+        data: data,
+        dataType: 'JSON' 
+      })
+      jqXHR.done (json) ->
+        document.location = u if json.response == 'valid'
+        $('#regwall-signin-error').removeClass("hidden") if json.response == 'invalid'
+      jqXHR.error () ->
+        alert(error)   
+      
+     
+      
+      
 ###
 
 
@@ -341,6 +373,272 @@ class SearchLoader
     else
       $("#main .pager").show()
       $('.pager-loading').hide()
+
+###
+
+###
+class VP50GridInfoPanel 
+  constructor: (target) ->
+    @target = target
+  
+  template: (item) ->
+    t = "
+        <div id=\"info-panel\" data-id=\"" + item.id + "\">"
+
+
+    t += item.content
+            
+    t += "<div id=\"close-button\" class=\"nav-button\"><span class=\"fa fa-times\"></span></div>"
+
+    if item.nextid != -1
+      t += "<div id=\"nav-next\" class=\"nav-button\" data-nextid=\""+item.nextid+"\"><span class=\"fa fa-angle-right\"></span></div>"
+    
+    if item.previd != -1
+      t += "<div id=\"nav-previous\" class=\"nav-button\" data-previd=\""+item.previd+"\"><span class=\"fa fa-angle-left\"></span></div>"
+
+    t += "<div id=\"info-panel-border\"></div> 
+    </div>
+    "
+
+  render: (item) ->
+    @target.after this.template(item)
+
+    _this = this
+
+    $('#info-panel #close-button').click ->
+      _this.close()
+      vpgrid.unprepare()
+
+    $('#info-panel #nav-next').click ->
+      nextid = $(this).data('nextid')
+      next = $('#vp50-grid li[data-id="' + nextid + '"]')
+      nextindex = $('#vp50-grid li').index($(next))
+      vpgrid.prepare(nextid)
+      vpgrid.show(nextid,nextindex)
+
+    $('#info-panel #nav-previous').click ->
+      previd = $(this).data('previd')
+      prev = $('#vp50-grid li[data-id="' + previd + '"]')
+      previndex = $('#vp50-grid li').index($(prev))
+      vpgrid.prepare(previd)
+      vpgrid.show(previd,previndex)
+
+  close: () ->
+    if $('#info-panel').length > 0
+      $('#info-panel').remove()
+
+###
+
+###
+class VP50Grid
+
+  constructor: (grid) ->
+    @grid = grid
+    @screen = new Screen()
+    @numPerRow = 4
+    @panel
+
+  register: () ->
+    this.load()
+    $(window).on 'deviceWidthChange', =>
+     this.redraw()
+
+
+  unprepare: () ->
+    @grid.find('li.cell').each (i, el) ->
+        $(el).removeClass('expanded')
+        $(el).removeClass('deselected')
+
+  prepare: (id) ->
+    @grid.find('li.cell').each (i, el) ->
+      if $(el).data('id') != id 
+        $(el).removeClass('expanded')
+        $(el).addClass('deselected')
+      else
+        $(el).addClass('expanded')
+        $(el).removeClass('deselected')
+
+
+  show: (id, currentIndex) ->
+    # If the panel is already visible, hide it
+
+    load = true
+    _existingPanelId = -1
+
+    if $('#info-panel').length > 0
+      if($('#info-panel').data('id') isnt id)
+        _existingPanelId = $('#info-panel').data('id')
+        @panel.close()
+        load = true
+      else 
+        load = false
+    
+    if load
+
+      if @screen.screenSize is 'lg' or @screen.screenSize is 'md'
+        @numPerRow = 4
+      else if @screen.screenSize is 'sm'
+        @numPerRow = 3
+      else 
+        @numPerRow = 2
+
+      # find the next row end
+      _rem = ((currentIndex+1) % @numPerRow) 
+
+      _target = $('#vp50-grid li[data-id="' + id + '"]')
+      _content = $(_target).find('.cell-info-panel').html()
+
+      _nextid = -1
+      if $(_target).next().length > 0
+        _nextid = $(_target).next().data('id')
+
+      _previd = -1
+      if $(_target).prev().length > 0
+        _previd = $(_target).prev().data('id')
+
+
+      if _rem > 0
+        for i in [1..@numPerRow - _rem] by 1
+          try
+            if $(_target).next().length > 0
+              _target = $(_target).next() 
+          catch e
+            # Funny number at the end of a row
+   
+      @panel = new VP50GridInfoPanel($(_target))
+      
+      @panel.render({ 
+        "id":id,
+        "nextid":_nextid,
+        "previd":_previd,
+        "content": _content
+      })
+      
+      if _existingPanelId isnt -1
+        _existingPanelRow = $('#vp50-grid li[data-id="' + _existingPanelId + '"]').data('row')
+        _newPanelRow = $('#vp50-grid li[data-id="' + id + '"]').data('row')
+        if _existingPanelRow isnt _newPanelRow
+          location.hash = $('#vp50-grid li[data-id="' + id + '"]').prop('id')
+
+
+  load: () ->
+    _grid = @grid
+    _screen = @screen
+    $this = this
+
+    #No Right Column
+    $('#promotion').remove()
+    $('#main').removeClass().addClass('xs-col-12')
+
+
+
+    # Set the scroll event on the ads
+    $(window).scroll ->
+      $this.showHideAds()
+
+    this.redraw()
+
+    cells = _grid.find('li.cell')
+    cells.each (index, e) =>  
+      $(e).mouseenter () ->
+        $(this).find('img').removeClass('desaturate')
+
+      $(e).mouseleave () ->
+        $(this).find('img').addClass('desaturate')
+
+      $(e).click () ->
+        _id = $(this).data('id');
+        _index = $('#vp50-grid li').index($(this))
+        $this.prepare(_id)
+        $this.show(_id, _index)
+        showHideAds()
+        
+
+  showHideAds: () ->
+    _screen = @screen
+    _grid = @grid
+
+    $ads = $('#vp50-ads')
+    $gridfoot = $('#vp50-foot')
+
+    gridInView = _screen.isScrolledIntoView($(_grid), false)
+    gridfootInView = _screen.isScrolledIntoView($gridfoot ,false)
+    if gridInView or gridfootInView
+      $ads.addClass('on-screen')
+      if !gridfootInView
+        $ads.removeClass('inline').addClass('floating')
+      else
+        $ads.addClass('inline').removeClass('floating')
+    else
+      $ads.removeClass('on-screen').removeClass('floating').removeClass('inline')
+
+
+  redraw: () ->
+    _grid = @grid
+
+    if @screen.screenSize is 'lg' or @screen.screenSize is 'md'
+      @numPerRow = 4
+    else if @screen.screenSize is 'sm'
+      @numPerRow = 3
+    else 
+      @numPerRow = 2
+
+    _currentRow = 0
+    _numPerRow = @numPerRow
+
+    _grid.find('li.cell').each (i, el) ->
+      $(el).removeClass('expanded')
+      $(el).removeClass('deselected')
+      
+      if  i >= (_currentRow * _numPerRow) + _numPerRow
+        _currentRow++
+      $(el).data('row',_currentRow)
+
+    if @panel
+      @panel.close()
+###
+
+
+###
+class Screen
+
+  constructor: () ->
+    @screenSize = 'xs'
+    this.detectDeviceWidthChange()
+    $s = this
+    $(window).resize () ->
+      $s.detectDeviceWidthChange()
+
+  detectDeviceWidthChange: () ->
+    width = $(window).width()
+
+    if width < 768
+      dw = 'xs'
+    else if width < 992
+      dw = 'sm'
+    else if width < 1200
+      dw = 'md'
+    else
+      dw = 'lg'
+    
+
+    if(dw != @screenSize)
+      @screenSize = dw
+      $(window).trigger('deviceWidthChange', [@screenSize])
+
+   
+   isScrolledIntoView: (elem, requireEntirelyVisible) ->
+    $elem = $(elem)
+    $window = $(window)
+    docViewTop = $window.scrollTop()
+    docViewBottom = docViewTop + $window.height()
+    elemTop = $elem.offset().top
+    elemBottom = elemTop + $elem.height()
+    if(!requireEntirelyVisible)
+      return ((( elemTop >= docViewTop) && (elemTop <= docViewBottom)) ||  ((elemTop <= docViewTop && elemBottom >= docViewBottom)) || ((elemBottom >= docViewTop) && (elemBottom <= docViewBottom))) 
+    else
+      return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop))
+
 
 ###
 
@@ -502,6 +800,10 @@ $(document).ready () ->
 
   if $('.form-registration').length > 0
     $('.form-registration [type="submit"]').addClass("btn btn-lg btn-primary")
+    
+    if $('.form-registration span.error').length > 0
+      $('.alert-warning').removeClass('hidden')
+      
     if $('.orgtype').length > 0
       $('.orgtype').change (e) ->
         orgtype = $(this).val()
@@ -523,14 +825,19 @@ $(document).ready () ->
   if $('#vui-service-sheet').length > 0
     snap = new VUIDailySnapshot()
     snap.register()
-    
+  
+  if $('#vp50-grid').length > 0
+    vpgrid = new VP50Grid($('#vp50-grid'))
+    vpgrid.register()
+
   jQuery.easing.def = 'easeOutQuart';
-  $().UItoTop({ easingType: 'easeOutQuart' });
+ 
+ # $().UItoTop({ easingType: 'easeOutQuart' });
   
-  jQuery.event.special.swipe.settings = {
-    threshold: 0.1,
-    sensitivity: 9
-  };
-  
+ # jQuery.event.special.swipe.settings = {
+ #   threshold: 0.1,
+ #   sensitivity: 9
+ # };
+ 
   return true
   

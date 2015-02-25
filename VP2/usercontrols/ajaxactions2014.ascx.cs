@@ -19,6 +19,7 @@ namespace VP2.usercontrols
                 case "features": LoadStories(ArticleList.TYPE_FEATURE); break;
                 case "news": LoadStories(ArticleList.TYPE_NEWS); break;
                 case "l": Login(); break;
+                case "uc": UserNameCheck(); break; // Username Check
                 case "sr": Search(); break;
                 case "jobs": LoadJobs(); break;
             }
@@ -93,13 +94,35 @@ namespace VP2.usercontrols
             string rUser = Request["rem"];
 
             bool remember = (!String.IsNullOrEmpty(rUser) && rUser.Equals("Y"));
-            if (VPMember.MemberLogin(user, password, remember))
+            if(String.IsNullOrEmpty(user) || String.IsNullOrEmpty(password))
+            {
+                Response.Write(@"{ ""response"":""invalid"",""data"":""Incorrect email / password combination. Please try again"" }");
+            }
+            else if (VPMember.MemberLogin(user, password, remember))
             {
                 Response.Write(@"{ ""response"":""valid"",""data"":""/vui3/"" }");
             }
             else
             {
-                Response.Write(@"{ ""response"":""invalid"",""data"":""Incorrect username / password combination. Please try again"" }");
+                Response.Write(@"{ ""response"":""invalid"",""data"":""Incorrect email / password combination. Please try again"" }");
+            }
+        }
+
+
+        private void UserNameCheck()
+        {
+            string user = Request["user"];
+
+            if (!String.IsNullOrEmpty(user))
+            {
+                if (VPMember.MemberExists(user))
+                {
+                    Response.Write(@"{ ""response"":""invalid"" }");
+                }
+                else
+                {
+                    Response.Write(@"{ ""response"":""valid"" }");
+                }
             }
         }
 

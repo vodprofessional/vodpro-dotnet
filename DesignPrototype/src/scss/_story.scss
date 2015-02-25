@@ -1,6 +1,10 @@
 
 #column-full {
 
+  a.anchor  {
+    display: block; position: relative; top: -125px; visibility: hidden;
+  }
+
   #disqus_thread {
     padding-top: 1em;
     border-top: $dotted-border;
@@ -65,11 +69,13 @@
     padding: 8px;
     box-shadow: 0 0 7px #CCCCCC;
   }
-  #vp2-regwall {
+  
+  #vp2-regwall, #vp2-premium {
     background: #f0f0f0;
     border: 1px solid #ddd;
     padding:15px;
     border-radius: 10px;
+    margin-top: 25px;
     h2 {
       margin-top: 0;
       color: #f00;
@@ -87,7 +93,34 @@
       border-radius: 0 0 5px 5px;
     }
     
+    .form-error {
+      color: #f00;
+      font-weight:bold;
+    } 
+    
   }
+  #vp2-premium {
+    a.member-link {
+      font-weight: normal;
+      padding-left: 35px;
+      font-size:1.3em;
+      display:block;
+      margin: 0.4em 0;
+      &.pdf {
+        background: url('../img/lg-pdf.png') top left no-repeat;
+      }
+      &.doc {
+        background: url('../img/lg-doc.png') top left no-repeat;
+      }
+      &.xls {
+        background: url('../img/lg-xls.png') top left no-repeat;
+      }
+      &.ppt {
+        background: url('../img/lg-ppt.png') top left no-repeat;
+      }
+    }
+  }
+  
   
   .article-lead {
     font-size: 1.3em;

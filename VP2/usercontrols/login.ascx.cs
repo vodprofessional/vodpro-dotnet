@@ -21,7 +21,20 @@ namespace VP2.usercontrols
 
             if (!IsPostBack)
             {
-                plcFormForgot.Visible = false;
+                if (Request["page"] != null)
+                {
+                    ReturnPage.Value = Request["page"].ToString();
+                }
+
+                if (!String.IsNullOrEmpty(Request.QueryString["forgot"]))
+                {
+                    plcFormForgot.Visible = true;
+                    plcFormLogin.Visible = false;
+                }
+                else
+                {
+                    plcFormForgot.Visible = false;
+                }
             }
 
             txtLoginEmail.Attributes["type"] = "email";
@@ -48,8 +61,6 @@ namespace VP2.usercontrols
             plcFormForgot.Visible = false;
             plcFormLogin.Visible = true;
         }
-
-
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
@@ -86,6 +97,12 @@ namespace VP2.usercontrols
                 if (VPMember.RecoverPassword(email))
                 {
                     plcPwdSent.Visible = true;
+
+                    if (!String.IsNullOrEmpty(ReturnPage.Value))
+                    {
+                        lnkBackToArticle.NavigateUrl = ReturnPage.Value;
+                        plcBackToPage.Visible = true;
+                    }
                 }
                 else
                 {
@@ -101,7 +118,7 @@ namespace VP2.usercontrols
         protected void btnReg_Click(object sender, EventArgs e)
         {
             string email = txtRegEmail.Text;
-            Response.Redirect("/register?email=" + Server.UrlEncode(email), true);
+            Response.Redirect("/register?email=" + Server.UrlEncode(email) + "&page=" + ReturnPage.Value, true);
         }
     }
 }

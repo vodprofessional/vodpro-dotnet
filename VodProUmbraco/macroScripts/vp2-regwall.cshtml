@@ -7,6 +7,7 @@
 }
 @helper RegWall(string message)
 {
+    string currentpage = HttpContext.Current.Request.Url.ToString();
     <div id="vp2-regwall" class="signuplogin">
             
         <h2>For Members Only</h2>
@@ -31,12 +32,20 @@
                         <input type="checkbox" value="regwall-remember-me"> Remember me
                     </label>-->
                     <button class="btn btn-lg btn-primary btn-block" type="submit" id="regwall-signin">Sign in</button>
+                    <p></p>
+                    <p><a href="/login?forgot=passwd&page=@(currentpage)">Forgotten your password?</a></p>
                 </div>
             </div>
             <div class="tab-pane" id="register">
                 <div class="form-signin" role="form">
                     <input type="email" class="form-control" id="regwall-email-reg" placeholder="Email address" required>
+                    
+                    <div class="form-error hidden" id="regwall-signin-error">That email address is already in use so it looks like you may have already registered. 
+                        Try logging in using the Sign In tab in this panel. Alternatively, have you <a href="/login?forgot=passwd&page=@(currentpage)">forgotten your password?</a></div>
+                    
                     <button class="btn btn-lg btn-primary btn-block" type="submit" id="regwall-register">Start Registration</button>
+                    <input type="hidden" id="regwall-page" value="@(currentpage)" />
+
                 </div>
             </div>
         </div>
@@ -45,10 +54,14 @@
 }
 
 @helper SpecialContent()
-    {
-  <h2 id="premium" class="membercontent"></h2>
-  <p>@Html.Raw(umbraco.library.RenderMacroContent(@Model.memberStory.ToString(), @Model.Id))</p>
-    // @Logout()
+{
+    <a id="premium" class="anchor"></a>
+    <div id="vp2-premium" class="content clearfix">
+        <h2 class="membercontent">Members Content</h2>
+           
+          <p>@Html.Raw(umbraco.library.RenderMacroContent(@Model.memberStory.ToString(), @Model.Id))</p>
+
+    </div>
 }
 
 @helper Logout()

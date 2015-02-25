@@ -1,0 +1,77 @@
+﻿@using umbraco.MacroEngines;
+@{
+  var content50VPID = @Parameter.content50VP;
+  
+  //var hideResults;  
+  if(content50VPID != null)
+  {
+
+    DynamicNode vp50node = new DynamicNode(content50VPID);
+    
+    List<DynamicNode> vp50list = vp50node.Descendants("VP50").Items.OrderBy(n => Int32.Parse(n.GetProperty("rank").ToString())).ToList<DynamicNode>();
+    
+    <div id="vp50-grid" class="clearfix">              
+        <ul>
+    @foreach(DynamicNode entry in vp50list)
+    {
+        string portrait = entry.GetProperty("portrait").ToString();
+        string previousRank = "New Entry";
+        if (!String.IsNullOrEmpty(entry.GetProperty("lastYearsRank").ToString()))
+        {
+            previousRank = entry.GetProperty("lastYearsRank").ToString();
+        }
+        
+        <li id="cell_@(entry.GetProperty("rank"))" class="cell" data-id="@(entry.GetProperty("rank"))">
+            <div class="cell-inner">
+                <div class="cell-image-wrapper">
+                    <img class="desaturate" src="@(portrait)" />
+                </div>
+                <div class="cell-number">@(entry.GetProperty("rank"))</div>
+                <div class="cell-info">
+                    <h3>@(entry.GetProperty("name"))</h3>
+                    <p>@(entry.GetProperty("jobTitle"))</p>
+                </div>
+            </div>
+            <div class="cell-info-panel">
+                <div class="info-panel-inner">
+                    <div id="main-image-container">
+                        <img alt="@(entry.GetProperty("name")) - @(entry.GetProperty("jobTitle"))" src="@(portrait)" class="main-image" />
+                    </div>
+                    <span class="ranking">@(entry.GetProperty("rank"))</span>
+                    <h2>@(entry.GetProperty("name"))</h2>
+                    <h3>@(entry.GetProperty("jobTitle"))</h3>
+                    <h4>Previous rank: <strong>@(previousRank)</strong></h4>
+                    <p>@(entry.GetProperty("briefDesription"))</p>
+                    <p>@(entry.GetProperty("longDescription"))</p>
+                </div>
+            </div>
+        </li>        
+       
+    }
+        </ul>
+    </div>                                
+    <span id="vp50-foot"></span>                                                               
+    <div id="vp50-ads" class="on-screen inline">
+    @if (@Model.AncestorOrSelf().sponsors.GetType() == typeof(umbraco.MacroEngines.DynamicXml))
+    {
+        var sponsorIDs = @Model.AncestorOrSelf().sponsors.GetEnumerator();
+        <ul>
+        @foreach (var sponsorID in @sponsorIDs)
+        {
+            dynamic sponsor = @Model.NodeById(@sponsorID.InnerText);
+            string sponsorurl = "#";
+            if (sponsor.sponsorStory.GetType() == typeof(System.Int32))
+            {
+                sponsorurl = umbraco.library.NiceUrl(sponsor.sponsorStory);
+            }
+            else if (sponsor.sponsorUrl.GetType() == typeof(System.String))
+            {
+                sponsorurl = @sponsor.sponsorUrl;
+            }
+            <li><a href="@sponsorurl"><img src="@sponsor.sponsorImage" /></a></li>
+        }
+        </ul>
+    }   
+    </div>
+  }
+}
