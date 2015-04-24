@@ -3,7 +3,6 @@ isFeedLoading = false
 isNewsLoading = false
 isJobsLoading = false
 vpgrid = null
-
 ###
 
 ###
@@ -406,7 +405,9 @@ class VP50GridInfoPanel
     _this = this
 
     $('#info-panel #close-button').click ->
+      
       _this.close()
+      location.hash = 'topof_' + $('#vp50-grid li[data-id="' + item.id + '"]').prop('id')
       vpgrid.unprepare()
 
     $('#info-panel #nav-next').click ->
@@ -475,7 +476,9 @@ class VP50Grid
     
     if load
 
-      if @screen.screenSize is 'lg' or @screen.screenSize is 'md'
+      if @screen.screenSize is 'lg' 
+        @numPerRow = 5
+      else if @screen.screenSize is 'md'
         @numPerRow = 4
       else if @screen.screenSize is 'sm'
         @numPerRow = 3
@@ -514,12 +517,12 @@ class VP50Grid
         "content": _content
       })
       
-      if _existingPanelId isnt -1
-        _existingPanelRow = $('#vp50-grid li[data-id="' + _existingPanelId + '"]').data('row')
-        _newPanelRow = $('#vp50-grid li[data-id="' + id + '"]').data('row')
-        if _existingPanelRow isnt _newPanelRow
-          location.hash = $('#vp50-grid li[data-id="' + id + '"]').prop('id')
-
+      #if _existingPanelId isnt -1
+      #  _existingPanelRow = $('#vp50-grid li[data-id="' + _existingPanelId + '"]').data('row')
+      #  _newPanelRow = $('#vp50-grid li[data-id="' + id + '"]').data('row')
+      #  if _existingPanelRow isnt _newPanelRow
+      location.hash = 'jumpto_' + $('#vp50-grid li[data-id="' + id + '"]').prop('id')
+          
 
   load: () ->
     _grid = @grid
@@ -576,7 +579,9 @@ class VP50Grid
   redraw: () ->
     _grid = @grid
 
-    if @screen.screenSize is 'lg' or @screen.screenSize is 'md'
+    if @screen.screenSize is 'lg'
+      @numPerRow = 5
+    else if @screen.screenSize is 'md'
       @numPerRow = 4
     else if @screen.screenSize is 'sm'
       @numPerRow = 3

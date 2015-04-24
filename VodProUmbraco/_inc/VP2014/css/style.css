@@ -371,6 +371,11 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover, header a
 @media (max-width: 767px) { #vp50-grid ul .cell { width: 50%; padding-bottom: 66.666666666%; } }
 @media (min-width: 768px) { #vp50-grid ul .cell { width: 33.333333333%; padding-bottom: 50%; } }
 @media (min-width: 992px) { #vp50-grid ul .cell { width: 25%; padding-bottom: 33.333333333%; } }
+@media (min-width: 1200px) { #vp50-grid ul .cell { width: 20%; padding-bottom: 27%; } }
+#vp50-grid ul .cell .cell-top { position: absolute; top: -130px; }
+#vp50-grid ul .cell .cell-jump { position: absolute; bottom: 50px; }
+@media (min-width: 768px) { #vp50-grid ul .cell .cell-jump { bottom: 110px; } }
+@media (min-width: 1200px) { #vp50-grid ul .cell .cell-jump { bottom: 220px; } }
 #vp50-grid ul .cell .cell-info-panel { display: none; }
 #vp50-grid ul .cell .cell-inner { bottom: 12px; cursor: pointer; left: 0; position: absolute; right: 12px; top: 0; }
 #vp50-grid ul .cell .cell-inner img { left: 0; position: relative; top: 0; width: 100%; }
@@ -392,7 +397,7 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover, header a
 @media (max-width: 767px) { #vp50-grid #info-panel .info-panel-inner #main-image-container { width: 0; height: 0; } }
 @media (min-width: 768px) { #vp50-grid #info-panel .info-panel-inner #main-image-container { width: 33%; min-height: 33%; padding-bottom: 280px; margin-right: 20px; } }
 @media (min-width: 992px) { #vp50-grid #info-panel .info-panel-inner #main-image-container { width: 40%; min-height: 370px; padding-bottom: 20px; margin-right: 20px; } }
-@media (min-width: 1200px) { #vp50-grid #info-panel .info-panel-inner #main-image-container { min-height: 450px; } }
+@media (min-width: 1200px) { #vp50-grid #info-panel .info-panel-inner #main-image-container { width: 33%; min-height: 350px; } }
 #vp50-grid #info-panel .info-panel-inner #main-image-container .main-image { width: 100%; }
 #vp50-grid #info-panel .info-panel-inner .ranking { font-size: 108px; line-height: 0.85em; margin-right: 10px; padding-bottom: 50px; vertical-align: top; float: left; }
 #vp50-grid #info-panel .nav-button { border: 1px solid #666; border-radius: 50%; cursor: pointer; height: 44px; opacity: 0.7; position: absolute; top: 5px; width: 44px; text-align: center; color: #666; }
@@ -406,6 +411,11 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover, header a
 #vp50-grid #info-panel #close-button { right: 40px; }
 #vp50-grid #info-panel #close-button { background-image: url("images/close-44.png"); right: 20px; }
 #vp50-grid #info-panel #info-panel-border { border-top: 4px solid #333; bottom: 0; left: 0; position: absolute; width: 100%; }
+#vp50-grid #info-panel .social-container { font-size: 1.2em; }
+#vp50-grid #info-panel .social-container a { color: #999; }
+#vp50-grid #info-panel .social-container a.social--twitter:hover { color: #00aced; }
+#vp50-grid #info-panel .social-container a.social--linkedin:hover { color: #4875B4; }
+#vp50-grid #info-panel .social-container a.social--outbound:hover { color: #a00; }
 
 footer { min-height: 150px; padding-top: 20px; background-color: #181829; color: #CCC; text-align: center; font-size: 1.1em; }
 @media (min-width: 767px) { footer { margin-top: 2em; } }

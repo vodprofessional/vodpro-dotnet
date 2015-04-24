@@ -1,7 +1,4 @@
 
-
-
-
 #vp50-ads {
     display: none;
     background-color:#eee;
@@ -16,15 +13,24 @@
         li {
             list-item-style:none;
             display: table-cell;
-            width:20%;
             padding: 10px;
             text-align: center;
+            @media (max-width: 640px) { 
+                display:inline-block; 
+                width:32%; 
+                padding: 6px;  
+            }
             
             img {
                 max-height:60px;
-                
-                @media (max-width: 640px) {
-                  width:100%;
+                @media (max-width: 767px) { 
+                    width: 100%; 
+                    max-width: 103px !IMPORTANT;
+                }
+                @media (max-width: 640px) { 
+                    max-height: 50px; 
+                    width: 100%; 
+                    max-width: 88px !IMPORTANT; 
                 }
             }
         }
@@ -88,6 +94,11 @@
         position: relative;
         vertical-align: top;
         
+        @media (max-width: 480px) {
+          width: 50%;
+          padding-bottom: 66.666666666%;
+        }
+        
         @media (max-width: 767px) {
           width: 50%;
           padding-bottom: 66.666666666%;
@@ -99,8 +110,24 @@
         }
         @media (min-width: 992px) {
           width: 25%;
-          padding-bottom: 33.333333333%;
+          padding-bottom: 37%;
         }
+        @media (min-width: 1200px) {
+          width: 20%;
+          padding-bottom: 30%;
+        }
+        .cell-top { position:absolute; top:-130px; }
+        .cell-jump { 
+            position:absolute; 
+            bottom:50px; 
+            @media (min-width: 768px) {
+                bottom:110px; 
+            }   
+            @media (min-width: 1200px) {
+                bottom:220px; 
+            }  
+        }
+        
         .cell-info-panel { display: none; }      
         
         .cell-inner {
@@ -148,21 +175,36 @@
                 text-align: center;
                 top: 0;
                 line-height:1em;
-                background: none repeat scroll 0 0 #b82266;
+                background: none repeat scroll 0 0 #1fa6de;
             }
             .cell-info {
                 color: #fff;
-                height: 50px;
                 line-height: 1.2em;
                 position: absolute;
+                bottom: 14px;
                 width: 100%;
+                padding: 0 5px;
+                
+                @media (max-width: 480px) {
+                    font-size: 0.9em;
+                    line-height: 1em;
+                }
                 
                 h3 { 
                     margin: 0; 
                     padding: 10px 5px 0; 
+                    font-size: 1.5em;
+                    
+                    @media (max-width: 480px) {
+                        font-size: 1.3em;
+                    }
                     @media (max-width: 767px) {
+                        font-size: 1.4em;
                         padding-top: 3px;
                     }
+                }
+                .red {
+                    color:#a00;
                 }
                 p  { margin: 0; padding: 0px 5px; } 
             }            
@@ -176,9 +218,9 @@
         
         &:not(.deselected) { 
             .cell-inner  { 
-                background: none repeat scroll 0 0 #b82266;
+                background: none repeat scroll 0 0 #1fa6de;
                 .cell-image-wrapper:after {
-                    background: none repeat scroll 0 0 rgba(184, 34, 102, 0.2);
+                    background: none repeat scroll 0 0 rgba(31, 166, 222, 0.2);
                     display: block;
                 } 
             } 
@@ -234,7 +276,8 @@
               margin-right: 20px;
             }
             @media (min-width: 1200px) {
-              min-height: 450px;
+              width: 33%;
+              min-height: 350px;
             }
             
             .main-image {
@@ -313,6 +356,22 @@
         left: 0;
         position: absolute;
         width: 100%;
+    }
+    .social-container {
+        font-size: 1.2em;
+        
+        a {
+            color: #999;
+            &.social--twitter:hover {
+                color:#00aced;
+            }    
+            &.social--linkedin:hover {
+                color:#4875B4;
+            }
+            &.social--outbound:hover {
+                color:#a00;
+            }
+        }
     }
   }
 }

@@ -624,6 +624,7 @@
       _this = this;
       $('#info-panel #close-button').click(function() {
         _this.close();
+        location.hash = 'topof_' + $('#vp50-grid li[data-id="' + item.id + '"]').prop('id');
         return vpgrid.unprepare();
       });
       $('#info-panel #nav-next').click(function() {
@@ -694,7 +695,7 @@
     };
 
     VP50Grid.prototype.show = function(id, currentIndex) {
-      var e, i, load, _content, _existingPanelId, _existingPanelRow, _i, _newPanelRow, _nextid, _previd, _ref3, _rem, _target;
+      var e, i, load, _content, _existingPanelId, _i, _nextid, _previd, _ref3, _rem, _target;
       load = true;
       _existingPanelId = -1;
       if ($('#info-panel').length > 0) {
@@ -707,7 +708,9 @@
         }
       }
       if (load) {
-        if (this.screen.screenSize === 'lg' || this.screen.screenSize === 'md') {
+        if (this.screen.screenSize === 'lg') {
+          this.numPerRow = 5;
+        } else if (this.screen.screenSize === 'md') {
           this.numPerRow = 4;
         } else if (this.screen.screenSize === 'sm') {
           this.numPerRow = 3;
@@ -743,13 +746,7 @@
           "previd": _previd,
           "content": _content
         });
-        if (_existingPanelId !== -1) {
-          _existingPanelRow = $('#vp50-grid li[data-id="' + _existingPanelId + '"]').data('row');
-          _newPanelRow = $('#vp50-grid li[data-id="' + id + '"]').data('row');
-          if (_existingPanelRow !== _newPanelRow) {
-            return location.hash = $('#vp50-grid li[data-id="' + id + '"]').prop('id');
-          }
-        }
+        return location.hash = 'jumpto_' + $('#vp50-grid li[data-id="' + id + '"]').prop('id');
       }
     };
 
@@ -807,7 +804,9 @@
     VP50Grid.prototype.redraw = function() {
       var _currentRow, _grid, _numPerRow;
       _grid = this.grid;
-      if (this.screen.screenSize === 'lg' || this.screen.screenSize === 'md') {
+      if (this.screen.screenSize === 'lg') {
+        this.numPerRow = 5;
+      } else if (this.screen.screenSize === 'md') {
         this.numPerRow = 4;
       } else if (this.screen.screenSize === 'sm') {
         this.numPerRow = 3;

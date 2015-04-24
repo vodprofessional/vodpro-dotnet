@@ -15,27 +15,35 @@
     @foreach(DynamicNode entry in vp50list)
     {
         string portrait = entry.GetProperty("portrait").ToString();
+        if (String.IsNullOrEmpty(portrait))
+        {
+            portrait = "";
+        }
         string previousRank = "New Entry";
         if (!String.IsNullOrEmpty(entry.GetProperty("lastYearsRank").ToString()))
         {
             previousRank = entry.GetProperty("lastYearsRank").ToString();
         }
         
+        
         <li id="cell_@(entry.GetProperty("rank"))" class="cell" data-id="@(entry.GetProperty("rank"))">
+            <span id="topof_cell_@(entry.GetProperty("rank"))" class="cell-top"></span>
             <div class="cell-inner">
                 <div class="cell-image-wrapper">
-                    <img class="desaturate" src="@(portrait)" />
+                    <img class="desaturate vp-nolightbox" src="@(portrait)"/>
                 </div>
                 <div class="cell-number">@(entry.GetProperty("rank"))</div>
                 <div class="cell-info">
                     <h3>@(entry.GetProperty("name"))</h3>
                     <p>@(entry.GetProperty("jobTitle"))</p>
                 </div>
+                <span id="jumpto_cell_@(entry.GetProperty("rank"))" class="cell-jump"></span>
             </div>
             <div class="cell-info-panel">
+                
                 <div class="info-panel-inner">
                     <div id="main-image-container">
-                        <img alt="@(entry.GetProperty("name")) - @(entry.GetProperty("jobTitle"))" src="@(portrait)" class="main-image" />
+                        <img alt="@(entry.GetProperty("name")) - @(entry.GetProperty("jobTitle"))" src="@(portrait)" class="main-image vp-nolightbox" />
                     </div>
                     <span class="ranking">@(entry.GetProperty("rank"))</span>
                     <h2>@(entry.GetProperty("name"))</h2>
@@ -43,6 +51,42 @@
                     <h4>Previous rank: <strong>@(previousRank)</strong></h4>
                     <p>@(entry.GetProperty("briefDesription"))</p>
                     <p>@(entry.GetProperty("longDescription"))</p>
+                    <div class="social-container">
+                        @if(!String.IsNullOrEmpty(entry.GetProperty("twitterHandle").ToString()))
+                        {
+                            string tw = entry.GetProperty("twitterHandle").ToString().Replace("@","");
+                            
+                        <a href="https://twitter.com/@(tw)" class="social--twitter" target="vpsocial" title="Connect with @@@(tw) on Twitter">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></a>
+                        }
+                        @if (!String.IsNullOrEmpty(entry.GetProperty("linkedInURL").ToString()))
+                        {
+                            string linkedInURL = entry.GetProperty("linkedInURL").ToString();
+                            if (!(linkedInURL.StartsWith("http://") || linkedInURL.StartsWith("https://")))
+                            {
+                                linkedInURL = "http://" + linkedInURL;
+                            }
+                        <a href="@(linkedInURL)" class="social--linkedin" target="vpsocial" title="Connect with @(entry.GetProperty("name")) on LinkedIn">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-square fa-stack-2x"></i>
+                            <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i></span></a>
+                        }
+                        @if(!String.IsNullOrEmpty(entry.GetProperty("moreInfoLink").ToString()))
+                        {
+                            string moreInfoLink = entry.GetProperty("moreInfoLink").ToString().Replace("@", "");
+                            if (!(moreInfoLink.StartsWith("http://") || moreInfoLink.StartsWith("https://")))
+                            {
+                                moreInfoLink = "http://"+moreInfoLink;
+                            }
+                            
+                        <a href="@(moreInfoLink)" class="social--outbound" target="vpsocial" title="@(entry.GetProperty("name")) on the web">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-square fa-stack-2x"></i>
+                            <i class="fa fa-external-link fa-stack-1x fa-inverse"></i></span></a> 
+                        }
+                    </div>
                 </div>
             </div>
         </li>        
