@@ -3,3 +3,6 @@ SanitiseDatabase/Properties/AssemblyInfo.cs
 SanitiseDatabase/SanitiseDatabase.csproj
 VodProUmbraco/App_Data/packages/created/createdPackages.config
 VodProUmbraco/media
+Backup
+Backup1
+.vs
