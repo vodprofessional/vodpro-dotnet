@@ -31,3 +31,15 @@ font-weight:normal;  font-size:1.3em; font-style:italic;
 margin: 10px; border-radius: 8px; border: 1px solid #eaeaea; padding: 8px; box-shadow: 0 0 7px #CCCCCC;
 }
 
+.width30 {
+width:30%;
+}
+
+.width25 {
+width:25%;
+}
+
+bio {
+overflow:auto; clear:left;
+}
+

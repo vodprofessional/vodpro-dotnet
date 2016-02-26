@@ -4,8 +4,7 @@
 
    if (HttpContext.Current.User.Identity.IsAuthenticated && m != null)
    {
-        <li><span>Welcome @m.FirstName</span></li>
-        <li><a href="/members/profile">Account Admin</a></li>
+        <li><a href="/members/profile">Welcome @m.FirstName</a></li>
    }
    else 
    {       

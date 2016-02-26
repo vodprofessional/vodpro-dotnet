@@ -70,12 +70,12 @@
   See our <a href="http://www.vodprofessional.com/about-us/terms-conditions/">terms and conditions</a> and <a href="http://www.vodprofessional.com/about-us/privacy-policy/">privacy policy</a> for more details.
       </p>
       
-   <p>   
-      <label class="checkbox">
+      <!--
+   <p>   <label class="checkbox">
               <asp:CheckBox runat="server" ID="chkAccept" Checked="false"/>
               Tick here if you do want to receive selected email promotions from
               external companies.</label>
-      </p>
+      </p>-->
       </div>
       
     </div>
@@ -419,18 +419,21 @@ and is necessary if you want to submit jobs or directory listings.
               For reference, your username is <em>always</em> your registered email address. You can change your password and other details
               through <a href="/members/profile">account admin</a>.
 
-          
               <!--
               We just sent a verification email to the address you provided (you may need 
               to check your Junk mail folder). Please click on the link in the email to complete your registration. 
               -->
             </p>
-
+            
             <asp:PlaceHolder runat="server" ID="plcBackToPage" Visible="false">
                 <p>
-                    <asp:HyperLink runat="server" ID="lnkBackToArticle">Back to article</asp:HyperLink>
+                    <asp:HyperLink runat="server" ID="lnkBackToArticle" CssClass="btn btn-primary">Back to article</asp:HyperLink>
                 </p>
             </asp:PlaceHolder>
+            <p><a title="Profile" href="/members/profile" class="btn btn-primary">Edit your account</a></p>
+            <p><a title="Add Event" href="/calendar" class="btn btn-primary">Add an event to the calendar</a></p>
+
+            <p>If you have any questions about membership of VOD Professional, please <a href="/contact-us" title="Contact us">contact us</a>.</p>
 
         </div>
       </ContentTemplate>

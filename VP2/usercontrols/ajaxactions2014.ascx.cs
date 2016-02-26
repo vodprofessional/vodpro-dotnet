@@ -22,6 +22,8 @@ namespace VP2.usercontrols
                 case "uc": UserNameCheck(); break; // Username Check
                 case "sr": Search(); break;
                 case "jobs": LoadJobs(); break;
+                case "events": LoadEvents(); break;
+                case "pubevt": PublishEvent(); break;
             }
         }
 
@@ -149,11 +151,63 @@ namespace VP2.usercontrols
             }
         }
 
+        private void LoadEvents()
+        {
+            try
+            {
+                List<CalendarItem> events = CalendarItem.GetEvents("PUBLIC");
+                List<string> jsonevents = new List<string>();
+                foreach(CalendarItem evt in events)
+                {
+                    jsonevents.Add(evt.AsJSON);
+                }
+                Response.Write(@"{""success"":1, ""result"": [" + String.Join(",", jsonevents) + "] }");
+            }
+            catch (Exception ex)
+            {
+                Response.Write(WrapJSON("invalid", ex.Message));
+            }
+        }
+
+        private void PublishEvent()
+        {
+            try
+            {
+                int id = 0;
+
+                if (Int32.TryParse(Request["id"], out id))
+                {
+                    CalendarItem evt = new CalendarItem() { ID = id };
+                    if (evt.Publish())
+                    {
+                        evt.Mode ="PUBLIC";
+                        evt.Init();
+                        Response.Write(WrapJSON("valid", @""""+evt.Url+@""""));
+                    }
+                    else
+                    {
+                        Response.Write(WrapJSON("invalid", "Couldn't publish"));
+                    }
+                }
+                else
+                {
+                    Response.Write(WrapJSON("invalid", "No ID"));
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error publishing event", ex);
+                Response.Write(WrapJSON("invalid", ex.Message));
+            }
+        }
 
         private string WrapJSON(string response, string data)
         {
             string json = @"{{ ""response"":""{0}"", ""data"": {1} }}";
             return String.Format(json, response, data);
         }
+
+        private static log4net.ILog log = log4net.LogManager.GetLogger(typeof(CalendarItem));
+
     }
 }

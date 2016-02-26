@@ -14,43 +14,56 @@
         <ul>
     @foreach(DynamicNode entry in vp50list)
     {
-        string portrait = entry.GetProperty("portrait").ToString();
-        if (String.IsNullOrEmpty(portrait))
-        {
-            portrait = "";
-        }
-        string previousRank = "New Entry";
-        if (!String.IsNullOrEmpty(entry.GetProperty("lastYearsRank").ToString()))
-        {
-            previousRank = entry.GetProperty("lastYearsRank").ToString();
-        }
+        string rank = "";
+		string name = "";
+		string jobTitle = "";
+		string briefDesc = "";
+		string longDesc = "";
+        string portrait = "";
+		string previousRank = "New Entry";
+		
+		try
+		{
+			if (!String.IsNullOrEmpty(entry.GetProperty("lastYearsRank").ToString()))
+			{
+				previousRank = entry.GetProperty("lastYearsRank").ToString();
+			}
+			rank = entry.GetProperty("rank").ToString();
+			name = entry.GetProperty("name").ToString();
+			jobTitle = entry.GetProperty("jobTitle").ToString();
+			briefDesc = entry.GetProperty("briefDescription").ToString();
+			longDesc = entry.GetProperty("longDescription").ToString();
+			portrait = entry.GetProperty("portrait").ToString();			
+		}
+		catch(Exception ex)
+		{
+			// Do nothing
+		}
         
-        
-        <li id="cell_@(entry.GetProperty("rank"))" class="cell" data-id="@(entry.GetProperty("rank"))">
-            <span id="topof_cell_@(entry.GetProperty("rank"))" class="cell-top"></span>
+        <li id="cell_@(rank)" class="cell" data-id="@(rank)">
+			<span id="topof_cell_@(rank)" class="cell-top"></span>
             <div class="cell-inner">
                 <div class="cell-image-wrapper">
-                    <img class="desaturate vp-nolightbox" src="@(portrait)"/>
+                    <img class="desaturate vp-nolightbox" src="@(portrait)" />
                 </div>
-                <div class="cell-number">@(entry.GetProperty("rank"))</div>
+                <div class="cell-number">@(rank)</div>
                 <div class="cell-info">
                     <h3>@(entry.GetProperty("name"))</h3>
                     <p>@(entry.GetProperty("jobTitle"))</p>
                 </div>
-                <span id="jumpto_cell_@(entry.GetProperty("rank"))" class="cell-jump"></span>
+				<span id="jumpto_cell_@(entry.GetProperty("rank"))" class="cell-jump"></span>
             </div>
             <div class="cell-info-panel">
-                
                 <div class="info-panel-inner">
                     <div id="main-image-container">
-                        <img alt="@(entry.GetProperty("name")) - @(entry.GetProperty("jobTitle"))" src="@(portrait)" class="main-image vp-nolightbox" />
+                        <img alt="@(name) - @(jobTitle)" src="@(portrait)" class="main-image vp-nolightbox" />
                     </div>
-                    <span class="ranking">@(entry.GetProperty("rank"))</span>
-                    <h2>@(entry.GetProperty("name"))</h2>
-                    <h3>@(entry.GetProperty("jobTitle"))</h3>
+                    <span class="ranking">@(rank)</span>
+                    <h2>@(name)</h2>
+                    <h3>@(jobTitle)</h3>
                     <h4>Previous rank: <strong>@(previousRank)</strong></h4>
-                    <p>@(entry.GetProperty("briefDesription"))</p>
-                    <p>@(entry.GetProperty("longDescription"))</p>
+                    <h4 class="red">@(briefDesc)</h4>
+                    <p>@(longDesc)</p>
                     <div class="social-container">
                         @if(!String.IsNullOrEmpty(entry.GetProperty("twitterHandle").ToString()))
                         {

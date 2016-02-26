@@ -1,0 +1,24 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VP2014.master" AutoEventWireup="true" %>
+
+<asp:Content runat="server" ContentPlaceHolderID="ContentMain">
+
+    <!-- Main content -->
+    <div id="content" class="news container" >
+        <div id="columns" class="row">
+            <div id="main" class="articles col-xs-12">
+                <div>
+                    <section id="column-full" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 active">
+                        <h2><umbraco:item id="umbTitle" runat="server" field="title" /></h2>
+                        <article>
+                            <div class="article-main">
+                                <p><umbraco:item id="Item1" runat="server" field="sectionIntro" /></p>
+                                <umbraco:Macro Alias="Vp2-calendar" runat="server"></umbraco:Macro> 
+                            </div>
+                        </article>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</asp:Content>

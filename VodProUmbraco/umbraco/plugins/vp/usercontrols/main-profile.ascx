@@ -350,6 +350,8 @@ permission to do so. See our privacy and information policy for more details.
       <p>
 Please indicate what type of communications you’d like to receive from third-parties
         below:</p>
+
+      <!--
    <p>   
       <label class="checkbox">
         Tick here if you do want to receive carefully selected email promotions from
@@ -357,6 +359,7 @@ Please indicate what type of communications you’d like to receive from third-p
       <asp:CheckBox runat="server" ID="chkAccept" Checked="false"/>
       </label>
    </p>
+      -->
 
    <asp:Button runat="server" ID="btnSave" OnClick="SaveDetails" Text="Update details" CssClass="btn btn-primary btn-block" />
   </div>

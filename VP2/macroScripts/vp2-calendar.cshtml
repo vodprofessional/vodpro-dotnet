@@ -1,0 +1,70 @@
+﻿@using VP2.businesslogic;
+
+
+@{
+    VPMember mem = VPMember.GetLoggedInUser();
+    if (mem != null)
+    {
+        <p align="center">
+            <a href="/members/add-event">Add a new event <i class="fa fa-plus-circle"></i></a>
+            &nbsp;
+            <a href="/members/list-events" title="View my events list">View my events list <i class="fa fa-arrow-circle-right"></i></a>
+        </p>
+            
+        <p class="clearfix"></p>
+    }
+    else
+    {
+        <p>If you would like to add an event to the calendar please <a href="/login">login or register</a></p>
+    }
+
+    <div class="row event-key-container">
+        <div class="col-xs-12">
+            <div class="event-key event-conference">Conference / Exhibition</div>
+            <div class="event-key event-networking">Networking Event</div>
+            <div class="event-key event-financial">Financial Results</div>
+            <div class="event-key event-demo">Product Demonstration</div>
+            <div class="event-key event-webinar">Webinar</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-xs-12 col-sm-4">
+            <h3 class="calendar-title"></h3>
+        </div>
+        <div class="col-xs-12 col-sm-8 ">
+            <div class="btn-group pull-right-sm event-buttons">
+                <button class="btn btn-primary" data-calendar-nav="prev"><< Previous Month</button>
+                <button class="btn btn-default" data-calendar-nav="today">Today</button>
+                <button class="btn btn-primary" data-calendar-nav="next">Next Month >></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-xs-12">
+            <div id="calendar" data-mode="p"></div>
+            <div id="eventlist"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-xs-12">
+            <div class="btn-group pull-right-sm event-buttons">
+                <button class="btn btn-primary" data-calendar-nav="prev"><< Previous Month</button>
+                <button class="btn btn-default" data-calendar-nav="today">Today</button>
+                <button class="btn btn-primary" data-calendar-nav="next">Next Month >></button>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="events-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body"></div>
+            </div>
+        </div>
+    </div>
+}

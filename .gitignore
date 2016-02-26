@@ -1,8 +1,12 @@
 SanitiseDatabase/Program.cs
 SanitiseDatabase/Properties/AssemblyInfo.cs
 SanitiseDatabase/SanitiseDatabase.csproj
+VodProUmbraco/App_Data/TEMP
 VodProUmbraco/App_Data/packages/created/createdPackages.config
 VodProUmbraco/media
+VodProUmbraco/vui-media
 Backup
 Backup1
 .vs
+**/bin
+**/obj

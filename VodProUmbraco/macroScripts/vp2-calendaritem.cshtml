@@ -1,0 +1,155 @@
+﻿@using umbraco.MacroEngines;
+@using VP2.businesslogic;
+@using umbraco.BusinessLogic;
+
+@helper DrawEvent(CalendarItem evt, string Mode, umbraco.BusinessLogic.User u)
+{
+  if(Mode.Equals("PREVIEW"))
+  {
+    <div class="alert alert-info">
+        This is preview mode. 
+        @if (evt.IsPublished)
+        {
+            <a href="@(evt.Url)">See published event</a>
+        }
+        @if(u != null)
+        {
+            <br/><a href="#" data-id="@(evt.ID)" id="PublishEvent" class="btn btn-primary">Publish now</a>
+            <div class="modal fade" id="event-publish-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Publishing Event</h3>
+                        </div>
+                        <div class="modal-body">
+
+                            <p>Please wait...</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+  }
+        <h1>@evt.Name</h1>
+        <div class="event-type @(evt.EventClass)">@evt.EventType</div>
+        if (!String.IsNullOrEmpty(evt.EventImage) && !String.IsNullOrEmpty(evt.ExternalUrlFormatted))
+        {
+            <div class="event-image"><a href="@evt.ExternalUrlFormatted"><img src="@evt.EventImage" /></a></div>
+        }
+        else if (!String.IsNullOrEmpty(evt.EventImage))
+        {
+            <div class="event-image"><img src="@evt.EventImage" /></div>
+        }
+        <div class="event-city">@evt.City</div>
+        <div class="event-date">@evt.DateString2
+        @if (!evt.TimeTBA)
+        { 
+            <br/><span class="time">@Html.Raw(evt.TimeString)</span> 
+        }
+        </div>
+
+        if (evt.EndDate < @DateTime.Now)
+        {
+        <div class="alert alert-info" role="alert">This event has already happened!</div>
+        }
+
+        <p>@Html.Raw(String.Join("<br/>", evt.DescriptionAsHtml))</p>
+
+        if(!String.IsNullOrEmpty(evt.ExternalUrlFormatted) || evt.OrganiserDetails.Length > 0)
+        {
+        <dl>
+            @if(!String.IsNullOrEmpty(evt.ExternalUrlFormatted))
+            {
+            <dt>Event web site:</dt>
+            <dd><a href="@evt.ExternalUrlFormatted">@evt.ExternalUrlFormatted</a></dd>
+            }
+            @if(evt.OrganiserDetails.Length > 0)
+            {
+            <dt>Organiser:</dt>
+            <dd>@Html.Raw(String.Join("<br/>", evt.OrganiserDetails))</dd>
+            }
+        </dl>
+        }
+
+
+        <div class="event-venue-container">
+            <div class="event-venue">
+                <h2>Venue</h2>
+                <div class="event-venue-address">
+                    @Html.Raw(String.Join("<br/>", evt.VenueDetails))
+                </div>
+
+                @if (!String.IsNullOrEmpty(evt.GoogleMap))
+                {
+                    <div class="event-venue-map">
+                        @Html.Raw(evt.GoogleMap)
+                    </div>
+                }
+            </div>
+        </div>
+}
+<article class="event-container">
+
+@{
+
+    // Preview of unpublished Item
+    string uid = HttpContext.Current.Request["eguid"];
+    if (!String.IsNullOrEmpty(uid))
+    {
+        CalendarItem e = CalendarItem.GetFromUID(uid);
+        if (e != null)
+        {
+            umbraco.BusinessLogic.User u = umbraco.BusinessLogic.User.GetCurrent();
+
+
+            @: @DrawEvent(e, "PREVIEW", u)
+
+
+        }
+    }
+    else
+    {
+        int eventid;
+        try
+        {
+            eventid = Model.Id;
+            CalendarItem e = new CalendarItem(eventid, "PUBLIC");
+
+            <a href="../" title="Back to calendar"><i class="fa fa-arrow-circle-left"></i> Back to Calendar</a>
+
+
+            if (e != null)
+            {
+                if (e.IsCreatedByCurrentMember())
+                {
+                    <span class="pull-right">
+                        <a href="/members/add-event?i=@(e.ID)" title="View my events list">Edit this event <i class="fa fa-pencil-square-o"></i></a>
+                        &nbsp;
+                        <a href="/members/list-events" title="View my events list">View my events list <i class="fa fa-arrow-circle-right"></i></a>
+                    </span>
+                }
+
+                @: @DrawEvent(e, "PUBLIC", null)
+            }
+            else
+            {
+                throw new Exception();
+            }
+        }
+        catch (Exception ex)
+        {
+            <h1>Sorry! We couldn't find that event</h1>
+            <p>
+
+                Head back to the <a href="/calendar">event calendar</a> and try again!
+
+            </p>
+        }
+    }
+
+
+}
+
+</article>

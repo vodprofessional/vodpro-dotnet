@@ -20,7 +20,7 @@
             @numVodServices VOD Products
             </div>
             <div class="text">
-            tracked for you across 9 platforms
+            tracked for you across 16 platforms
             </div>
         </div>
         </li>
@@ -32,7 +32,7 @@
             @String.Format("{0:#,##}", numScreenshots) screenshots
             </div>
             <div class="text">
-            from @numVodServices services, across 9 platforms
+            from @numVodServices services, across 16 platforms
             </div>
         </div>
         </a>
@@ -68,9 +68,10 @@
 @{
     VUIUser u = VUI3Utility.GetUser();
     Member c = u.Member;
-    
+
+  
   @* NOT LOGGED IN STATE *@
-    if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_NONE) || u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_REGISTRANT))
+    if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_NONE))
     {
       
     <div class="gridContainer clearfix marketing-home">
@@ -85,7 +86,7 @@
             </div>
            
                 
-            <div id="mainslider">
+             <div id="mainslider">
                 <div class="top060bot40"></div>                        
                 <div id="carousel" class="slider-big">
                     <ul class="bjqs">
@@ -97,7 +98,7 @@
                                     <p>Whether you're looking for design inspiration, best practice guidelines or a list (and illustrations) of innovative 
                                     <br>features to include in your next online television service, the VUI Library is here to make your life easier. </p>
 						    </div>
-						    <img src="/_inc/images/vui-marketing-2014/slider-iphone.png" alt="Use this resource to help you design your VOD service"/></li>
+						    <img src="/_inc/images/vui-marketing-2014/slider-iphone-2015.png" alt="Use this resource to help you design your VOD service"/></li>
 						<li>
                             <a href="screenshots" title="Jump to a preview of our screenshot library">
 						    <h2>Screenshots of VOD Services</h2>
@@ -106,7 +107,7 @@
                                 <br>Get started with over 10,000 screenshots from almost 400 global products across a range of platforms.</p>
                                 <p>We're adding VUI screenshots all the time from tablets, smartphones, connected TV and games consoles too. <br>Want us to look at a particular VOD service? We can monitor it for you.</p>
 						    </div>
-						    <img src="/_inc/images/vui-marketing-2014/slider-tvs.png" alt="Thousands of screenshots"/></a></li>
+						    <img src="/_inc/images/vui-marketing-2014/slider-tvs-2015.png" alt="Thousands of screenshots"/></a></li>
 
                         <li>
                             <a href="benchmarking" title="See a preview of our platform benchmarking">
@@ -117,7 +118,7 @@
                                 <p>Writing a requirements brief or functional specification? No problem. 
                                     <br>We tell you what features are included - and in what proportions - in video services across a range of platforms.</p>
 						    </div>
-						    <img src="/_inc/images/vui-marketing-2014/slider-phones.png" alt="Benchmarking"/></a></li>
+						    <img src="/_inc/images/vui-marketing-2014/slider-ipad-2015.png" alt="Benchmarking"/></a></li>
                         <li>
                             <a href="appstore-ratings" title="See how we keep track of app store rating">
 						    <h2>App Store Ratings &amp; Comments</h2>
@@ -127,14 +128,13 @@
                                 <p>Updated daily and perfect for tracking your own VOD services and those of your peers and competitors.</p>
 
 						    </div>
-						    <img src="/_inc/images/vui-marketing-2014/slider-ipad.png" alt="App Store Ratings"/></a></li>
+						    <img src="/_inc/images/vui-marketing-2014/slider-stars-2015.png" alt="App Store Ratings"/></a></li>
                         <li>
-                            <a href="best-practice-guides" title="See a sample of our analysis and best practice reports">
-						    <h2>Analysis</h2>
+                            <h2>Consulting</h2>
 						    <div class="centertext">
 							    <p>As well as screenshots, benchmarking data and App Store ratings, the VUI Library contains qualitative analyses <br>of video on demand services; their functionality, UI and UX. <p>Check out our best practice guides, special reports and reviews written by industry experts. </p>
 						    </div>
-						    <img src="/_inc/images/vui-marketing-2014/slider-analysis.png" alt="Analysis"/></a></li>
+						    <img src="/_inc/images/vui-marketing-2014/slider-analysis.png" alt="Analysis"/></li>
                     </ul>
                 </div> <!-- End outer wrapper -->
             </div> <!-- mainslider -->

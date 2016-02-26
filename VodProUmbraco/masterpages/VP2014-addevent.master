@@ -1,0 +1,27 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/VP2014.master" AutoEventWireup="true" %>
+<%@ Register TagName="EventForm" TagPrefix="vp" Src="~/umbraco/plugins/vp/usercontrols/event-form.ascx" %>
+<asp:content ContentPlaceHolderId="ContentMain" runat="server">
+  
+    <!-- Main content -->
+    <div id="content" class="container" >
+        <div id="columns" class="row">
+            <div id="main" class="articles col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                <div>
+                    <section id="column-full" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 active">
+                        <h2><umbraco:item id="umbTitle" runat="server" field="title" /></h2>
+                        <umbraco:item id="umbStory" runat="server" field="story" />
+                        <form runat="server">
+                            <vp:EventForm id="evt1" runat="server" />
+                        </form>
+                    </section>
+                </div>
+            </div>
+            <div id="promotion" class="col-lg-5 col-md-5 hidden-sm hidden-xs">
+                <div id="inner-promotion">
+                    <umbraco:Macro Alias="vp2-rhs" runat="server"></umbraco:Macro>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</asp:content>

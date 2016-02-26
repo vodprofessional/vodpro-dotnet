@@ -69,7 +69,7 @@ namespace VP2.usercontrols
                 bool completedLogin = VPMember.MemberLogin(txtLoginEmail.Text, txtPassword.Text);
                 if (completedLogin)
                 {
-                    Response.Redirect("/members/profile", true);
+                    Response.Redirect(ConfigurationManager.AppSettings["LoggedInRedirect"], true);
                 }
                 else
                 {

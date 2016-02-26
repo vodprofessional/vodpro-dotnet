@@ -48,6 +48,41 @@ namespace VUI.pages
             }
         }
 
+        protected void DeleteChildren(object sender, EventArgs e)
+        {
+            int id = -1;
+
+            if (Int32.TryParse(txtParentId.Text, out id))
+            {
+                try
+                {
+                    Document parent = new Document(id);
+                    if (parent.Children.Count() > 0)
+                    {
+                        int counter = 0;
+                        foreach (Document child in parent.Children)
+                        {
+                            child.delete();
+                            counter++;
+                        }
+                        litDeleteChildren.Text = "Deleted " + counter + " child nodes";
+                    }
+                    else
+                    {
+                        litDeleteChildren.Text = "No child nodes";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    litDeleteChildren.Text = "Could not delete. Check ID";
+                }
+            }
+            else
+            {
+                litDeleteChildren.Text = "Not an ID";
+            }
+        }
+
         protected void UpdateServiceMasterName(object sender, EventArgs e)
         {
             string existingName = lstServices.SelectedValue;

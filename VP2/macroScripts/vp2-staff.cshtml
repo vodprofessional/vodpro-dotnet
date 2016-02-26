@@ -1,0 +1,31 @@
+﻿@using umbraco.MacroEngines;
+
+
+@{ 
+    var profilesRootID = @Parameter.profilesRoot;
+    List<DynamicNode> profiles;
+
+    if (profilesRootID != null)
+    {
+        DynamicNode aboutNode = new DynamicNode(profilesRootID);
+        
+        profiles = aboutNode.Descendants("StaffProfile").Items.ToList<DynamicNode>();
+
+
+        foreach(DynamicNode profile in profiles)
+        {
+            string name = profile.GetProperty("name").ToString();
+            string description = profile.GetProperty("profile").ToString();
+            string linkedinURL = profile.GetProperty("linkedinURL").ToString();
+            string photo = profile.GetProperty("photo").ToString();
+            <div class="bio">
+                <img src="@(photo)" />
+                <h3>@(name)</h3>
+                @Html.Raw(description)
+                <p>
+                    <a href="@(linkedinURL)"><i class="fa fa-linkedin-square"></i></a>
+                </p>
+            </div>
+        }
+    }
+ }

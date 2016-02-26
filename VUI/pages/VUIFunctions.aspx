@@ -22,6 +22,14 @@
         <h2>VUI Users</h2>
         <asp:Literal ID="litVUIUsers" runat="server" />
 
+        <hr/>
+
+        <h2>Tidy up - delete child nodes (DANGER)</h2>
+        Enter ID, all children will be deleted, leaving original <asp:TextBox runat="server" ID="txtParentId" />
+        <asp:Button runat="server" ID="btnDeleteChildren" OnClick="DeleteChildren" Text="Delete Children" />
+        <asp:Literal runat="server" ID="litDeleteChildren" />
+
+
     </div>
     </form>
         <script type="text/javascript">

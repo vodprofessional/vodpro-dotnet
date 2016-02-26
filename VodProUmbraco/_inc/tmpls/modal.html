@@ -1,0 +1,28 @@
+<% 	event.date_start = new Date(parseInt(event.start));
+	event.date_end = new Date(parseInt(event.end)); 
+	event.desc = event.description ? event.description : "";
+	
+	startDateStr = event.date_start.getDate()+ " " + monthFromDate(event.date_start.getMonth()) + " " + event.date_start.getFullYear();
+	endDateStr = event.date_end.getDate()+ " " + monthFromDate(event.date_end.getMonth()) + " " + event.date_end.getFullYear();
+    
+	if (event.date_start.getDate() + "/" +event.date_start.getMonth() + "/" + event.date_start.getFullYear() == event.date_end.getDate() + "/" + event.date_end.getMonth() + "/" + event.date_end.getFullYear()) {
+	  endDateStr = "";
+	}
+	else {
+	  endDateStr = " - " + endDateStr;
+	}
+	%>
+	
+	
+	
+<h1><%= event.title %></h1>
+<% if (event.img_url) {%>
+<div class="event-image">
+<img src="<%= event.img_url %>" /></div>
+<% } %>
+<div class="event-city"><%=event.city %></div>
+<div class="event-date"><%= startDateStr %> <%= endDateStr %><i class = "icon-time"></i></div>
+<p><%= event.desc %></p>
+<div class="event-info-button">
+    <a href="<%= event.url %>" class = "btn btn-primary"><i class = "icon-calendar"></i> More info</a>
+</div>

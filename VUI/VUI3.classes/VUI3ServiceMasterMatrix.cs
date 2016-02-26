@@ -18,7 +18,7 @@ namespace VUI.VUI3.classes
 
             string sql = @"    SELECT M.ServiceName, M.TabletAndroid  ,M.SmartphoneAndroid ,M.SmartphoneiPhone  ,M.TabletiPad  ,M.SmartphoneWindows, M.TabletAmazonFireHD, M.SmartphoneAmazonFire   , M.Web, 
                                 [Connected TV-Samsung], [Connected TV-Sony],[Connected TV-LG], [Connected TV-Panasonic],[Games Consoles-XBox],[Games Consoles-Playstation],
-                                [STB-Amazon Fire TV],[STB-Apple TV], [STB-Freesat], [STB-Roku], [STB-Now TV], 
+                                [STB-Amazon Fire TV],[STB-Apple TV], [STB-Google TV], [STB-Freesat], [STB-Roku], [STB-Now TV], 
                                 [STB-Sky],[STB-Virgin],[STB-YouView],[STB-AT&T U-Verse],
                                 [STB-Cox],[STB-Charter],[STB-Direct TV],[STB-Dish],[STB-Optimum],
                                 [STB-Sudden Link],[STB-Verizon FiOS],[STB-Xfinity],[STB-TiVo],
@@ -59,6 +59,7 @@ namespace VUI.VUI3.classes
 
                         i.STBAmazonFireTVCount = (int)sr["STB-Amazon Fire TV"];
                         i.STBAppleTVCount = (int)sr["STB-Apple TV"];
+                        i.STBGoogleTVCount = (int)sr["STB-Google TV"];
                         i.STBFreesatCount = (int)sr["STB-Freesat"];
                         i.STBRokuCount = (int)sr["STB-Roku"];
                         i.STBNowTVCount = (int)sr["STB-Now TV"];
@@ -142,6 +143,7 @@ namespace VUI.VUI3.classes
         public int GamesConsolesXBoxCount { get; set; }
         public int GamesConsolesPlaystationCount{ get; set; }
         public int STBAmazonFireTVCount { get; set; }
+        public int STBGoogleTVCount { get; set; } 
         public int STBRokuCount { get; set; }
         public int STBFreesatCount { get; set; }
         public int STBNowTVCount{ get; set; }
@@ -240,6 +242,10 @@ namespace VUI.VUI3.classes
                 case "STB-Apple TV":
                 {
                     return STBAppleTVCount;
+                }
+                case "STB-Google TV":
+                {
+                    return STBGoogleTVCount;
                 }
                 case "STB-Freesat":
                 {
