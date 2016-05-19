@@ -79,10 +79,10 @@ namespace VUI.VUI2.classes
             string VUI_importfolder = Utility.GetConst("VUI_importfolder");
             string VUI_mediafolder = Utility.GetConst("VUI_mediafolder");
             string VUI_importtempfolder = Utility.GetConst("VUI_importtempfolder");
-             VUI_maxwidth_full = Int32.Parse(Utility.GetConst("VUI_maxwidth_full"));
-             VUI_maxwidth_lg = Int32.Parse(Utility.GetConst("VUI_maxwidth_lg"));
-             VUI_maxwidth_md = Int32.Parse(Utility.GetConst("VUI_maxwidth_md"));
-             VUI_maxwidth_th = Int32.Parse(Utility.GetConst("VUI_maxwidth_th"));
+            VUI_maxwidth_full = Int32.Parse(Utility.GetConst("VUI_maxwidth_full"));
+            VUI_maxwidth_lg = Int32.Parse(Utility.GetConst("VUI_maxwidth_lg"));
+            VUI_maxwidth_md = Int32.Parse(Utility.GetConst("VUI_maxwidth_md"));
+            VUI_maxwidth_th = Int32.Parse(Utility.GetConst("VUI_maxwidth_th"));
             //int VUI_pagetypelist = Int32.Parse(Utility.GetConst("VUI_pagetypelist"));
             //int VUI_ScoringPageTypes = Int32.Parse(Utility.GetConst("VUI_ScoringPageTypes"));
             //int VUI_BenchmarkDevicesList = Int32.Parse(Utility.GetConst("VUI_BenchmarkDevicesList"));
@@ -161,7 +161,7 @@ namespace VUI.VUI2.classes
                             if (n.ContentType.Alias.Equals(Utility.GetConst("VUI2_devicetype")) && n.Text.Trim().Equals(deviceOrServiceName))
                             {
 
-                                List<Document> serviceNodes = n.Children.ToList<Document>(); 
+                                List<Document> serviceNodes = n.Children.ToList<Document>();
                                 foreach (DirectoryInfo serviceFolder in deviceOrServiceFolder.GetDirectories())
                                 {
                                     foreach (Document serviceNode in serviceNodes)
@@ -190,7 +190,7 @@ namespace VUI.VUI2.classes
                         }
                         */
 
-                        
+
                         /*
                         //Loop through Service folders
                         var deviceRoot = new Node(deviceNodeId);
@@ -257,7 +257,7 @@ namespace VUI.VUI2.classes
             bool benchmarkExists = false;
             foreach (Document b in benchmarkNodes)
             {
-                if(b.ContentType.Alias.Equals(Utility.GetConst("VUI2_analysistype")) && b.Text.ToLower().Equals(dateVal.ToLower()))
+                if (b.ContentType.Alias.Equals(Utility.GetConst("VUI2_analysistype")) && b.Text.ToLower().Equals(dateVal.ToLower()))
                 {
                     benchmarkNodeId = b.Id;
                     benchmarkExists = true;
@@ -293,8 +293,9 @@ namespace VUI.VUI2.classes
             foreach (DirectoryInfo featureFolder in folder.GetDirectories())
             {
                 string pageTypeName = String.Empty;
-                
-                try {
+
+                try
+                {
                     pageTypeName = featureDirectoryMap[featureFolder.Name];
                     images = featureFolder.GetFiles();
                     if (images.Length > 0)
@@ -303,8 +304,9 @@ namespace VUI.VUI2.classes
                         imageCount += images.Length;
                     }
                 }
-                catch (Exception e) {
-                    log.Error("Error Getting images from folder [" + featureFolder.FullName + "]", e); 
+                catch (Exception e)
+                {
+                    log.Error("Error Getting images from folder [" + featureFolder.FullName + "]", e);
                 }
             }
 
@@ -315,12 +317,12 @@ namespace VUI.VUI2.classes
                 Document sm = VUI3Utility.FindServiceMasterDocumentByName(serviceRoot.Text);
                 int smid = sm.Id;
                 string pd = platformName;
-                if(!String.IsNullOrEmpty(deviceName)) 
+                if (!String.IsNullOrEmpty(deviceName))
                 {
                     pd = pd + " / " + deviceName;
                 }
-                
-                VUI3News.AddNews(VUI3News.NEWSTYPE_SCREENSHOT, relatedServiceId:smid, relatedService: serviceRoot.Text, relatedPlatform: platformName, relatedDevice: deviceName, ScreenshotCount: imageCount, directToLive: false, tweetNews: false );
+
+                VUI3News.AddNews(VUI3News.NEWSTYPE_SCREENSHOT, relatedServiceId: smid, relatedService: serviceRoot.Text, relatedPlatform: platformName, relatedDevice: deviceName, ScreenshotCount: imageCount, directToLive: false, tweetNews: false);
             }
             catch (Exception ex)
             {
@@ -329,7 +331,7 @@ namespace VUI.VUI2.classes
         }
 
 
-        private static void DoImages(FileInfo[] images, Document serviceRoot, int benchmarkNodeId, string importTag, string dateVal, string platformName, string deviceName, string serviceName, string pageTypeName,  bool publish)
+        private static void DoImages(FileInfo[] images, Document serviceRoot, int benchmarkNodeId, string importTag, string dateVal, string platformName, string deviceName, string serviceName, string pageTypeName, bool publish)
         {
             Document benchmarkRoot = new Document(benchmarkNodeId);
             try
@@ -431,11 +433,11 @@ namespace VUI.VUI2.classes
 
 
 
-/*        private static int CreateVUINode(string nodeName, int parentNode, string documentType)
-        {
-            return CreateVUINodePublish(nodeName, parentNode, documentType, null, true);
-        }
-        */
+        /*        private static int CreateVUINode(string nodeName, int parentNode, string documentType)
+                {
+                    return CreateVUINodePublish(nodeName, parentNode, documentType, null, true);
+                }
+                */
         private static int CreateVUINode(string nodeName, int parentNode, string documentType, Dictionary<string, object> nodeProps)
         {
             return CreateVUINodePublish(nodeName, parentNode, documentType, nodeProps, true);
@@ -519,7 +521,7 @@ namespace VUI.VUI2.classes
             }
         }
 
-        private static  ImageCodecInfo GetEncoder(ImageFormat format)
+        private static ImageCodecInfo GetEncoder(ImageFormat format)
         {
             ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
             foreach (ImageCodecInfo codec in codecs)
@@ -533,7 +535,7 @@ namespace VUI.VUI2.classes
         }
 
 
-        
+
         public static void InitPageTypePreVals()
         {
             pageTypeVals.Clear();
@@ -554,7 +556,7 @@ namespace VUI.VUI2.classes
 
         public static string GetPageType(string val)
         {
-            if(pageTypeVals.Keys.Contains(val))
+            if (pageTypeVals.Keys.Contains(val))
             {
                 return pageTypeVals[val];
             }
@@ -586,26 +588,74 @@ namespace VUI.VUI2.classes
             featureDirectoryMap.Add("14 - Customised Video Player", "Customised video player");
             featureDirectoryMap.Add("15 - Video Description", "Video description");
             featureDirectoryMap.Add("16 - Favourites", "Favourites");
-            featureDirectoryMap.Add("17 - Playlists", "Playlists");
-            featureDirectoryMap.Add("18 - Sign-in Register", "Sign in / Register");
-            featureDirectoryMap.Add("19 - Social Sign-on", "Social sign-on");
-            featureDirectoryMap.Add("20 - Parental Controls", "Parental controls");
-            featureDirectoryMap.Add("21 - Help", "Help");
-            featureDirectoryMap.Add("22 - About", "About");
-            featureDirectoryMap.Add("23 - Contact", "Contact");
-            featureDirectoryMap.Add("24 - Accessibility", "Accessibility");
-            featureDirectoryMap.Add("25 - Watch on other Platforms", "Watch on other platforms");
-            featureDirectoryMap.Add("26 - Adaptive Bitrate Streaming", "Adaptive bitrate streaming");
-            featureDirectoryMap.Add("27 - Audio-described Shows", "Audio-described Shows");
-            featureDirectoryMap.Add("28 - Device Synchronisation", "Device synchronisation");
-            featureDirectoryMap.Add("29 - Download to Device", "Download to device");
-            featureDirectoryMap.Add("30 - Extended Archive", "Extended Archive");
-            featureDirectoryMap.Add("31 - Last Viewed", "Last Viewed");
-            featureDirectoryMap.Add("32 - Live Restart", "Live Restart");
-            featureDirectoryMap.Add("33 - Live Viewing", "Live Viewing");
-            featureDirectoryMap.Add("34 - Resume after Stopping", "Resume after stopping");
-            featureDirectoryMap.Add("35 - Social Recommendation", "Social recommendation");
+            featureDirectoryMap.Add("17 - Sign-in Register", "Sign in / Register");
+            featureDirectoryMap.Add("18 - Social Sign-on", "Social sign-on");
+            featureDirectoryMap.Add("19 - Parental Controls", "Parental controls");
+            featureDirectoryMap.Add("20 - Help", "Help");
+            featureDirectoryMap.Add("21 - About", "About");
+            featureDirectoryMap.Add("22 - Contact", "Contact");
+            featureDirectoryMap.Add("23 - Accessibility", "Accessibility");
+            featureDirectoryMap.Add("24 - Watch on other Platforms", "Watch on other platforms");
+            featureDirectoryMap.Add("25 - Adaptive Bitrate Streaming", "Adaptive bitrate streaming");
+            featureDirectoryMap.Add("26 - Audio-described Shows", "Audio-described Shows");
+            featureDirectoryMap.Add("27 - Device Synchronisation", "Device synchronisation");
+            featureDirectoryMap.Add("28 - Download to Device", "Download to device");
+            featureDirectoryMap.Add("29 - Extended Archive", "Extended Archive");
+            featureDirectoryMap.Add("30 - Last Viewed", "Last Viewed");
+            featureDirectoryMap.Add("31 - Live Restart", "Live Restart");
+            featureDirectoryMap.Add("32 - Live Viewing", "Live Viewing");
+            featureDirectoryMap.Add("33 - Resume after Stopping", "Resume after stopping");
+            featureDirectoryMap.Add("34 - Social Recommendation", "Social recommendation");
+            featureDirectoryMap.Add("35 - Trailers", "Trailers");
+            featureDirectoryMap.Add("36 - Notifications", "Notifications");
+            featureDirectoryMap.Add("37 - Shuffle buttons", "Shuffle buttons");
+            featureDirectoryMap.Add("38 - Picture-in-picture", "Picture-in-picture");
+            featureDirectoryMap.Add("39 - Voice control", "Voice control");
+            featureDirectoryMap.Add("40 - Ratings and metadata integration", "Ratings and metadata integration");
+            featureDirectoryMap.Add("41 - Cellular viewing", "Cellular viewing");
+            featureDirectoryMap.Add("42 - In-app purchasing", "In-app purchasing");
+            featureDirectoryMap.Add("43 - Surprise me", "Surprise me");
+            featureDirectoryMap.Add("44 - Title stacking", "Title stacking");
+            featureDirectoryMap.Add("45 - Time-based viewing", "Time-based viewing");
 
+            /*
+                        featureDirectoryMap.Add("00 - Splash Page", "Splash Page");
+                        featureDirectoryMap.Add("01 - Featured Content", "Featured content");
+                        featureDirectoryMap.Add("02 - Categorisation", "Categorisation");
+                        featureDirectoryMap.Add("03 - Category Homepage", "Category homepage");
+                        featureDirectoryMap.Add("04 - Most Popular", "Most popular");
+                        featureDirectoryMap.Add("05 - Recently Added", "Recently added");
+                        featureDirectoryMap.Add("06 - More Episodes", "More episodes");
+                        featureDirectoryMap.Add("07 - Content Recommendation", "Content recommendation");
+                        featureDirectoryMap.Add("08 - EPG", "EPG");
+                        featureDirectoryMap.Add("09 - Search", "Search");
+                        featureDirectoryMap.Add("10 - Predictive Search", "Predictive search");
+                        featureDirectoryMap.Add("11 - A-Z Page", "A-Z page");
+                        featureDirectoryMap.Add("12 - Social Sharing Outbound", "Social sharing (out)");
+                        featureDirectoryMap.Add("13 - Social Sharing In Service", "Social sharing (in-service)");
+                        featureDirectoryMap.Add("14 - Customised Video Player", "Customised video player");
+                        featureDirectoryMap.Add("15 - Video Description", "Video description");
+                        featureDirectoryMap.Add("16 - Favourites", "Favourites");
+                        featureDirectoryMap.Add("17 - Playlists", "Playlists");
+                        featureDirectoryMap.Add("18 - Sign-in Register", "Sign in / Register");
+                        featureDirectoryMap.Add("19 - Social Sign-on", "Social sign-on");
+                        featureDirectoryMap.Add("20 - Parental Controls", "Parental controls");
+                        featureDirectoryMap.Add("21 - Help", "Help");
+                        featureDirectoryMap.Add("22 - About", "About");
+                        featureDirectoryMap.Add("23 - Contact", "Contact");
+                        featureDirectoryMap.Add("24 - Accessibility", "Accessibility");
+                        featureDirectoryMap.Add("25 - Watch on other Platforms", "Watch on other platforms");
+                        featureDirectoryMap.Add("26 - Adaptive Bitrate Streaming", "Adaptive bitrate streaming");
+                        featureDirectoryMap.Add("27 - Audio-described Shows", "Audio-described Shows");
+                        featureDirectoryMap.Add("28 - Device Synchronisation", "Device synchronisation");
+                        featureDirectoryMap.Add("29 - Download to Device", "Download to device");
+                        featureDirectoryMap.Add("30 - Extended Archive", "Extended Archive");
+                        featureDirectoryMap.Add("31 - Last Viewed", "Last Viewed");
+                        featureDirectoryMap.Add("32 - Live Restart", "Live Restart");
+                        featureDirectoryMap.Add("33 - Live Viewing", "Live Viewing");
+                        featureDirectoryMap.Add("34 - Resume after Stopping", "Resume after stopping");
+                        featureDirectoryMap.Add("35 - Social Recommendation", "Social recommendation");
+            */
             featureFeatureMap.Add("Splash Page", "Splash page");
             featureFeatureMap.Add("Featured content", "Featured content");
             featureFeatureMap.Add("Categorisation", "Categorisation");
@@ -642,6 +692,9 @@ namespace VUI.VUI2.classes
             featureFeatureMap.Add("Live Viewing", "Live Viewing");
             featureFeatureMap.Add("Resume after stopping", "Resume after stopping");
             featureFeatureMap.Add("Social content recommendation", "Social recommendation");
+
+
+
 
         }
 

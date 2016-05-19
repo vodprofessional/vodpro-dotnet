@@ -25,20 +25,48 @@ namespace VUI.VUI2.classes
         {
             if (sender.ContentType.Alias.Equals(Utility.GetConst("VUI2_analysistype")))
             {
-                if (sender.getProperty("serviceCapabilities") != null)
-                {
-                    int totalscore = 0;
+                bool oldScoring = false;
 
-                    if (!String.IsNullOrEmpty(sender.getProperty("serviceCapabilities").Value.ToString()))
+                if (sender.getProperty("pre2016Score") != null)
+                {
+                    bool.TryParse(sender.getProperty("pre2016Score").Value.ToString(), out oldScoring);
+                }
+
+                if(oldScoring)
+                { 
+                    if (sender.getProperty("serviceCapabilities") != null)
                     {
-                        string[] capabilities = sender.getProperty("serviceCapabilities").Value.ToString().Split(',');
-                        totalscore = capabilities.Length;
+                        int totalscore = 0;
+
+                        if (!String.IsNullOrEmpty(sender.getProperty("serviceCapabilities").Value.ToString()))
+                        {
+                            string[] capabilities = sender.getProperty("serviceCapabilities").Value.ToString().Split(',');
+                            totalscore = capabilities.Length;
+                        }
+                        sender.getProperty("serviceScore").Value = totalscore;
                     }
-                    sender.getProperty("serviceScore").Value = totalscore;
+                    else
+                    {
+                        sender.getProperty("serviceScore").Value = 0;
+                    }
                 }
                 else
                 {
-                    sender.getProperty("serviceScore").Value = 0;
+                    if (sender.getProperty("features2016") != null)
+                    {
+                        int totalscore = 0;
+
+                        if (!String.IsNullOrEmpty(sender.getProperty("features2016").Value.ToString()))
+                        {
+                            string[] capabilities = sender.getProperty("features2016").Value.ToString().Split(',');
+                            totalscore = capabilities.Length;
+                        }
+                        sender.getProperty("serviceScore").Value = totalscore;
+                    }
+                    else
+                    {
+                        sender.getProperty("serviceScore").Value = 0;
+                    }
                 }
             }
 
