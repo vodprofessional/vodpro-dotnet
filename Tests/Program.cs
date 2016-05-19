@@ -10,6 +10,9 @@ namespace Tests
 {
     class Program
     {
+
+
+
         static void Main(string[] args)
         {
 
@@ -17,17 +20,19 @@ namespace Tests
 
 
 
-            /*Importer.InitFeatureMaps();
+            Importer.InitFeatureMaps();
 
-            foreach (string dname in Importer.featureDirectoryMap.Keys)
+            using (StreamWriter file = new StreamWriter(@"c:\TMP\functions.txt"))
             {
 
-                Directory.CreateDirectory(Path.Combine(@"d:\TMP\VODPRO\", dname));
+                foreach (string dname in Importer.featureDirectoryMap.Values)
+                {
+                    file.WriteLine(dname);//               Directory.CreateDirectory(Path.Combine(@"d:\clients\vpro\features\", dname));
 
+                }
             }
-            */
 
-                DownloadAttachment.GetAttachment();
+               // DownloadAttachment.GetAttachment();
 
         }
     }
