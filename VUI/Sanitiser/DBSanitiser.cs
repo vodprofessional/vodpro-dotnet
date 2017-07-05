@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading;
 using System.Web.Security;
 using umbraco.cms.businesslogic.member;
 using VUI.classes;
@@ -16,11 +17,39 @@ namespace VUI.Sanitiser
             // Manual Task - Sanitise Users in Umbraco
 
             // Delete all Member information
+
             List<Member> ms = Member.GetAllAsList().ToList();
-            foreach (Member m in ms)
+            List<Member> mstoDelete = new List<Member>();
+            int interator = 0;
+            if (ms.Count > 50)
             {
-                Membership.DeleteUser(m.LoginName, true);
+                mstoDelete = ms.GetRange(0, 50);
             }
+            else
+            {
+                mstoDelete = ms.GetRange(0, ms.Count);
+            }
+            do
+            {
+                //List<Member> ms = Member.GetAllAsList().ToList();
+                foreach (Member m in mstoDelete)
+                {
+                    Membership.DeleteUser(m.LoginName, true);
+                    ms.Remove(m);
+                    Thread.Sleep(50);
+                }
+                if (ms.Count > 50)
+                {
+                    mstoDelete = ms.GetRange(0, 50);
+                }
+                else
+                {
+                    mstoDelete = ms.GetRange(0, ms.Count);
+                }
+                interator++;
+            } while (mstoDelete.Count > 0 && interator < 100);
+
+            
 
             // Add new VUI administrator and 5 associated users
             CreateVUIuser("VUI Admin", "VUI Admin", "vuiadmin@vodprofessional.com");

@@ -1,0 +1,1068 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/vui3-master.master" AutoEventWireup="true" %>
+
+
+
+<asp:Content ID="ContentHead" ContentPlaceHolderID="ContentPlaceHolderHead" runat="server">
+    <title>VUIX Library - Feature Comparison</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="/_inc/VP2014/css/jquery.fancybox.min.css"/>
+  <style>
+  html {
+    font-size: 14px;
+  }
+  
+  .container {
+    margin-top: 100px;
+  }
+  
+  .nav-tabs li:first-child {
+    margin-left: 27%;
+  }
+  .nav-tabs {
+    margin-bottom: 20px;
+  }
+  
+  .title-col {
+  
+  }
+  .title-row {
+    height: 200px;
+    float:left;
+    clear:left;
+    width:100%;
+  }
+  .title-row:first-child {
+    margin-top: 45px;
+  }
+  .title-row h2 {
+    padding: 0 0 0 0;
+    margin: 50px 0 0 0;
+    text-align: right;
+    font-size: 1.5rem;
+  }
+  .slide {
+  }
+  .slide-title {
+  
+  }
+  .slide-title h2 {
+    padding: 0 0 0 0;
+    margin:  5px 0 0 0;
+    height:  45px;
+    font-size: 1.3rem;
+    text-align: center;
+  }
+  .slide-body {
+    padding: 0 10px;
+    text-align: center;
+  }
+  .slide-body a {
+    display: block;
+    height:  180px;
+    width:   96%;
+    margin:  0 0 20px 0;
+    overflow:hidden;
+    background-position: center center;
+    background-size: cover;
+  }
+  .slide-body a img {
+    display: none;
+  }
+  
+  .slider-nav {
+    position: absolute;
+    top: -5px;
+    z-index: 19;
+  }
+  .slider-nav-prev {
+    left: 2px;
+  }
+  .slider-nav-next {
+    right: 12px;
+  }
+  .slider-nav button {
+    background: transparent;
+    border: 0px none;
+    font-size: 2rem;
+    color: rgb(31, 166, 222);
+    opacity: 0.4;
+  }
+  .slider-nav button:hover {
+    opacity: 0.8;
+  }
+  
+  .fancybox-slide--iframe .fancybox-content {
+    max-height : 80%;
+    margin: 0;
+  }
+  
+  .fancybox-caption {
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: lato, sans-serif, helvetica, arial;
+  }
+  
+  @media only screen and (max-width : 1200px) {
+
+  }
+
+  /* Medium Devices, Desktops */
+  @media only screen and (max-width : 992px) {
+
+  }
+
+  /* Small Devices, Tablets */
+  @media only screen and (max-width : 768px) {
+
+  }
+  
+  </style>
+    
+</asp:Content>
+
+<asp:Content ID="ContentBody" ContentPlaceHolderID="ContentPlaceHolderBody" runat="server">
+<div class="container">
+  <div class="row">
+    <div role="tabpanel">
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="active"><a href="#web" role="tab" data-toggle="tab">Web</a></li>
+        <li><a href="#ipad" role="tab" data-toggle="tab">iPad</a></li>
+        <li><a href="#androidtablet" role="tab" data-toggle="tab">Android Tablet</a></li>
+        <li><a href="#iphone" role="tab" data-toggle="tab">iPhone</a></li>
+        <li><a href="#androidphone" role="tab" data-toggle="tab">Android Smartphone</a></li>
+        <li><a href="#connectedtv" role="tab" data-toggle="tab">Connected TV</a></li>
+      </ul>
+     <div class="tab-content">
+      <div id="web" class="tab-pane fade in active">
+        
+        <div class="col-xs-6 col-sm-3 title-col">
+          <div class="title-row"><h2>Amazon Prime Video</h2></div>
+          <div class="title-row"><h2>BBC iPlayer</h2></div>
+          <div class="title-row"><h2>Berliner Philharmoniker</h2></div>
+          <div class="title-row"><h2>Netflix</h2></div>
+          <div class="title-row"><h2>Red Bull TV</h2></div>
+          <div class="title-row"><h2>YouTube</h2></div>
+        </div>
+
+        <div class="slider-col col-xs-6 col-sm-9">
+          <div class="slider">
+            <div class="slide slick-slide">
+              <div class="slide-title">
+                <h2>Featured Content</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/Web/01-Featured-Content.png" data-fancybox="web featured content" data-caption="Featured Content on Amazon Prime Video, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/Web/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/Web/01-Featured-Content.png" data-fancybox="web featured content" data-caption="Featured Content on BBC iPlayer, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/Web/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/Web/01-Featured-Content.png" data-fancybox="web featured content" data-caption="Featured Content on Berliner Philharmoniker, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/Web/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/Web/01-Featured-Content.png" data-fancybox="web featured content" data-caption="Featured Content on Netflix, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/Web/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/Web/01-Featured-Content.png" data-fancybox="web featured content" data-caption="Featured Content on Red Bull TV, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/Web/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/Web/01-Featured-Content.png" data-fancybox="web featured content" data-caption="Featured Content on YouTube, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/Web/01-Featured-Content_th.png" />
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+              <h2>Categorisation</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/Web/02-Categorisation.png" data-fancybox="web Categorisation" data-caption="Categorisation on Amazon Prime Video, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/Web/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/Web/02-Categorisation.png" data-fancybox="web Categorisation" data-caption="Categorisation on BBC iPlayer, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/Web/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/Web/02-Categorisation.png" data-fancybox="web Categorisation" data-caption="Categorisation on Berliner Philharmoniker, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/Web/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/Web/02-Categorisation.png" data-fancybox="web Categorisation" data-caption="Categorisation on Netflix, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/Web/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/Web/02-Categorisation.png" data-fancybox="web Categorisation" data-caption="Categorisation on Red Bull TV, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/Web/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/Web/02-Categorisation.png" data-fancybox="web Categorisation" data-caption="Categorisation on YouTube, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/Web/02-Categorisation_th.png" />
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+              <h2>Description Page</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/Web/03-Description-Page.png" data-fancybox="web Content description" data-caption="Content description on Amazon Prime Video, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/Web/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/Web/03-Description-Page.png" data-fancybox="web Content description" data-caption="Content description on BBC iPlayer, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/Web/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/Web/03-Description-Page.png" data-fancybox="web Content description" data-caption="Content description on Berliner Philharmoniker, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/Web/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/Web/03-Description-Page.png" data-fancybox="web Content description" data-caption="Content description on Netflix, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/Web/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/Web/03-Description-Page.png" data-fancybox="web Content description" data-caption="Content description on Red Bull TV, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/Web/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/Web/03-Description-Page.png" data-fancybox="web Content description" data-caption="Content description on YouTube, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/Web/03-Description-Page_th.png" />
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+                <h2>Video Player</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/Web/04-Player.png" data-fancybox="web Video Player" data-caption="Video Player on Amazon Prime Video, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/Web/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/Web/04-Player.png" data-fancybox="web Video Player" data-caption="Video Player on BBC iPlayer, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/Web/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/Web/04-Player.png" data-fancybox="web Video Player" data-caption="Video Player on Berliner Philharmoniker, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/Web/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/Web/04-Player.png" data-fancybox="web Video Player" data-caption="Video Player on Netflix, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/Web/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/Web/04-Player.png" data-fancybox="web Video Player" data-caption="Video Player on Red Bull TV, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/Web/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/Web/04-Player.png" data-fancybox="web Video Player" data-caption="Video Player on YouTube, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/Web/04-Player_th.png" />
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+              <h2>Search</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/Web/05-Search.png" data-fancybox="web Search" data-caption="Search on Amazon Prime Video, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/Web/05-Search_th.png" />
+                </a>        
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/Web/05-Search.png" data-fancybox="web Search" data-caption="Search on BBC iPlayer, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/Web/05-Search_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/Web/05-Search.png" data-fancybox="web Search" data-caption="Search on Berliner Philharmoniker, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/Web/05-Search_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/Web/05-Search.png" data-fancybox="web Search" data-caption="Search on Netflix, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/Web/05-Search_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/Web/05-Search.png" data-fancybox="web Search" data-caption="Search on Red Bull TV, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/Web/05-Search_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/Web/05-Search.png" data-fancybox="web Search" data-caption="Search on YouTube, Web">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/Web/05-Search_th.png" />
+                </a>
+              </div>
+            </div>
+          </div>
+                        
+        </div>
+      </div>
+      
+      <div id="ipad" class="tab-pane fade">
+     
+        <div class="col-xs-6 col-sm-3 title-col">
+          <div class="title-row"><h2>Amazon Prime Video</h2></div>
+          <div class="title-row"><h2>BBC iPlayer</h2></div>
+          <div class="title-row"><h2>Berliner Philharmoniker</h2></div>
+          <div class="title-row"><h2>Netflix</h2></div>
+          <div class="title-row"><h2>Red Bull TV</h2></div>
+          <div class="title-row"><h2>YouTube</h2></div>
+        </div>
+
+        <div class="slider-col col-xs-6 col-sm-9">
+          <div class="slider">
+            <div class="slide slick-slide">
+              <div class="slide-title">
+                <h2>Featured Content</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/iPad/01-Featured-Content.png" data-fancybox="ipad featured content" data-caption="Featured Content on Amazon Prime Video, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/iPad/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/iPad/01-Featured-Content.png" data-fancybox="ipad featured content" data-caption="Featured Content on BBC iPlayer, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/iPad/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/iPad/01-Featured-Content.png" data-fancybox="ipad featured content" data-caption="Featured Content on Berliner Philharmoniker, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/iPad/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/iPad/01-Featured-Content.png" data-fancybox="ipad featured content" data-caption="Featured Content on Netflix, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/iPad/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/iPad/01-Featured-Content.png" data-fancybox="ipad featured content" data-caption="Featured Content on Red Bull TV, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/iPad/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/iPad/01-Featured-Content.png" data-fancybox="ipad featured content" data-caption="Featured Content on YouTube, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/iPad/01-Featured-Content_th.png" />
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+              <h2>Categorisation</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/iPad/02-Categorisation.png" data-fancybox="ipad Categorisation" data-caption="Categorisation on Amazon Prime Video, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/iPad/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/iPad/02-Categorisation.png" data-fancybox="ipad Categorisation" data-caption="Categorisation on BBC iPlayer, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/iPad/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/iPad/02-Categorisation.png" data-fancybox="ipad Categorisation" data-caption="Categorisation on Berliner Philharmoniker, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/iPad/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/iPad/02-Categorisation.png" data-fancybox="ipad Categorisation" data-caption="Categorisation on Netflix, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/iPad/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/iPad/02-Categorisation.png" data-fancybox="ipad Categorisation" data-caption="Categorisation on Red Bull TV, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/iPad/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/iPad/02-Categorisation.png" data-fancybox="ipad Categorisation" data-caption="Categorisation on YouTube, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/iPad/02-Categorisation_th.png" />
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+              <h2>Description Page</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/iPad/03-Description-Page.png" data-fancybox="ipad Content description" data-caption="Content description on Amazon Prime Video, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/iPad/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/iPad/03-Description-Page.png" data-fancybox="ipad Content description" data-caption="Content description on BBC iPlayer, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/iPad/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/iPad/03-Description-Page.png" data-fancybox="ipad Content description" data-caption="Content description on Berliner Philharmoniker, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/iPad/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/iPad/03-Description-Page.png" data-fancybox="ipad Content description" data-caption="Content description on Netflix, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/iPad/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/iPad/03-Description-Page.png" data-fancybox="ipad Content description" data-caption="Content description on Red Bull TV, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/iPad/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/iPad/03-Description-Page.png" data-fancybox="ipad Content description" data-caption="Content description on YouTube, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/iPad/03-Description-Page_th.png" />
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+                <h2>Video Player</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/iPad/04-Player.png" data-fancybox="ipad Video Player" data-caption="Video Player on Amazon Prime Video, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/iPad/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/iPad/04-Player.png" data-fancybox="ipad Video Player" data-caption="Video Player on BBC iPlayer, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/iPad/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/iPad/04-Player.png" data-fancybox="ipad Video Player" data-caption="Video Player on Berliner Philharmoniker, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/iPad/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/iPad/04-Player.png" data-fancybox="ipad Video Player" data-caption="Video Player on Netflix, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/iPad/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/iPad/04-Player.png" data-fancybox="ipad Video Player" data-caption="Video Player on Red Bull TV, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/iPad/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/iPad/04-Player.png" data-fancybox="ipad Video Player" data-caption="Video Player on YouTube, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/iPad/04-Player_th.png" />
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+              <h2>Search</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/iPad/05-Search.png" data-fancybox="ipad Search" data-caption="Search on Amazon Prime Video, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/iPad/05-Search_th.png" />
+                </a>        
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/iPad/05-Search.png" data-fancybox="ipad Search" data-caption="Search on BBC iPlayer, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/iPad/05-Search_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/iPad/05-Search.png" data-fancybox="ipad Search" data-caption="Search on Berliner Philharmoniker, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/iPad/05-Search_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/iPad/05-Search.png" data-fancybox="ipad Search" data-caption="Search on Netflix, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/iPad/05-Search_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/iPad/05-Search.png" data-fancybox="ipad Search" data-caption="Search on Red Bull TV, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/iPad/05-Search_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/iPad/05-Search.png" data-fancybox="ipad Search" data-caption="Search on YouTube, iPad">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/iPad/05-Search_th.png" />
+                </a>
+              </div>
+            </div>
+          </div>
+                  
+        </div>
+      </div>
+        
+      <div id="androidtablet" class="tab-pane fade">
+     
+        <div class="col-xs-6 col-sm-3 title-col">
+          <div class="title-row"><h2>Amazon Prime Video</h2></div>
+          <div class="title-row"><h2>BBC iPlayer</h2></div>
+          <div class="title-row"><h2>Berliner Philharmoniker</h2></div>
+          <div class="title-row"><h2>Netflix</h2></div>
+          <div class="title-row"><h2>Red Bull TV</h2></div>
+          <div class="title-row"><h2>YouTube</h2></div>
+        </div>
+
+        <div class="slider-col col-xs-6 col-sm-9">
+          <div class="slider">
+            <div class="slide slick-slide">
+              <div class="slide-title">
+                <h2>Featured Content</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/Android-Tablet/01-Featured-Content.png" data-fancybox="droidtab featured content" data-caption="Featured Content on Amazon Prime Video, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/Android-Tablet/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/Android-Tablet/01-Featured-Content.png" data-fancybox="droidtab featured content" data-caption="Featured Content on BBC iPlayer, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/Android-Tablet/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/Android-Tablet/01-Featured-Content.png" data-fancybox="droidtab featured content" data-caption="Featured Content on Berliner Philharmoniker, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/Android-Tablet/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/Android-Tablet/01-Featured-Content.png" data-fancybox="droidtab featured content" data-caption="Featured Content on Netflix, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/Android-Tablet/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/Android-Tablet/01-Featured-Content.png" data-fancybox="droidtab featured content" data-caption="Featured Content on Red Bull TV, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/Android-Tablet/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/Android-Tablet/01-Featured-Content.png" data-fancybox="droidtab featured content" data-caption="Featured Content on YouTube, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/Android-Tablet/01-Featured-Content_th.png" />
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+              <h2>Categorisation</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/Android-Tablet/02-Categorisation.png" data-fancybox="droidtab Categorisation" data-caption="Categorisation on Amazon Prime Video, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/Android-Tablet/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/Android-Tablet/02-Categorisation.png" data-fancybox="droidtab Categorisation" data-caption="Categorisation on BBC iPlayer, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/Android-Tablet/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/Android-Tablet/02-Categorisation.png" data-fancybox="droidtab Categorisation" data-caption="Categorisation on Berliner Philharmoniker, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/Android-Tablet/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/Android-Tablet/02-Categorisation.png" data-fancybox="droidtab Categorisation" data-caption="Categorisation on Netflix, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/Android-Tablet/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/Android-Tablet/02-Categorisation.png" data-fancybox="droidtab Categorisation" data-caption="Categorisation on Red Bull TV, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/Android-Tablet/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/Android-Tablet/02-Categorisation.png" data-fancybox="droidtab Categorisation" data-caption="Categorisation on YouTube, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/Android-Tablet/02-Categorisation_th.png" />
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+              <h2>Description Page</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/Android-Tablet/03-Description-Page.png" data-fancybox="droidtab Content description" data-caption="Content description on Amazon Prime Video, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/Android-Tablet/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/Android-Tablet/03-Description-Page.png" data-fancybox="droidtab Content description" data-caption="Content description on BBC iPlayer, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/Android-Tablet/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/Android-Tablet/03-Description-Page.png" data-fancybox="droidtab Content description" data-caption="Content description on Berliner Philharmoniker, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/Android-Tablet/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/Android-Tablet/03-Description-Page.png" data-fancybox="droidtab Content description" data-caption="Content description on Netflix, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/Android-Tablet/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/Android-Tablet/03-Description-Page.png" data-fancybox="droidtab Content description" data-caption="Content description on Red Bull TV, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/Android-Tablet/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/Android-Tablet/03-Description-Page.png" data-fancybox="droidtab Content description" data-caption="Content description on YouTube, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/Android-Tablet/03-Description-Page_th.png" />
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+                <h2>Video Player</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/Android-Tablet/04-Player.png" data-fancybox="droidtab Video Player" data-caption="Video Player on Amazon Prime Video, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/Android-Tablet/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/Android-Tablet/04-Player.png" data-fancybox="droidtab Video Player" data-caption="Video Player on BBC iPlayer, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/Android-Tablet/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/Android-Tablet/04-Player.png" data-fancybox="droidtab Video Player" data-caption="Video Player on Berliner Philharmoniker, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/Android-Tablet/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/Android-Tablet/04-Player.png" data-fancybox="droidtab Video Player" data-caption="Video Player on Netflix, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/Android-Tablet/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/Android-Tablet/04-Player.png" data-fancybox="droidtab Video Player" data-caption="Video Player on Red Bull TV, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/Android-Tablet/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/Android-Tablet/04-Player.png" data-fancybox="droidtab Video Player" data-caption="Video Player on YouTube, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/Android-Tablet/04-Player_th.png" />
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+              <h2>Search</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/Android-Tablet/05-Search.png" data-fancybox="droidtab Search" data-caption="Search on Amazon Prime Video, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/Android-Tablet/05-Search_th.png" />
+                </a>        
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/Android-Tablet/05-Search.png" data-fancybox="droidtab Search" data-caption="Search on BBC iPlayer, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/Android-Tablet/05-Search_th.png" />
+                </a>
+                <a>
+                  
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/Android-Tablet/05-Search.png" data-fancybox="droidtab Search" data-caption="Search on Netflix, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/Android-Tablet/05-Search_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/Android-Tablet/05-Search.png" data-fancybox="droidtab Search" data-caption="Search on Red Bull TV, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/Android-Tablet/05-Search_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/Android-Tablet/05-Search.png" data-fancybox="droidtab Search" data-caption="Search on YouTube, Android Tablet">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/Android-Tablet/05-Search_th.png" />
+                </a>
+              </div>
+            </div>
+          </div>
+                  
+        </div>
+      </div>
+
+      <div id="iphone" class="tab-pane fade">
+     
+        <div class="col-xs-6 col-sm-3 title-col">
+          <div class="title-row"><h2>Amazon Prime Video</h2></div>
+          <div class="title-row"><h2>BBC iPlayer</h2></div>
+          <div class="title-row"><h2>Berliner Philharmoniker</h2></div>
+          <div class="title-row"><h2>Netflix</h2></div>
+          <div class="title-row"><h2>Red Bull TV</h2></div>
+          <div class="title-row"><h2>YouTube</h2></div>
+        </div>
+
+        <div class="slider-col col-xs-6 col-sm-9">
+          <div class="slider">
+            <div class="slide slick-slide">
+              <div class="slide-title">
+                <h2>Featured Content</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/iPhone/01-Featured-Content.png" data-fancybox="iphone featured content" data-caption="Featured Content on Amazon Prime Video, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/iPhone/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/iPhone/01-Featured-Content.png" data-fancybox="iphone featured content" data-caption="Featured Content on BBC iPlayer, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/iPhone/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/iPhone/01-Featured-Content.png" data-fancybox="iphone featured content" data-caption="Featured Content on Berliner Philharmoniker, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/iPhone/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/iPhone/01-Featured-Content.png" data-fancybox="iphone featured content" data-caption="Featured Content on Netflix, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/iPhone/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/iPhone/01-Featured-Content.png" data-fancybox="iphone featured content" data-caption="Featured Content on Red Bull TV, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/iPhone/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/iPhone/01-Featured-Content.png" data-fancybox="iphone featured content" data-caption="Featured Content on YouTube, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/iPhone/01-Featured-Content_th.png" />
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+              <h2>Categorisation</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/iPhone/02-Categorisation.png" data-fancybox="iphone Categorisation" data-caption="Categorisation on Amazon Prime Video, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/iPhone/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/iPhone/02-Categorisation.png" data-fancybox="iphone Categorisation" data-caption="Categorisation on BBC iPlayer, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/iPhone/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/iPhone/02-Categorisation.png" data-fancybox="iphone Categorisation" data-caption="Categorisation on Berliner Philharmoniker, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/iPhone/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/iPhone/02-Categorisation.png" data-fancybox="iphone Categorisation" data-caption="Categorisation on Netflix, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/iPhone/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/iPhone/02-Categorisation.png" data-fancybox="iphone Categorisation" data-caption="Categorisation on Red Bull TV, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/iPhone/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/iPhone/02-Categorisation.png" data-fancybox="iphone Categorisation" data-caption="Categorisation on YouTube, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/iPhone/02-Categorisation_th.png" />
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+              <h2>Description Page</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/iPhone/03-Description-Page.png" data-fancybox="iphone Content description" data-caption="Content description on Amazon Prime Video, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/iPhone/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/iPhone/03-Description-Page.png" data-fancybox="iphone Content description" data-caption="Content description on BBC iPlayer, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/iPhone/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/iPhone/03-Description-Page.png" data-fancybox="iphone Content description" data-caption="Content description on Berliner Philharmoniker, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/iPhone/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/iPhone/03-Description-Page.png" data-fancybox="iphone Content description" data-caption="Content description on Netflix, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/iPhone/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/iPhone/03-Description-Page.png" data-fancybox="iphone Content description" data-caption="Content description on Red Bull TV, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/iPhone/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/iPhone/03-Description-Page.png" data-fancybox="iphone Content description" data-caption="Content description on YouTube, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/iPhone/03-Description-Page_th.png" />
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+                <h2>Video Player</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/iPhone/04-Player.png" data-fancybox="iphone Video Player" data-caption="Video Player on Amazon Prime Video, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/iPhone/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/iPhone/04-Player.png" data-fancybox="iphone Video Player" data-caption="Video Player on BBC iPlayer, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/iPhone/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/iPhone/04-Player.png" data-fancybox="iphone Video Player" data-caption="Video Player on Berliner Philharmoniker, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/iPhone/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/iPhone/04-Player.png" data-fancybox="iphone Video Player" data-caption="Video Player on Netflix, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/iPhone/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/iPhone/04-Player.png" data-fancybox="iphone Video Player" data-caption="Video Player on Red Bull TV, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/iPhone/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/iPhone/04-Player.png" data-fancybox="iphone Video Player" data-caption="Video Player on YouTube, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/iPhone/04-Player_th.png" />
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+              <h2>Search</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/iPhone/05-Search.png" data-fancybox="iphone Search" data-caption="Search on Amazon Prime Video, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/iPhone/05-Search_th.png" />
+                </a>        
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/iPhone/05-Search.png" data-fancybox="iphone Search" data-caption="Search on BBC iPlayer, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/iPhone/05-Search_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/iPhone/05-Search.png" data-fancybox="iphone Search" data-caption="Search on Berliner Philharmoniker, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/iPhone/05-Search_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/iPhone/05-Search.png" data-fancybox="iphone Search" data-caption="Search on Netflix, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/iPhone/05-Search_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/iPhone/05-Search.png" data-fancybox="iphone Search" data-caption="Search on Red Bull TV, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/iPhone/05-Search_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/iPhone/05-Search.png" data-fancybox="iphone Search" data-caption="Search on YouTube, iPhone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/iPhone/05-Search_th.png" />
+                </a>
+              </div>
+            </div>
+          </div>
+                  
+        </div>
+      </div>
+              
+      <div id="androidphone" class="tab-pane fade">
+     
+        <div class="col-xs-6 col-sm-3 title-col">
+          <div class="title-row"><h2>Amazon Prime Video</h2></div>
+          <div class="title-row"><h2>BBC iPlayer</h2></div>
+          <div class="title-row"><h2>Berliner Philharmoniker</h2></div>
+          <div class="title-row"><h2>Netflix</h2></div>
+          <div class="title-row"><h2>Red Bull TV</h2></div>
+          <div class="title-row"><h2>YouTube</h2></div>
+        </div>
+
+        <div class="slider-col col-xs-6 col-sm-9">
+          <div class="slider">
+            <div class="slide slick-slide">
+              <div class="slide-title">
+                <h2>Featured Content</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/Android-Smartphone/01-Featured-Content.png" data-fancybox="androidphone featured content" data-caption="Featured Content on Amazon Prime Video, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/Android-Smartphone/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/Android-Smartphone/01-Featured-Content.png" data-fancybox="androidphone featured content" data-caption="Featured Content on BBC iPlayer, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/Android-Smartphone/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/Android-Smartphone/01-Featured-Content.png" data-fancybox="androidphone featured content" data-caption="Featured Content on Berliner Philharmoniker, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/Android-Smartphone/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/Android-Smartphone/01-Featured-Content.png" data-fancybox="androidphone featured content" data-caption="Featured Content on Netflix, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/Android-Smartphone/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/Android-Smartphone/01-Featured-Content.png" data-fancybox="androidphone featured content" data-caption="Featured Content on Red Bull TV, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/Android-Smartphone/01-Featured-Content_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/Android-Smartphone/01-Featured-Content.png" data-fancybox="androidphone featured content" data-caption="Featured Content on YouTube, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/Android-Smartphone/01-Featured-Content_th.png" />
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+              <h2>Categorisation</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/Android-Smartphone/02-Categorisation.png" data-fancybox="androidphone Categorisation" data-caption="Categorisation on Amazon Prime Video, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/Android-Smartphone/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/Android-Smartphone/02-Categorisation.png" data-fancybox="androidphone Categorisation" data-caption="Categorisation on BBC iPlayer, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/Android-Smartphone/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/Android-Smartphone/02-Categorisation.png" data-fancybox="androidphone Categorisation" data-caption="Categorisation on Berliner Philharmoniker, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/Android-Smartphone/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/Android-Smartphone/02-Categorisation.png" data-fancybox="androidphone Categorisation" data-caption="Categorisation on Netflix, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/Android-Smartphone/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/Android-Smartphone/02-Categorisation.png" data-fancybox="androidphone Categorisation" data-caption="Categorisation on Red Bull TV, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/Android-Smartphone/02-Categorisation_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/Android-Smartphone/02-Categorisation.png" data-fancybox="androidphone Categorisation" data-caption="Categorisation on YouTube, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/Android-Smartphone/02-Categorisation_th.png" />
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+              <h2>Description Page</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/Android-Smartphone/03-Description-Page.png" data-fancybox="androidphone Content description" data-caption="Content description on Amazon Prime Video, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/Android-Smartphone/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/Android-Smartphone/03-Description-Page.png" data-fancybox="androidphone Content description" data-caption="Content description on BBC iPlayer, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/Android-Smartphone/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/Android-Smartphone/03-Description-Page.png" data-fancybox="androidphone Content description" data-caption="Content description on Berliner Philharmoniker, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/Android-Smartphone/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/Android-Smartphone/03-Description-Page.png" data-fancybox="androidphone Content description" data-caption="Content description on Netflix, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/Android-Smartphone/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/Android-Smartphone/03-Description-Page.png" data-fancybox="androidphone Content description" data-caption="Content description on Red Bull TV, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/Android-Smartphone/03-Description-Page_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/Android-Smartphone/03-Description-Page.png" data-fancybox="androidphone Content description" data-caption="Content description on YouTube, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/Android-Smartphone/03-Description-Page_th.png" />
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+                <h2>Video Player</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/Android-Smartphone/04-Player.png" data-fancybox="androidphone Video Player" data-caption="Video Player on Amazon Prime Video, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/Android-Smartphone/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/Android-Smartphone/04-Player.png" data-fancybox="androidphone Video Player" data-caption="Video Player on BBC iPlayer, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/Android-Smartphone/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/Android-Smartphone/04-Player.png" data-fancybox="androidphone Video Player" data-caption="Video Player on Berliner Philharmoniker, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/Android-Smartphone/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/Android-Smartphone/04-Player.png" data-fancybox="androidphone Video Player" data-caption="Video Player on Netflix, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/Android-Smartphone/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/Android-Smartphone/04-Player.png" data-fancybox="androidphone Video Player" data-caption="Video Player on Red Bull TV, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/Android-Smartphone/04-Player_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/Android-Smartphone/04-Player.png" data-fancybox="androidphone Video Player" data-caption="Video Player on YouTube, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/Android-Smartphone/04-Player_th.png" />
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+              <h2>Search</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/Android-Smartphone/05-Search.png" data-fancybox="androidphone Search" data-caption="Search on Amazon Prime Video, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/Android-Smartphone/05-Search_th.png" />
+                </a>        
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/Android-Smartphone/05-Search.png" data-fancybox="androidphone Search" data-caption="Search on BBC iPlayer, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/Android-Smartphone/05-Search_th.png" />
+                </a>
+                <a>
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/Android-Smartphone/05-Search.png" data-fancybox="androidphone Search" data-caption="Search on Netflix, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/Android-Smartphone/05-Search_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/Android-Smartphone/05-Search.png" data-fancybox="androidphone Search" data-caption="Search on Red Bull TV, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/Android-Smartphone/05-Search_th.png" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/Android-Smartphone/05-Search.png" data-fancybox="androidphone Search" data-caption="Search on YouTube, Android Phone">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/Android-Smartphone/05-Search_th.png" />
+                </a>
+              </div>
+            </div>
+          </div>
+                  
+        </div>
+      </div>
+        
+      <div id="connectedtv" class="tab-pane fade">
+     
+        <div class="col-xs-6 col-sm-3 title-col">
+          <div class="title-row"><h2>Amazon Prime Video</h2></div>
+          <div class="title-row"><h2>BBC iPlayer</h2></div>
+          <div class="title-row"><h2>Berliner Philharmoniker</h2></div>
+          <div class="title-row"><h2>Netflix</h2></div>
+          <div class="title-row"><h2>Red Bull TV</h2></div>
+          <div class="title-row"><h2>YouTube</h2></div>
+        </div>
+
+        <div class="slider-col col-xs-6 col-sm-9">
+          <div class="slider">
+            <div class="slide slick-slide">
+              <div class="slide-title">
+                <h2>Featured Content</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/Connected-TV/01-Featured-Content.jpg" data-fancybox="connectedtv featured content" data-caption="Featured Content on Amazon Prime Video, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/Connected-TV/01-Featured-Content_th.jpg" />
+                </a>
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/Connected-TV/01-Featured-Content.jpg" data-fancybox="connectedtv featured content" data-caption="Featured Content on BBC iPlayer, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/Connected-TV/01-Featured-Content_th.jpg" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/Connected-TV/01-Featured-Content.jpg" data-fancybox="connectedtv featured content" data-caption="Featured Content on Berliner Philharmoniker, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/Connected-TV/01-Featured-Content_th.jpg" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/Connected-TV/01-Featured-Content.jpg" data-fancybox="connectedtv featured content" data-caption="Featured Content on Netflix, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/Connected-TV/01-Featured-Content_th.jpg" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/Connected-TV/01-Featured-Content.jpg" data-fancybox="connectedtv featured content" data-caption="Featured Content on Red Bull TV, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/Connected-TV/01-Featured-Content_th.jpg" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/Connected-TV/01-Featured-Content.jpg" data-fancybox="connectedtv featured content" data-caption="Featured Content on YouTube, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/Connected-TV/01-Featured-Content_th.jpg" />
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+              <h2>Categorisation</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/Connected-TV/02-Categorisation.jpg" data-fancybox="connectedtv Categorisation" data-caption="Categorisation on Amazon Prime Video, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/Connected-TV/02-Categorisation_th.jpg" />
+                </a>
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/Connected-TV/02-Categorisation.jpg" data-fancybox="connectedtv Categorisation" data-caption="Categorisation on BBC iPlayer, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/Connected-TV/02-Categorisation_th.jpg" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/Connected-TV/02-Categorisation.jpg" data-fancybox="connectedtv Categorisation" data-caption="Categorisation on Berliner Philharmoniker, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/Connected-TV/02-Categorisation_th.jpg" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/Connected-TV/02-Categorisation.jpg" data-fancybox="connectedtv Categorisation" data-caption="Categorisation on Netflix, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/Connected-TV/02-Categorisation_th.jpg" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/Connected-TV/02-Categorisation.jpg" data-fancybox="connectedtv Categorisation" data-caption="Categorisation on Red Bull TV, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/Connected-TV/02-Categorisation_th.jpg" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/Connected-TV/02-Categorisation.jpg" data-fancybox="connectedtv Categorisation" data-caption="Categorisation on YouTube, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/Connected-TV/02-Categorisation_th.jpg" />
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+              <h2>Description Page</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/Connected-TV/03-Description-Page.jpg" data-fancybox="connectedtv Content description" data-caption="Description Page on Amazon Prime Video, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/Connected-TV/03-Description-Page_th.jpg" />
+                </a>
+                <a>
+                </a>
+                <a>
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/Connected-TV/03-Description-Page.jpg" data-fancybox="connectedtv Content description" data-caption="Content description on Netflix, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/Connected-TV/03-Description-Page_th.jpg" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/Connected-TV/03-Description-Page.jpg" data-fancybox="connectedtv Content description" data-caption="Content description on Red Bull TV, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/Connected-TV/03-Description-Page_th.jpg" />
+                </a>
+                <a>
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+                <h2>Video Player</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/Connected-TV/04-Player.jpg" data-fancybox="connectedtv Video Player" data-caption="Video Player on Amazon Prime Video, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/Connected-TV/04-Player_th.jpg" />
+                </a>
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/Connected-TV/04-Player.jpg" data-fancybox="connectedtv Video Player" data-caption="Video Player on BBC iPlayer, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/Connected-TV/04-Player_th.jpg" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Berliner-Philharmoniker/Connected-TV/04-Player.jpg" data-fancybox="connectedtv Video Player" data-caption="Video Player on Berliner Philharmoniker, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Berliner-Philharmoniker/Connected-TV/04-Player_th.jpg" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/Connected-TV/04-Player.jpg" data-fancybox="connectedtv Video Player" data-caption="Video Player on Netflix, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/Connected-TV/04-Player_th.jpg" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/Connected-TV/04-Player.jpg" data-fancybox="connectedtv Video Player" data-caption="Video Player on Red Bull TV, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/Connected-TV/04-Player_th.jpg" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/Connected-TV/04-Player.jpg" data-fancybox="connectedtv Video Player" data-caption="Video Player on YouTube, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/Connected-TV/04-Player_th.jpg" />
+                </a>
+              </div>
+            </div>
+            
+            <div class="slide slick-slide">
+              <div class="slide-title">
+              <h2>Search</h2>
+              </div>
+              <div class="slide-body">
+                <a href="/_inc/_vui-features-2017/Amazon-Prime-Video/Connected-TV/05-Search.jpg" data-fancybox="connectedtv Search" data-caption="Search on Amazon Prime Video, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Amazon-Prime-Video/Connected-TV/05-Search_th.jpg" />
+                </a>        
+                <a href="/_inc/_vui-features-2017/BBC-iPlayer/Connected-TV/05-Search.jpg" data-fancybox="connectedtv Search" data-caption="Search on BBC iPlayer, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/BBC-iPlayer/Connected-TV/05-Search_th.jpg" />
+                </a>
+                <a>
+                </a>
+                <a href="/_inc/_vui-features-2017/Netflix/Connected-TV/05-Search.jpg" data-fancybox="connectedtv Search" data-caption="Search on Netflix, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Netflix/Connected-TV/05-Search_th.jpg" />
+                </a>
+                <a href="/_inc/_vui-features-2017/Red-Bull-TV/Connected-TV/05-Search.jpg" data-fancybox="connectedtv Search" data-caption="Search on Red Bull TV, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/Red-Bull-TV/Connected-TV/05-Search_th.jpg" />
+                </a>
+                <a href="/_inc/_vui-features-2017/YouTube/Connected-TV/05-Search.jpg" data-fancybox="connectedtv Search" data-caption="Search on YouTube, Connected TV">
+                  <img class="lazy" src="/_inc/_vui-features-2017/YouTube/Connected-TV/05-Search_th.jpg" />
+                </a>
+              </div>
+            </div>
+          </div>
+                  
+        </div>
+      </div>
+        
+       </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div style="display:none">
+  
+</div>
+
+<script type="text/javascript" src="/_inc/VP2014/js/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+<script type="text/javascript" src="/_inc/VP2014/js/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+    
+    
+    $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
+      var target = $(e.target).attr("href");
+      initSlick(target);
+    })
+    $('li.active a').trigger('shown.bs.tab');
+    
+    $('.slide-body a img').each(function (i, img) {
+      var a = $(img).parent();
+      $(a).css('background-image', 'url(' + $(img).attr('src') + ')');
+    });
+  
+    
+    function initSlick(tab) {
+      $(tab).find('.slider').each(function (i, el) {
+        $(el).slick({
+          slidesToShow: 3,
+          prevArrow: '<div class="slider-nav slider-nav-prev"><button type="button" class=""><span class="icon icon-chevron-sign-left"></span></button></div>',
+          nextArrow: '<div class="slider-nav slider-nav-next"><button type="button" class=""><span class="icon icon-chevron-sign-right"></span></button></div>',
+          infinite: false
+        });
+      });
+    }
+    
+    $(".slider a").fancybox({
+		  margin : [100, 300],
+    });
+  });
+</script>
+</asp:Content>
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolderBodyTag" runat="server">
+	
+</asp:content>

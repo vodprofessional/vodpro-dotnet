@@ -58,9 +58,24 @@ namespace VUI.VUI2.classes
 
         public void SetBenchmark()
         {
-            Capabilities = Node.GetProperty("serviceCapabilities").Value.Split(',');
-            HotFeatures = Node.GetProperty("hotFeatures").Value.Split(',');
-            if(!String.IsNullOrEmpty(Node.GetProperty("benchmarkDate").Value)) {
+            
+            IsPre2016Score = false;
+            try
+            {
+                if (Node.GetProperty("pre2016Score") != null)
+                {
+                    IsPre2016Score = Node.GetProperty("pre2016Score").Value == "1";
+                }
+            }
+            catch (Exception e)
+            {
+                log.Error("Error ssetting benchmark: ", e);
+            }
+
+            // Capabilities2015 = Node.GetProperty("serviceCapabilities").Value.Split(',');
+            Capabilities = Node.GetProperty("features2016").Value.Split(',');
+            // HotFeatures = Node.GetProperty("hotFeatures").Value.Split(',');
+            if (!String.IsNullOrEmpty(Node.GetProperty("benchmarkDate").Value)) {
                 BenchmarkDate = DateTime.Parse(Node.GetProperty("benchmarkDate").Value);
             }
             DeviceDescription = Node.GetProperty("benchmarkDevice").Value;
@@ -72,6 +87,7 @@ namespace VUI.VUI2.classes
             {
                 MarketplaceRating = String.Empty;
             }
+            
         }
 
         public bool HideHotFeatures
@@ -124,6 +140,7 @@ namespace VUI.VUI2.classes
             {
                 return Capabilities.Contains(capability);
             }
+
             return false;
         }
         public bool HasHotFeature(string capability)
@@ -164,6 +181,7 @@ namespace VUI.VUI2.classes
         public DateTime Date { get; set; }
         public DateTime BenchmarkDate { get; set; }
         public string DeviceDescription { get; set; }
+        public bool IsPre2016Score { get; set; }
         public string[] Capabilities { get; set; }
         public string[] HotFeatures { get; set; }
         public int BenchmarkScore { get { if(!_scoreSet) { SetScore(); } return _benchmarkScore; } }

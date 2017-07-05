@@ -334,6 +334,49 @@ namespace VUI.pages
         }
 
 
+        private void UnpublishWithChildren(Document parent, umbraco.BusinessLogic.User u, int level)
+        {
+            string indent = "";
+            for (int i=0; i<level+1; i++)
+            {
+                indent += "-";
+            }
+
+            log.Debug(" Unpublishing " + indent + " " + parent.Path);
+            parent.UnPublish();
+            umbraco.library.UnPublishSingleNode(parent.Id);
+            try {
+                umbraco.library.UpdateDocumentCache(parent.Id);
+            }
+            catch (Exception ex)
+            {
+                log.Error(indent + "- Something went wrong");
+            }
+
+            if (parent.HasChildren)
+            {
+                foreach (Document d in parent.GetDescendants())
+                {
+                    UnpublishWithChildren(d, u, level+1);
+                }
+            }
+        }
+
+        protected void UnpublishContent(object sender, EventArgs e)
+        {
+
+            umbraco.BusinessLogic.User u = umbraco.BusinessLogic.User.GetAllByLoginName("websitecontentuser", false).First();
+            umbraco.library.UpdateDocumentCache(1058);
+
+            UnpublishWithChildren(new Document(1059), u, 1); //News
+            UnpublishWithChildren(new Document(1077), u, 1); //Research
+            UnpublishWithChildren(new Document(1078), u, 1); //Features
+            UnpublishWithChildren(new Document(36404), u, 1); //Calendar
+            UnpublishWithChildren(new Document(1079), u, 1); //Reviews
+            UnpublishWithChildren(new Document(1913), u, 1); //Blog
+        }
+
+
 
         protected void btnSetAnalyses2016_Click(object sender, EventArgs e)
         {

@@ -345,6 +345,10 @@ namespace VUI.VUI2.classes
                 DateTime createDate = image.CreateDate;
 
                 string pagetype = image.GetProperty("pageType").Value;
+                if (!string.IsNullOrEmpty(image.GetProperty("pageType2016").Value))
+                {
+                    pagetype = image.GetProperty("pageType2016").Value;
+                }
 
                 string ImageURL_th =  VUI_mediafolder + @"th/" + image.GetProperty("thFile").Value.Replace("&", "%26");
                 string ImageURL_md =  VUI_mediafolder + @"md/" + image.GetProperty("thFile").Value.Replace("&", "%26");

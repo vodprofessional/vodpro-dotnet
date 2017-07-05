@@ -59,10 +59,12 @@ namespace VUI.VUI2.classes
         public static Dictionary<string, string> featureDirectoryMap = new Dictionary<string, string>();
         public static Dictionary<string, string> featureFeatureMap = new Dictionary<string, string>();
         public static Dictionary<string, string> pageTypeVals = new Dictionary<string, string>();
+        public static Dictionary<string, string> pageTypeVals2016 = new Dictionary<string, string>();
 
         public static List<string> imagesImported;
         public static List<string> errorImages;
 
+        public static int pageTypeValues2016Key = 0;
 
         public static void Import(string importTag)
         {
@@ -72,6 +74,7 @@ namespace VUI.VUI2.classes
             imagesImported = new List<string>();
             errorImages = new List<string>();
 
+            pageTypeValues2016Key = Int32.Parse(Utility.GetConst("VUI_2016PageTypes"));
 
             InitFeatureMaps();
             InitPageTypePreVals();
@@ -400,8 +403,11 @@ namespace VUI.VUI2.classes
                             imageProps.Add("lgFile", imageName);
                             imageProps.Add("thFile", imageName);
                             imageProps.Add("importTag", importTag);
+
                             // ADD page type here
                             imageProps.Add("pageType", GetPageType(pageTypeName));
+                            imageProps.Add("pageType2016", GetPageType2016(pageTypeName));
+
 
                             int imageId = CreateVUINodePublish(imageName, benchmarkNodeId, VUI_IMAGETYPE, imageProps, publish);
 
@@ -552,6 +558,21 @@ namespace VUI.VUI2.classes
                 }
                 conn.Close();
             }
+
+            pageTypeVals2016.Clear();
+
+            sql = String.Format(@"select value, id from [dbo].[cmsDataTypePreValues] where datatypeNodeId = {0}", pageTypeValues2016Key);
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.AppSettings["umbracoDbDSN"].ToString()))
+            {
+                conn.Open();
+                SqlCommand comm = new SqlCommand(sql, conn);
+                SqlDataReader sr = comm.ExecuteReader();
+                while (sr.Read())
+                {
+                    pageTypeVals2016.Add(sr[0].ToString(), sr[1].ToString());
+                }
+                conn.Close();
+            }
         }
 
         public static string GetPageType(string val)
@@ -565,6 +586,20 @@ namespace VUI.VUI2.classes
                 return String.Empty;
             }
         }
+
+        public static string GetPageType2016(string val)
+        {
+            if (pageTypeVals2016.Keys.Contains(val))
+            {
+                return pageTypeVals2016[val];
+            }
+            else
+            {
+                return String.Empty;
+            }
+        }
+
+
 
         public static void InitFeatureMaps()
         {
@@ -693,6 +728,17 @@ namespace VUI.VUI2.classes
             featureFeatureMap.Add("Resume after stopping", "Resume after stopping");
             featureFeatureMap.Add("Social content recommendation", "Social recommendation");
 
+            featureFeatureMap.Add("Trailers", "Trailers");
+            featureFeatureMap.Add("Notifications", "Notifications");
+            featureFeatureMap.Add("Shuffle buttons", "Shuffle buttons");
+            featureFeatureMap.Add("Picture-in-picture", "Picture-in-picture");
+            featureFeatureMap.Add("Voice control", "Voice control");
+            featureFeatureMap.Add("Ratings and metadata integration", "Ratings and metadata integration");
+            featureFeatureMap.Add("Cellular viewing", "Cellular viewing");
+            featureFeatureMap.Add("In-app purchasing", "In-app purchasing");
+            featureFeatureMap.Add("Surprise me", "Surprise me");
+            featureFeatureMap.Add("Title stacking", "Title stacking");
+            featureFeatureMap.Add("Time-based viewing", "Time-based viewing");
 
 
 

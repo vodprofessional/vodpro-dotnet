@@ -109,6 +109,10 @@ namespace VUI.VUI3.classes
 
             DateTime createDate = image.CreateDate;
             string pagetype = image.GetProperty("pageType").Value;
+            if (image.GetProperty("pageType2016") != null && !string.IsNullOrEmpty(image.GetProperty("pageType2016").Value))
+            {
+                pagetype = image.GetProperty("pageType2016").Value;
+            }
             string ImageURL_th = VUI_mediafolder + @"th/" + image.GetProperty("thFile").Value.Replace("&", "%26");
             string ImageURL_md = VUI_mediafolder + @"md/" + image.GetProperty("thFile").Value.Replace("&", "%26");
             string ImageURL_lg = VUI_mediafolder + @"lg/" + image.GetProperty("lgFile").Value.Replace("&", "%26");
@@ -364,7 +368,14 @@ namespace VUI.VUI3.classes
                     comm.CommandText = sql;
                     comm.Connection = conn;
                     comm.Prepare();
-                    comm.ExecuteNonQuery();
+                    try {
+                        comm.ExecuteNonQuery();
+                    }
+                    catch(Exception ex)
+                    {
+                        log.Debug(sql);
+                        throw ex;
+                    }
                     conn.Close();
                 }
             }
@@ -541,7 +552,7 @@ namespace VUI.VUI3.classes
             List<DynamicNode> analyses = service.Descendants(Utility.GetConst("VUi2_analysistype")).Items.ToList();
 
             DateTime benchmarkDate;
-            DateTime mostRecentBenchmark = new DateTime(1990, 1, 1);
+            DateTime mostRecentBenchmark = DateTime.MinValue;
             int analysisToScoreId = -1;
             int tempAnalysisId = -1;
 
@@ -682,11 +693,12 @@ namespace VUI.VUI3.classes
                                           ,     IsPreviewable = {7}
                                           ,     ScreenshotCount = {8}
                                           ,     AppStoreURL = '{9}'
+                                          ,     BenchmarkDate = '{10}'
                                           where ID = {0};
                                         end
                                         else
-                                          insert into vui_Service (ID,Name,ServiceName,PlatformId,DeviceId,BenchmarkScore,DefaultScreenshotID,IsPreviewable,ScreenshotCount,AppStoreURL) values ({0}, '{1}', '{2}', {3}, {4}, {5}, {6}, {7}, {8}, '{9}'); "
-                        , new Object[] { service.Id, service.Name, Utility.NiceUrlName(service.Id), platformId, deviceId, serviceScore, defaultScreenshotID, isPreviewable, screenshotCount, appStoreURL });
+                                          insert into vui_Service (ID,Name,ServiceName,PlatformId,DeviceId,BenchmarkScore,DefaultScreenshotID,IsPreviewable,ScreenshotCount,AppStoreURL,BenchmarkDate) values ({0}, '{1}', '{2}', {3}, {4}, {5}, {6}, {7}, {8}, '{9}', '{10}'); "
+                        , new Object[] { service.Id, service.Name, Utility.NiceUrlName(service.Id), platformId, deviceId, serviceScore, defaultScreenshotID, isPreviewable, screenshotCount, appStoreURL, mostRecentBenchmark.Equals(DateTime.MinValue) ? "" : mostRecentBenchmark.ToString("yyyy-MM-dd") });
 
             string VUI_mediafolder = ConfigurationManager.AppSettings["VUI_mediafolder"].ToString().Replace("~", "");
 
@@ -701,6 +713,10 @@ namespace VUI.VUI3.classes
                 DateTime createDate = image.CreateDate;
 
                 string pagetype = image.GetProperty("pageType").Value;
+                if (image.GetProperty("pageType2016") != null && !string.IsNullOrEmpty(image.GetProperty("pageType2016").Value))
+                {
+                    pagetype = image.GetProperty("pageType2016").Value;
+                }
 
                 string ImageURL_th = VUI_mediafolder + @"th/" + image.GetProperty("thFile").Value.Replace("&", "%26");
                 string ImageURL_md = VUI_mediafolder + @"md/" + image.GetProperty("thFile").Value.Replace("&", "%26");
@@ -731,7 +747,7 @@ namespace VUI.VUI3.classes
                                             end 
                                             ELSE
                                               insert into vui_Image (Id, ServiceId, PageType, ImageURL_th, ImageURL_md, ImageURL_lg, ImageURL_full, DateCreated, AnalysisId) values ({0},{1},'{2}','{3}','{4}','{5}','{6}','{7}', {8}); "
-                            , new Object[] { imageid, service.Id, pagetype, ImageURL_th, ImageURL_md, ImageURL_lg, ImageURL_full, createDate.ToString("yyyy-MM-dd HH:mm:ss.0"), analysisId });
+                            , new Object[] { imageid, service.Id, pagetype, ImageURL_th.Replace("'","''"), ImageURL_md.Replace("'", "''"), ImageURL_lg.Replace("'", "''"), ImageURL_full.Replace("'", "''"), createDate.ToString("yyyy-MM-dd HH:mm:ss.0"), analysisId });
 
                 sql += tmp;
             }
@@ -768,13 +784,15 @@ namespace VUI.VUI3.classes
             Dictionary<string, int> scores = new Dictionary<string, int>();
 
             // Set up the Scores Dictionary
-            XPathNodeIterator iterator = umbraco.library.GetPreValues(Int32.Parse(Utility.GetConst("VUI_function_list")));
+            XPathNodeIterator iterator = umbraco.library.GetPreValues(Int32.Parse(Utility.GetConst("VUI_Scoring2016Features"))); //VUI_function_list
             iterator.MoveNext(); //move to first
             XPathNodeIterator preValues = iterator.Current.SelectChildren("preValue", "");
             while (preValues.MoveNext())
             {
                 scores.Add(preValues.Current.Value.Trim(), 0);
             }
+
+            /*
             iterator = umbraco.library.GetPreValues(Int32.Parse(Utility.GetConst("VUI_hotfeatures_list")));
             iterator.MoveNext(); //move to first
             preValues = iterator.Current.SelectChildren("preValue", "");
@@ -782,6 +800,7 @@ namespace VUI.VUI3.classes
             {
                 scores.Add(preValues.Current.Value.Trim(), 0);
             }
+            */
 
             Analysis a = new Analysis(analysisId);
             a.SetBenchmark();
@@ -790,6 +809,7 @@ namespace VUI.VUI3.classes
 
             try
             {
+                if(_analyses == null) _analyses = new Dictionary<string, int>();
                 _analyses.Add(a.Node.Parent.Name + "/" + a.Node.Name, analysisId);
             }
             catch (Exception ex) { ; }
@@ -803,9 +823,13 @@ namespace VUI.VUI3.classes
                         scores[c] += 1;
                     }
                     catch (Exception ex1)
-                    { ;}
+                    {
+                        log.Error("Error storing capabilities [" + c +  "]", ex1);
+                    }
                 }
             }
+
+            /*
             if (a.HotFeatures != null)
             {
                 foreach (string c in a.HotFeatures)
@@ -818,6 +842,7 @@ namespace VUI.VUI3.classes
                     { ;}
                 }
             }
+            */
 
             StringBuilder sq = new StringBuilder();
             foreach (string feature in scores.Keys)

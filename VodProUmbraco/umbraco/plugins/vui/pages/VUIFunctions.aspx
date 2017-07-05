@@ -104,6 +104,9 @@
         <asp:Button runat="server" ID="btnDeleteChildren" OnClick="DeleteChildren" Text="Delete Children" />
         <asp:Literal runat="server" ID="litDeleteChildren" />
 
+        <h2>Unpublish Old VodPro content</h2>
+
+        <asp:Button runat="server" ID="btnUnpublishNonVUI" OnClick="UnpublishContent" Text="Unpublish Content" />
 
     </div>
     </form>
