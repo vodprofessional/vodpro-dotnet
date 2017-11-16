@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VodProUmbraco", "VodProUmbraco\VodProUmbraco.csproj", "{0EA94EF5-412A-413B-B457-8519AA7FC028}"
 EndProject
@@ -28,6 +28,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications and Tests", "Applications and Tests", "{CB9B9969-758A-4A8F-98CC-4B56998BFD68}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{820AF4E1-CB5C-49E5-B61A-79D6A1F1689A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomEditorControls", "CustomEditorControls\CustomEditorControls.csproj", "{554169A9-0682-49D9-B423-09CD14709F4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -149,6 +151,18 @@ Global
 		{5B7B9862-12D0-495B-8FA8-D1807BAAC705}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{5B7B9862-12D0-495B-8FA8-D1807BAAC705}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{5B7B9862-12D0-495B-8FA8-D1807BAAC705}.Release|x86.ActiveCfg = Release|Any CPU
+		{554169A9-0682-49D9-B423-09CD14709F4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{554169A9-0682-49D9-B423-09CD14709F4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{554169A9-0682-49D9-B423-09CD14709F4F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{554169A9-0682-49D9-B423-09CD14709F4F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{554169A9-0682-49D9-B423-09CD14709F4F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{554169A9-0682-49D9-B423-09CD14709F4F}.Debug|x86.Build.0 = Debug|Any CPU
+		{554169A9-0682-49D9-B423-09CD14709F4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{554169A9-0682-49D9-B423-09CD14709F4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{554169A9-0682-49D9-B423-09CD14709F4F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{554169A9-0682-49D9-B423-09CD14709F4F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{554169A9-0682-49D9-B423-09CD14709F4F}.Release|x86.ActiveCfg = Release|Any CPU
+		{554169A9-0682-49D9-B423-09CD14709F4F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -164,5 +178,6 @@ Global
 		{3B8DF094-DFD0-449F-9930-93975E6E26DB} = {820AF4E1-CB5C-49E5-B61A-79D6A1F1689A}
 		{768121AA-C363-4308-8D1F-3A586A96E116} = {820AF4E1-CB5C-49E5-B61A-79D6A1F1689A}
 		{5B7B9862-12D0-495B-8FA8-D1807BAAC705} = {820AF4E1-CB5C-49E5-B61A-79D6A1F1689A}
+		{554169A9-0682-49D9-B423-09CD14709F4F} = {820AF4E1-CB5C-49E5-B61A-79D6A1F1689A}
 	EndGlobalSection
 EndGlobal

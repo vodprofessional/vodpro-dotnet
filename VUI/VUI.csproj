@@ -20,6 +20,11 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -125,6 +130,7 @@
     <Content Include="usercontrols\CrowdJob.ascx" />
     <Content Include="usercontrols\paypal-ipn-processor.ascx" />
     <Content Include="usercontrols\vui-categorise-images.ascx" />
+    <Content Include="usercontrols\vui-data-services.ascx" />
     <Content Include="usercontrols\vui-importer.ascx" />
     <Content Include="usercontrols\vui-login.ascx" />
     <Content Include="usercontrols\vui-membership.ascx" />
@@ -187,6 +193,13 @@
     </Compile>
     <Compile Include="usercontrols\vui-categorise-images.ascx.designer.cs">
       <DependentUpon>vui-categorise-images.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrols\vui-data-services.ascx.cs">
+      <DependentUpon>vui-data-services.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="usercontrols\vui-data-services.ascx.designer.cs">
+      <DependentUpon>vui-data-services.ascx</DependentUpon>
     </Compile>
     <Compile Include="usercontrols\vui-news.ascx.cs">
       <DependentUpon>vui-news.ascx</DependentUpon>
@@ -332,6 +345,7 @@
     <Compile Include="VUI3.classes\VUIServiceRatings.cs" />
     <Compile Include="VUI3.classes\VUI3StoreComment.cs" />
     <Compile Include="VUI3.classes\VUIUser.cs" />
+    <Compile Include="VUI3.classes\VUIVideo.cs" />
     <Compile Include="VUI3.classes\Web\VUIMaster.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

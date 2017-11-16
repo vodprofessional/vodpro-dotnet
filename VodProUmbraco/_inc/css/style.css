@@ -1471,6 +1471,9 @@ footer {
   line-height: 24px;
   margin: 0 0 30px;
 }
+.b-tabs-devices .panes p.header {
+  margin-bottom: 6px;
+}
 
 .item-block {
   -webkit-box-shadow: rgba(0, 0, 0, 0.24) 0 0 5px;
@@ -1657,6 +1660,9 @@ footer {
   background: #fff;
   padding: 40px 0 0;
 }
+.service .b-video {
+  padding-top:0px;
+}
 .service .b-screenshots .b-carousel {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -1673,6 +1679,9 @@ footer {
   margin-left: 20px;
   width: 268px;
 }
+.service .b-video .b-carousel .carousel li {
+  height: 260px;
+}
 .service .b-screenshots .b-carousel .carousel li a {
   color: #000;
   font-size: 18px;
@@ -1683,6 +1692,9 @@ footer {
 .service .b-screenshots .b-carousel .carousel li .screenshot-img {
   height: 172px;
   margin: 0 0 5px;
+}
+.service .b-video .b-carousel .carousel li .screenshot-img {
+  height: 200px;
 }
 .service .b-screenshots .b-carousel .carousel li .screenshot-count {
   float: right;

@@ -17,17 +17,23 @@
         <li class="header-nav-item @(activeclass)">
             <a href="/vui/screenshots">Screenshots</a>
         </li>
-        @if (false)
+        @if (path.Contains("/videos"))
         {
-            if (path.Contains("/benchmarking"))
-            {
-                activeclass = "active";
-            }
-            else { activeclass = String.Empty; }
+            activeclass = "active";
+        }
+        else { activeclass = String.Empty; }
+        <li class="header-nav-item @(activeclass)">
+            <a href="/vui/videos">Videos</a>
+        </li>
+
+        @if (path.Contains("/benchmarking"))
+        {
+            activeclass = "active";
+        }
+        else { activeclass = String.Empty; }
         <li class="header-nav-item @(activeclass)">
             <a href="/vui/benchmarking">Benchmarking</a>
         </li>
-        }
         @if (path.Contains("/appstore-ratings"))
         { 
             activeclass = "active"; 

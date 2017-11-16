@@ -20,6 +20,11 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -4343,6 +4348,8 @@
     <Content Include="macroScripts\vui3-storylisting.cshtml" />
     <Content Include="macroScripts\vui3-navigation.cshtml" />
     <Content Include="macroScripts\vui3-notifications.cshtml" />
+    <Content Include="macroScripts\vui3-videolisting.cshtml" />
+    <Content Include="macroScripts\vui3-video.cshtml" />
     <None Include="macroScripts\VUI_Benchmarking.cshtml" />
     <None Include="macroScripts\VUI_HomePageAdminBox.cshtml" />
     <None Include="macroScripts\VUI_HomePageText.cshtml" />

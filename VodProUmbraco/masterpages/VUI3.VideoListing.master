@@ -1,0 +1,30 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/vui3-master.master" AutoEventWireup="true" %>
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolderHead" runat="server">
+	<title>VUIX Videos</title>
+</asp:content>
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolderBodyTag" runat="server">
+     <umbraco:Macro ID="Macro2" runat="server" Language="cshtml">
+    @using VUI.VUI3.classes;
+    @using System.Web;
+    @{
+        string cssclass = "second articlelist";
+        @: @Html.Raw(VUI3Utility.PageBody(cssclass))
+    }
+    </umbraco:Macro>
+</asp:content>
+
+<asp:content ContentPlaceHolderId="ContentPlaceHolderBody" runat="server">
+	
+    
+    <div id="main">
+        <div class="main-top">
+
+	        <umbraco:Macro Alias="vui3-videolisting" runat="server" Tag="Video Walkthrough" Title="Video Walkthroughs" IsFirst="true"></umbraco:Macro>  
+              
+	        <umbraco:Macro Alias="vui3-videolisting" runat="server" Tag="Video Walkthrough" Title="Another Type of Video"></umbraco:Macro>    
+
+        </div>
+    </div>
+</asp:content>

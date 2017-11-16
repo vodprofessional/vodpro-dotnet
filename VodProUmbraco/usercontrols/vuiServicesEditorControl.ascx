@@ -1,0 +1,2 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="vuiServicesEditorControl.ascx.cs" Inherits="CustomEditorControls.usercontrols.vuiServicesEditorControl" %>
+<asp:CheckBoxList runat="server" ID="rptServices" SelectionMode="Multiple"></asp:CheckBoxList>

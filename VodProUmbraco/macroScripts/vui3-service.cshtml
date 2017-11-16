@@ -44,6 +44,56 @@
     </div>
 }
 
+@helper WriteVideos(VUI3ServiceMaster service, bool IsFullMode)
+{
+    if (VUIVideo.AllVideosForService(service.Id.Value).Count > 0)
+    {
+        <div class="b-screenshots b-video service-slide" id="slide-video">
+            <div class="inner">
+                <h2>Videos</h2>
+                <div class="b-tabs b-tabs-devices">
+                    <div class="panes">
+                        <div class="pane">
+                        <div class="inner">
+                            <div class="b-carousel big">
+                                <div class="carousel">
+                                    <ul>
+
+                                        @foreach (VUIVideo video in VUIVideo.AllVideosForService(service.Id.Value))
+                                        {
+                                            string url = "#";
+                                            string linkaddon = @"data-panelregion=""action-contact-form"" data-panel=""true""";
+                                            if (IsFullMode)
+                                            {
+                                                url = @video.Url.Replace("/vui/", "/vui3/");
+                                                linkaddon = @"target=""_videoview""";
+                                            }
+                                            <li>
+                                                <a href="@url" @Html.Raw(linkaddon)>
+                                                    <p class="header">@(video.Title)</p>
+                                                    <div class="screenshot-img">
+                                                        <img src="https://img.youtube.com/vi/@(video.YouTubeShortCode)/0.jpg" alt="" />
+                                                    </div>
+                                                    <p>
+                                                        @(video.PublishDate.ToString("MMMM yyyy"))
+                                                    </p>
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                <a class="arrow prev" href="#"></a><a class="arrow next" href="#"></a>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+
 @helper WriteBenchmark(VUI3ServiceMaster service, string platformName, string deviceName)
 {
 if (service.ScreenshotPackages.HasBenchmarksForPlatform(platformName, deviceName))
@@ -1287,6 +1337,9 @@ else if (rating <= 0.75M && rating > 0.25M)
                         </div>
                     </div>
                 </div>
+
+
+                @WriteVideos(@Service, IsFullMode)
 
 
                 <div class="b-bencmarking service-slide" id="slide-benchmarking">

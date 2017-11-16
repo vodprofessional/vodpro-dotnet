@@ -10,3 +10,4 @@ Backup1
 .vs
 **/bin
 **/obj
+packages/

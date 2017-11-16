@@ -415,6 +415,8 @@ h2.membercontent { height:20px; color: #000; background:transparent none; font-w
 .articlelist ul.bp-features li .bp-image { display:table-cell; vertical-align:top;}
 .articlelist ul.bp-features li .bp-image img { max-width:200px; margin: 0 15px 0 0;  border-radius:5px;  }
 .articlelist ul.bp-features li .bp-text {  display:table-cell; }
+.articlelist ul.bp-features li a .bp-text  span{  font-size:1.2em; color: #333; line-height: 1.6em; }
+.articlelist ul.bp-features li a .bp-text span:hover { color:#888;}
 .panes .b-matrix-files .inner .item-block ul li .img { overflow:hidden; border-radius:3px;  }
 .panes .b-matrix-files .inner .item-block ul li .img img { height:27px; }
 

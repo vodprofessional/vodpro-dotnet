@@ -1,0 +1,92 @@
+@using VUI.classes;
+@using VUI.VUI3.classes;
+@using umbraco.cms.businesslogic.member;
+@using System.Web;
+@using umbraco.MacroEngines;
+@{
+    bool IsFullMode = false;
+    VUI3ServiceMasterMatrix Matrix;
+    VUI3PageFunctionDescriptions PageDescriptions;
+
+
+    string tag = @Parameter.Tag == null ? "" : @Parameter.Tag;
+    string title = @Parameter.Title;
+    bool isFirst = @Parameter.IsFirst == null ? false : @Parameter.IsFirst.Equals("true");
+}
+<div class="inner">
+
+    @{
+        VUIUser u = VUI3Utility.GetUser();
+
+        @: @Html.Raw(@VUI3Utility.SetPageTitle(@"VUI Library - " + title))
+
+        if (u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_ADMIN) || u.UserStatus.Equals(VUIfunctions.VUI_USERTYPE_USER))
+        {
+            IsFullMode = true;
+        }
+
+        if (!IsFullMode && isFirst)
+        {
+            IsFullMode = false;
+
+
+            <h1>@title - Available to Subscribers!</h1>
+
+            <p>
+                You will need to <a href="#" data-panelregion="action-login-form" data-panel="true">login to the VUI Library</a> in order to access our video library.
+
+            </p>
+            <p>&nbsp;</p>
+            <p>
+                If you don't have a login yet, you can <a href="#" data-panelregion="action-contact-form" data-panel="true">contact us to arrange a demonstration from one of our team</a>
+                and <a href="/vui3">find out more about the benefits of becoming a subscriber</a>.
+            </p>
+            <p>&nbsp;</p>
+        }
+        else
+        {
+            <h1>@title</h1>
+        }
+
+        List<DynamicNode> subNodes = @Model.Descendants("VUI3Video").OrderBy("publishDate desc").Items;
+
+        
+
+
+        if (@subNodes.Count(s => s.GetProperty("tags").Value != null && s.GetProperty("tags").Value.Contains(tag)) > 0)
+        {
+
+            <div class="ui-center-align">
+                <ul class="bp-features">
+                    @foreach (DynamicNode video in @subNodes.Where(s => s.GetProperty("tags").Value != null && s.GetProperty("tags").Value.Contains(tag)))
+                    {
+
+                        string url = "#";
+                        string linkaddon = @"data-panelregion=""action-contact-form"" data-panel=""true""";
+                        if (IsFullMode)
+                        {
+                            url = @video.Url.Replace("/vui/", "/vui3/");
+                            linkaddon = @"target=""_videoview""";
+                        }
+
+                        <li class="bp-feature">
+                            <a href="@url" @Html.Raw(linkaddon)>
+                                <div class="bp-image">
+                                    <img src="https://img.youtube.com/vi/@(video.GetProperty("youTubeShortCode").Value)/0.jpg" />
+                                </div>
+                                <div class="bp-text">
+                                    <h2>
+                                        @video.GetProperty("title").Value
+                                    </h2>
+                                    <span>@video.GetProperty("description").Value</span>
+                                    @*  - @video.GetProperty("tags").Value *@
+                                </div>
+
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+    }
+</div>

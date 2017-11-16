@@ -1,0 +1,26 @@
+@using VUI.classes;
+@using VUI.VUI3.classes;
+@using umbraco.cms.businesslogic.member;
+@using System.Web;
+@using umbraco.MacroEngines;
+
+
+<div class="inner">
+
+    @{
+        <h1>@Model.title</h1>
+
+        <div style="margin: 16px 0">
+            <iframe width="853" height="480" src="https://www.youtube.com/embed/@(Model.youTubeShortCode)" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+
+        <p>
+            @Model.description
+        </p>
+
+        <p style="color:#808080">Tags: @Model.tags</p>
+
+    }
+
+</div>
