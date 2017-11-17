@@ -1,6 +1,6 @@
-# Developing for VOD Professional
+# Developing Vodkr's VUIX Library
 
-The VOD Professional web site runs on Umbraco v4.7.2.  This has been customised and enhanced to provide additional functionality to support our subscription product, the VUI (Video User Interface) library.
+The VUIX Library site https://library.vodkr.com runs on Umbraco v4.7.2.  This has been customised and enhanced to provide additional functionality to support our subscription library product.
 
 If you are reading this document you have probably been contracted to build an enhancement to our system. This document outlines how to begin doing this. If any of the terminology is unfamiliar to you, then feel free to ask us what we mean, although it may also indicate to you that you aren’t the right person to carry out the work and you should let us know as soon as you can; your honesty will be hugely appreciated :)
 
@@ -39,7 +39,7 @@ We expect you to put comments into your code. You don’t need to comment every 
 
 It may be appropriate to keep your work entirely in its own project. Of course this would be simplest for us to integrate and install.
 
-The site has grown organically over several years, so if you want to use existing classes and methods and can’t work out what they do, please contact us directly technical@vodprofessional.com. 
+The site has grown organically over several years, so if you want to use existing classes and methods and can’t work out what they do, please contact us directly technical@vodkr.com. 
 
 ## Finally
 Have fun!
