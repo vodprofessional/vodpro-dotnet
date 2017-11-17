@@ -13,7 +13,7 @@ If you are reading this document you have probably been contracted to build an e
 ## Getting Access to our codebase
 You'll be branching from the *develop* branch of this repo, and we expect that you'll make feature branches for whatever work you're carrying out. To keep the repo clean, we suggest that you use the git excludes list provided at the end of this document.
 
-You'll need to download our sanitised development DB “vodprofessional_umbraco_ext” and restore it into your dev system. It's available here: https://drive.google.com/file/d/0B8BQ4aJnGmq_TjhkWlNpNEFsS28/view?usp=sharing
+You'll need to download our sanitised development DB “vodprofessional_umbraco_ext” and restore it into your dev system. It's available here: https://drive.google.com/file/d/1PjMCbUd9wcrgqwziTilrsWfJI9cku19K/view?usp=sharing
 
 ## Local Setup
 We'll take it for granted you know how to:
@@ -33,7 +33,6 @@ Once we have signed off your work we'll need to discuss how we get those changes
 1. Your changes committed to the Github repo;
 2. SQL scripts of any DB changes;
 3. If you are producing pure Umbraco changes, e.g. Document types, data types and so on, then creating an Umbraco installation package is a good solution for sharing your changes.  We can work this out on a project-by-project basis.
-Coding Standards
 
 ## Coding style and standards
 We expect you to put comments into your code. You don’t need to comment every line, but a short description about what a class or method is for is expected.  Please put a standard comment at the top of all your files with your name and the date in, so we can look back and understand who to call if something goes wrong in future. You can indent with spaces or tabs. Use sensible variable names in English please!
