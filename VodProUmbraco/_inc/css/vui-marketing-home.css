@@ -1207,6 +1207,7 @@ html, body * {
   background: #666 none;
   padding: 4px 16px;
   text-indent: 0;
+  text-decoration: none !important;
 }
 .marketing-home ul.bjqs-controls.v-centered li.bjqs-prev a {
   background: #999 none;
