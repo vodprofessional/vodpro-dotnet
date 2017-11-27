@@ -34,21 +34,22 @@
         <li class="header-nav-item @(activeclass)">
             <a href="/vui/benchmarking">Benchmarking</a>
         </li>
-        @if (path.Contains("/appstore-ratings"))
-        { 
-            activeclass = "active"; 
-        } else { activeclass=String.Empty; }
-        <li class="header-nav-item @(activeclass)">
-            <a href="/vui/tables">Tables</a>
-        </li>
-        @*
-        @if (path.Contains("/best-practice-guides"))
-        { 
-            activeclass = "active"; 
-        } else { activeclass=String.Empty; }
-        <li class="header-nav-item @(activeclass)">
-            <a href="/vui/best-practice-guides">Analysis</a>
-        </li>
-        *@
+@*
+    @if (path.Contains("/appstore-ratings"))
+    {
+        activeclass = "active";
+    } else { activeclass=String.Empty; }
+    <li class="header-nav-item @(activeclass)">
+        <a href="/vui/tables">Tables</a>
+    </li>
+
+    @if (path.Contains("/best-practice-guides"))
+    {
+        activeclass = "active";
+    } else { activeclass=String.Empty; }
+    <li class="header-nav-item @(activeclass)">
+        <a href="/vui/best-practice-guides">Analysis</a>
+    </li>
+*@
     </ul>
 }
