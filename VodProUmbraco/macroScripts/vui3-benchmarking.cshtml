@@ -134,19 +134,19 @@
                             </span>
                         </li>
                         <li>
-                            <strong>13.</strong> Social sharing (in-service)
+                            <strong>14.</strong> Video description
                             <span class="description">
                                 <span class="desc-inner">
-                                    @Html.Raw(PageDescriptions.GetDescription("Social sharing (in-service)"))
+                                    @Html.Raw(PageDescriptions.GetDescription("Video description"))
                                 </span>
                                 <span class="arrow"></span>
                             </span>
                         </li>
                         <li>
-                            <strong>14.</strong> Video description
+                            <strong>15.</strong> Trailers
                             <span class="description">
                                 <span class="desc-inner">
-                                    @Html.Raw(PageDescriptions.GetDescription("Video description"))
+                                    @Html.Raw(PageDescriptions.GetDescription("Trailers"))
                                 </span>
                                 <span class="arrow"></span>
                             </span>
@@ -179,7 +179,7 @@
                             </span>
                         </li>
                         <li>
-                            <strong>19.</strong> Social sharing (in-service)
+                            <strong>19.</strong> Surprise me
                             <span class="description">
                                 <span class="desc-inner">
                                     @Html.Raw(PageDescriptions.GetDescription("Surprise me"))
@@ -242,7 +242,7 @@
                         <strong>22.</strong> Customised video player  
                         <span class="description">
                             <span class="desc-inner">
-                                @Html.Raw(PageDescriptions.GetDescription("Social sharing (in-service)"))
+                                @Html.Raw(PageDescriptions.GetDescription("Customised video player"))
                             </span>
                             <span class="arrow"></span> 
                         </span>
@@ -509,7 +509,7 @@
         <h3>
                       Best in Class
                       </h3>
-                      <p>When you subscribe, you’ll be able to see the breakdown for individual platforms (like Web, Tablet, Smartphone etc.) and find out which existing video services display the greatest range of functionality.</p>
+                      <p>When you subscribe, youï¿½ll be able to see the breakdown for individual platforms (like Web, Tablet, Smartphone etc.) and find out which existing video services display the greatest range of functionality.</p>
               </div>           
         }
         if (IsFullMode && !platformDevice.Equals("Overall"))
@@ -567,6 +567,7 @@
     {
         int maxwidth = 430;
         int score = matrix.GetScores(feature, platformDevice).Score;
+		if (score > 100) { score = 100; }
         int width = (maxwidth * score) / 100;
         string style = "width:" + width + "px;";    
 
@@ -1085,7 +1086,8 @@
             <div class="pane">
               <div class="inner">
                 <p>
-                  Based on the most recent benchmarks of all services in @matrix.GetScores("About", "Overall").Max combinations across platforms
+                    This is how often the following features and functions appear in video user interfaces across platforms. 
+                    The data is based on recent benchmark tests weâ€™ve run against  @matrix.GetScores("About", "Overall").Max VOD products.
                 </p>
                 @DrawBenchmarkingPane(matrix, "Overall")
               </div>

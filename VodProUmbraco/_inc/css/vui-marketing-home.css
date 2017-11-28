@@ -1109,6 +1109,9 @@ html, body * {
   display: block;
 }
 /* OW FIXES */
+.marketing-home .slideblock p + p {
+  margin-top: 1em;
+}
 
 .marketing-home header {
   padding-top: 10px;
